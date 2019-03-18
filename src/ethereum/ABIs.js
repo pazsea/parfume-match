@@ -275,9 +275,7 @@ export const ABICompany = [
         type: "string"
       }
     ],
-    pay
-
-    able: false,
+    payable: false,
     stateMutability: "view",
     type: "function"
   },

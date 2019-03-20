@@ -9,6 +9,7 @@
     "react-scripts": "2.0.4",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.2",
     "remove-node-modules": "^1.7.4"
   },
   "scripts": {

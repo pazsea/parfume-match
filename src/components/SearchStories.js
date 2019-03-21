@@ -9,6 +9,7 @@ class SearchStories extends Component {
 
     this.state = {
       query: '',
+      loading: false,
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -17,8 +18,15 @@ class SearchStories extends Component {
   onSubmit(event) {
     const { query } = this.state;
     if (query) {
+      this.setState({
+        loading: true,
+      });
       this.props.onFetchStories(query);
+
       this.setState({ query: '' });
+      this.setState({
+        loading: false,
+      });
     }
 
     event.preventDefault();
@@ -38,6 +46,7 @@ class SearchStories extends Component {
           onChange={this.onChange}
         />
         <button type="submit">Search</button>
+        {this.state.loading ? <p>Loading...</p> : null}
       </form>
     );
   }

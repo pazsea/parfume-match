@@ -3,21 +3,29 @@ import 'firebase/auth';
 import 'firebase/database';
 
 var config = {
-  apiKey: 'AIzaSyDPzLW1VpAUC5x9OPF4pCJO9j5e5hO4bp4',
-  authDomain: 'gjtpsniph.firebaseapp.com',
-  databaseURL: 'https://gjtpsniph.firebaseio.com',
-  projectId: 'gjtpsniph',
-  storageBucket: 'gjtpsniph.appspot.com',
-  messagingSenderId: '315707951148',
+  apiKey: "AIzaSyDPzLW1VpAUC5x9OPF4pCJO9j5e5hO4bp4",
+  authDomain: "gjtpsniph.firebaseapp.com",
+  databaseURL: "https://gjtpsniph.firebaseio.com",
+  projectId: "gjtpsniph",
+  storageBucket: "gjtpsniph.appspot.com",
+  messagingSenderId: "315707951148"
 };
 
 class Firebase {
   constructor() {
     app.initializeApp(config);
 
+    /* Helper */
+
+    this.serverValue = app.database.ServerValue;
     this.emailAuthProvider = app.auth.EmailAuthProvider;
+
+    /* Firebase APIs */
+
     this.auth = app.auth();
     this.db = app.database();
+
+    /* Social Sign In Method Provider */
 
     this.googleProvider = new app.auth.GoogleAuthProvider();
     this.facebookProvider = new app.auth.FacebookAuthProvider();
@@ -44,6 +52,11 @@ class Firebase {
   doSignOut = () => this.auth.signOut();
 
   doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+
+  // doSendEmailVerification = () =>
+  //   this.auth.currentUser.sendEmailVerification({
+  //     url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
+  //   });
 
   doPasswordUpdate = password =>
     this.auth.currentUser.updatePassword(password);
@@ -83,6 +96,7 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
+
   // *** Message API ***
 
   message = uid => this.db.ref(`messages/${uid}`);

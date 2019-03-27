@@ -22,4 +22,6 @@ const AdminPage = () => (
 const condition = authUser =>
   authUser && authUser.roles.includes(ROLES.ADMIN);
 
-export default compose(withAuthorization(condition))(AdminPage);
+export default compose(
+  withAuthorization(condition),
+)(AdminPage);

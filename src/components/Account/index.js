@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { compose } from 'recompose';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';

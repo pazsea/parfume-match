@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+
 import { withFirebase } from '../Firebase';
 import MessageList from './MessageList';
 
@@ -123,6 +124,7 @@ class Messages extends Component {
 }
 
 const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
   messages: Object.keys(state.messageState.messages || {}).map(
     key => ({
       ...state.messageState.messages[key],

@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import storyReducer from './story';
-import archiveReducer from './archive';
+import sessionReducer from './session';
+import userReducer from './user';
+import messageReducer from './message';
 
 const rootReducer = combineReducers({
-  storyState: storyReducer,
-  archiveState: archiveReducer,
+  sessionState: sessionReducer,
+  userState: userReducer,
+  messageState: messageReducer,
 });
 
 export default rootReducer;

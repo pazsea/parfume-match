@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ForgetParagraphStyle } from './styles';
+import {
+  PasswordForgetFormDiv,
+  ForgetParagraphStyle,
+} from './styles';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import { LandingDiv } from '../Landing/styles';
 
 const PasswordForgetPage = () => (
-  <div>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
-  </div>
+  <LandingDiv>
+    <PasswordForgetFormDiv>
+      <PasswordForgetForm />
+    </PasswordForgetFormDiv>
+  </LandingDiv>
 );
 
 const INITIAL_STATE = {
@@ -51,15 +56,20 @@ class PasswordForgetFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={this.state.email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
+        <div className="container-input">
+          <input
+            name="email"
+            className="input100"
+            value={this.state.email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+          />
+          <span className="focus-input100" data-symbol="&#xf15a;" />
+        </div>
+
         <button disabled={isInvalid} type="submit">
-          Reset My Password
+          RESET MY PASSWORD
         </button>
 
         {error && <p>{error.message}</p>}

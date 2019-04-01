@@ -71,7 +71,6 @@ class SignInFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <h1>Sign in:</h1>
         <div className="container-input">
           <input
             className="input100"
@@ -97,7 +96,7 @@ class SignInFormBase extends Component {
         </div>
 
         <button disabled={isInvalid} type="submit">
-          Sign In
+          SIGN IN
         </button>
         <PasswordForgetLink />
 

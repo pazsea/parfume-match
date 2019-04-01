@@ -1,7 +1,7 @@
 // import React from 'react';
 import styled from 'styled-components';
 
-export const SignInFormDiv = styled.div`
+export const SignUpFormDiv = styled.div`
   padding: 8% 1% 1% 1%;
   text-align: center;
   flex: 0.33;
@@ -136,41 +136,5 @@ export const SignInFormDiv = styled.div`
     color: black;
     /* border: none; */
     font-weight: 700;
-  }
-`;
-
-export const SignInSocialMediaDiv = styled.div`
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .social-items {
-    font-size: 15px;
-    color: #fff;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    margin: 5px;
-  }
-
-  .social-items:hover {
-    color: #fff;
-    background-color: #333333;
-  }
-  .bg1 {
-    background-color: #3b5998;
-  }
-  .bg2 {
-    background-color: #1da1f2;
-  }
-  .bg3 {
-    background-color: #ea4335;
-  }
-  button {
-    border: none;
-    cursor: pointer;
   }
 `;

@@ -4,13 +4,15 @@ import { Link, withRouter } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import { SignInFormDiv } from '../SignIn/styles';
+import { SignUpFormDiv } from './styles';
+import { LandingDiv } from '../Landing/styles';
 
 const SignUpPage = () => (
-  <div>
-    <h1>SignUp</h1>
-    <SignUpForm />
-  </div>
+  <LandingDiv>
+    <SignUpFormDiv>
+      <SignUpForm />
+    </SignUpFormDiv>
+  </LandingDiv>
 );
 
 const INITIAL_STATE = {
@@ -101,34 +103,53 @@ class SignUpFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
+        <div className="container-input">
+          <input
+            name="username"
+            className="input100"
+            value={username}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Full Name"
+          />
+          <span className="focus-input100" data-symbol="&#xf207;" />
+        </div>
+        <div className="container-input">
+          <input
+            name="email"
+            className="input100"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+          />
+
+          <span className="focus-input100" data-symbol="&#xf15a;" />
+        </div>
+        <div className="container-input">
+          <input
+            name="passwordOne"
+            className="input100"
+            value={passwordOne}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+
+          <span className="focus-input100" data-symbol="&#xf191;" />
+        </div>
+        <div className="container-input">
+          <input
+            name="passwordTwo"
+            className="input100"
+            value={passwordTwo}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Confirm Password"
+          />
+          <span className="focus-input100" data-symbol="&#xf191;" />
+        </div>
+        <br />
         <label>
           Admin:
           <input
@@ -138,8 +159,9 @@ class SignUpFormBase extends Component {
             onChange={this.onChangeCheckbox}
           />
         </label>
+        <br />
         <button disabled={isInvalid} type="submit">
-          Sign Up
+          SIGN UP
         </button>
 
         {error && <p>{error.message}</p>}
@@ -149,9 +171,9 @@ class SignUpFormBase extends Component {
 }
 
 const SignUpLink = () => (
-  <SignInFormDiv>
+  <p>
     Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-  </SignInFormDiv>
+  </p>
 );
 
 const SignUpForm = withRouter(withFirebase(SignUpFormBase));

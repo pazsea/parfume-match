@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { compose } from 'recompose';
 
@@ -10,7 +10,7 @@ import * as ROUTES from '../../constants/routes';
 import { SignInFormDiv, SignInSocialMediaDiv } from './styles';
 
 const SignInPage = () => (
-  <div>
+  <SignInFormDiv>
     <SignInForm />
     <SignInSocialMediaDiv>
       <SignInGoogle />
@@ -18,7 +18,7 @@ const SignInPage = () => (
       <SignInTwitter />
     </SignInSocialMediaDiv>
     <SignUpLink />
-  </div>
+  </SignInFormDiv>
 );
 
 const INITIAL_STATE = {
@@ -70,9 +70,8 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <SignInFormDiv onSubmit={this.onSubmit}>
-        <h1>Sign in:</h1>
-        <div class="container-input">
+      <form onSubmit={this.onSubmit}>
+        <div className="container-input">
           <input
             className="input100"
             name="email"
@@ -81,10 +80,10 @@ class SignInFormBase extends Component {
             type="text"
             placeholder="Email Address"
           />
-          <span class="focus-input100" data-symbol="&#xf206;" />
+          <span className="focus-input100" data-symbol="&#xf206;" />
         </div>
 
-        <div class="container-input">
+        <div className="container-input">
           <input
             className="input100"
             name="password"
@@ -93,16 +92,16 @@ class SignInFormBase extends Component {
             type="password"
             placeholder="Password"
           />
-          <span class="focus-input100" data-symbol="&#xf190;" />
+          <span className="focus-input100" data-symbol="&#xf190;" />
         </div>
 
         <button disabled={isInvalid} type="submit">
-          Sign In
+          SIGN IN
         </button>
         <PasswordForgetLink />
 
         {error && <p>{error.message}</p>}
-      </SignInFormDiv>
+      </form>
     );
   }
 }
@@ -141,12 +140,12 @@ class SignInGoogleBase extends Component {
   };
 
   render() {
-    const { error } = this.state;
+    // const { error } = this.state;
 
     return (
       <form onSubmit={this.onSubmit}>
         <button className="social-items bg3" type="submit">
-          <i class="fab fa-google" />
+          <i className="fab fa-google" />
         </button>
       </form>
     );
@@ -187,12 +186,12 @@ class SignInFacebookBase extends Component {
   };
 
   render() {
-    const { error } = this.state;
+    // const { error } = this.state;
 
     return (
       <form onSubmit={this.onSubmit}>
         <button type="submit" className="social-items bg1">
-          <i class="fab fa-facebook-f" />
+          <i className="fab fa-facebook-f" />
         </button>
       </form>
     );
@@ -233,14 +232,13 @@ class SignInTwitterBase extends Component {
   };
 
   render() {
-    const { error } = this.state;
+    // const { error } = this.state;
 
     return (
       <form onSubmit={this.onSubmit}>
         <button type="submit" className="social-items bg2">
-          <i class="fab fa-twitter" />
+          <i className="fab fa-twitter" />
         </button>
-        {/* {error && <p>{error.message}</p>} */}
       </form>
     );
   }

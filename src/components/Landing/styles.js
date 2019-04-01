@@ -1,8 +1,12 @@
-import React from 'react';
 import styled from 'styled-components';
+import landingbg from '../../images/landingbg.jpg';
 
 export const LandingDiv = styled.div`
-  width: 100%;
+  display: flex;
+
+  flex-direction: row-reverse;
+  width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  background-image: url(${landingbg});
+  background-size: cover;
 `;

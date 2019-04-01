@@ -7,11 +7,7 @@ import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
 const Navigation = ({ authUser }) =>
-  authUser ? (
-    <NavigationAuth authUser={authUser} />
-  ) : (
-    null
-  );
+  authUser ? <NavigationAuth authUser={authUser} /> : null;
 
 const NavigationAuth = ({ authUser }) => (
   <ul>
@@ -29,6 +25,10 @@ const NavigationAuth = ({ authUser }) => (
         <Link to={ROUTES.ADMIN}>Admin</Link>
       </li>
     )}
+    <li>
+      <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
+    </li>
+
     <li>
       <SignOutButton />
     </li>

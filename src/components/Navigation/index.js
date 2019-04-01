@@ -26,6 +26,10 @@ const NavigationAuth = ({ authUser }) => (
       </li>
     )}
     <li>
+      <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
+    </li>
+
+    <li>
       <SignOutButton />
     </li>
   </ul>

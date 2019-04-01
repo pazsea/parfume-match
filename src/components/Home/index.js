@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
-import { withAuthorization} from '../Session';
+import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import Messages from '../Messages';
 

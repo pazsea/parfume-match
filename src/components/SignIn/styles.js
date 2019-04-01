@@ -1,9 +1,14 @@
-import React from 'react';
+// import React from 'react';
 import styled from 'styled-components';
 
 export const SignInFormDiv = styled.form`
-  padding: 0 2% 2% 2%;
+  padding: 1% 1% 1% 1%;
   text-align: center;
+  flex: 0.33;
+
+  border: 2px solid yellow;
+  border-radius: 10px;
+  background: white;
   h1 {
     text-align: center;
     font-weight: 80;
@@ -19,7 +24,7 @@ export const SignInFormDiv = styled.form`
     font-size: 16px;
     color: #333333;
     display: block;
-    width: 100%;
+    width: 88%;
     height: 55px;
     background: transparent;
     padding: 0 7px 0 43px;
@@ -123,9 +128,9 @@ export const SignInFormDiv = styled.form`
 
   button {
     width: 100%;
-    margin-top: 2%;
+    margin-top: 15%;
     border-radius: 25px;
-    padding: 5px;
+    padding: 10px;
     background: #3b5998;
     color: white;
     border: none;

@@ -1,8 +1,11 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const LandingDiv = styled.div`
-  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
+  background-color: lightblue;
+  background-size: cover;
 `;

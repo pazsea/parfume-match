@@ -1,9 +1,11 @@
 import React from 'react';
+import { LandingDiv } from './styles';
+import SignInPage from '../SignIn/';
 
 const Landing = () => (
-  <div>
-    <h1>Landing</h1>
-  </div>
+  <LandingDiv>
+    <SignInPage />
+  </LandingDiv>
 );
 
 export default Landing;

@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+
 import { compose } from 'recompose';
 
 import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import { SignInFormDiv, SignInSocialMediaDiv } from './styles';
 
 const SignInPage = () => (
   <div>
-    <h1>SignIn</h1>
     <SignInForm />
-    <SignInGoogle />
-    <SignInFacebook />
-    <SignInTwitter />
-    <PasswordForgetLink />
+    <SignInSocialMediaDiv>
+      <SignInGoogle />
+      <SignInFacebook />
+      <SignInTwitter />
+    </SignInSocialMediaDiv>
     <SignUpLink />
   </div>
 );
@@ -68,27 +70,39 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
+      <SignInFormDiv onSubmit={this.onSubmit}>
+        <h1>Sign in:</h1>
+        <div class="container-input">
+          <input
+            className="input100"
+            name="email"
+            value={email}
+            onChange={this.onChange}
+            type="text"
+            placeholder="Email Address"
+          />
+          <span class="focus-input100" data-symbol="&#xf206;" />
+        </div>
+
+        <div class="container-input">
+          <input
+            className="input100"
+            name="password"
+            value={password}
+            onChange={this.onChange}
+            type="password"
+            placeholder="Password"
+          />
+          <span class="focus-input100" data-symbol="&#xf190;" />
+        </div>
+
         <button disabled={isInvalid} type="submit">
           Sign In
         </button>
+        <PasswordForgetLink />
 
         {error && <p>{error.message}</p>}
-      </form>
+      </SignInFormDiv>
     );
   }
 }
@@ -131,9 +145,9 @@ class SignInGoogleBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Google</button>
-
-        {error && <p>{error.message}</p>}
+        <button className="social-items bg3" type="submit">
+          <i class="fab fa-google" />
+        </button>
       </form>
     );
   }
@@ -177,9 +191,9 @@ class SignInFacebookBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Facebook</button>
-
-        {error && <p>{error.message}</p>}
+        <button type="submit" className="social-items bg1">
+          <i class="fab fa-facebook-f" />
+        </button>
       </form>
     );
   }
@@ -223,9 +237,10 @@ class SignInTwitterBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Twitter</button>
-
-        {error && <p>{error.message}</p>}
+        <button type="submit" className="social-items bg2">
+          <i class="fab fa-twitter" />
+        </button>
+        {/* {error && <p>{error.message}</p>} */}
       </form>
     );
   }

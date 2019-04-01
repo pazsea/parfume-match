@@ -10,7 +10,7 @@ const Navigation = ({ authUser }) =>
   authUser ? (
     <NavigationAuth authUser={authUser} />
   ) : (
-    <NavigationNonAuth />
+    null
   );
 
 const NavigationAuth = ({ authUser }) => (

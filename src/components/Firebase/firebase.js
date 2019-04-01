@@ -10,7 +10,6 @@ var config = {
   storageBucket: "gjtpsniph.appspot.com",
   messagingSenderId: "315707951148"
 };
-
 class Firebase {
   constructor() {
     app.initializeApp(config);

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
@@ -39,12 +41,15 @@ class App extends Component {
       innerHeight <= 1366 &&
       innerHeight >= 1024
     ) {
-      // dispatch({ type: 'MEDIUM_SIZE' });
+      this.props.setMediumSize();
       console.log('IPAD size ');
     } else if (innerWidth < 768 && innerHeight < 1024) {
+      this.props.setSmallSize();
+
       console.log('MOBILE size ');
     } else {
       console.log('NORMAAAL SIZE');
+      this.props.setBigSize();
     }
   }
 
@@ -75,6 +80,22 @@ class App extends Component {
   }
 }
 
+// mediumSizeFunction = dispatch => ({
+//   dispatch({type: 'MEDIUM_SIZE'; })
+// })
+
+const mapDispatchToProps = () => ({
+  setBigSize: () => ({ type: 'BIG_SIZE' }),
+  setMediumSize: () => ({ type: 'MEDIUM_SIZE' }),
+  setSmallSize: () => ({ type: 'SMALL_SIZE' }),
+});
+// const mapDispatchToProps = dispatch => ({
+//   onSetMessages: messages =>
+//     dispatch({ type: 'MESSAGES_SET', messages }),
+//   onSetMessagesLimit: limit =>
+//     dispatch({ type: 'MESSAGES_LIMIT_SET', limit }),
+// });
+
 // const App = () => (
 //   <Router>
 //     <div>
@@ -95,4 +116,7 @@ class App extends Component {
 //   </Router>
 // );
 
-export default withAuthentication(App);
+export default compose(
+  withAuthentication,
+  connect(mapDispatchToProps),
+)(App);

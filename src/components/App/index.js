@@ -42,13 +42,9 @@ class App extends Component {
       innerHeight >= 1024
     ) {
       this.props.setMediumSize();
-      console.log('IPAD size ');
     } else if (innerWidth < 768 && innerHeight < 1024) {
       this.props.setSmallSize();
-
-      console.log('MOBILE size ');
     } else {
-      console.log('NORMAAAL SIZE');
       this.props.setBigSize();
     }
   }
@@ -84,39 +80,16 @@ class App extends Component {
 //   dispatch({type: 'MEDIUM_SIZE'; })
 // })
 
-const mapDispatchToProps = () => ({
-  setBigSize: () => ({ type: 'BIG_SIZE' }),
-  setMediumSize: () => ({ type: 'MEDIUM_SIZE' }),
-  setSmallSize: () => ({ type: 'SMALL_SIZE' }),
+const mapDispatchToProps = dispatch => ({
+  setBigSize: () => dispatch({ type: 'BIG_SIZE' }),
+  setMediumSize: () => dispatch({ type: 'MEDIUM_SIZE' }),
+  setSmallSize: () => dispatch({ type: 'SMALL_SIZE' }),
 });
-// const mapDispatchToProps = dispatch => ({
-//   onSetMessages: messages =>
-//     dispatch({ type: 'MESSAGES_SET', messages }),
-//   onSetMessagesLimit: limit =>
-//     dispatch({ type: 'MESSAGES_LIMIT_SET', limit }),
-// });
-
-// const App = () => (
-//   <Router>
-//     <div>
-//       <Navigation />
-
-//       <Route exact path={ROUTES.LANDING} component={LandingPage} />
-//       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-//       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-//       <Route
-//         path={ROUTES.PASSWORD_FORGET}
-//         component={PasswordForgetPage}
-//       />
-//       <Route path={ROUTES.HOME} component={HomePage} />
-//       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-//       <Route path={ROUTES.ADMIN} component={AdminPage} />
-//       <Route path={ROUTES.WARDROBE} component={WardrobePage} />
-//     </div>
-//   </Router>
-// );
 
 export default compose(
   withAuthentication,
-  connect(mapDispatchToProps),
+  connect(
+    null,
+    mapDispatchToProps,
+  ),
 )(App);

@@ -1,25 +1,74 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
 import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import { SignInFormDiv, SignInSocialMediaDiv } from './styles';
+import {
+  SignInFormDivBig,
+  SignInSocialMediaDiv,
+  SignInFormDivSmall,
+  SignInFormDivMedium,
+} from './styles';
 
-const SignInPage = () => (
-  <SignInFormDiv>
-    <SignInForm />
-    <SignInSocialMediaDiv>
-      <SignInGoogle />
-      <SignInFacebook />
-      <SignInTwitter />
-    </SignInSocialMediaDiv>
-    <SignUpLink />
-  </SignInFormDiv>
-);
+class SignInPage extends React.Component {
+  render() {
+    const { bigSize, mediumSize, smallSize } = this.props;
+
+    if (bigSize) {
+      return (
+        <SignInFormDivBig>
+          <SignInForm />
+          <SignInSocialMediaDiv>
+            <SignInGoogle />
+            <SignInFacebook />
+            <SignInTwitter />
+          </SignInSocialMediaDiv>
+          <SignUpLink />
+        </SignInFormDivBig>
+      );
+    } else if (mediumSize) {
+      return (
+        <SignInFormDivMedium>
+          <SignInForm />
+          <SignInSocialMediaDiv>
+            <SignInGoogle />
+            <SignInFacebook />
+            <SignInTwitter />
+          </SignInSocialMediaDiv>
+          <SignUpLink />
+        </SignInFormDivMedium>
+      );
+    } else if (smallSize) {
+      return (
+        <SignInFormDivSmall>
+          <SignInForm />
+          <SignInSocialMediaDiv>
+            <SignInGoogle />
+            <SignInFacebook />
+            <SignInTwitter />
+          </SignInSocialMediaDiv>
+          <SignUpLink />
+        </SignInFormDivSmall>
+      );
+    } else {
+      return (
+        <SignInFormDivBig>
+          <SignInForm />
+          <SignInSocialMediaDiv>
+            <SignInGoogle />
+            <SignInFacebook />
+            <SignInTwitter />
+          </SignInSocialMediaDiv>
+          <SignUpLink />
+        </SignInFormDivBig>
+      );
+    }
+  }
+}
 
 const INITIAL_STATE = {
   email: '',
@@ -264,6 +313,12 @@ const SignInTwitter = compose(
   withFirebase,
 )(SignInTwitterBase);
 
-export default SignInPage;
+const mapStateToProps = state => ({
+  bigSize: state.screenSizeState.bigSize,
+  mediumSize: state.screenSizeState.mediumSize,
+  smallSize: state.screenSizeState.smallSize,
+});
+
+export default compose(connect(mapStateToProps))(SignInPage);
 
 export { SignInForm, SignInGoogle, SignInFacebook, SignInTwitter };

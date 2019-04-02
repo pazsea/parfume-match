@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import {
-  PasswordForgetFormDiv,
+  PasswordForgetFormDivBig,
+  PasswordForgetFormDivSmall,
+  PasswordForgetFormDivMedium,
   ForgetParagraphStyle,
 } from './styles';
 
@@ -10,13 +14,45 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import { LandingDiv } from '../Landing/styles';
 
-const PasswordForgetPage = () => (
-  <LandingDiv>
-    <PasswordForgetFormDiv>
-      <PasswordForgetForm />
-    </PasswordForgetFormDiv>
-  </LandingDiv>
-);
+class PasswordForgetPage extends React.Component {
+  render() {
+    const { bigSize, mediumSize, smallSize } = this.props;
+
+    if (bigSize) {
+      return (
+        <LandingDiv>
+          <PasswordForgetFormDivBig>
+            <PasswordForgetForm />
+          </PasswordForgetFormDivBig>
+        </LandingDiv>
+      );
+    } else if (mediumSize) {
+      return (
+        <LandingDiv>
+          <PasswordForgetFormDivMedium>
+            <PasswordForgetForm />
+          </PasswordForgetFormDivMedium>
+        </LandingDiv>
+      );
+    } else if (smallSize) {
+      return (
+        <LandingDiv>
+          <PasswordForgetFormDivSmall>
+            <PasswordForgetForm />
+          </PasswordForgetFormDivSmall>
+        </LandingDiv>
+      );
+    } else {
+      return (
+        <LandingDiv>
+          <PasswordForgetFormDivBig>
+            <PasswordForgetForm />
+          </PasswordForgetFormDivBig>
+        </LandingDiv>
+      );
+    }
+  }
+}
 
 const INITIAL_STATE = {
   email: '',
@@ -84,7 +120,13 @@ const PasswordForgetLink = () => (
   </ForgetParagraphStyle>
 );
 
-export default PasswordForgetPage;
+const mapStateToProps = state => ({
+  bigSize: state.screenSizeState.bigSize,
+  mediumSize: state.screenSizeState.mediumSize,
+  smallSize: state.screenSizeState.smallSize,
+});
+
+export default compose(connect(mapStateToProps))(PasswordForgetPage);
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
 

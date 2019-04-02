@@ -4,36 +4,24 @@ const INITIAL_STATE = {
   smallSize: false,
 };
 
-// const applyBigSize = (state, action) => ({
-//   ...state,
-//   messages: action.messages,
-// });
-
-// const applyMediumSize = (state, action) => ({
-//   ...state,
-//   limit: action.limit,
-// });
-
-// const applySmallSize = (state, action) => ({
-//   ...state,
-//   limit: action.limit,
-// });
-
 function sreenSizeReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case 'BIG_SIZE':
       return {
-        ...state,
         bigSize: true,
+        mediumSize: false,
+        smallSize: false,
       };
     case 'MEDIUM_SIZE':
       return {
-        ...state,
+        bigSize: false,
         mediumSize: true,
+        smallSize: false,
       };
     case 'SMALL_SIZE':
       return {
-        ...state,
+        bigSize: false,
+        mediumSize: false,
         smallSize: true,
       };
     default:

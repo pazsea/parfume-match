@@ -1,19 +1,58 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import { SignUpFormDiv } from './styles';
+import {
+  SignUpFormDivBig,
+  SignUpFormDivSmall,
+  SignUpFormDivMedium,
+} from './styles';
 import { LandingDiv } from '../Landing/styles';
 
-const SignUpPage = () => (
-  <LandingDiv>
-    <SignUpFormDiv>
-      <SignUpForm />
-    </SignUpFormDiv>
-  </LandingDiv>
-);
+class SignUpPage extends React.Component {
+  render() {
+    const { bigSize, mediumSize, smallSize } = this.props;
+
+    if (bigSize) {
+      return (
+        <LandingDiv>
+          <SignUpFormDivBig>
+            <SignUpForm />
+          </SignUpFormDivBig>
+        </LandingDiv>
+      );
+    } else if (mediumSize) {
+      return (
+        <LandingDiv>
+          <SignUpFormDivMedium>
+            <SignUpForm />
+          </SignUpFormDivMedium>
+        </LandingDiv>
+      );
+    } else if (smallSize) {
+      return (
+        <LandingDiv>
+          <SignUpFormDivSmall>
+            <SignUpForm />
+          </SignUpFormDivSmall>
+        </LandingDiv>
+      );
+    } else {
+      return (
+        <LandingDiv>
+          <SignUpFormDivBig>
+            <SignUpForm />
+          </SignUpFormDivBig>
+        </LandingDiv>
+      );
+    }
+  }
+}
 
 const INITIAL_STATE = {
   username: '',
@@ -176,8 +215,14 @@ const SignUpLink = () => (
   </p>
 );
 
+const mapStateToProps = state => ({
+  bigSize: state.screenSizeState.bigSize,
+  mediumSize: state.screenSizeState.mediumSize,
+  smallSize: state.screenSizeState.smallSize,
+});
+
 const SignUpForm = withRouter(withFirebase(SignUpFormBase));
 
-export default SignUpPage;
+export default compose(connect(mapStateToProps))(SignUpPage);
 
 export { SignUpForm, SignUpLink };

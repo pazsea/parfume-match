@@ -9,6 +9,15 @@ import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
+import QuizPage, {
+  QuestionOne,
+  QuestionTwo,
+  QuestionThree,
+  QuestionFour,
+  QuestionFive,
+  QuestionSix,
+} from '../Quiz';
+// import QuestionOne from '../Quiz';
 import WardrobePage from '../Wardrobe';
 
 import * as ROUTES from '../../constants/routes';
@@ -29,6 +38,13 @@ const App = () => (
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
+      <Route path={ROUTES.QUIZ} component={QuizPage} />
+      <Route path={ROUTES.QUESTIONONE} component={QuestionOne} />
+      <Route path={ROUTES.QUESTIONTWO} component={QuestionTwo} />
+      <Route path={ROUTES.QUESTIONTHREE} component={QuestionThree} />
+      <Route path={ROUTES.QUESTIONFOUR} component={QuestionFour} />
+      <Route path={ROUTES.QUESTIONFIVE} component={QuestionFive} />
+      <Route path={ROUTES.QUESTIONSIX} component={QuestionSix} />
       <Route path={ROUTES.WARDROBE} component={WardrobePage} />
     </div>
   </Router>

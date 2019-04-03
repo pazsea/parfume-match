@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -7,50 +7,20 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import {
-  SignUpFormDivBig,
-  SignUpFormDivSmall,
-  SignUpFormDivMedium,
-} from './styles';
+import { SignUpFormDiv } from './styles';
 import { LandingDiv } from '../Landing/styles';
 
 class SignUpPage extends React.Component {
   render() {
-    const { bigSize, mediumSize, smallSize } = this.props;
+    const { mediumSize, smallSize } = this.props;
 
-    if (bigSize) {
-      return (
-        <LandingDiv>
-          <SignUpFormDivBig>
-            <SignUpForm />
-          </SignUpFormDivBig>
-        </LandingDiv>
-      );
-    } else if (mediumSize) {
-      return (
-        <LandingDiv>
-          <SignUpFormDivMedium>
-            <SignUpForm />
-          </SignUpFormDivMedium>
-        </LandingDiv>
-      );
-    } else if (smallSize) {
-      return (
-        <LandingDiv>
-          <SignUpFormDivSmall>
-            <SignUpForm />
-          </SignUpFormDivSmall>
-        </LandingDiv>
-      );
-    } else {
-      return (
-        <LandingDiv>
-          <SignUpFormDivBig>
-            <SignUpForm />
-          </SignUpFormDivBig>
-        </LandingDiv>
-      );
-    }
+    return (
+      <LandingDiv>
+        <SignUpFormDiv small={smallSize} medium={mediumSize}>
+          <SignUpForm />
+        </SignUpFormDiv>
+      </LandingDiv>
+    );
   }
 }
 

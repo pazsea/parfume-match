@@ -1,12 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
 import {
-  PasswordForgetFormDivBig,
-  PasswordForgetFormDivSmall,
-  PasswordForgetFormDivMedium,
+  PasswordForgetFormDiv,
   ForgetParagraphStyle,
 } from './styles';
 
@@ -16,41 +14,15 @@ import { LandingDiv } from '../Landing/styles';
 
 class PasswordForgetPage extends React.Component {
   render() {
-    const { bigSize, mediumSize, smallSize } = this.props;
+    const { mediumSize, smallSize } = this.props;
 
-    if (bigSize) {
-      return (
-        <LandingDiv>
-          <PasswordForgetFormDivBig>
-            <PasswordForgetForm />
-          </PasswordForgetFormDivBig>
-        </LandingDiv>
-      );
-    } else if (mediumSize) {
-      return (
-        <LandingDiv>
-          <PasswordForgetFormDivMedium>
-            <PasswordForgetForm />
-          </PasswordForgetFormDivMedium>
-        </LandingDiv>
-      );
-    } else if (smallSize) {
-      return (
-        <LandingDiv>
-          <PasswordForgetFormDivSmall>
-            <PasswordForgetForm />
-          </PasswordForgetFormDivSmall>
-        </LandingDiv>
-      );
-    } else {
-      return (
-        <LandingDiv>
-          <PasswordForgetFormDivBig>
-            <PasswordForgetForm />
-          </PasswordForgetFormDivBig>
-        </LandingDiv>
-      );
-    }
+    return (
+      <LandingDiv>
+        <PasswordForgetFormDiv medium={mediumSize} small={smallSize}>
+          <PasswordForgetForm />
+        </PasswordForgetFormDiv>
+      </LandingDiv>
+    );
   }
 }
 

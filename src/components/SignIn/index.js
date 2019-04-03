@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
@@ -7,66 +7,23 @@ import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-import {
-  SignInFormDivBig,
-  SignInSocialMediaDiv,
-  SignInFormDivSmall,
-  SignInFormDivMedium,
-} from './styles';
+import { SignInFormDiv, SignInSocialMediaDiv } from './styles';
 
 class SignInPage extends React.Component {
   render() {
-    const { bigSize, mediumSize, smallSize } = this.props;
+    const { mediumSize, smallSize } = this.props;
 
-    if (bigSize) {
-      return (
-        <SignInFormDivBig>
-          <SignInForm />
-          <SignInSocialMediaDiv>
-            <SignInGoogle />
-            <SignInFacebook />
-            <SignInTwitter />
-          </SignInSocialMediaDiv>
-          <SignUpLink />
-        </SignInFormDivBig>
-      );
-    } else if (mediumSize) {
-      return (
-        <SignInFormDivMedium>
-          <SignInForm />
-          <SignInSocialMediaDiv>
-            <SignInGoogle />
-            <SignInFacebook />
-            <SignInTwitter />
-          </SignInSocialMediaDiv>
-          <SignUpLink />
-        </SignInFormDivMedium>
-      );
-    } else if (smallSize) {
-      return (
-        <SignInFormDivSmall>
-          <SignInForm />
-          <SignInSocialMediaDiv>
-            <SignInGoogle />
-            <SignInFacebook />
-            <SignInTwitter />
-          </SignInSocialMediaDiv>
-          <SignUpLink />
-        </SignInFormDivSmall>
-      );
-    } else {
-      return (
-        <SignInFormDivBig>
-          <SignInForm />
-          <SignInSocialMediaDiv>
-            <SignInGoogle />
-            <SignInFacebook />
-            <SignInTwitter />
-          </SignInSocialMediaDiv>
-          <SignUpLink />
-        </SignInFormDivBig>
-      );
-    }
+    return (
+      <SignInFormDiv medium={mediumSize} small={smallSize}>
+        <SignInForm />
+        <SignInSocialMediaDiv>
+          <SignInGoogle />
+          <SignInFacebook />
+          <SignInTwitter />
+        </SignInSocialMediaDiv>
+        <SignUpLink />
+      </SignInFormDiv>
+    );
   }
 }
 

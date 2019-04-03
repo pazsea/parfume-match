@@ -33,6 +33,10 @@ class App extends Component {
     });
   }
 
+  componentWillUnmount() {
+    console.log('ooout');
+  }
+
   handleResize() {
     const { innerHeight, innerWidth } = this.state;
     if (
@@ -75,10 +79,6 @@ class App extends Component {
     );
   }
 }
-
-// mediumSizeFunction = dispatch => ({
-//   dispatch({type: 'MEDIUM_SIZE'; })
-// })
 
 const mapDispatchToProps = dispatch => ({
   setBigSize: () => dispatch({ type: 'BIG_SIZE' }),

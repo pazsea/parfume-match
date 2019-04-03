@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import {
   PasswordForgetFormDiv,
@@ -10,13 +12,19 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import { LandingDiv } from '../Landing/styles';
 
-const PasswordForgetPage = () => (
-  <LandingDiv>
-    <PasswordForgetFormDiv>
-      <PasswordForgetForm />
-    </PasswordForgetFormDiv>
-  </LandingDiv>
-);
+class PasswordForgetPage extends React.Component {
+  render() {
+    const { mediumSize, smallSize } = this.props;
+
+    return (
+      <LandingDiv>
+        <PasswordForgetFormDiv medium={mediumSize} small={smallSize}>
+          <PasswordForgetForm />
+        </PasswordForgetFormDiv>
+      </LandingDiv>
+    );
+  }
+}
 
 const INITIAL_STATE = {
   email: '',
@@ -84,7 +92,13 @@ const PasswordForgetLink = () => (
   </ForgetParagraphStyle>
 );
 
-export default PasswordForgetPage;
+const mapStateToProps = state => ({
+  bigSize: state.screenSizeState.bigSize,
+  mediumSize: state.screenSizeState.mediumSize,
+  smallSize: state.screenSizeState.smallSize,
+});
+
+export default compose(connect(mapStateToProps))(PasswordForgetPage);
 
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
 

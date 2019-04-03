@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
 import { SignUpLink } from '../SignUp';
@@ -9,17 +9,23 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import { SignInFormDiv, SignInSocialMediaDiv } from './styles';
 
-const SignInPage = () => (
-  <SignInFormDiv>
-    <SignInForm />
-    <SignInSocialMediaDiv>
-      <SignInGoogle />
-      <SignInFacebook />
-      <SignInTwitter />
-    </SignInSocialMediaDiv>
-    <SignUpLink />
-  </SignInFormDiv>
-);
+class SignInPage extends React.Component {
+  render() {
+    const { mediumSize, smallSize } = this.props;
+
+    return (
+      <SignInFormDiv medium={mediumSize} small={smallSize}>
+        <SignInForm />
+        <SignInSocialMediaDiv>
+          <SignInGoogle />
+          <SignInFacebook />
+          <SignInTwitter />
+        </SignInSocialMediaDiv>
+        <SignUpLink />
+      </SignInFormDiv>
+    );
+  }
+}
 
 const INITIAL_STATE = {
   email: '',
@@ -264,6 +270,12 @@ const SignInTwitter = compose(
   withFirebase,
 )(SignInTwitterBase);
 
-export default SignInPage;
+const mapStateToProps = state => ({
+  bigSize: state.screenSizeState.bigSize,
+  mediumSize: state.screenSizeState.mediumSize,
+  smallSize: state.screenSizeState.smallSize,
+});
+
+export default compose(connect(mapStateToProps))(SignInPage);
 
 export { SignInForm, SignInGoogle, SignInFacebook, SignInTwitter };

@@ -1,19 +1,28 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 import { SignUpFormDiv } from './styles';
 import { LandingDiv } from '../Landing/styles';
 
-const SignUpPage = () => (
-  <LandingDiv>
-    <SignUpFormDiv>
-      <SignUpForm />
-    </SignUpFormDiv>
-  </LandingDiv>
-);
+class SignUpPage extends React.Component {
+  render() {
+    const { mediumSize, smallSize } = this.props;
+
+    return (
+      <LandingDiv>
+        <SignUpFormDiv small={smallSize} medium={mediumSize}>
+          <SignUpForm />
+        </SignUpFormDiv>
+      </LandingDiv>
+    );
+  }
+}
 
 const INITIAL_STATE = {
   username: '',
@@ -176,8 +185,14 @@ const SignUpLink = () => (
   </p>
 );
 
+const mapStateToProps = state => ({
+  bigSize: state.screenSizeState.bigSize,
+  mediumSize: state.screenSizeState.mediumSize,
+  smallSize: state.screenSizeState.smallSize,
+});
+
 const SignUpForm = withRouter(withFirebase(SignUpFormBase));
 
-export default SignUpPage;
+export default compose(connect(mapStateToProps))(SignUpPage);
 
 export { SignUpForm, SignUpLink };

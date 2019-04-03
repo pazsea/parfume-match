@@ -1,14 +1,34 @@
 // import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const SignInFormDiv = styled.div`
   padding: 8% 1% 1% 1%;
   text-align: center;
   flex: 0.33;
   margin: 1%;
-  /* border: 2px solid black; */
   border-radius: 10px;
   background-color: none;
+  ${props =>
+    props.medium &&
+    css`
+      padding: 8% 1% 1% 1%;
+      text-align: center;
+      flex: 1;
+      margin: 10% 20% 10% 20%;
+      border-radius: 10px;
+      background-color: none;
+    `}
+  ${props =>
+    props.small &&
+    css`
+      padding: 20% 4% 6% 4%;
+      text-align: center;
+      flex: 1;
+      margin: 1%;
+      border-radius: 10px;
+      background-color: none;
+    `}
+
   h1 {
     text-align: center;
     font-weight: 80;

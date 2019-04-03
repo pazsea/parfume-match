@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import '../../../node_modules/react-image-gallery/styles/css/image-gallery.css';
@@ -12,16 +12,28 @@ class WardrobePage extends React.Component {
   render() {
     const images = [
       {
-        original: require('../../images/IMG_2143.JPG'),
-        thumbnail: 'http://lorempixel.com/250/150/nature/1/',
+        original: require('../../images/collectionWithTextClean.png'),
+        thumbnail: require('../../images/collectionWithTextClean.png'),
       },
       {
-        original: require('../../images/IMG_2145.JPG'),
-        thumbnail: 'http://lorempixel.com/250/150/nature/2/',
+        original: require('../../images/collectionWithTextFemaleClassics.png'),
+        thumbnail: require('../../images/collectionWithTextFemaleClassics.png'),
       },
       {
-        original: require('../../images/IMG_2150.JPG'),
-        thumbnail: 'http://lorempixel.com/250/150/nature/3/',
+        original: require('../../images/collectionWithTextTrendingNow.png'),
+        thumbnail: require('../../images/collectionWithTextTrendingNow.png'),
+      },
+      {
+        original: require('../../images/collectionWithTextWorkPlay.jpg'),
+        thumbnail: require('../../images/collectionWithTextWorkPlay.jpg'),
+      },
+      {
+        original: require('../../images/collectionWithTextAvantgarde.jpg'),
+        thumbnail: require('../../images/collectionWithTextAvantgarde.jpg'),
+      },
+      {
+        original: require('../../images/collectionWithTextAesthetic.png'),
+        thumbnail: require('../../images/collectionWithTextAesthetic.png'),
       },
     ];
 

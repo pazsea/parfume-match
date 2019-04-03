@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 // https://github.com/jonsuh/hamburgers/blob/master/dist/hamburgers.css  <-- Check if needed.
 
 export const HamburgerButton = styled.button`
-  top: 0;
+  top: -10px;
   right: 0;
   position: absolute;
   padding: 15px 15px;
@@ -54,8 +54,8 @@ export const HamburgerButton = styled.button`
     `}
   .hamburger-inner {
     display: block;
-    /* top: 50%; */
-    /* margin-top: -2px; */
+    top: 50%;
+    margin-top: -2px;
     top: 0;
 
     transition: background-color 0s 0.13s linear;
@@ -66,7 +66,7 @@ export const HamburgerButton = styled.button`
     width: 40px;
     height: 4px;
     background-color: #000;
-    /* border-radius: 4px; */
+    border-radius: 4px;
     position: absolute;
 
     transition-property: transform;

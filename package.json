@@ -13,6 +13,7 @@
     "react-scripts": "2.1.1",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
     "remove-node-modules": "^1.7.4",
     "schema-utils": "^1.0.0",
     "styled-components": "^4.2.0"

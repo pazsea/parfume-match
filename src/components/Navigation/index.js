@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import './hamburger.css';
-import { HamburgerButton } from './styles';
+import '../../hamburger.css';
+import { closeNav, openNav } from './styles';
 
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
@@ -27,24 +27,20 @@ class NavigationAuth extends Component {
     const { isActive } = this.state;
     return (
       <Fragment>
-        {/* <button
-          className={
-            isActive
-              ? 'hamburger hamburger--spring is-active'
-              : 'hamburger hamburger--spring'
-          }
+        <button
+          className={isActive ? openNav : closeNav}
           type="button"
           onClick={this.toggleNav}
         >
           <span className="hamburger-box">
             <span className="hamburger-inner" />
           </span>
-        </button> */}
-        <HamburgerButton isActive={isActive} onClick={this.toggleNav}>
+        </button>
+        {/* <HamburgerButton isActive={isActive} onClick={this.toggleNav}>
           <span className="hamburger-box">
             <span className="hamburger-inner" />
           </span>
-        </HamburgerButton>
+        </HamburgerButton> */}
 
         <ul>
           <li>

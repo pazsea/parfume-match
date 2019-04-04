@@ -24,6 +24,7 @@ import WardrobePage from '../Wardrobe';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
+import Recommendation from '../Recommendation';
 
 class App extends Component {
   state = {
@@ -98,6 +99,10 @@ class App extends Component {
             component={QuestionFive}
           />
           <Route path={ROUTES.QUESTIONSIX} component={QuestionSix} />
+          <Route
+            path={ROUTES.RECOMMENDATION}
+            component={Recommendation}
+          />
           <Route path={ROUTES.WARDROBE} component={WardrobePage} />
         </div>
       </Router>

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../hamburger.css';
-import { closeNav, openNav, Nav } from './styles';
+import { closeNav, openNav, Nav, Cart, NavUl } from './styles';
 
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
@@ -27,10 +27,10 @@ class NavigationAuth extends Component {
     const { isActive } = this.state;
     return (
       <Nav isActive={isActive}>
-        <div>
+        {/* <div id="logo">
           <p>Logga</p>
-        </div>
-        <ul>
+        </div> */}
+        <NavUl pose={isActive ? 'visible' : 'hidden'}>
           <li>
             <Link to={ROUTES.HOME}>Home</Link>
           </li>
@@ -52,7 +52,7 @@ class NavigationAuth extends Component {
           <li>
             <SignOutButton />
           </li>
-        </ul>
+        </NavUl>
         <button
           className={isActive ? openNav : closeNav}
           type="button"
@@ -62,7 +62,7 @@ class NavigationAuth extends Component {
             <span className="hamburger-inner" />
           </span>
         </button>
-        <button>Cart</button>
+        <Cart>Cart</Cart>
       </Nav>
     );
   }

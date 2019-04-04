@@ -26,63 +26,47 @@ class NavigationAuth extends Component {
     const { authUser } = this.props;
     const { isActive } = this.state;
     return (
-      <Fragment>
-        {/* <HamburgerButton isActive={isActive} onClick={this.toggleNav}>
+      <Nav isActive={isActive}>
+        <div>
+          <p>Logga</p>
+        </div>
+        <ul>
+          <li>
+            <Link to={ROUTES.HOME}>Home</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.ACCOUNT}>Account</Link>
+          </li>
+          <li>
+            <Link to={ROUTES.QUIZ}>Doft-Quiz</Link>
+          </li>
+
+          {authUser.roles.includes(ROLES.ADMIN) && (
+            <li>
+              <Link to={ROUTES.ADMIN}>Admin</Link>
+            </li>
+          )}
+          <li>
+            <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
+          </li>
+          <li>
+            <SignOutButton />
+          </li>
+        </ul>
+        <button
+          className={isActive ? openNav : closeNav}
+          type="button"
+          onClick={this.toggleNav}
+        >
           <span className="hamburger-box">
             <span className="hamburger-inner" />
           </span>
-        </HamburgerButton> */}
-
-        <Nav>
-          <ul>
-            <li>
-              <Link to={ROUTES.HOME}>Home</Link>
-            </li>
-            <li>
-              <Link to={ROUTES.ACCOUNT}>Account</Link>
-            </li>
-            <li>
-              <Link to={ROUTES.QUIZ}>Doft-Quiz</Link>
-            </li>
-
-            {authUser.roles.includes(ROLES.ADMIN) && (
-              <li>
-                <Link to={ROUTES.ADMIN}>Admin</Link>
-              </li>
-            )}
-            <li>
-              <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
-            </li>
-            <button
-              className={isActive ? openNav : closeNav}
-              type="button"
-              onClick={this.toggleNav}
-            >
-              <span className="hamburger-box">
-                <span className="hamburger-inner" />
-              </span>
-            </button>
-
-            <li>
-              <SignOutButton />
-            </li>
-          </ul>
-        </Nav>
-      </Fragment>
+        </button>
+        <button>Cart</button>
+      </Nav>
     );
   }
 }
-
-// const NavigationNonAuth = () => (
-//   <ul>
-//     <li>
-//       <Link to={ROUTES.LANDING}>Landing</Link>
-//     </li>
-//     <li>
-//       <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-//     </li>
-//   </ul>
-// );
 
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser,

@@ -5,3 +5,9 @@ import styled, { css } from 'styled-components';
 export const openNav = 'hamburger hamburger--spring is-active';
 
 export const closeNav = 'hamburger hamburger--spring';
+
+export const Nav = styled.nav`
+  ul {
+    display: flex;
+  }
+`;

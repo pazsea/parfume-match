@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../hamburger.css';
-import { closeNav, openNav } from './styles';
+import { closeNav, openNav, Nav } from './styles';
 
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
@@ -27,45 +27,47 @@ class NavigationAuth extends Component {
     const { isActive } = this.state;
     return (
       <Fragment>
-        <button
-          className={isActive ? openNav : closeNav}
-          type="button"
-          onClick={this.toggleNav}
-        >
-          <span className="hamburger-box">
-            <span className="hamburger-inner" />
-          </span>
-        </button>
         {/* <HamburgerButton isActive={isActive} onClick={this.toggleNav}>
           <span className="hamburger-box">
             <span className="hamburger-inner" />
           </span>
         </HamburgerButton> */}
 
-        <ul>
-          <li>
-            <Link to={ROUTES.HOME}>Home</Link>
-          </li>
-          <li>
-            <Link to={ROUTES.ACCOUNT}>Account</Link>
-          </li>
-          <li>
-            <Link to={ROUTES.QUIZ}>Doft-Quiz</Link>
-          </li>
-
-          {authUser.roles.includes(ROLES.ADMIN) && (
+        <Nav>
+          <ul>
             <li>
-              <Link to={ROUTES.ADMIN}>Admin</Link>
+              <Link to={ROUTES.HOME}>Home</Link>
             </li>
-          )}
-          <li>
-            <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
-          </li>
+            <li>
+              <Link to={ROUTES.ACCOUNT}>Account</Link>
+            </li>
+            <li>
+              <Link to={ROUTES.QUIZ}>Doft-Quiz</Link>
+            </li>
 
-          <li>
-            <SignOutButton />
-          </li>
-        </ul>
+            {authUser.roles.includes(ROLES.ADMIN) && (
+              <li>
+                <Link to={ROUTES.ADMIN}>Admin</Link>
+              </li>
+            )}
+            <li>
+              <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
+            </li>
+            <button
+              className={isActive ? openNav : closeNav}
+              type="button"
+              onClick={this.toggleNav}
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner" />
+              </span>
+            </button>
+
+            <li>
+              <SignOutButton />
+            </li>
+          </ul>
+        </Nav>
       </Fragment>
     );
   }

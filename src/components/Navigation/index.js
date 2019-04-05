@@ -52,16 +52,17 @@ class NavigationAuth extends Component {
           <li>
             <SignOutButton />
           </li>
+          <button
+            className={isActive ? openNav : closeNav}
+            type="button"
+            onClick={this.toggleNav}
+          >
+            <span className="hamburger-box">
+              <span className="hamburger-inner" />
+            </span>
+          </button>
         </ul>
-        <button
-          className={isActive ? openNav : closeNav}
-          type="button"
-          onClick={this.toggleNav}
-        >
-          <span className="hamburger-box">
-            <span className="hamburger-inner" />
-          </span>
-        </button>
+
         <Cart>Cart</Cart>
       </Nav>
     );

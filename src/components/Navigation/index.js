@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../hamburger.css';
-import { closeNav, openNav, Nav, Cart, NavUl } from './styles';
+import { closeNav, openNav, Nav, Cart } from './styles';
 
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
@@ -30,7 +30,7 @@ class NavigationAuth extends Component {
         {/* <div id="logo">
           <p>Logga</p>
         </div> */}
-        <NavUl pose={isActive ? 'visible' : 'hidden'}>
+        <ul>
           <li>
             <Link to={ROUTES.HOME}>Home</Link>
           </li>
@@ -52,7 +52,7 @@ class NavigationAuth extends Component {
           <li>
             <SignOutButton />
           </li>
-        </NavUl>
+        </ul>
         <button
           className={isActive ? openNav : closeNav}
           type="button"

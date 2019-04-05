@@ -4,6 +4,21 @@ import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import {
+  FlexContainerRow,
+  FlexContainerColumn,
+  FlexLeftContainer,
+  FlexRightContainer,
+  ImageContainer,
+  QuizTitle,
+  QuizSubTitle,
+  QuizIntroText,
+  QuizIntroButton,
+  ImageText,
+  ImageFlexContainer,
+  RelativeContainer,
+  TextInsideImage,
+} from './styles';
 import quizStep1Everything from '../../images/quizStep1Everything.jpg';
 import quizStep1Man from '../../images/quizStep1Man.jpg';
 import quizStep1Unisex from '../../images/quizStep1Unisex.jpg';
@@ -35,17 +50,27 @@ class QuizPage extends Component {
   render() {
     return (
       <div>
-        <h1>Sniph quiz: Hitta din kollektion</h1>
-        <p>
-          Svårt att bestämma dig för vilken av våra kollektioner som
-          passar dig?
-          <br /> Ingen fara! Gör vårt Sniph quiz så kommer vi att
-          kunna ge dig en bättre rekommendation. Du kan göra testet
-          flera gånger och som medlem kan du byta kollektion när du
-          vill.
-        </p>
-
-        <Link to={ROUTES.QUESTIONONE}>STARTA DOFT-QUIZ</Link>
+        <FlexContainerColumn>
+          <QuizTitle>
+            <h1>Sniph quiz: Hitta din kollektion</h1>
+            <h2>______</h2>
+          </QuizTitle>
+          <QuizIntroText>
+            <p>
+              Svårt att bestämma dig för vilken av våra kollektioner
+              som passar dig?
+              <br /> Ingen fara! Gör vårt Sniph quiz så kommer vi att
+              kunna ge dig en bättre rekommendation. Du kan göra
+              testet flera gånger och som medlem kan du byta
+              kollektion när du vill.
+            </p>
+          </QuizIntroText>
+          <QuizIntroButton>
+            <button>
+              <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
+            </button>
+          </QuizIntroButton>
+        </FlexContainerColumn>
       </div>
     );
   }
@@ -55,15 +80,56 @@ export class QuestionOne extends Component {
   render() {
     return (
       <div>
-        <h1>Vilken parfymtyp är du ute efter?</h1>
-        <p>Alternativ: För kvinnor, unisex, för män, allt</p>
+        <FlexContainerColumn>
+          <QuizTitle>
+            <h1>Vilken parfymtyp är du ute efter?</h1>
+            <QuizSubTitle>
+              <h2>______</h2>
+            </QuizSubTitle>
+          </QuizTitle>
 
-        <img src={quizStep1Everything} alt="" />
-        <img src={quizStep1Man} alt="" />
-        <img src={quizStep1Unisex} alt="" />
-        <img src={quizStep1Woman} alt="" />
+          <ImageFlexContainer>
+            <Link to={ROUTES.QUESTIONTWO}>
+              <RelativeContainer>
+                <img src={quizStep1Woman} alt="" />
 
-        <Link to={ROUTES.QUESTIONTWO}>NÄSTA FRÅGA</Link>
+                <TextInsideImage>
+                  <h2>För kvinnor</h2>
+                </TextInsideImage>
+              </RelativeContainer>
+            </Link>
+
+            <Link to={ROUTES.QUESTIONTWO}>
+              <RelativeContainer>
+                <img src={quizStep1Unisex} alt="" />
+
+                <TextInsideImage>
+                  <h2>Unisex</h2>
+                </TextInsideImage>
+              </RelativeContainer>
+            </Link>
+
+            <Link to={ROUTES.QUESTIONTWO}>
+              <RelativeContainer>
+                <img src={quizStep1Man} alt="" />
+
+                <TextInsideImage>
+                  <h2>För män</h2>
+                </TextInsideImage>
+              </RelativeContainer>
+            </Link>
+
+            <Link to={ROUTES.QUESTIONTWO}>
+              <RelativeContainer>
+                <img src={quizStep1Everything} alt="" />
+
+                <TextInsideImage>
+                  <h2>Allt</h2>
+                </TextInsideImage>
+              </RelativeContainer>
+            </Link>
+          </ImageFlexContainer>
+        </FlexContainerColumn>
       </div>
     );
   }
@@ -73,16 +139,46 @@ export class QuestionTwo extends Component {
   render() {
     return (
       <div>
-        <h1>Hur avancerad är din parfymsmak</h1>
-        <p>
-          Alternativ: Jag gillar parfym men inte mer, Jag tänker på
-          topp- och basnoter, ge mig något att bita i!
-        </p>
-        <img src={quizStep2ILikeParfume} alt="" />
-        <img src={quizStep2ImThinkingOf} alt="" />
-        <img src={quizStep2GiveMeSomething} alt="" />
+        <FlexContainerColumn>
+          <QuizTitle>
+            <h1>Hur avancerad är din parfymsmak?</h1>
+            <QuizSubTitle>
+              <h2>______</h2>
+            </QuizSubTitle>
+          </QuizTitle>
 
-        <Link to={ROUTES.QUESTIONTHREE}>NÄSTA FRÅGA</Link>
+          <ImageFlexContainer>
+            <Link to={ROUTES.QUESTIONTHREE}>
+              <RelativeContainer>
+                <img src={quizStep2ILikeParfume} alt="" />
+
+                <TextInsideImage>
+                  <h2>För kvinnor</h2>
+                </TextInsideImage>
+              </RelativeContainer>
+            </Link>
+
+            <Link to={ROUTES.QUESTIONTHREE}>
+              <RelativeContainer>
+                <img src={quizStep2ImThinkingOf} alt="" />
+
+                <TextInsideImage>
+                  <h2>Unisex</h2>
+                </TextInsideImage>
+              </RelativeContainer>
+            </Link>
+
+            <Link to={ROUTES.QUESTIONTHREE}>
+              <RelativeContainer>
+                <img src={quizStep2GiveMeSomething} alt="" />
+
+                <TextInsideImage>
+                  <h2>För män</h2>
+                </TextInsideImage>
+              </RelativeContainer>
+            </Link>
+          </ImageFlexContainer>
+        </FlexContainerColumn>
       </div>
     );
   }
@@ -91,21 +187,99 @@ export class QuestionTwo extends Component {
 export class QuestionThree extends Component {
   render() {
     return (
+      // <div>
+      //   <h1>När vill du dofta extra härligt?</h1>
+      //   <p>
+      //     På jobbet, hemma, på klubben, på gymmet, på nästa dejt, på
+      //     vernissage
+      //   </p>
+
+      //   <img src={quizStep3AtGym} alt="" />
+      //   <img src={quizStep3AtHome} alt="" />
+      //   <img src={quizStep3AtWork} alt="" />
+      //   <img src={quizStep3Club} alt="" />
+      //   <img src={quizStep3OnDate} alt="" />
+      //   <img src={quizStep3Vernissage} alt="" />
+
+      //   <Link to={ROUTES.QUESTIONFOUR}>NÄSTA FRÅGA</Link>
+      // </div>
+
       <div>
-        <h1>När vill du dofta extra härligt?</h1>
-        <p>
-          På jobbet, hemma, på klubben, på gymmet, på nästa dejt, på
-          vernissage
-        </p>
+        <FlexContainerColumn>
+          <QuizTitle>
+            <h1>När vill du dofta extra härligt?</h1>
+            <QuizSubTitle>
+              <h2>______</h2>
+            </QuizSubTitle>
+          </QuizTitle>
+        </FlexContainerColumn>
+        <FlexContainerRow>
+          <ImageFlexContainer>
+            <FlexLeftContainer>
+              <Link to={ROUTES.QUESTIONFOUR}>
+                <RelativeContainer>
+                  <img src={quizStep3AtWork} alt="" />
 
-        <img src={quizStep3AtGym} alt="" />
-        <img src={quizStep3AtHome} alt="" />
-        <img src={quizStep3AtWork} alt="" />
-        <img src={quizStep3Club} alt="" />
-        <img src={quizStep3OnDate} alt="" />
-        <img src={quizStep3Vernissage} alt="" />
+                  <TextInsideImage>
+                    <h2>På jobbet</h2>
+                  </TextInsideImage>
+                </RelativeContainer>
+              </Link>
 
-        <Link to={ROUTES.QUESTIONFOUR}>NÄSTA FRÅGA</Link>
+              <Link to={ROUTES.QUESTIONFOUR}>
+                <RelativeContainer>
+                  <img src={quizStep3AtHome} alt="" />
+
+                  <TextInsideImage>
+                    <h2>Hemma</h2>
+                  </TextInsideImage>
+                </RelativeContainer>
+              </Link>
+
+              <Link to={ROUTES.QUESTIONFOUR}>
+                <RelativeContainer>
+                  <img src={quizStep3Club} alt="" />
+
+                  <TextInsideImage>
+                    <h2>På klubben</h2>
+                  </TextInsideImage>
+                </RelativeContainer>
+              </Link>
+            </FlexLeftContainer>
+
+            <FlexRightContainer>
+              <Link to={ROUTES.QUESTIONFOUR}>
+                <RelativeContainer>
+                  <img src={quizStep3AtGym} alt="" />
+
+                  <TextInsideImage>
+                    <h2>På gymmet</h2>
+                  </TextInsideImage>
+                </RelativeContainer>
+              </Link>
+
+              <Link to={ROUTES.QUESTIONFOUR}>
+                <RelativeContainer>
+                  <img src={quizStep3OnDate} alt="" />
+
+                  <TextInsideImage>
+                    <h2>På nästa dejt</h2>
+                  </TextInsideImage>
+                </RelativeContainer>
+              </Link>
+
+              <Link to={ROUTES.QUESTIONFOUR}>
+                <RelativeContainer>
+                  <img src={quizStep3Vernissage} alt="" />
+
+                  <TextInsideImage>
+                    <h2>På vernissage</h2>
+                  </TextInsideImage>
+                </RelativeContainer>
+              </Link>
+            </FlexRightContainer>
+          </ImageFlexContainer>
+        </FlexContainerRow>
       </div>
     );
   }

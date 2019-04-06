@@ -30,7 +30,7 @@ export const Nav = styled.nav`
     ${props =>
       props.isActive &&
       css`
-        width: 60%;
+        width: 100%;
       `}
     li {
       margin-left: 5%;

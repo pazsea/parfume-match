@@ -14,3 +14,4 @@ export const QUESTIONTHREE = '/qthree';
 export const QUESTIONFOUR = '/qfour';
 export const QUESTIONFIVE = '/qfive';
 export const QUESTIONSIX = '/qsix';
+export const RECOMMENDATION = '/recommendation';

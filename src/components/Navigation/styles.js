@@ -9,14 +9,15 @@ export const closeNav = 'hamburger hamburger--spring';
 export const Nav = styled.nav`
   display: flex;
   justify-content: flex-end;
-  /* border: 2px solid green; */
   top: 0;
   position: sticky;
   width: 100%;
+
   ul {
     list-style: none;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
+    align-items: center;
     width: 4%;
     padding: 0;
     margin: 0;
@@ -41,3 +42,39 @@ export const Nav = styled.nav`
 `;
 
 export const Cart = styled.button``;
+
+//MOBILE NAV
+
+export const MobileNav = styled.nav`
+  button {
+    top: 0;
+    right: 0;
+    position: absolute;
+    z-index: 100;
+    color: black;
+  }
+`;
+
+export const NavDiv = styled.div`
+  transform: translateY(-120%);
+  transition: transform 0.4s ease-out;
+  /* z-index: 50000; */
+  /* border: 1px solid red; */
+  background: white;
+  position: absolute;
+  width: 100vw;
+
+  ${props =>
+    props.isActive &&
+    css`
+      transform: translateX(0);
+    `}
+
+  text-align: center;
+  ul {
+    opacity: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+`;

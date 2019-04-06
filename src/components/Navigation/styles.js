@@ -18,7 +18,7 @@ export const Nav = styled.nav`
     /* border: 2px solid red; */
     display: flex;
     align-items: center;
-    width: 4%;
+    width: 5%;
     padding: 0;
     margin: 0;
     justify-content: flex-end;
@@ -49,7 +49,7 @@ export const MobileNav = styled.nav`
   button {
     top: 0;
     right: 0;
-    position: absolute;
+    position: fixed;
     z-index: 100;
     color: black;
   }
@@ -61,8 +61,10 @@ export const NavDiv = styled.div`
   /* z-index: 50000; */
   /* border: 1px solid red; */
   background: white;
-  position: absolute;
-  width: 100vw;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
 
   ${props =>
     props.isActive &&

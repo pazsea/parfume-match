@@ -31,7 +31,7 @@ class App extends Component {
     innerHeight: window.innerHeight,
     innerWidth: window.innerWidth,
   };
-  componentDidMount() {
+  componentWillMount() {
     // const { innerHeight, innerWidth } = this.state;
     this.handleResize();
     window.addEventListener('resize', () => {

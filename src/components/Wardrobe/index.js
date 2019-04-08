@@ -1,57 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import '../../../node_modules/react-image-gallery/styles/css/image-gallery.css';
-
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
+import { QuizTitle, QuizSubTitle } from './styles';
 
-import ImageGallery from 'react-image-gallery';
-
-class WardrobePage extends React.Component {
+class WardrobePage extends Component {
   render() {
-    const images = [
-      {
-        original: require('../../images/collectionWithTextClean.png'),
-        thumbnail: require('../../images/collectionWithTextClean.png'),
-      },
-      {
-        original: require('../../images/collectionWithTextFemaleClassics.png'),
-        thumbnail: require('../../images/collectionWithTextFemaleClassics.png'),
-      },
-      {
-        original: require('../../images/collectionWithTextTrendingNow.png'),
-        thumbnail: require('../../images/collectionWithTextTrendingNow.png'),
-      },
-      {
-        original: require('../../images/collectionWithTextWorkPlay.jpg'),
-        thumbnail: require('../../images/collectionWithTextWorkPlay.jpg'),
-      },
-      {
-        original: require('../../images/collectionWithTextAvantgarde.jpg'),
-        thumbnail: require('../../images/collectionWithTextAvantgarde.jpg'),
-      },
-      {
-        original: require('../../images/collectionWithTextAesthetic.png'),
-        thumbnail: require('../../images/collectionWithTextAesthetic.png'),
-      },
-    ];
-
-    return <ImageGallery items={images} />;
+    return (
+      <div>
+        <QuizTitle>
+          <h1>Wardrobe</h1>
+        </QuizTitle>
+        <QuizSubTitle>
+          <p>This is the Wardrobe</p>
+        </QuizSubTitle>
+      </div>
+    );
   }
 }
-
-// class WardrobePage extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <h1>Wardrobe</h1>
-//         <p>This is the Wardrobe</p>
-//         <ImageGallery />
-//       </div>
-//     );
-//   }
-// }
 
 const mapStateToProps = state => ({
   users: state.userState.users,

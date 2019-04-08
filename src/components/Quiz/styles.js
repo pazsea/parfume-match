@@ -16,19 +16,20 @@ export const FlexContainerColumn = styled.div`
 `;
 
 export const FlexContainerRow = styled.div`
-  border: 1px orange solid;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
 
   line-height: 1.563;
 `;
 
 export const FlexLeftContainer = styled.div`
-  border: 1px red solid;
+  margin-right: 10px;
 `;
 
 export const FlexRightContainer = styled.div`
-  border: 1px blue solid;
+  /* border: 1px blue solid; */
+  margin-left: 10px;
 `;
 
 export const QuizTitle = styled.div`
@@ -54,14 +55,27 @@ export const QuizIntroText = styled.div`
 
 export const ImageFlexContainer = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   text-align: center;
   color: white;
   img {
     padding-bottom: 15px;
     width: 80%;
+  }
+`;
+
+export const ImageFlexSpacing = styled.div`
+  display: flex;
+  align-items: center;
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+  /* text-align: center; */
+  color: white;
+  img {
+    padding-bottom: 15px;
+    width: 100%;
   }
 `;
 
@@ -77,7 +91,6 @@ export const RelativeContainer = styled.div`
   position: relative;
   text-align: center;
   color: white;
-
   :hover {
     opacity: 0.8;
   }
@@ -89,6 +102,23 @@ export const TextInsideImage = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   text-transform: uppercase;
+`;
+
+export const QuizInput = styled.div`
+  display: flex;
+  justify-content: center;
+  font-size: 1em;
+
+  textarea {
+    margin-bottom: 30px;
+    height: 550px;
+    width: 500px;
+    background-color: #f6f6f6;
+  }
+
+  ::placeholder {
+    vertical-align: super;
+  }
 `;
 
 export const QuizIntroButton = styled.div`

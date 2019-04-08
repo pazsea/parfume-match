@@ -31,7 +31,7 @@ class App extends Component {
     innerHeight: window.innerHeight,
     innerWidth: window.innerWidth,
   };
-  componentDidMount() {
+  componentWillMount() {
     // const { innerHeight, innerWidth } = this.state;
     this.handleResize();
     window.addEventListener('resize', () => {
@@ -55,11 +55,11 @@ class App extends Component {
       innerHeight <= 1366 &&
       innerHeight >= 1024
     ) {
-      this.props.setMediumSize();
+      this.props.setSize('mediumSize');
     } else if (innerWidth < 768 && innerHeight < 1024) {
-      this.props.setSmallSize();
+      this.props.setSize('smallSize');
     } else {
-      this.props.setBigSize();
+      this.props.setSize('bigSize');
     }
   }
 
@@ -111,9 +111,7 @@ class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setBigSize: () => dispatch({ type: 'BIG_SIZE' }),
-  setMediumSize: () => dispatch({ type: 'MEDIUM_SIZE' }),
-  setSmallSize: () => dispatch({ type: 'SMALL_SIZE' }),
+  setSize: size => dispatch({ type: 'SIZE', size }),
 });
 
 export default compose(

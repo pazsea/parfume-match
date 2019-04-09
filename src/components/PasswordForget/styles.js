@@ -154,7 +154,8 @@ export const PasswordForgetFormDiv = styled.div`
     padding: 10px;
     background: #fbdee3;
     color: black;
-    /* border: none; */
+    cursor: pointer;
+
     font-weight: 700;
   }
 `;

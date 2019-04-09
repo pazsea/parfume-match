@@ -154,7 +154,13 @@ export const SignUpFormDiv = styled.div`
     padding: 10px;
     background: #fbdee3;
     color: black;
-    /* border: none; */
+    cursor: pointer;
     font-weight: 700;
   }
+`;
+
+export const CheckboxDiv = styled.div`
+  padding-top: 3%;
+  display: flex;
+  justify-content: space-evenly;
 `;

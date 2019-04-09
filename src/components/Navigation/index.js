@@ -63,7 +63,7 @@ class NavigationAuth extends Component {
               </li>
             )}
             <li>
-              <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
+              <Link to={ROUTES.WARDROBE}>Wardrobe</Link>
             </li>
             <li>
               <SignOutButton />

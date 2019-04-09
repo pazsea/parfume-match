@@ -18,7 +18,7 @@ export const Nav = styled.nav`
     /* border: 2px solid red; */
     display: flex;
     align-items: center;
-    width: 5%;
+    width: 0%;
     padding: 0;
     margin: 0;
     justify-content: flex-end;

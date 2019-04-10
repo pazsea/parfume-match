@@ -24,13 +24,14 @@ import WardrobePage from '../Wardrobe';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
+import Recommendation from '../Recommendation';
 
 class App extends Component {
   state = {
     innerHeight: window.innerHeight,
     innerWidth: window.innerWidth,
   };
-  componentDidMount() {
+  componentWillMount() {
     // const { innerHeight, innerWidth } = this.state;
     this.handleResize();
     window.addEventListener('resize', () => {
@@ -54,11 +55,11 @@ class App extends Component {
       innerHeight <= 1366 &&
       innerHeight >= 1024
     ) {
-      this.props.setMediumSize();
+      this.props.setSize('mediumSize');
     } else if (innerWidth < 768 && innerHeight < 1024) {
-      this.props.setSmallSize();
+      this.props.setSize('smallSize');
     } else {
-      this.props.setBigSize();
+      this.props.setSize('bigSize');
     }
   }
 
@@ -98,6 +99,10 @@ class App extends Component {
             component={QuestionFive}
           />
           <Route path={ROUTES.QUESTIONSIX} component={QuestionSix} />
+          <Route
+            path={ROUTES.RECOMMENDATION}
+            component={Recommendation}
+          />
           <Route path={ROUTES.WARDROBE} component={WardrobePage} />
         </div>
       </Router>
@@ -106,9 +111,7 @@ class App extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setBigSize: () => dispatch({ type: 'BIG_SIZE' }),
-  setMediumSize: () => dispatch({ type: 'MEDIUM_SIZE' }),
-  setSmallSize: () => dispatch({ type: 'SMALL_SIZE' }),
+  setSize: size => dispatch({ type: 'SIZE', size }),
 });
 
 export default compose(

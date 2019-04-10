@@ -160,7 +160,9 @@ export class QuestionSix extends Component {
           är det bra om du väljer dem i listan för bättre matchning"
         />
 
-        <Link to={ROUTES.WARDROBE}>Visa min Sniph-kollektion</Link>
+        <Link to={ROUTES.RECOMMENDATION}>
+          Visa min Sniph-kollektion
+        </Link>
       </div>
     );
   }

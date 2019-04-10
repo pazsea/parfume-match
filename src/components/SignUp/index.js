@@ -7,8 +7,9 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
-import { SignUpFormDiv } from './styles';
+import { SignUpFormDiv, CheckboxDiv } from './styles';
 import { LandingDiv } from '../Landing/styles';
+import '../../pretty-checkbox.min.css';
 
 class SignUpPage extends React.Component {
   render() {
@@ -31,6 +32,8 @@ const INITIAL_STATE = {
   passwordTwo: '',
   isAdmin: false,
   error: null,
+  completedQuiz: false,
+  publicWardrobe: false,
 };
 
 const ERROR_CODE_ACCOUNT_EXISTS = 'auth/email-already-in-use';
@@ -51,7 +54,14 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = event => {
-    const { username, email, passwordOne, isAdmin } = this.state;
+    const {
+      username,
+      email,
+      passwordOne,
+      isAdmin,
+      completedQuiz,
+      publicWardrobe,
+    } = this.state;
     const roles = [];
 
     if (isAdmin) {
@@ -66,6 +76,8 @@ class SignUpFormBase extends Component {
           username,
           email,
           roles,
+          publicWardrobe,
+          completedQuiz,
         });
       })
       // .then(() => {
@@ -102,6 +114,7 @@ class SignUpFormBase extends Component {
       passwordTwo,
       isAdmin,
       error,
+      publicWardrobe,
     } = this.state;
 
     const isInvalid =
@@ -159,20 +172,37 @@ class SignUpFormBase extends Component {
           <span className="focus-input100" data-symbol="&#xf191;" />
         </div>
         <br />
-        <label>
-          Admin:
-          <input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
-          />
-        </label>
+        <CheckboxDiv>
+          <div className="pretty p-default">
+            <input
+              name="isAdmin"
+              type="checkbox"
+              checked={isAdmin}
+              onChange={this.onChangeCheckbox}
+            />
+            <div className="state p-success">
+              <i className="icon mdi mdi-check" />
+              <label>Admin</label>
+            </div>
+          </div>
+          <div className="pretty p-default">
+            <input
+              name="publicWardrobe"
+              type="checkbox"
+              checked={publicWardrobe}
+              onChange={this.onChangeCheckbox}
+            />
+            <div className="state p-success">
+              <i className="icon mdi mdi-check" />
+              <label>Public</label>
+            </div>
+          </div>
+        </CheckboxDiv>
+
         <br />
         <button disabled={isInvalid} type="submit">
           SIGN UP
         </button>
-
         {error && <p>{error.message}</p>}
       </form>
     );

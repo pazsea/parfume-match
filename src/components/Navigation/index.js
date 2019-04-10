@@ -63,22 +63,21 @@ class NavigationAuth extends Component {
               </li>
             )}
             <li>
-              <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
+              <Link to={ROUTES.WARDROBE}>Wardrobe</Link>
             </li>
             <li>
               <SignOutButton />
             </li>
-            <button
-              className={isActive ? openNav : closeNav}
-              type="button"
-              onClick={this.toggleNav}
-            >
-              <span className="hamburger-box">
-                <span className="hamburger-inner" />
-              </span>
-            </button>
           </ul>
-
+          <button
+            className={isActive ? openNav : closeNav}
+            type="button"
+            onClick={this.toggleNav}
+          >
+            <span className="hamburger-box">
+              <span className="hamburger-inner" />
+            </span>
+          </button>
           <Cart>Cart</Cart>
         </Nav>
       );

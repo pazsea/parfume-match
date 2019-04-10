@@ -1,9 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const SlideWrapper = styled.div`
-  background: lightcoral;
-  height: 100vh;
-  width: auto;
-  background-repeat: no-repeat;
+export const QuizTitle = styled.div`
+  text-align: center;
+  letter-spacing: 0;
+  font-weight: 900;
+  font-size: 1em;
+`;
+export const QuizSubTitle = styled.div`
+  text-align: center;
+  letter-spacing: 0;
+  font-weight: 300;
+  font-size: 1em;
 `;

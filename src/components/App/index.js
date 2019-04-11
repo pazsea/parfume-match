@@ -19,7 +19,7 @@ import QuizPage, {
   QuestionFive,
   QuestionSix,
 } from '../Quiz';
-// import QuestionOne from '../Quiz';
+import RecommendationsPage from '../Recommendation';
 import WardrobePage from '../Wardrobe';
 
 import * as ROUTES from '../../constants/routes';
@@ -101,7 +101,7 @@ class App extends Component {
           <Route path={ROUTES.QUESTIONSIX} component={QuestionSix} />
           <Route
             path={ROUTES.RECOMMENDATION}
-            component={Recommendation}
+            component={RecommendationsPage}
           />
           <Route path={ROUTES.WARDROBE} component={WardrobePage} />
         </div>

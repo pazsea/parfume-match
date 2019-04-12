@@ -14,27 +14,37 @@ class RecommendationsPage extends Component {
 
     this.state = {
       images: [
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/aurora.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/canyon.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/city.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/desert.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/mountains.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/redsky.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/sandy-shores.jpg',
-        'https://s3.us-east-2.amazonaws.com/dzuz14/thumbnails/tree-of-life.jpg',
+        'https://cdn.shopify.com/s/files/1/1061/5242/products/WP-Collection-450x450_grande.png?v=1550738754',
+        'https://cdn.shopify.com/s/files/1/1061/5242/products/TN-Collection-450x450_grande.png?v=1550738927',
+        'https://cdn.shopify.com/s/files/1/1061/5242/products/FC-Collection-450x450_grande_9ca94448-a73f-414b-9ffb-9310381c3426_grande.png?v=1550738730',
+        'https://cdn.shopify.com/s/files/1/1061/5242/products/C-Collection-450x450_grande_2c33a2b0-584c-4e87-b338-1c83ffcb3aec_grande.png?v=1550738715',
+        'https://cdn.shopify.com/s/files/1/1061/5242/products/AG-Collection-450x450_grande_d8ac98a0-818a-4dda-a789-cfadeec9cad7_grande.jpeg?v=1550738697',
+        'https://cdn.shopify.com/s/files/1/1061/5242/products/WP-Collection-450x450_grande.jpg?v=1550738768',
       ],
       currentIndex: 0,
       translateValue: 0,
     };
   }
 
-  goToPrevSlide = () => {};
+  goToPrevSlide = () => {
+    if (this.state.currentIndex === this.state.images.length + 1) {
+      return this.setState({
+        currentIndex: 0,
+        translateValue: 0,
+      });
+    }
+
+    // This will not run if we met the if condition above
+    this.setState(prevState => ({
+      currentIndex: prevState.currentIndex - 1,
+      translateValue: prevState.translateValue + +this.slideWidth(),
+    }));
+  };
 
   goToNextSlide = () => {
     // Exiting the method early if we are at the end of the images array.
     // We also want to reset currentIndex and translateValue, so we return
     // to the first image in the array.
-    console.log('Next clicked');
     if (this.state.currentIndex === this.state.images.length - 1) {
       return this.setState({
         currentIndex: 0,

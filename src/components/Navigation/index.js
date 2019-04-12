@@ -8,7 +8,8 @@ import {
   Nav,
   MobileNav,
   NavDiv,
-  Cart,
+  CartBtn,
+  Carts,
 } from './styles';
 
 import SignOutButton from '../SignOut';
@@ -78,7 +79,9 @@ class NavigationAuth extends Component {
               <span className="hamburger-inner" />
             </span>
           </button>
-          <Cart>Cart</Cart>
+          <CartBtn>
+            <Carts />
+          </CartBtn>
         </Nav>
       );
     } else if (mediumSize || smallSize) {

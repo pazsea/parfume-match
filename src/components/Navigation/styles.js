@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-
+import { Cart } from 'styled-icons/boxicons-regular/Cart';
 // https://github.com/jonsuh/hamburgers/blob/master/dist/hamburgers.css  <-- Check if needed.
 
 export const openNav = 'hamburger hamburger--spring is-active';
@@ -44,19 +44,27 @@ export const Nav = styled.nav`
 
   button:nth-child(1) {
     border: none;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 `;
 
-export const Cart = styled.button`
+export const CartBtn = styled.button`
   /* display: flex; */
   align-self: center;
 
   border: none;
-  width: 2.6rem;
-  height: 1.125rem;
-  padding: 1px 7px 2px 7px;
-  border: 1px solid red;
+  /* width: 2.6rem;
+  height: 1.125rem; */
+  /* padding: 1px 7px 2px 7px; */
+  /* border: 1px solid red; */
+`;
+
+export const Carts = styled(Cart)`
+  /* align-self: center; */
+  width: 2rem;
+  height: 2rem;
+  padding-bottom: 0.3rem;
+  padding-right: 0.5rem;
 `;
 
 //MOBILE NAV

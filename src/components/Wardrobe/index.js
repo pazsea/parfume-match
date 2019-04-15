@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import '../../../node_modules/react-image-gallery/styles/css/image-gallery.css';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import { QuizTitle, QuizSubTitle } from './styles';

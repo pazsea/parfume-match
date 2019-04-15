@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import './styles.css';
+import { Slider, SliderWrapper } from './styles';
 import Slide from './Slide';
 import LeftArrow from './LeftArrow';
 import RightArrow from './RightArrow';
@@ -65,9 +66,8 @@ class RecommendationsPage extends Component {
 
   render() {
     return (
-      <div className="slider">
-        <div
-          className="slider-wrapper"
+      <Slider>
+        <SliderWrapper
           style={{
             transform: `translateX(${this.state.translateValue}px)`,
             transition: 'transform ease-out 0.45s',
@@ -76,12 +76,12 @@ class RecommendationsPage extends Component {
           {this.state.images.map((image, i) => (
             <Slide key={i} image={image} />
           ))}
-        </div>
+        </SliderWrapper>
 
         <LeftArrow goToPrevSlide={this.goToPrevSlide} />
 
         <RightArrow goToNextSlide={this.goToNextSlide} />
-      </div>
+      </Slider>
     );
   }
 }

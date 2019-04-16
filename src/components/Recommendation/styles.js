@@ -1,4 +1,20 @@
 import styled from 'styled-components';
+// import collectionWithTextAesthetic from '../../images/collectionWithTextAesthetic.png';
+// import collectionWithTextAvantgarde from '../../images/collectionWithTextAvantgarde.jpg';
+// import collectionWithTextClean from '../../images/collectionWithTextClean.png';
+// import collectionWithTextFemaleClassics from '../../images/collectionWithTextFemaleClassics.png';
+// import collectionWithTextTrendingNow from '../../images/collectionWithTextTrendingNow.png';
+// import collectionWithTextWorkPlay from '../../images/collectionWithTextWorkPlay.jpg';
+// import headerClean from '../../images/headerClean.jpg';
+// export const ParfumeBottleImage = styled.div`
+/* background-image: url(${headerClean}); */
+//   display: flex;
+//   flex-direction: row-reverse;
+//   width: 100%;
+//   height: 100vh;
+//   background-image: url(${parfumeBottleGeneric});
+//   background-size: cover;
+// `;
 
 export const Slider = styled.div`
   position: relative;
@@ -47,4 +63,81 @@ export const BackArrow = styled.div`
   left: 25px;
   z-index: 999;
   color: #fff;
+`;
+
+export const CleanImage = styled.div`
+  background: blue;
+  /* align-self: center; */
+  background-repeat: no-repeat;
+  /* height: 300px; */
+`;
+
+export const Header = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+  /* top: 0; */
+  background-image: url(${props => props.headerImage});
+  width: 100%;
+  height: 35vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 2rem;
+`;
+
+export const FlexContainer = styled.div`
+  border: 1px solid green;
+  display: flex;
+  justify-content: center;
+`;
+
+export const TextFlexContainer = styled.div`
+  border: 1px solid red;
+  flex-direction: column;
+  word-wrap: wrap;
+`;
+
+export const Description = styled.div`
+  width: 400px;
+  max-width: 500px;
+`;
+
+export const ImageFlexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  /* align-self: center; */
+  flex-direction: column;
+  /* justify-content: center; */
+  text-align: center;
+  padding-right: 5rem;
+  color: white;
+`;
+
+export const SubscribeButton = styled.div`
+  text-align: center;
+  text-transform: uppercase;
+  button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
+      sans-serif;
+
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 16px;
+    a:visited {
+      text-decoration: none;
+      color: white;
+    }
+    a:link {
+      text-decoration: none;
+      color: white;
+    }
+  }
 `;

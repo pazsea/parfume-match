@@ -9,17 +9,17 @@ export const QuizTitle = styled.div`
 
 export const Wrapper = styled.div`
   width: 100%;
-  border: 1px solid black;
   display: flex;
+  justify-content: center;
+  margin: 0.8em 0;
 `;
 
 // ONE WHOLE CARD
 export const ImageDiv = styled.div`
-  margin: 0.5em;
-  flex: 1;
-  border: 1px solid red;
+  flex-basis: 40%;
   display: flex;
   justify-content: center;
+
   img {
     align-self: center;
     width: 50%;
@@ -28,39 +28,70 @@ export const ImageDiv = styled.div`
 `;
 
 export const ParfumeDiv = styled.div`
-  margin: 0.5em;
-  flex: 1;
-  border: 1px solid green;
+  flex-basis: 40%;
   display: flex;
   flex-direction: column;
+  box-shadow: 4px 2px 2px black;
+  border: 1px solid #ccc;
+`;
+
+export const ButtonDiv = styled.div`
+  display: flex;
+  flex: 2;
+  flex-direction: row;
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+  align-items: center;
+
+  button {
+    cursor: pointer;
+    border: none;
+    font-size: 1.2em;
+    font-weight: 700;
+    background: none;
+    height: fit-content;
+    padding: 0;
+    margin-left: 0.4em;
+  }
+  button:nth-child(1) {
+    border-bottom: ${props =>
+      props.tabOpen === 'descriptionTab1' ? '1px solid black' : null};
+  }
+
+  button:nth-child(2) {
+    margin-left: 0.9em;
+
+    border-bottom: ${props =>
+      props.tabOpen === 'ratingTab1' ? '1px solid black' : null};
+  }
+  button:hover {
+    background-color: #ddd;
+  }
 `;
 
 export const StarsDiv = styled.div`
   flex: 1;
-  border: 1px solid black;
-  font-size: 1.5em;
+  font-size: 2em;
+  margin-left: 0.4em;
 `;
 export const HeaderDiv = styled.div`
   flex: 1;
-  border: 1px solid black;
+  margin-left: 0.4em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+  font-size: 1.4em;
+  padding: 0.1em 0;
 `;
 
 //DESCRIPTION TAB
 
 export const DescriptionDiv = styled.div`
   flex: 8;
-`;
-
-export const ButtonDiv = styled.div`
-  display: flex;
-  flex: 1;
-  /* border: 1px solid black; */
-  flex-direction: row;
-  button {
-    cursor: pointer;
-    background: none;
-    border: 1px solid black;
-  }
+  margin-left: 0.4em;
+  font-size: 1em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
 `;
 
 //MY RATING TAB
@@ -68,7 +99,6 @@ export const ButtonDiv = styled.div`
 export const RatingForm = styled.form`
   border: 1px solid yellow;
   display: flex;
-  /* align-items: stretch; */
   flex-direction: column;
   flex: 8;
   label {
@@ -77,7 +107,7 @@ export const RatingForm = styled.form`
 `;
 
 export const RatingBox = styled.input`
-  flex: 8;
+  flex: 5;
 `;
 
 export const RatingButton = styled.input`

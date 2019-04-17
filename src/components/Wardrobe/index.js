@@ -7,15 +7,12 @@ import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
-
-import '../../../node_modules/react-image-gallery/styles/css/image-gallery.css';
 import parfume1 from '../../images/parfume1.jpg';
-import 'react-tabs/style/react-tabs.css';
 
 class WardrobePage extends Component {
   state = {
     isTruncated: false,
-    tabOpen: true,
+    tabOpen: 'descriptionTab1',
     rating: 1,
   };
 
@@ -49,7 +46,7 @@ class WardrobePage extends Component {
             <img src={parfume1} />
           </s.ImageDiv>
           <s.ParfumeDiv>
-            <s.ButtonDiv>
+            <s.ButtonDiv tabOpen={tabOpen}>
               <button
                 value={'descriptionTab' + nombre}
                 onClick={e => this.toggleTab(e)}
@@ -67,25 +64,75 @@ class WardrobePage extends Component {
             <s.StarsDiv>
               <StarRatingComponent
                 name="rate1"
-                starCount={10}
+                starCount={5}
                 value={rating}
                 onStarClick={this.onStarClick.bind(this)}
               />
             </s.StarsDiv>
-            {tabOpen === 'descriptionTab' + nombre ? (
-              <ParfumeWrapper
+            {tabOpen === 'descriptionTab' + nombre ||
+            tabOpen === '' ? (
+              <DescriptionWrapper
                 rating={rating}
                 isTruncated={isTruncated}
                 toggleTruncate={this.toggleTruncate}
+                tabOpen={tabOpen}
               />
-            ) : (
+            ) : tabOpen === 'ratingTab' + nombre ? (
               <RatingWrapper
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
                 value={value}
                 starClick={this.onStarClick}
+                tabOpen={tabOpen}
               />
-            )}
+            ) : null}
+          </s.ParfumeDiv>
+        </s.Wrapper>
+        <s.Wrapper>
+          <s.ImageDiv>
+            <img src={parfume1} />
+          </s.ImageDiv>
+          <s.ParfumeDiv>
+            <s.ButtonDiv tabOpen={tabOpen}>
+              <button
+                value={'descriptionTab' + nombre}
+                onClick={e => this.toggleTab(e)}
+              >
+                Description
+              </button>
+              <button
+                value={'ratingTab' + nombre}
+                onClick={e => this.toggleTab(e)}
+              >
+                My Rating
+              </button>
+            </s.ButtonDiv>
+            <s.HeaderDiv>Parfym</s.HeaderDiv>
+            <s.StarsDiv>
+              <StarRatingComponent
+                name="rate1"
+                starCount={5}
+                value={rating}
+                onStarClick={this.onStarClick.bind(this)}
+              />
+            </s.StarsDiv>
+            {tabOpen === 'descriptionTab' + nombre ||
+            tabOpen === '' ? (
+              <DescriptionWrapper
+                rating={rating}
+                isTruncated={isTruncated}
+                toggleTruncate={this.toggleTruncate}
+                tabOpen={tabOpen}
+              />
+            ) : tabOpen === 'ratingTab' + nombre ? (
+              <RatingWrapper
+                handleSubmit={this.handleSubmit}
+                handleChange={this.handleChange}
+                value={value}
+                starClick={this.onStarClick}
+                tabOpen={tabOpen}
+              />
+            ) : null}
           </s.ParfumeDiv>
         </s.Wrapper>
       </Fragment>
@@ -93,30 +140,28 @@ class WardrobePage extends Component {
   }
 }
 
-function ParfumeWrapper({ toggleTruncate, isTruncated }) {
+function DescriptionWrapper({ toggleTruncate, isTruncated }) {
   return (
     <Fragment>
       <s.DescriptionDiv>
         <Truncate
-          lines={isTruncated ? 0 : 15}
+          lines={isTruncated ? 0 : 9}
           ellipsis={
             <span>
               ... <a onClick={toggleTruncate}> Read more</a>
             </span>
           }
         >
-          The girls looked like tall, exotic grazing animals, swaying
-          gracefully and unconsciously with the movement of the train,
-          their high heels like polished hooves against the gray metal
-          of the bright void beyond the chain link. Her cheekbones
-          flaring scarlet as Wizard’s Castle burned, forehead drenched
-          with azure when Munich fell to the Tank War, mouth touched
-          with hot gold as a gliding cursor struck sparks from the
-          banks of every computer in the puppet place had been a
-          subunit of Freeside’s security system. The girls looked like
-          tall, exotic grazing animals, swaying gracefully and
-          unconsciously with the surgery,
-          <a onClick={toggleTruncate}> Read less</a>
+          2017 års stora lansering från parfymprofilen Pierre
+          Guillaumes doftkollektion "Huitième Art" är en makalös
+          splash av fruktiga ackord, träiga noter och mustiga kryddor.
+          2017 års stora lansering från parfymprofilen Pierre
+          Guillaumes doftkollektion "Huitième Art" är en makalös
+          splash av fruktiga ackord, träiga noter och mustiga kryddor.
+          <br />
+          Att du inom kort känner att du bara måste duscha dig i
+          Aqaysos är inte otänkbart. Blir detta doften som förändrar
+          ditt liv?
         </Truncate>
       </s.DescriptionDiv>
     </Fragment>
@@ -127,8 +172,6 @@ function RatingWrapper({ handleSubmit, handleChange, value }) {
   return (
     <Fragment>
       <s.RatingForm onSubmit={handleSubmit}>
-        <label>My feedback:</label>
-
         <s.RatingBox
           type="text"
           className="ratingBox"

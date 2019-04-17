@@ -23,7 +23,7 @@ export const ImageDiv = styled.div`
   img {
     align-self: center;
     width: 50%;
-    height: auto;
+    /* height: auto; */
   }
 `;
 
@@ -97,7 +97,6 @@ export const DescriptionDiv = styled.div`
 //MY RATING TAB
 
 export const RatingForm = styled.form`
-  border: 1px solid yellow;
   display: flex;
   flex-direction: column;
   flex: 8;
@@ -106,10 +105,23 @@ export const RatingForm = styled.form`
   }
 `;
 
-export const RatingBox = styled.input`
+export const RatingBox = styled.textarea`
   flex: 5;
+  margin: 0 0.4em 0.4em 0.4em;
 `;
 
 export const RatingButton = styled.input`
   flex: 1;
+  color: #fff;
+  background: #000;
+  margin: 0 0.4em 0.4em 0.4em;
+  border: 2px solid #000;
+  text-transform: uppercase;
+
+  :hover {
+    color: #000;
+    background: white;
+    border: 2px solid black;
+    cursor: pointer;
+  }
 `;

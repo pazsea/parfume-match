@@ -173,7 +173,7 @@ function RatingWrapper({ handleSubmit, handleChange, value }) {
     <Fragment>
       <s.RatingForm onSubmit={handleSubmit}>
         <s.RatingBox
-          type="text"
+          type="textarea"
           className="ratingBox"
           value={value}
           onChange={handleChange}

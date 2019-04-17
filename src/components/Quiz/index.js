@@ -453,7 +453,7 @@ export class QuestionSix extends Component {
           </QuizInput>
           <QuizIntroButton>
             <button>
-              <Link to={ROUTES.WARDROBE}>
+              <Link to={ROUTES.RECOMMENDATION}>
                 Visa min Sniph-kollektion
               </Link>
             </button>

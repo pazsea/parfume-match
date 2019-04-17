@@ -17,3 +17,7 @@ code {
 *:focus {
   outline: 0;
 }
+
+* {
+  box-sizing: border-box;
+}

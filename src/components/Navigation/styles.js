@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-
+import { Cart } from 'styled-icons/boxicons-regular/Cart';
 // https://github.com/jonsuh/hamburgers/blob/master/dist/hamburgers.css  <-- Check if needed.
 
 export const openNav = 'hamburger hamburger--spring is-active';
@@ -15,7 +15,7 @@ export const Nav = styled.nav`
 
   ul {
     list-style: none;
-    /* border: 2px solid red; */
+    /* border: 1px solid red; */
     display: flex;
     align-items: center;
     width: 0%;
@@ -33,15 +33,40 @@ export const Nav = styled.nav`
         width: 100%;
       `}
     li {
-      margin-left: 5%;
+      margin-left: 2%;
+      /* border: 1px solid red; */
+      a {
+        text-decoration: none;
+        color: black;
+      }
     }
   }
 
   button:nth-child(1) {
+    border: none;
+    /* border: 1px solid red; */
   }
 `;
 
-export const Cart = styled.button``;
+export const CartBtn = styled.button`
+  /* display: flex; */
+  align-self: center;
+
+  border: none;
+  /* width: 2.6rem;
+  height: 1.125rem; */
+  /* padding: 1px 7px 2px 7px; */
+  /* border: 1px solid red; */
+`;
+
+export const Carts = styled(Cart)`
+  /* align-self: center; */
+  width: 2.35rem;
+  height: 2.35rem;
+  padding-bottom: 0.3rem;
+  padding-right: 0.5rem;
+  font-weight: lighter;
+`;
 
 //MOBILE NAV
 
@@ -64,7 +89,7 @@ export const NavDiv = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
 
   ${props =>
     props.isActive &&
@@ -74,9 +99,26 @@ export const NavDiv = styled.div`
 
   text-align: center;
   ul {
-    opacity: 1;
+    /* opacity: 1; */
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-top: 0.9rem;
+
+    li a {
+      text-decoration: none;
+      color: black;
+    }
   }
+`;
+
+export const MobileCart = styled.button`
+  border: none;
+  right: 0;
+  top: 0;
+  background: none;
+  z-index: 100;
+  position: fixed;
+  margin-right: 2.2rem;
+  margin-top: 0.54rem;
 `;

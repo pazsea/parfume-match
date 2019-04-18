@@ -20,7 +20,8 @@
     "redux-logger": "^3.0.6",
     "remove-node-modules": "^1.7.4",
     "schema-utils": "^1.0.0",
-    "styled-components": "^4.2.0"
+    "styled-components": "^4.2.0",
+    "styled-icons": "^7.9.0"
   },
   "scripts": {
     "start": "react-scripts start",

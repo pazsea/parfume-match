@@ -61,8 +61,8 @@ export const CartBtn = styled.button`
 
 export const Carts = styled(Cart)`
   /* align-self: center; */
-  width: 2rem;
-  height: 2rem;
+  width: 2.35rem;
+  height: 2.35rem;
   padding-bottom: 0.3rem;
   padding-right: 0.5rem;
   font-weight: lighter;

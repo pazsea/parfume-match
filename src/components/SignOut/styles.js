@@ -5,4 +5,6 @@ export const SignoutBtn = styled.button`
   font-size: 1rem;
   color: #000;
   padding: 0;
+  background: none;
+  border: none;
 `;

@@ -44,6 +44,8 @@ export const Nav = styled.nav`
 
   button:nth-child(1) {
     border: none;
+    background: none;
+
     /* border: 1px solid red; */
   }
 `;
@@ -53,6 +55,7 @@ export const CartBtn = styled.button`
   align-self: center;
 
   border: none;
+  background: none;
   /* width: 2.6rem;
   height: 1.125rem; */
   /* padding: 1px 7px 2px 7px; */

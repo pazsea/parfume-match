@@ -4,7 +4,7 @@ export const firstTextAesthetic =
   'Herrkollektionen Aesthetic är för dig som inte drar dig för att omfamna det originella, det lekfulla och det alldeles underbara i att aldrig dofta som alla andra. En kollektion för dig som vill sticka ut och låta doften ta plats åt dig.';
 
 export const secondTextAesthetic =
-  'Dofter som tidigare kvalificerat in i kollektionen Aesthetic är fängslande Eau Sacée från parisiska Heeley Parfums där du ger ett uttryck och ett gäng intryck som består. Tänk katolsk kyrka och rökelse. Vrickat. Skjut sedan ut dig och dra till en takterrass i Brooklyn. Stilbyte till betydligt fräschare Electric Wood EdP från rockiga Room 1015. Uppseendeväckande och löjligt förförisk. Aesthetic handlar om de unika dofterna som kommer att få folk i din närhet att vilja veta mer om både dig och din parfym. Ny doft varje månad.';
+  'Dofter som tidigare kvalificerat in i kollektionen <br>Aesthetic är fängslande Eau Sacée från parisiska Heeley Parfums där du ger ett uttryck och ett gäng intryck som består. Tänk katolsk kyrka och rökelse. Vrickat. Skjut sedan ut dig och dra till en takterrass i Brooklyn. Stilbyte till betydligt fräschare Electric Wood EdP från rockiga Room 1015. Uppseendeväckande och löjligt förförisk. Aesthetic handlar om de unika dofterna som kommer att få folk i din närhet att vilja veta mer om både dig och din parfym. Ny doft varje månad.';
 
 export const firstTextAvantGarde =
   'Unisexkollektionen Avant-Garde ger dig experimentella dofter du inte vågat bära. Ännu. Utmana dig själv och din omvärld med ovanliga och lite mer komplexa dofter. Lev utanför din comfort zone, ta chansen att sticka ut och upptäck sidor av dig själv du inte visste du hade.';
@@ -34,4 +34,4 @@ export const firstTextWorkPlay =
   'Herrkollektionen Work/Play ger dig noga utvalda dofter för den moderna mannens liv. Från fullspäckad vardag till sena helgnätter. För vem vill göra samma intryck på jobbmötet en måndag som på dejten en fredag? Work/Play är för dig som gillar när allt känns självklart. Och vill dofta därefter.';
 
 export const secondTextWorkPlay =
-  'Dofter som tidigare valts ut i Work/Play är exempelvis topprejtade Aqaysos EdP från franska doftgeniet Pierre Guillaumes varumärke, med samma namn. Tänk nyduschat och oemotståndligt fruktigt men med tyngd på det jordiga. Ta nästa plan [Paris – Stockholm Vasastan] och möt underbara Onyx Pearl EdP signerad svenska Agonist. Inbjudande och mystiskt. Intimt och självsäkert. Du kommer vilja ha mer – och du slipper välja.';
+  'Dofter som tidigare valts ut i Work/Play\\n\\n är exempelvis topprejtade Aqaysos EdP från franska doftgeniet Pierre Guillaumes varumärke, med samma namn. Tänk nyduschat och oemotståndligt fruktigt men med tyngd på det jordiga. Ta nästa plan [Paris – Stockholm Vasastan] och möt underbara Onyx Pearl EdP signerad svenska Agonist. Inbjudande och mystiskt. Intimt och självsäkert. Du kommer vilja ha mer – och du slipper välja.';

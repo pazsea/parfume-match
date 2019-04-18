@@ -104,7 +104,7 @@ export const Description = styled.div`
 export const ImageFlexContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   /* align-self: center; */
   flex-direction: column;
   /* justify-content: center; */

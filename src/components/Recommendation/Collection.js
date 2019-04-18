@@ -22,7 +22,6 @@ class Collection extends Component {
   state = {};
 
   componentWillMount() {
-    console.log('HAAALLLÅÅÅ');
     console.log(this.props.colSuggested);
   }
 
@@ -31,7 +30,8 @@ class Collection extends Component {
       image,
       headerImage,
       title,
-      description,
+      firstDescription,
+      secondDescription,
     } = this.props.colSuggested;
     return (
       <Fragment>
@@ -44,7 +44,7 @@ class Collection extends Component {
           </ImageFlexContainer>
           <TextFlexContainer>
             <h1>{title}</h1>
-            <h2>159 kr / Månad</h2>
+            <h2>159 KR/MÅNAD</h2>
 
             <SubscribeButton>
               <button>
@@ -53,7 +53,9 @@ class Collection extends Component {
             </SubscribeButton>
 
             <Description>
-              <p>{description}</p>
+              <p>{firstDescription}</p>
+              <br />
+              <p>{secondDescription}</p>
               <ul>
                 <li>Ny doft varje månad</li>
                 <li>Smart etui att ta med</li>

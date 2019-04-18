@@ -23,14 +23,7 @@ import headerFemaleClassics from '../../images/headerFemaleClassics.jpg';
 import headerTrendingNow from '../../images/headerTrendingNow.jpg';
 import headerWorkPlay from '../../images/headerWorkPlay.jpg';
 //Text
-import {
-  textAesthetic,
-  textAvantGarde,
-  textClean,
-  textFemaleClassics,
-  textTrendingNow,
-  textWorkPlay,
-} from './descriptions.js';
+import * as DESC from './descriptions.js';
 
 class RecommendationsPage extends Component {
   state = {
@@ -39,42 +32,48 @@ class RecommendationsPage extends Component {
       image: collectionWithTextAesthetic,
       headerImage: headerForMen,
       title: 'FÖR MÄN: AESTHETIC',
-      description: textAesthetic,
+      firstDescription: DESC.firstTextAesthetic,
+      secondDescription: DESC.secondTextAesthetic,
     },
     avantGarde: {
       image: collectionWithTextAvantgarde,
       headerImage: headerAvantGarde,
       title: 'AVANT-GARDE',
-      description: textAvantGarde,
+      firstDescription: DESC.firstTextAvantGarde,
+      secondDescription: DESC.secondTextAvantGarde,
     },
     clean: {
       image: collectionWithTextClean,
       headerImage: headerClean,
       title: 'CLEAN',
-      description: textClean,
+      firstDescription: DESC.firstTextClean,
+      secondDescription: DESC.secondTextClean,
     },
     femaleClassics: {
       image: collectionWithTextFemaleClassics,
       headerImage: headerFemaleClassics,
       title: 'FEMALE CLASSICS',
-      description: textFemaleClassics,
+      firstDescription: DESC.firstTextFemaleClassics,
+      secondDescription: DESC.secondTextFemaleClassics,
     },
     trendingNow: {
       image: collectionWithTextTrendingNow,
       headerImage: headerTrendingNow,
       title: 'TRENDING NOW',
-      description: textTrendingNow,
+      firstDescription: DESC.firstTextTrendingNow,
+      secondDescription: DESC.secondTextTrendingNow,
     },
     workPlay: {
       image: collectionWithTextWorkPlay,
       headerImage: headerWorkPlay,
       title: 'FÖR MÄN: WORK/PLAY',
-      description: textWorkPlay,
+      firstDescription: DESC.firstTextWorkPlay,
+      secondDescription: DESC.secondTextWorkPlay,
     },
   };
 
   render() {
-    var userCollection = 'trendingNow';
+    var userCollection = 'workPlay';
 
     return (
       <div>

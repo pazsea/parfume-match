@@ -10,6 +10,7 @@ import {
   NavDiv,
   CartBtn,
   Carts,
+  MobileCart,
 } from './styles';
 
 import SignOutButton from '../SignOut';
@@ -49,22 +50,32 @@ class NavigationAuth extends Component {
     </div> */}
           <ul>
             <li>
-              <Link to={ROUTES.HOME}>Home</Link>
+              <Link onClick={this.toggleNav} to={ROUTES.HOME}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to={ROUTES.ACCOUNT}>Account</Link>
+              <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
+                Account
+              </Link>
             </li>
             <li>
-              <Link to={ROUTES.QUIZ}>Doft-Quiz</Link>
+              <Link onClick={this.toggleNav} to={ROUTES.QUIZ}>
+                Doft-Quiz
+              </Link>
             </li>
 
             {authUser.roles.includes(ROLES.ADMIN) && (
               <li>
-                <Link to={ROUTES.ADMIN}>Admin</Link>
+                <Link onClick={this.toggleNav} to={ROUTES.ADMIN}>
+                  Admin
+                </Link>
               </li>
             )}
             <li>
-              <Link to={ROUTES.WARDROBE}>Wardrobe</Link>
+              <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
+                Wardrobe
+              </Link>
             </li>
             <li>
               <SignOutButton />
@@ -91,6 +102,7 @@ class NavigationAuth extends Component {
             {/* <div id="logo">
     <p>Logga</p>
   </div> */}
+
             <button
               className={isActive ? openNav : closeNav}
               type="button"
@@ -101,25 +113,38 @@ class NavigationAuth extends Component {
               </span>
             </button>
           </MobileNav>
+          <MobileCart>
+            <Carts />
+          </MobileCart>
           <NavDiv isActive={isActive}>
             <ul>
               <li>
-                <Link to={ROUTES.HOME}>Home</Link>
+                <Link onClick={this.toggleNav} to={ROUTES.HOME}>
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to={ROUTES.ACCOUNT}>Account</Link>
+                <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
+                  Account
+                </Link>
               </li>
               <li>
-                <Link to={ROUTES.QUIZ}>Doft-Quiz</Link>
+                <Link onClick={this.toggleNav} to={ROUTES.QUIZ}>
+                  Doft-Quiz
+                </Link>
               </li>
 
               {authUser.roles.includes(ROLES.ADMIN) && (
                 <li>
-                  <Link to={ROUTES.ADMIN}>Admin</Link>
+                  <Link onClick={this.toggleNav} to={ROUTES.ADMIN}>
+                    Admin
+                  </Link>
                 </li>
               )}
               <li>
-                <Link to={ROUTES.WARDROBE}>My Wardrobe</Link>
+                <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
+                  My Wardrobe
+                </Link>
               </li>
               <li>
                 <SignOutButton />

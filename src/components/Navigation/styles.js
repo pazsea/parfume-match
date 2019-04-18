@@ -65,6 +65,7 @@ export const Carts = styled(Cart)`
   height: 2rem;
   padding-bottom: 0.3rem;
   padding-right: 0.5rem;
+  font-weight: lighter;
 `;
 
 //MOBILE NAV
@@ -88,7 +89,7 @@ export const NavDiv = styled.div`
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
 
   ${props =>
     props.isActive &&
@@ -98,9 +99,26 @@ export const NavDiv = styled.div`
 
   text-align: center;
   ul {
-    opacity: 1;
+    /* opacity: 1; */
     list-style: none;
     margin: 0;
     padding: 0;
+    padding-top: 0.9rem;
+
+    li a {
+      text-decoration: none;
+      color: black;
+    }
   }
+`;
+
+export const MobileCart = styled.button`
+  border: none;
+  right: 0;
+  top: 0;
+  background: none;
+  z-index: 100;
+  position: fixed;
+  margin-right: 2.2rem;
+  margin-top: 0.54rem;
 `;

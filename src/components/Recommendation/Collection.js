@@ -6,8 +6,6 @@ import { compose } from 'recompose';
 import './styles.css';
 import {
   Header,
-  headerClean,
-  CleanImage,
   FlexContainer,
   ImageFlexContainer,
   TextFlexContainer,

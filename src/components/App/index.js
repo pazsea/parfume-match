@@ -24,7 +24,6 @@ import WardrobePage from '../Wardrobe';
 
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
-import Recommendation from '../Recommendation';
 
 class App extends Component {
   state = {

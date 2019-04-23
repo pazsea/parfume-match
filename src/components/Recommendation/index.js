@@ -1,6 +1,4 @@
-import React, { Component, Fragment } from 'react';
-import * as ROUTES from '../../constants/routes';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import './styles.css';
@@ -15,7 +13,6 @@ import collectionWithTextClean from '../../images/collectionWithTextClean.png';
 import collectionWithTextFemaleClassics from '../../images/collectionWithTextFemaleClassics.png';
 import collectionWithTextTrendingNow from '../../images/collectionWithTextTrendingNow.png';
 import collectionWithTextWorkPlay from '../../images/collectionWithTextWorkPlay.jpg';
-import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
 import headerForMen from '../../images/headerForMen.jpg';
 import headerAvantGarde from '../../images/headerAvantgard.jpg';
 import headerClean from '../../images/headerClean.jpg';

@@ -1,4 +1,6 @@
-import styled from 'styled-components';
+// import styled from 'styled-components';
+import styled from 'styled-components/macro';
+
 // import collectionWithTextAesthetic from '../../images/collectionWithTextAesthetic.png';
 // import collectionWithTextAvantgarde from '../../images/collectionWithTextAvantgarde.jpg';
 // import collectionWithTextClean from '../../images/collectionWithTextClean.png';
@@ -85,13 +87,11 @@ export const Header = styled.div`
 `;
 
 export const FlexContainer = styled.div`
-  border: 1px solid green;
   display: flex;
   justify-content: center;
 `;
 
 export const TextFlexContainer = styled.div`
-  border: 1px solid red;
   flex-direction: column;
   word-wrap: wrap;
 `;
@@ -105,9 +105,7 @@ export const ImageFlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  /* align-self: center; */
   flex-direction: column;
-  /* justify-content: center; */
   text-align: center;
   padding-right: 5rem;
   color: white;

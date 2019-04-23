@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Truncate from 'react-truncate';
 import { compose } from 'recompose';
-
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import * as s from './styles';

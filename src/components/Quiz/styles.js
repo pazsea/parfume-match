@@ -1,6 +1,4 @@
-import React from 'react';
 import styled from 'styled-components';
-import { quizStep2GiveMeSomething } from '../../images/quizStep2GiveMeSomething.jpg';
 
 export const SlideWrapper = styled.div`
   background: lightcoral;

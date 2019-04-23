@@ -10,7 +10,7 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: flex-end;
   top: 0;
-  position: sticky;
+  position: fixed;
   width: 100%;
 
   ul {

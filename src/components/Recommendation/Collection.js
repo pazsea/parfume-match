@@ -51,9 +51,9 @@ class Collection extends Component {
             </SubscribeButton>
 
             <Description>
-              <p>{firstDescription}</p>
-              <br />
-              <p>{secondDescription}</p>
+              {firstDescription.split('/n').map((desc, index) => (
+                <p>{desc}</p>
+              ))}
               <ul>
                 <li>Ny doft varje månad</li>
                 <li>Smart etui att ta med</li>

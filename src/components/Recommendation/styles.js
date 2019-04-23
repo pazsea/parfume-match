@@ -1,23 +1,6 @@
 // import styled from 'styled-components';
 import styled from 'styled-components/macro';
 
-// import collectionWithTextAesthetic from '../../images/collectionWithTextAesthetic.png';
-// import collectionWithTextAvantgarde from '../../images/collectionWithTextAvantgarde.jpg';
-// import collectionWithTextClean from '../../images/collectionWithTextClean.png';
-// import collectionWithTextFemaleClassics from '../../images/collectionWithTextFemaleClassics.png';
-// import collectionWithTextTrendingNow from '../../images/collectionWithTextTrendingNow.png';
-// import collectionWithTextWorkPlay from '../../images/collectionWithTextWorkPlay.jpg';
-// import headerClean from '../../images/headerClean.jpg';
-// export const ParfumeBottleImage = styled.div`
-/* background-image: url(${headerClean}); */
-//   display: flex;
-//   flex-direction: row-reverse;
-//   width: 100%;
-//   height: 100vh;
-//   background-image: url(${parfumeBottleGeneric});
-//   background-size: cover;
-// `;
-
 export const Slider = styled.div`
   position: relative;
   width: 500px;

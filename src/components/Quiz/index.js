@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import { connect } from 'react-redux';
 import {
   FlexContainerRow,
   FlexContainerColumn,
@@ -46,7 +47,18 @@ import quizStep5Sensual from '../../images/quizStep5Sensual.jpg';
 // Quiz page är huvudkomponenten som har tre states för slutföring.
 // Quiz page har tre komponenter renderas utifall state är tillgängligt.
 
+// TO DO
+// PUSH TO WARDROBE IF SKIP
+// PUSH TO RECOMMENDATION IF COMPLETED QUIZ
+// CREATE A POINT SYSTEM FOR QUIZ TO RELATE TO RECOMMENDED COLLECTION
 class QuizPage extends Component {
+  skipQuiz = (event, authUser) => {
+    this.props.firebase
+      .users()
+      .child(authUser.uid)
+      .update({ completedQuiz: true });
+  };
+
   render() {
     return (
       <div>
@@ -70,6 +82,13 @@ class QuizPage extends Component {
               <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
             </button>
           </QuizIntroButton>
+          <button
+            onClick={event =>
+              this.skipQuiz(event, this.props.authUser)
+            }
+          >
+            Hoppa över
+          </button>
         </FlexContainerColumn>
       </div>
     );
@@ -464,9 +483,14 @@ export class QuestionSix extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
+});
+
 const condition = authUser => !!authUser;
 
 export default compose(
   withFirebase,
   withAuthorization(condition),
+  connect(mapStateToProps),
 )(QuizPage);

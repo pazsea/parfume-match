@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { withAuthentication } from '../Session';
 
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
@@ -23,7 +24,6 @@ import RecommendationsPage from '../Recommendation';
 import WardrobePage from '../Wardrobe';
 
 import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
 
 class App extends Component {
   state = {
@@ -63,10 +63,17 @@ class App extends Component {
   }
 
   render() {
+    const { authUser } = this.props;
     return (
       <Router>
         <div>
-          <Navigation />
+          {authUser ? (
+            authUser.completedQuiz ? (
+              <Navigation />
+            ) : null
+          ) : (
+            <Navigation />
+          )}
 
           <Route
             exact
@@ -109,14 +116,21 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
+});
+
 const mapDispatchToProps = dispatch => ({
   setSize: size => dispatch({ type: 'SIZE', size }),
 });
 
+// const condition = authUser => !!authUser;
+
 export default compose(
   withAuthentication,
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
   ),
+  // withAuthorization(condition),
 )(App);

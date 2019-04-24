@@ -3,12 +3,12 @@ import 'firebase/auth';
 import 'firebase/database';
 
 var config = {
-  apiKey: "AIzaSyDPzLW1VpAUC5x9OPF4pCJO9j5e5hO4bp4",
-  authDomain: "gjtpsniph.firebaseapp.com",
-  databaseURL: "https://gjtpsniph.firebaseio.com",
-  projectId: "gjtpsniph",
-  storageBucket: "gjtpsniph.appspot.com",
-  messagingSenderId: "315707951148"
+  apiKey: 'AIzaSyBCtpmY5H7oMSlVhQGyi4gqHqrRhTPJ9IA',
+  authDomain: 'fir-test-6c575.firebaseapp.com',
+  databaseURL: 'https://fir-test-6c575.firebaseio.com',
+  projectId: 'fir-test-6c575',
+  storageBucket: 'fir-test-6c575.appspot.com',
+  messagingSenderId: '416487329441',
 };
 class Firebase {
   constructor() {

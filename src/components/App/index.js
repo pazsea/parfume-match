@@ -29,6 +29,7 @@ class App extends Component {
   state = {
     innerHeight: window.innerHeight,
     innerWidth: window.innerWidth,
+    // parfumes: []
   };
   componentWillMount() {
     // const { innerHeight, innerWidth } = this.state;
@@ -41,6 +42,17 @@ class App extends Component {
       this.handleResize();
     });
   }
+
+  componentDidMount() {
+    this.getParfumes();
+  }
+
+  getParfumes = () => {
+    fetch('http://localhost:4000/parfumes')
+      .then(response => response.json())
+      .then(response => this.props.getAll(response.parfumes))
+      .catch(err => console.error(err));
+  };
 
   componentWillUnmount() {
     console.log('ooout');
@@ -111,6 +123,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => ({
   setSize: size => dispatch({ type: 'SIZE', size }),
+  getAll: parfumes => dispatch({ type: 'GET_ALL_TABLES', parfumes }),
 });
 
 export default compose(

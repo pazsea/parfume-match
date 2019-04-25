@@ -36,7 +36,7 @@ class HomePage extends Component {
         <h1>Home Page</h1>
         <p>The Home Page is accessible by every signed in user.</p>
         {parfumes
-          ? parfumes.slice(172, 175).map((parfume, index) => (
+          ? parfumes.slice(172, 200).map((parfume, index) => (
               <div key={index}>
                 <p key={index}>{parfume.name}</p>
                 <p key={'name' + index}>{parfume.brand}</p>

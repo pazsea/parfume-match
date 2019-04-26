@@ -21,14 +21,10 @@ export function getParfumes() {
 }
 
 export function deleteRow(id) {
-  axios
-    .delete(`http://localhost:4000/parfumes/${id}`)
-    .then(function(response) {
-      console.log('DELEEETED' + id + response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+  return {
+    type: 'REMOVE_ID_FROM_TABLE',
+    id,
+  };
 }
 
 // export function bindComments(postId) {

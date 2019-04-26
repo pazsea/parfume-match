@@ -32,6 +32,11 @@ class HomePage extends Component {
   }
 
   removeParfume = (e, id) => {
+    const removedFromState = this.state.parfumes.splice(
+      e.target.index,
+      1,
+    );
+    this.setState({ removedFromState });
     console.log('TEST ROW ' + id);
     this.props.deleteRow(id);
   };

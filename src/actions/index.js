@@ -7,25 +7,39 @@ export function changeSize(size) {
   };
 }
 
-export function getParfumes() {
-  return dispatch => {
-    return (
-      axios
-        .get('http://localhost:4000/parfumes')
-        //   .then(response => console.log(response))
-        .then(response => {
-          dispatch(loadParfumesAction(response.data));
-        })
-    );
+export function onSetUsers(users) {
+  return {
+    type: 'USERS_SET',
+    users,
   };
 }
 
-export function loadParfumesAction({ parfumes }) {
-  console.log(parfumes);
+export function getParfumes() {
+  return dispatch => {
+    return axios
+      .get('http://localhost:4000/parfumes')
+      .then(response => {
+        dispatch(loadParfumesAction(response.data));
+      });
+  };
+}
+
+export function loadParfumesAction({ test }) {
   return {
     type: 'GET_ALL_TABLES',
-    parfumes,
+    test,
   };
+}
+
+export function deleteRow(id) {
+  axios
+    .delete(`http://localhost:4000/parfumes/${id}`)
+    .then(function(response) {
+      console.log('DELEEETED' + id + response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
 }
 
 // export function bindComments(postId) {

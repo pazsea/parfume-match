@@ -43,11 +43,14 @@ class App extends Component {
       });
       this.handleResize();
     });
+    this.props.getParfumes();
+    console.log('GET PARFUMES DISPATCH LAUNCHED');
   }
 
-  componentDidMount() {
-    this.props.getParfumes();
-  }
+  // componentDidMount() {
+  //   this.props.getParfumes();
+  //   console.log('GET PARFUMES DISPATCH LAUNCHED');
+  // }
 
   // getParfumes = () => {
   //   fetch('http://localhost:4000/parfumes')

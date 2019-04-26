@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
-import Messages from '../Messages';
+// import Messages from '../Messages';
 
 class HomePage extends Component {
   state = {
@@ -16,21 +16,41 @@ class HomePage extends Component {
     this.props.firebase.users().on('value', snapshot => {
       this.props.onSetUsers(snapshot.val());
     });
+
+    console.log('PARFYMER HÄR I HOME ' + this.props.parfumes);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.parfumes !== this.props.parfumes) {
+      this.setState({ parfumes: this.props.parfumes });
+    }
   }
 
   componentWillUnmount() {
     this.props.firebase.users().off();
   }
 
-  addParfume = () => {
-    const { brand, name } = this.state;
-    fetch(
-      `http://localhost:4000/parfumes/add?brand=${brand}&name=${name}`,
-    ).catch(err => console.error(err));
-  };
+  // removeParfume = () => {
+  //   const { brand, name } = this.state;
+  //   fetch(
+  //     `http://localhost:4000/parfumes/add?brand=${brand}&name=${name}`,
+  //   )
+  //     .catch(err => console.error(err))
+  //     .then(getParfumes());
+  // };
+
+  // addParfume = () => {
+  //   const { brand, name } = this.state;
+  //   fetch(
+  //     `http://localhost:4000/parfumes/add?brand=${brand}&name=${name}`,
+  //   )
+  //     .catch(err => console.error(err))
+  //     .then(getParfumes());
+  // };
 
   render() {
-    const { parfumes } = this.props;
+    const { parfumes } = this.state;
+
     return (
       <div>
         <h1>Home Page</h1>
@@ -40,6 +60,12 @@ class HomePage extends Component {
               <div key={index}>
                 <p key={index}>{parfume.name}</p>
                 <p key={'name' + index}>{parfume.brand}</p>
+                <button
+                  key={'button' + parfume.name + index}
+                  onClick={e => this.removeParfume(e, index)}
+                >
+                  Remove
+                </button>
               </div>
             ))
           : null}
@@ -65,7 +91,7 @@ class HomePage extends Component {
 
 const mapStateToProps = state => ({
   users: state.userState.users,
-  parfumes: state.getAllState.data,
+  parfumes: state.getAllState.parfumes,
 });
 
 const mapDispatchToProps = dispatch => ({

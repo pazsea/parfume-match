@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 
+import * as actionCreators from '../../actions/index.js';
+
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
@@ -44,15 +46,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getParfumes();
+    this.props.getParfumes();
   }
 
-  getParfumes = () => {
-    fetch('http://localhost:4000/parfumes')
-      .then(response => response.json())
-      .then(response => this.props.getAll(response.parfumes))
-      .catch(err => console.error(err));
-  };
+  // getParfumes = () => {
+  //   fetch('http://localhost:4000/parfumes')
+  //     .then(response => response.json())
+  //     .then(response => this.props.getAll(response.parfumes))
+  //     .catch(err => console.error(err));
+  // };
 
   componentWillUnmount() {
     console.log('ooout');
@@ -66,11 +68,11 @@ class App extends Component {
       innerHeight <= 1366 &&
       innerHeight >= 1024
     ) {
-      this.props.setSize('mediumSize');
+      this.props.changeSize('mediumSize');
     } else if (innerWidth < 768 && innerHeight < 1024) {
-      this.props.setSize('smallSize');
+      this.props.changeSize('smallSize');
     } else {
-      this.props.setSize('bigSize');
+      this.props.changeSize('bigSize');
     }
   }
 
@@ -121,15 +123,15 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  setSize: size => dispatch({ type: 'SIZE', size }),
-  getAll: parfumes => dispatch({ type: 'GET_ALL_TABLES', parfumes }),
-});
+// const mapDispatchToProps = dispatch => ({
+//   setSize: size => dispatch({ type: 'SIZE', size }),
+//   getAll: parfumes => dispatch({ type: 'GET_ALL_TABLES', parfumes }),
+// });
 
 export default compose(
   withAuthentication,
   connect(
     null,
-    mapDispatchToProps,
+    actionCreators,
   ),
 )(App);

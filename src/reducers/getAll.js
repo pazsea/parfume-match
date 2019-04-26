@@ -4,7 +4,7 @@ function getAllReducer(state = [], action) {
       return Object.assign(
         {},
         {
-          data: action.parfumes,
+          parfumes: action.parfumes,
         },
       );
     }

@@ -42,7 +42,7 @@ class WardrobePage extends Component {
         </s.QuizTitle>
         <s.Wrapper>
           <s.ImageDiv>
-            <img src={parfume1} />
+            <img alt=" parfume" src={parfume1} />
           </s.ImageDiv>
           <s.ParfumeDiv>
             <s.ButtonDiv tabOpen={tabOpen}>
@@ -89,7 +89,7 @@ class WardrobePage extends Component {
         </s.Wrapper>
         <s.Wrapper>
           <s.ImageDiv>
-            <img src={parfume1} />
+            <img alt="Parfume" src={parfume1} />
           </s.ImageDiv>
           <s.ParfumeDiv>
             <s.ButtonDiv tabOpen={tabOpen}>
@@ -147,7 +147,11 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
           lines={isTruncated ? 0 : 9}
           ellipsis={
             <span>
-              ... <a onClick={toggleTruncate}> Read more</a>
+              ...{' '}
+              <a href="#" onClick={toggleTruncate}>
+                {' '}
+                Read more
+              </a>
             </span>
           }
         >

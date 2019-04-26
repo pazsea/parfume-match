@@ -1,10 +1,10 @@
 function getAllReducer(state = [], action) {
   switch (action.type) {
-    case 'GET_ALL_TABLES': {
+    case 'FETCH_DATA_SUCCESS': {
       return Object.assign(
         {},
         {
-          parfumes: action.test,
+          parfumes: action.payload.test,
         },
       );
     }

@@ -15,19 +15,8 @@ export function onSetUsers(users) {
 }
 
 export function getParfumes() {
-  return dispatch => {
-    return axios
-      .get('http://localhost:4000/parfumes')
-      .then(response => {
-        dispatch(loadParfumesAction(response.data));
-      });
-  };
-}
-
-export function loadParfumesAction({ test }) {
   return {
     type: 'GET_ALL_TABLES',
-    test,
   };
 }
 

@@ -21,11 +21,11 @@ class HomePage extends Component {
     console.log('PARFYMER HÄR I HOME ' + this.props.parfumes);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.parfumes !== this.props.parfumes) {
-  //     this.setState({ parfumes: this.props.parfumes });
-  //   }
-  // }
+  componentDidUpdate(prevProps) {
+    if (prevProps.parfumes !== this.props.parfumes) {
+      this.setState({ parfumes: this.props.parfumes });
+    }
+  }
 
   componentWillUnmount() {
     this.props.firebase.users().off();

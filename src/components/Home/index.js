@@ -39,14 +39,30 @@ class HomePage extends Component {
     // );
     // this.setState({ removedFromState });
     console.log('TEST ROW ' + id);
+    // .post('http://localhost:4000/parfumes/add', {
+    //   idx: action.parfume,
+    // })
+
     axios
-      .delete('http://localhost:4000/parfumes/', { sphinx_idx: [id] })
+      .delete(
+        `http://localhost:4000/parfumes/`,
+        id,
+        // { headers: { 'Content-Type': 'text/plain' } },
+      )
       .then(function(response) {
         console.log(response);
       })
       .catch(function(error) {
         console.log(error);
       });
+    // axios
+    //   .delete('http://localhost:4000/parfumes/', { sphinx_idx: id })
+    //   .then(function(response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function(error) {
+    //     console.log(error);
+    //   });
   };
 
   // addParfume = () => {
@@ -58,7 +74,7 @@ class HomePage extends Component {
   //     .then(getParfumes());
   // };
 
-  addPerfume = () => {
+  addParfume = () => {
     console.log('newAP reached');
     const { name } = this.state;
     this.props.addParfume(name);
@@ -113,7 +129,7 @@ class HomePage extends Component {
           placeholder="brand"
           onChange={e => this.setState({ brand: e.target.value })}
         /> */}
-        <button onClick={this.addPerfume}>KLICKA</button>
+        <button onClick={this.addParfume}>KLICKA</button>
       </div>
     );
   }

@@ -24,37 +24,14 @@ function* postParfume(action) {
     });
 
   yield fetchAllData();
-  // yield call(
-  //   [axios, axios.post],
-  //   'http://localhost:4000/parfumes/add',
-  //   { idx: action.parfume },
-  //   [axios, axios.then],
-  //   function(response) {
-  //     console.log(response);
-  //   },
-  //   [axios, axios.catch],
-  //   function(error) {
-  //     console.log(error);
-  //   },
-
-  // );
-
-  // axios
-  //   .post('http://localhost:4000/parfumes/add', { idx: name })
-  //   .then(function(response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function(error) {
-  //     console.log(error);
-  //   });
 }
 
-// function* removeFromDatabase({ id }) { // mm, bra fråga. 1 sek!
-//   yield call(
-//     [axios, axios.delete],
-//     `http://localhost:4000/parfumes/${id}`,
-//   );
-// }
+function* removeFromDatabase({ id }) {
+  yield call(
+    [axios, axios.delete],
+    `http://localhost:4000/parfumes/${id}`,
+  );
+}
 
 export function* watchGetAll() {
   yield takeLatest('GET_ALL_TABLES', fetchAllData);

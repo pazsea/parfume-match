@@ -43,7 +43,7 @@ class App extends Component {
       });
       this.handleResize();
     });
-    this.props.getParfumes();
+    this.props.fetchParfumes();
     console.log('GET PARFUMES DISPATCH LAUNCHED');
   }
 

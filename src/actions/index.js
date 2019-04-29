@@ -14,18 +14,25 @@ export function onSetUsers(users) {
   };
 }
 
-export function getParfumes() {
+export function fetchParfumes() {
   return {
     type: 'GET_ALL_TABLES',
   };
 }
 
-export function deleteRow(id) {
+export function addParfume(parfume) {
   return {
-    type: 'REMOVE_ID_FROM_TABLE',
-    id,
+    type: 'ADDING_PARFUME',
+    parfume: parfume,
   };
 }
+
+// export function deleteRow(id) {
+//   return {
+//     type: 'REMOVE_ID_FROM_TABLE',
+//     id,
+//   };
+// }
 
 // export function bindComments(postId) {
 

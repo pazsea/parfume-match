@@ -1,10 +1,10 @@
-function getAllReducer(state = [], action) {
+function fetchParfumeReducer(state = [], action) {
   switch (action.type) {
     case 'FETCH_DATA_SUCCESS': {
       return Object.assign(
         {},
         {
-          parfumes: action.payload.test,
+          parfumes: action.payload.parfumes,
         },
       );
     }
@@ -13,4 +13,4 @@ function getAllReducer(state = [], action) {
   }
 }
 
-export default getAllReducer;
+export default fetchParfumeReducer;

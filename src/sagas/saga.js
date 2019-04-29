@@ -9,20 +9,46 @@ function* fetchAllData() {
   yield put({ type: 'FETCH_DATA_SUCCESS', payload: data.data });
 }
 
-function postAxios() {
-  axios
-    .post('/parfumes/add', { idx: 100 })
+function* postParfume(action) {
+  console.log(action.parfume);
+
+  yield axios
+    .post('http://localhost:4000/parfumes/add', {
+      idx: action.parfume,
+    })
     .then(function(response) {
-      console.log(response); // igen
+      console.log(response);
     })
     .catch(function(error) {
       console.log(error);
     });
-} // typ sådär, men hur vi ska kalla på den osv i saga osv är lite beyond me. Det vet jag. Så vi behöver inte gå igenom det
-// vi kan lägga denna funktion på knappen direkt i home istället.. Om det är enklare -- aa gör't.
-// testa igen ok same error
 
-// Så fetch funkar bra. Min reducer fångar upp detta . Men hur skulle jag göra en post t.ex..
+  yield fetchAllData();
+  // yield call(
+  //   [axios, axios.post],
+  //   'http://localhost:4000/parfumes/add',
+  //   { idx: action.parfume },
+  //   [axios, axios.then],
+  //   function(response) {
+  //     console.log(response);
+  //   },
+  //   [axios, axios.catch],
+  //   function(error) {
+  //     console.log(error);
+  //   },
+
+  // );
+
+  // axios
+  //   .post('http://localhost:4000/parfumes/add', { idx: name })
+  //   .then(function(response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function(error) {
+  //     console.log(error);
+  //   });
+}
+
 // function* removeFromDatabase({ id }) { // mm, bra fråga. 1 sek!
 //   yield call(
 //     [axios, axios.delete],
@@ -32,5 +58,5 @@ function postAxios() {
 
 export function* watchGetAll() {
   yield takeLatest('GET_ALL_TABLES', fetchAllData);
-  // yield takeLatest('REMOVE_ID_FROM_TABLE', removeFromDatabase);
+  yield takeLatest('ADDING_PARFUME', postParfume);
 }

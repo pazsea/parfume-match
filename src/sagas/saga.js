@@ -26,6 +26,21 @@ function* postParfume(action) {
   yield fetchAllData();
 }
 
+function* eraseParfume(action) {
+  console.log(action.parfumeId);
+
+  yield axios
+    .delete('http://localhost:4000/parfumes/' + action.parfumeId)
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+  yield fetchAllData();
+}
+
 function* removeFromDatabase({ id }) {
   yield call(
     [axios, axios.delete],
@@ -36,4 +51,5 @@ function* removeFromDatabase({ id }) {
 export function* watchGetAll() {
   yield takeLatest('GET_ALL_TABLES', fetchAllData);
   yield takeLatest('ADDING_PARFUME', postParfume);
+  yield takeLatest('REMOVE_PARFUME', eraseParfume);
 }

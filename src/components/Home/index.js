@@ -33,36 +33,16 @@ class HomePage extends Component {
   }
 
   removeParfume = (e, id) => {
-    // const removedFromState = this.state.parfumes.splice(
-    //   e.target.index,
-    //   1,
-    // );
-    // this.setState({ removedFromState });
-    console.log('TEST ROW ' + id);
-    // .post('http://localhost:4000/parfumes/add', {
-    //   idx: action.parfume,
-    // })
-
-    axios
-      .delete(
-        `http://localhost:4000/parfumes/`,
-        id,
-        // { headers: { 'Content-Type': 'text/plain' } },
-      )
-      .then(function(response) {
-        console.log(response);
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-    // axios
-    //   .delete('http://localhost:4000/parfumes/', { sphinx_idx: id })
-    //   .then(function(response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
+    this.props.deleteParfume(id);
+    // //FUNKAR
+    //     axios
+    //       .delete('http://localhost:4000/parfumes/' + id)
+    //       .then(function(response) {
+    //         console.log(response);
+    //       })
+    //       .catch(function(error) {
+    //         console.log(error);
+    //       });
   };
 
   // addParfume = () => {
@@ -139,10 +119,6 @@ const mapStateToProps = state => ({
   users: state.userState.users,
   parfumes: state.parfumesState.parfumes,
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   onSetUsers: users => dispatch({ type: 'USERS_SET', users }),
-// });
 
 const condition = authUser => !!authUser;
 

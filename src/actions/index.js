@@ -27,6 +27,13 @@ export function addParfume(parfume) {
   };
 }
 
+export function deleteParfume(parfumeId) {
+  return {
+    type: 'REMOVE_PARFUME',
+    parfumeId: parfumeId,
+  };
+}
+
 // export function deleteRow(id) {
 //   return {
 //     type: 'REMOVE_ID_FROM_TABLE',

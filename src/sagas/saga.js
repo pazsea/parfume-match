@@ -45,9 +45,12 @@ function* updatingParfume(action) {
   console.log(action.parfumeId);
 
   yield axios
-    .put('http://localhost:4000/parfumes/' + action.id, {
-      new_sphinx_idx: action.updatedParfumeContent,
-    })
+    .put(
+      'http://localhost:4000/parfumes/' +
+        action.id +
+        '/' +
+        action.updatedParfumeContent,
+    )
     .then(function(response) {
       console.log(response);
     })

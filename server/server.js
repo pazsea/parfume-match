@@ -85,16 +85,15 @@ app.delete('/parfumes/:id', (req, res) => {
 
 // `UPDATE tbl_sphinx_data SET sphinx_idx = 'Canyon 123' WHERE address = '${sphinx_idx}'`;
 
-app.put('/parfumes/:id', (req, res) => {
+app.put('/parfumes/:id/:content', (req, res) => {
   console.log(req.params.id);
   const current_sphinx_idx = req.params.id;
-  const { new_sphinx_idx } = req.body;
-  const UPDATE_ITEM_ON_DATABASE = `UPDATE tbl_sphinx_data SET sphinx_idx = ? WHERE sphinx_idx = ?`;
+  const new_sphinx_idx = req.params.content;
+  const UPDATE_ITEM_ON_DATABASE = `UPDATE tbl_sphinx_data SET sphinx_idx ='${new_sphinx_idx}' WHERE sphinx_idx = '${current_sphinx_idx}'`;
 
   connection.query(
     UPDATE_ITEM_ON_DATABASE,
-    current_sphinx_idx,
-    new_sphinx_idx,
+
     (err, result) => {
       if (err) {
         return res.send(err);

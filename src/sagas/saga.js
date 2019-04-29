@@ -41,15 +41,26 @@ function* eraseParfume(action) {
   yield fetchAllData();
 }
 
-function* removeFromDatabase({ id }) {
-  yield call(
-    [axios, axios.delete],
-    `http://localhost:4000/parfumes/${id}`,
-  );
+function* updatingParfume(action) {
+  console.log(action.parfumeId);
+
+  yield axios
+    .put('http://localhost:4000/parfumes/' + action.id, {
+      new_sphinx_idx: action.updatedParfumeContent,
+    })
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+  yield fetchAllData();
 }
 
 export function* watchGetAll() {
   yield takeLatest('GET_ALL_TABLES', fetchAllData);
   yield takeLatest('ADDING_PARFUME', postParfume);
   yield takeLatest('REMOVE_PARFUME', eraseParfume);
+  yield takeLatest('UPDATING_PARFUME', updatingParfume);
 }

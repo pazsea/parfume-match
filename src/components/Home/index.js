@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import axios from 'axios';
@@ -45,17 +45,15 @@ class HomePage extends Component {
     //       });
   };
 
-  // editParfume = () => {
-  //   const { brand, name } = this.state;
-  //   fetch(
-  //     `http://localhost:4000/parfumes/add?brand=${brand}&name=${name}`,
-  //   )
-  //     .catch(err => console.error(err))
-  //     .then(getParfumes());
-  // };
+  changeParfume = (event, sphinx_idx, ind) => {
+    const updatedParfumeContent = this.state[sphinx_idx + ind];
+    console.log('HOME KOMPONENT' + updatedParfumeContent);
+    this.props.updateParfume(sphinx_idx, updatedParfumeContent);
+  };
 
   addParfume = () => {
     console.log('newAP reached');
+    const { name } = this.state;
     this.props.addParfume(name);
     // axios
     //   .post('http://localhost:4000/parfumes/add', { idx: name })
@@ -74,7 +72,57 @@ class HomePage extends Component {
       <div>
         <h1>Home Page</h1>
         <p>The Home Page is accessible by every signed in user.</p>
+
         {parfumes
+          ? parfumes.slice(0, 5).map((parfume, index) => (
+              <Fragment>
+                <p key={'brand' + parfume.sphinx_idx + index}>
+                  {parfume.updated_time}
+                </p>
+                <input
+                  type="text"
+                  key={'input' + parfume.sphinx_idx + index}
+                  value={
+                    this.state[parfume.sphinx_idx + index]
+                      ? this.state[parfume.sphinx_idx + index]
+                      : parfume.sphinx_idx
+                  }
+                  onChange={e =>
+                    this.setState({
+                      [parfume.sphinx_idx + index]: e.target.value,
+                    })
+                  }
+                />
+
+                <button
+                  disabled={
+                    this.state[parfume.sphinx_idx + index]
+                      ? false
+                      : true
+                  }
+                  key={'buttonUpdate' + parfume.sphinx_idx + index}
+                  onClick={event =>
+                    this.changeParfume(
+                      event,
+                      parfume.sphinx_idx,
+                      index,
+                    )
+                  }
+                >
+                  CHANGE PARFUME
+                </button>
+                <button
+                  key={'button' + parfume.sphinx_idx + index}
+                  onClick={e =>
+                    this.removeParfume(e, parfume.sphinx_idx)
+                  }
+                >
+                  REMOVE parfume
+                </button>
+              </Fragment>
+            ))
+          : null}
+        {/* {parfumes
           ? parfumes.map((parfume, index) => (
               <div key={'div' + parfume.sphinx_idx + index}>
                 <p key={'name' + parfume.sphinx_idx + index}>
@@ -93,7 +141,7 @@ class HomePage extends Component {
                 </button>
               </div>
             ))
-          : null}
+          : null} */}
         {/* <Messages users={this.props.users} /> */}
 
         <input

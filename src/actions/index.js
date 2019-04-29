@@ -34,6 +34,15 @@ export function deleteParfume(parfumeId) {
   };
 }
 
+export function updateParfume(id, updatedParfumeContent) {
+  console.log('I MIN ACTION' + updatedParfumeContent);
+  return {
+    type: 'UPDATING_PARFUME',
+    id: id,
+    updatedParfumeContent: updatedParfumeContent,
+  };
+}
+
 // export function deleteRow(id) {
 //   return {
 //     type: 'REMOVE_ID_FROM_TABLE',

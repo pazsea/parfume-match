@@ -45,7 +45,7 @@ class HomePage extends Component {
     //       });
   };
 
-  // addParfume = () => {
+  // editParfume = () => {
   //   const { brand, name } = this.state;
   //   fetch(
   //     `http://localhost:4000/parfumes/add?brand=${brand}&name=${name}`,
@@ -56,7 +56,6 @@ class HomePage extends Component {
 
   addParfume = () => {
     console.log('newAP reached');
-    const { name } = this.state;
     this.props.addParfume(name);
     // axios
     //   .post('http://localhost:4000/parfumes/add', { idx: name })

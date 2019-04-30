@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import axios from 'axios';
 
 import * as actionCreators from '../../actions/index.js';
 
@@ -13,13 +12,13 @@ class HomePage extends Component {
   state = {
     name: '',
     brand: '',
+    content: '',
   };
 
   componentDidMount() {
     this.props.firebase.users().on('value', snapshot => {
       this.props.onSetUsers(snapshot.val());
     });
-    console.log('PARFYMER HÄR I HOME ' + this.props.parfumes);
   }
 
   componentDidUpdate(prevProps) {
@@ -32,37 +31,18 @@ class HomePage extends Component {
     this.props.firebase.users().off();
   }
 
-  removeParfume = (e, id) => {
-    this.props.deleteParfume(id);
-    // //FUNKAR
-    //     axios
-    //       .delete('http://localhost:4000/parfumes/' + id)
-    //       .then(function(response) {
-    //         console.log(response);
-    //       })
-    //       .catch(function(error) {
-    //         console.log(error);
-    //       });
+  removeParfume = (e, sphinx_idx) => {
+    this.props.deleteParfume(sphinx_idx);
   };
 
   changeParfume = (event, sphinx_idx, ind) => {
     const updatedParfumeContent = this.state[sphinx_idx + ind];
-    console.log('HOME KOMPONENT' + updatedParfumeContent);
     this.props.updateParfume(sphinx_idx, updatedParfumeContent);
   };
 
   addParfume = () => {
-    console.log('newAP reached');
-    const { name } = this.state;
-    this.props.addParfume(name);
-    // axios
-    //   .post('http://localhost:4000/parfumes/add', { idx: name })
-    //   .then(function(response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
+    const { content } = this.state;
+    this.props.addParfume(content);
   };
 
   render() {
@@ -75,7 +55,7 @@ class HomePage extends Component {
 
         {parfumes
           ? parfumes.slice(0, 5).map((parfume, index) => (
-              <Fragment>
+              <Fragment key={'fragment' + parfume.sphinx_idx + index}>
                 <p key={'brand' + parfume.sphinx_idx + index}>
                   {parfume.updated_time}
                 </p>
@@ -122,33 +102,12 @@ class HomePage extends Component {
               </Fragment>
             ))
           : null}
-        {/* {parfumes
-          ? parfumes.map((parfume, index) => (
-              <div key={'div' + parfume.sphinx_idx + index}>
-                <p key={'name' + parfume.sphinx_idx + index}>
-                  {parfume.sphinx_idx}
-                </p>
-                <p key={'brand' + parfume.sphinx_idx + index}>
-                  {parfume.updated_time}
-                </p>
-                <button
-                  key={'button' + parfume.sphinx_idx + index}
-                  onClick={e =>
-                    this.removeParfume(e, parfume.sphinx_idx)
-                  }
-                >
-                  Remove
-                </button>
-              </div>
-            ))
-          : null} */}
-        {/* <Messages users={this.props.users} /> */}
 
         <input
           type="text"
-          value={this.state.name}
+          value={this.state.content}
           placeholder="name"
-          onChange={e => this.setState({ name: e.target.value })}
+          onChange={e => this.setState({ content: e.target.value })}
         />
         {/* <input
           type="text"

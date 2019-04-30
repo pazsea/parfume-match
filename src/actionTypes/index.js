@@ -1,0 +1,10 @@
+export const SIZE = 'SIZE';
+
+export const USERS_SET = 'USERS_SET';
+
+export const GET_ALL_TABLES = 'GET_ALL_TABLES';
+export const ADDING_PARFUME = 'ADDING_PARFUME';
+export const REMOVE_PARFUME = 'REMOVE_PARFUME';
+export const UPDATING_PARFUME = 'UPDATING_PARFUME';
+
+export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';

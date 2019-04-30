@@ -34,7 +34,6 @@ class App extends Component {
     // parfumes: []
   };
   componentWillMount() {
-    // const { innerHeight, innerWidth } = this.state;
     this.handleResize();
     window.addEventListener('resize', () => {
       this.setState({
@@ -44,23 +43,6 @@ class App extends Component {
       this.handleResize();
     });
     this.props.fetchParfumes();
-    console.log('GET PARFUMES DISPATCH LAUNCHED');
-  }
-
-  // componentDidMount() {
-  //   this.props.getParfumes();
-  //   console.log('GET PARFUMES DISPATCH LAUNCHED');
-  // }
-
-  // getParfumes = () => {
-  //   fetch('http://localhost:4000/parfumes')
-  //     .then(response => response.json())
-  //     .then(response => this.props.getAll(response.parfumes))
-  //     .catch(err => console.error(err));
-  // };
-
-  componentWillUnmount() {
-    console.log('ooout');
   }
 
   handleResize() {
@@ -125,11 +107,6 @@ class App extends Component {
     );
   }
 }
-
-// const mapDispatchToProps = dispatch => ({
-//   setSize: size => dispatch({ type: 'SIZE', size }),
-//   getAll: parfumes => dispatch({ type: 'GET_ALL_TABLES', parfumes }),
-// });
 
 export default compose(
   withAuthentication,

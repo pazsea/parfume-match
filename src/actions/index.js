@@ -1,65 +1,43 @@
-import axios from 'axios';
+import * as a from '../actionTypes';
 
 export function changeSize(size) {
   return {
-    type: 'SIZE',
+    type: a.SIZE,
     size,
   };
 }
 
 export function onSetUsers(users) {
   return {
-    type: 'USERS_SET',
+    type: a.USERS_SET,
     users,
   };
 }
 
 export function fetchParfumes() {
   return {
-    type: 'GET_ALL_TABLES',
+    type: a.GET_ALL_TABLES,
   };
 }
 
 export function addParfume(parfume) {
   return {
-    type: 'ADDING_PARFUME',
+    type: a.ADDING_PARFUME,
     parfume: parfume,
   };
 }
 
 export function deleteParfume(parfumeId) {
   return {
-    type: 'REMOVE_PARFUME',
+    type: a.REMOVE_PARFUME,
     parfumeId: parfumeId,
   };
 }
 
-export function updateParfume(id, updatedParfumeContent) {
-  console.log('I MIN ACTION' + updatedParfumeContent);
+export function updateParfume(sphinx_idx, updatedParfumeContent) {
   return {
-    type: 'UPDATING_PARFUME',
-    id: id,
+    type: a.UPDATING_PARFUME,
+    id: sphinx_idx,
     updatedParfumeContent: updatedParfumeContent,
   };
 }
-
-// export function deleteRow(id) {
-//   return {
-//     type: 'REMOVE_ID_FROM_TABLE',
-//     id,
-//   };
-// }
-
-// export function bindComments(postId) {
-
-//     return function (dispatch){
-//       return API.fetchComments(postId).then(comments => {
-//       // dispatch
-//         dispatch( {
-//           type: BIND_COMMENTS,
-//           comments,
-//           postId
-//         })
-//       })
-//     }
-//    }

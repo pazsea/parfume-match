@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 // import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
-import { watchGetAll } from '../sagas/saga';
+import { watchGetAll } from '../sagas/';
 
 const sagaMiddleware = createSagaMiddleware();
 

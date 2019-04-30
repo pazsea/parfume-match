@@ -154,7 +154,7 @@ export const SignInFormDiv = styled.div`
     padding: 10px;
     background: #fbdee3;
     color: black;
-    /* border: none; */
+    cursor: pointer;
     font-weight: 700;
   }
 `;

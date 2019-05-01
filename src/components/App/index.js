@@ -29,6 +29,7 @@ class App extends Component {
   state = {
     innerHeight: window.innerHeight,
     innerWidth: window.innerWidth,
+    parfumes: [],
   };
   componentWillMount() {
     // const { innerHeight, innerWidth } = this.state;
@@ -63,6 +64,7 @@ class App extends Component {
   }
 
   render() {
+    const { parfumes } = this.state;
     return (
       <Router>
         <div>
@@ -71,7 +73,7 @@ class App extends Component {
           <Route
             exact
             path={ROUTES.LANDING}
-            component={LandingPage}
+            component={parfumes === 'heeeloo' ? LandingPage : Loading}
           />
           <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
           <Route path={ROUTES.SIGN_IN} component={SignInPage} />
@@ -107,6 +109,10 @@ class App extends Component {
       </Router>
     );
   }
+}
+
+function Loading(props) {
+  return <h1>Loading....</h1>;
 }
 
 const mapDispatchToProps = dispatch => ({

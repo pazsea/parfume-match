@@ -1,3 +1,5 @@
+import * as a from '../constants/actionTypes';
+
 const INITIAL_STATE = {
   messages: null,
   limit: 5,
@@ -15,7 +17,7 @@ const applySetMessagesLimit = (state, action) => ({
 
 function messageReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case 'MESSAGES_SET': {
+    case a.MESSAGES_SET: {
       return applySetMessages(state, action);
     }
     case 'MESSAGES_LIMIT_SET': {

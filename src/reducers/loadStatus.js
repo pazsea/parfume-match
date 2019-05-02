@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 function loadStatusReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case a.STATE_FETCH_SUCCESS: {
-      console.log(action.hell);
       return Object.assign(
         {},
         {

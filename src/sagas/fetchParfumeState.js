@@ -10,7 +10,7 @@ export function* fetchParfumeState() {
   //   const data = yield call([axios, axios.get], urlGet);
   //   yield put({ type: a.FETCHED_PARFUME_STATE, data });
   yield sleep(3000);
-  yield put({ type: a.STATE_FETCH_SUCCESS, hell: 'whatsapp' });
+  yield put({ type: a.STATE_FETCH_SUCCESS });
 }
 
 // export function* fetchAllData() {

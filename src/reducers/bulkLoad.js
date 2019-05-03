@@ -19,9 +19,17 @@ function bulkLoadReducer(state = INITIAL_STATE, action) {
   }
 }
 
+// export const exportToFirebase = () => async dispatch => {
+//   todosRef.on('value', snapshot => {
+//     dispatch({
+//       type: a.SNIPH_BULK_SUCCESS,
+//       db: snapshot.val(),
+//     });
+//   });
+// };
+
 export default bulkLoadReducer;
 
 // Exempel
 // sniphBulkDataState.parfumes.Parfymnnamn
 // sniphBulkDataState.collections
-// sniphBulkDataState.

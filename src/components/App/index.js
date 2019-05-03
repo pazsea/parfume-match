@@ -108,10 +108,6 @@ class App extends Component {
   }
 }
 
-function Loading(props) {
-  return <h1>Loading....</h1>;
-}
-
 const mapStateToProps = state => ({
   fetchCompleted: state.loadStatusState.stateFetched,
 });

@@ -29,7 +29,6 @@ class Collection extends Component {
       headerImage,
       title,
       firstDescription,
-      secondDescription,
     } = this.props.colSuggested;
     return (
       <Fragment>

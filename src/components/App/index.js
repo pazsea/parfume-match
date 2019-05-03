@@ -60,7 +60,8 @@ class App extends Component {
   }
 
   render() {
-    return this.props.fetchCompleted ? (
+    // return this.props.fetchCompleted ? (
+    return (
       <Router>
         <div>
           <Navigation />
@@ -102,8 +103,8 @@ class App extends Component {
           <Route path={ROUTES.WARDROBE} component={WardrobePage} />
         </div>
       </Router>
-    ) : (
-      <Loading />
+      // ) : (
+      //   <Loading />
     );
   }
 }
@@ -112,9 +113,9 @@ function Loading(props) {
   return <h1>Loading....</h1>;
 }
 
-const mapStateToProps = state => ({
-  fetchCompleted: state.loadStatusState.stateFetched,
-});
+// const mapStateToProps = state => ({
+//   fetchCompleted: state.loadStatusState.stateFetched,
+// });
 
 const mapDispatchToProps = dispatch => ({
   setSize: size => dispatch({ type: a.SIZE, size }),
@@ -127,7 +128,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   withAuthentication,
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
   ),
 )(App);

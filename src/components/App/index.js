@@ -21,7 +21,7 @@ import QuizPage, {
 } from '../Quiz';
 import RecommendationsPage from '../Recommendation';
 import WardrobePage from '../Wardrobe';
-
+import * as a from '../../constants/actionTypes';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 
@@ -29,9 +29,10 @@ class App extends Component {
   state = {
     innerHeight: window.innerHeight,
     innerWidth: window.innerWidth,
+    parfumes: [],
   };
   componentWillMount() {
-    // const { innerHeight, innerWidth } = this.state;
+    this.props.startFetch();
     this.handleResize();
     window.addEventListener('resize', () => {
       this.setState({
@@ -40,10 +41,6 @@ class App extends Component {
       });
       this.handleResize();
     });
-  }
-
-  componentWillUnmount() {
-    console.log('ooout');
   }
 
   handleResize() {
@@ -63,7 +60,7 @@ class App extends Component {
   }
 
   render() {
-    return (
+    return this.props.fetchCompleted ? (
       <Router>
         <div>
           <Navigation />
@@ -105,18 +102,32 @@ class App extends Component {
           <Route path={ROUTES.WARDROBE} component={WardrobePage} />
         </div>
       </Router>
+    ) : (
+      <Loading />
     );
   }
 }
 
+function Loading(props) {
+  return <h1>Loading....</h1>;
+}
+
+const mapStateToProps = state => ({
+  fetchCompleted: state.loadStatusState.stateFetched,
+});
+
 const mapDispatchToProps = dispatch => ({
-  setSize: size => dispatch({ type: 'SIZE', size }),
+  setSize: size => dispatch({ type: a.SIZE, size }),
+  startFetch: () =>
+    dispatch({
+      type: a.STATE_FETCH,
+    }),
 });
 
 export default compose(
   withAuthentication,
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
   ),
 )(App);

@@ -30,10 +30,6 @@ console.log(connection);
 
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hellooooo');
-});
-
 app.post('/parfumes/add', (req, res) => {
   console.log(req.body);
   const { idx } = req.body;
@@ -52,7 +48,7 @@ app.post('/parfumes/add', (req, res) => {
 });
 
 app.get('/parfumes', (req, res) => {
-  connection.query(SELECT_TEST_TABLE, (err, results) => {
+  connection.query(SELECT_PARFUMES_STATE, (err, results) => {
     if (err) {
       return res.send(err);
     } else {

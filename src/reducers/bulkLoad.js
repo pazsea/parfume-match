@@ -1,16 +1,16 @@
 import * as a from '../constants/actionTypes';
 
 const INITIAL_STATE = {
-  bulkData: [],
+  parfumes: [],
 };
 
-function bulkLoadReducer(state = INITIAL_STATE, data) {
-  switch (data.type) {
+function bulkLoadReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
     case a.SNIPH_BULK_SUCCESS: {
       return Object.assign(
         {},
         {
-          bulkData: data,
+          parfumes: action.data.data.parfumes,
         },
       );
     }
@@ -20,3 +20,8 @@ function bulkLoadReducer(state = INITIAL_STATE, data) {
 }
 
 export default bulkLoadReducer;
+
+// Exempel
+// sniphBulkDataState.parfumes.Parfymnnamn
+// sniphBulkDataState.collections
+// sniphBulkDataState.

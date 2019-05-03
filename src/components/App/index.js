@@ -32,7 +32,9 @@ class App extends Component {
     parfumes: [],
   };
   componentWillMount() {
-    this.props.startFetch();
+    if (!this.props.fetchCompleted) {
+      this.props.startFetch();
+    }
     this.handleResize();
     window.addEventListener('resize', () => {
       this.setState({
@@ -60,7 +62,6 @@ class App extends Component {
   }
 
   render() {
-    // return this.props.fetchCompleted ? (
     return (
       <Router>
         <div>
@@ -103,8 +104,6 @@ class App extends Component {
           <Route path={ROUTES.WARDROBE} component={WardrobePage} />
         </div>
       </Router>
-      // ) : (
-      //   <Loading />
     );
   }
 }
@@ -113,9 +112,9 @@ function Loading(props) {
   return <h1>Loading....</h1>;
 }
 
-// const mapStateToProps = state => ({
-//   fetchCompleted: state.loadStatusState.stateFetched,
-// });
+const mapStateToProps = state => ({
+  fetchCompleted: state.loadStatusState.stateFetched,
+});
 
 const mapDispatchToProps = dispatch => ({
   setSize: size => dispatch({ type: a.SIZE, size }),
@@ -128,7 +127,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   withAuthentication,
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
   ),
 )(App);

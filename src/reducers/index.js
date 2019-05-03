@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   userState: userReducer,
   messageState: messageReducer,
   screenSizeState: screenSizeReducer,
-  // loadStatusState: loadStatusReducer,
+  loadStatusState: loadStatusReducer,
   sniphBulkDataState: bulkLoadReducer,
 });
 

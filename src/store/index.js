@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 import logger from 'redux-logger';
 import rootReducer from '../reducers';
@@ -26,7 +27,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   persistedReducer,
-  applyMiddleware(logger, sagaMiddleware),
+  composeWithDevTools(applyMiddleware(logger, sagaMiddleware)),
 );
 sagaMiddleware.run(watchAll);
 export const persistor = persistStore(store);

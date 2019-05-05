@@ -66,7 +66,12 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navigation />
+          {authUser ? (
+            authUser.completedQuiz ? (
+              <Navigation />
+            ) : null
+          ) : null}
+          {/* <Navigation /> */}
 
           <Route
             exact
@@ -102,7 +107,16 @@ class App extends Component {
             path={ROUTES.RECOMMENDATION}
             component={RecommendationsPage}
           />
-          <Route path={ROUTES.WARDROBE} component={WardrobePage} />
+          <Route
+            path={ROUTES.WARDROBE}
+            component={
+              authUser
+                ? authUser.completedQuiz
+                  ? WardrobePage
+                  : QuizPage
+                : null
+            }
+          />
         </div>
       </Router>
     );

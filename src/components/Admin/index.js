@@ -4,14 +4,16 @@ import { compose } from 'recompose';
 
 import { withAuthorization } from '../Session';
 import { UserList, UserItem } from '../Users';
+
 import * as ROLES from '../../constants/roles';
 import * as ROUTES from '../../constants/routes';
+import { Link } from 'react-router-dom';
 
 const AdminPage = () => (
   <div>
     <h1>Admin</h1>
     <p>The Admin Page is accessible by every signed in admin user.</p>
-
+    <Link to={`${ROUTES.UPDATEPERFUMES}/`}>Update perfumes</Link>
     <Switch>
       <Route exact path={ROUTES.ADMIN_DETAILS} component={UserItem} />
       <Route exact path={ROUTES.ADMIN} component={UserList} />
@@ -22,6 +24,4 @@ const AdminPage = () => (
 const condition = authUser =>
   authUser && authUser.roles.includes(ROLES.ADMIN);
 
-export default compose(
-  withAuthorization(condition),
-)(AdminPage);
+export default compose(withAuthorization(condition))(AdminPage);

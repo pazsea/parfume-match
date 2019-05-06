@@ -21,6 +21,7 @@ import QuizPage, {
 } from '../Quiz';
 import RecommendationsPage from '../Recommendation';
 import WardrobePage from '../Wardrobe';
+import UpdatePerfumes from '../UpdatePerfumes';
 import * as a from '../../constants/actionTypes';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
@@ -100,6 +101,10 @@ class App extends Component {
             component={RecommendationsPage}
           />
           <Route path={ROUTES.WARDROBE} component={WardrobePage} />
+          <Route
+            path={ROUTES.UPDATEPERFUMES}
+            component={UpdatePerfumes}
+          />
         </div>
       </Router>
     ) : (

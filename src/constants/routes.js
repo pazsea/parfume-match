@@ -15,3 +15,4 @@ export const QUESTIONFOUR = '/qfour';
 export const QUESTIONFIVE = '/qfive';
 export const QUESTIONSIX = '/qsix';
 export const RECOMMENDATION = '/recommendation';
+export const UPDATEPERFUMES = '/updateperfumes';

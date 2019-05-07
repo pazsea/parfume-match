@@ -50,11 +50,6 @@ class App extends Component {
     this.props.firebase.users().on('value', snapshot => {
       this.props.onSetUsers(snapshot.val());
     });
-    this.props.firebase
-      .user(this.props.authUser.uid)
-      .on('value', snapshot => {
-        this.props.onSetAuthUser(snapshot.val());
-      });
   }
 
   componentWillUnmount() {
@@ -139,8 +134,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetAuthUser: authUser =>
-    dispatch({ type: 'AUTH_USER_SET', authUser }),
   onSetUsers: users => dispatch({ type: 'USERS_SET', users }),
   setSize: size => dispatch({ type: a.SIZE, size }),
   startFetch: () =>

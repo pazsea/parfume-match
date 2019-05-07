@@ -18,7 +18,6 @@ import {
   ImageFlexSpacing,
   RelativeContainer,
   TextInsideImage,
-  QuizInput,
 } from './styles';
 import quizStep1Everything from '../../images/quizStep1Everything.jpg';
 import quizStep1Man from '../../images/quizStep1Man.jpg';
@@ -44,19 +43,19 @@ import quizStep5Elegant from '../../images/quizStep5Elegant.jpg';
 import quizStep5Unique from '../../images/quizStep5Unique.jpg';
 import quizStep5Sensual from '../../images/quizStep5Sensual.jpg';
 
-// Quiz page är huvudkomponenten som har tre states för slutföring.
-// Quiz page har tre komponenter renderas utifall state är tillgängligt.
-
-// TO DO
-// PUSH TO WARDROBE IF SKIP
-// PUSH TO RECOMMENDATION IF COMPLETED QUIZ
-// CREATE A POINT SYSTEM FOR QUIZ TO RELATE TO RECOMMENDED COLLECTION
 class QuizPage extends Component {
   skipQuiz = (event, authUser) => {
     this.props.firebase
       .users()
       .child(authUser.uid)
-      .update({ completedQuiz: true });
+      .update({ completedQuiz: true })
+      .then(
+        this.props.firebase
+          .user(this.props.authUser.uid)
+          .once('value', snapshot => {
+            this.props.onSetAuthUser(snapshot.val());
+          }),
+      );
   };
 
   render() {
@@ -452,39 +451,13 @@ export class QuestionFive extends Component {
   }
 }
 
-export class QuestionSix extends Component {
-  render() {
-    return (
-      <div>
-        <FlexContainerColumn>
-          <QuizTitle>
-            <h1>Vilka är dina favoritparfymer idag?</h1>
-            <QuizSubTitle>
-              <h2>______</h2>
-            </QuizSubTitle>
-          </QuizTitle>
-          <QuizInput>
-            <textarea
-              placeholder="Skriv namnen på parfymer du tycker om och
-          tryck return efter varje. I vissa fall ger vi förslag och då
-          är det bra om du väljer dem i listan för bättre matchning."
-            />
-          </QuizInput>
-          <QuizIntroButton>
-            <button>
-              <Link to={ROUTES.RECOMMENDATION}>
-                Visa min Sniph-kollektion
-              </Link>
-            </button>
-          </QuizIntroButton>
-        </FlexContainerColumn>
-      </div>
-    );
-  }
-}
-
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onSetAuthUser: authUser =>
+    dispatch({ type: 'AUTH_USER_SET', authUser }),
 });
 
 const condition = authUser => !!authUser;
@@ -492,5 +465,8 @@ const condition = authUser => !!authUser;
 export default compose(
   withFirebase,
   withAuthorization(condition),
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 )(QuizPage);

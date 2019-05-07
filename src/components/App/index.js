@@ -18,8 +18,9 @@ import QuizPage, {
   QuestionThree,
   QuestionFour,
   QuestionFive,
-  QuestionSix,
 } from '../Quiz';
+
+import QuestionSix from '../Quiz/QuestionSix';
 import RecommendationsPage from '../Recommendation';
 import WardrobePage from '../Wardrobe';
 import * as a from '../../constants/actionTypes';
@@ -45,6 +46,22 @@ class App extends Component {
     });
   }
 
+  componentDidMount() {
+    this.props.firebase.users().on('value', snapshot => {
+      this.props.onSetUsers(snapshot.val());
+    });
+    this.props.firebase
+      .user(this.props.authUser.uid)
+      .on('value', snapshot => {
+        this.props.onSetAuthUser(snapshot.val());
+      });
+  }
+
+  componentWillUnmount() {
+    this.props.firebase.users().off();
+    this.props.firebase.user().off();
+  }
+
   handleResize() {
     const { innerHeight, innerWidth } = this.state;
     if (
@@ -66,12 +83,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          {authUser ? (
-            authUser.completedQuiz ? (
-              <Navigation />
-            ) : null
-          ) : null}
-          {/* <Navigation /> */}
+          {authUser && authUser.completedQuiz ? <Navigation /> : null}
 
           <Route
             exact
@@ -110,11 +122,9 @@ class App extends Component {
           <Route
             path={ROUTES.WARDROBE}
             component={
-              authUser
-                ? authUser.completedQuiz
-                  ? WardrobePage
-                  : QuizPage
-                : null
+              authUser && authUser.completedQuiz
+                ? WardrobePage
+                : QuizPage
             }
           />
         </div>
@@ -129,6 +139,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  onSetAuthUser: authUser =>
+    dispatch({ type: 'AUTH_USER_SET', authUser }),
+  onSetUsers: users => dispatch({ type: 'USERS_SET', users }),
   setSize: size => dispatch({ type: a.SIZE, size }),
   startFetch: () =>
     dispatch({

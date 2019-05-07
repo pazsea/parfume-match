@@ -19,69 +19,84 @@ import { withFirebase } from '../Firebase';
 class Collection extends Component {
   state = {};
 
-  componentWillMount() {
-    console.log(this.props.colSuggested);
+  async componentWillMount() {
+    this.getCollection();
+  }
+  getCollection() {
+    this.props.firebase
+      .user(this.props.authUser.uid)
+      .child('recommendedCol')
+      .once('value', snapshot => {
+        const collection = Object.keys(snapshot.val());
+        // console.log(collection);
+        this.setState({ selected: collection });
+      });
   }
 
   render() {
-    const {
-      image,
-      headerImage,
-      title,
-      firstDescription,
-    } = this.props.colSuggested;
-    return (
-      <Fragment>
-        <Header headerImage={headerImage} />
+    const { selected } = this.state;
+    console.log('RENDER ' + selected);
+    // console.log('PROPS ' + this.props.colSuggested);
+    // const {
+    //   image,
+    //   headerImage,
+    //   title,
+    //   firstDescription,
+    // } = this.props[selected];
+    return <div>heeej</div>;
 
-        <FlexContainer>
-          <ImageFlexContainer>
-            <img src={image} alt="" />
-            <img src={genericParfumeBottle} alt="" />
-          </ImageFlexContainer>
-          <TextFlexContainer>
-            <h1>{title}</h1>
-            <h2>159 KR/MÅNAD</h2>
+    //   <Fragment>
+    //     <Header headerImage={headerImage} />
 
-            <SubscribeButton>
-              <button>
-                <Link to={ROUTES.HOME}>Prenumerera</Link>
-              </button>
-            </SubscribeButton>
+    //     <FlexContainer>
+    //       <ImageFlexContainer>
+    //         <img src={image} alt="" />
+    //         <img src={genericParfumeBottle} alt="" />
+    //       </ImageFlexContainer>
+    //       <TextFlexContainer>
+    //         <h1>{title}</h1>
+    //         <h2>159 KR/MÅNAD</h2>
 
-            <Description>
-              {firstDescription.split('/n').map((desc, index) => (
-                <p>{desc}</p>
-              ))}
-              <ul>
-                <li>Ny doft varje månad</li>
-                <li>Smart etui att ta med</li>
-                <li>Dofter utvalda av experter</li>
-                <li>Byt eller pausa när du vill</li>
-                <li>Ingen bindningstid</li>
-                <li>Fri frakt</li>
-              </ul>
-              <br />
-              <br />
-              <p>
-                <i>
-                  <b>Sniph</b> är en prenumerationstjänst som gör det
-                  enkelt att upptäcka nya dofter. Vi skickar dig varje
-                  månad mindre flaskor med kända parfymer, som du
-                  använder i vårt smarta etui. Prenumerationen kostar
-                  159 kr/mån utan bindningstid.
-                </i>
-              </p>
-            </Description>
-          </TextFlexContainer>
-        </FlexContainer>
-      </Fragment>
-    );
+    //         <SubscribeButton>
+    //           <button>
+    //             <Link to={ROUTES.HOME}>Prenumerera</Link>
+    //           </button>
+    //         </SubscribeButton>
+
+    //         <Description>
+    //           {firstDescription.split('/n').map((desc, index) => (
+    //             <p>{desc}</p>
+    //           ))}
+    //           <ul>
+    //             <li>Ny doft varje månad</li>
+    //             <li>Smart etui att ta med</li>
+    //             <li>Dofter utvalda av experter</li>
+    //             <li>Byt eller pausa när du vill</li>
+    //             <li>Ingen bindningstid</li>
+    //             <li>Fri frakt</li>
+    //           </ul>
+    //           <br />
+    //           <br />
+    //           <p>
+    //             <i>
+    //               <b>Sniph</b> är en prenumerationstjänst som gör det
+    //               enkelt att upptäcka nya dofter. Vi skickar dig varje
+    //               månad mindre flaskor med kända parfymer, som du
+    //               använder i vårt smarta etui. Prenumerationen kostar
+    //               159 kr/mån utan bindningstid.
+    //             </i>
+    //           </p>
+    //         </Description>
+    //       </TextFlexContainer>
+    //     </FlexContainer>
+    //   </Fragment>
+    // );
   }
 }
 
 const mapStateToProps = state => ({
   users: state.userState.users,
+  authUser: state.sessionState.authUser,
 });
 
 const mapDispatchToProps = dispatch => ({

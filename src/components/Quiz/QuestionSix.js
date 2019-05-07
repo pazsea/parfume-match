@@ -14,11 +14,30 @@ import {
 } from './styles';
 
 class QuestionSix extends Component {
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  randomKey = () => {
+    const keys = [
+      'aesthetic',
+      'avantGarde',
+      'clean',
+      'femaleClassics',
+      'trendingNow',
+      'workPlay',
+    ];
+    console.log('VALD KOLLEKTION' + keys[this.getRandomInt(6)]);
+    return keys[this.getRandomInt(6)];
+  };
+
   skipQuiz() {
     const { authUser } = this.props;
 
     this.props.firebase.user(authUser.uid).update({
       completedQuiz: true,
+      recommendedCol: {
+        [this.randomKey()]: false,
+      },
     });
   }
 

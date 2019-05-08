@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import { connect } from 'react-redux';
 import {
   FlexContainerRow,
   FlexContainerColumn,
@@ -17,7 +18,6 @@ import {
   ImageFlexSpacing,
   RelativeContainer,
   TextInsideImage,
-  QuizInput,
 } from './styles';
 import quizStep1Everything from '../../images/quizStep1Everything.jpg';
 import quizStep1Man from '../../images/quizStep1Man.jpg';
@@ -43,10 +43,21 @@ import quizStep5Elegant from '../../images/quizStep5Elegant.jpg';
 import quizStep5Unique from '../../images/quizStep5Unique.jpg';
 import quizStep5Sensual from '../../images/quizStep5Sensual.jpg';
 
-// Quiz page är huvudkomponenten som har tre states för slutföring.
-// Quiz page har tre komponenter renderas utifall state är tillgängligt.
-
 class QuizPage extends Component {
+  skipQuiz = (event, authUser) => {
+    this.props.firebase
+      .users()
+      .child(authUser.uid)
+      .update({ completedQuiz: true })
+      .then(
+        this.props.firebase
+          .user(this.props.authUser.uid)
+          .once('value', snapshot => {
+            this.props.onSetAuthUser(snapshot.val());
+          }),
+      );
+  };
+
   render() {
     return (
       <div>
@@ -70,6 +81,13 @@ class QuizPage extends Component {
               <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
             </button>
           </QuizIntroButton>
+          <button
+            onClick={event =>
+              this.skipQuiz(event, this.props.authUser)
+            }
+          >
+            Hoppa över
+          </button>
         </FlexContainerColumn>
       </div>
     );
@@ -433,40 +451,22 @@ export class QuestionFive extends Component {
   }
 }
 
-export class QuestionSix extends Component {
-  render() {
-    return (
-      <div>
-        <FlexContainerColumn>
-          <QuizTitle>
-            <h1>Vilka är dina favoritparfymer idag?</h1>
-            <QuizSubTitle>
-              <h2>______</h2>
-            </QuizSubTitle>
-          </QuizTitle>
-          <QuizInput>
-            <textarea
-              placeholder="Skriv namnen på parfymer du tycker om och
-          tryck return efter varje. I vissa fall ger vi förslag och då
-          är det bra om du väljer dem i listan för bättre matchning."
-            />
-          </QuizInput>
-          <QuizIntroButton>
-            <button>
-              <Link to={ROUTES.RECOMMENDATION}>
-                Visa min Sniph-kollektion
-              </Link>
-            </button>
-          </QuizIntroButton>
-        </FlexContainerColumn>
-      </div>
-    );
-  }
-}
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onSetAuthUser: authUser =>
+    dispatch({ type: 'AUTH_USER_SET', authUser }),
+});
 
 const condition = authUser => !!authUser;
 
 export default compose(
   withFirebase,
   withAuthorization(condition),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 )(QuizPage);

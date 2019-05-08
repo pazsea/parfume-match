@@ -42,7 +42,7 @@ class WardrobePage extends Component {
         </s.QuizTitle>
         <s.Wrapper>
           <s.ImageDiv>
-            <img src={parfume1} />
+            <img alt="parfume bottle" src={parfume1} />
           </s.ImageDiv>
           <s.ParfumeDiv>
             <s.ButtonDiv tabOpen={tabOpen}>
@@ -89,7 +89,7 @@ class WardrobePage extends Component {
         </s.Wrapper>
         <s.Wrapper>
           <s.ImageDiv>
-            <img src={parfume1} />
+            <img alt="parfume bottle" src={parfume1} />
           </s.ImageDiv>
           <s.ParfumeDiv>
             <s.ButtonDiv tabOpen={tabOpen}>

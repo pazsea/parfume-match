@@ -39,6 +39,7 @@ class Collection extends Component {
     const { loading, selectedCol } = this.state;
 
     if (loading || selectedCol === undefined) {
+      console.log(selectedCol);
       return (
         <h2>
           Du har ingen rekommenderad kollektion. Har du fyllt i quiz
@@ -46,6 +47,7 @@ class Collection extends Component {
         </h2>
       );
     } else {
+      console.log(this.state.selectedCol);
       const {
         image,
         headerImage,

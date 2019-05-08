@@ -69,12 +69,37 @@ class RecommendationsPage extends Component {
     },
   };
 
+  // componentWillMount() {
+  //   this.getCollection();
+  // }
+  // getCollection() {
+  //   this.props.firebase
+  //     .user(this.props.authUser.uid)
+  //     .child('recommendedCol')
+  //     .once('value', snapshot => {
+  //       const collection = Object.keys(snapshot.val());
+  //       console.log('HÄÄÄÄÄR ÄR FIREBASE ' + collection);
+  //       const selected = this.state[collection];
+  //       console.log('HÄÄÄÄÄR ÄR FIREBASE ' + selected[0]);
+
+  //       return selected;
+  //     });
+  // }
+
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  randomKey = () => {
+    const keys = Object.keys(this.state);
+    return keys[this.getRandomInt(6)];
+  };
+
   render() {
-    var userCollection = 'workPlay';
+    console.log('INDEX COLLECTION RENDERAS');
 
     return (
       <div>
-        <Collection colSuggested={this.state[userCollection]} />
+        <Collection {...this.state} />
       </div>
     );
   }
@@ -82,6 +107,7 @@ class RecommendationsPage extends Component {
 
 const mapStateToProps = state => ({
   users: state.userState.users,
+  authUser: state.sessionState.authUser,
 });
 
 const mapDispatchToProps = dispatch => ({

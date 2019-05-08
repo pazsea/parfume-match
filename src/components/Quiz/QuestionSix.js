@@ -12,19 +12,39 @@ import {
   QuizInput,
   ButtonWrapper,
 } from './styles';
+import { Section } from '../../styleConstants/section.js';
 
 class QuestionSix extends Component {
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  randomKey = () => {
+    const keys = [
+      'aesthetic',
+      'avantGarde',
+      'clean',
+      'femaleClassics',
+      'trendingNow',
+      'workPlay',
+    ];
+    console.log('VALD KOLLEKTION' + keys[this.getRandomInt(6)]);
+    return keys[this.getRandomInt(6)];
+  };
+
   skipQuiz() {
     const { authUser } = this.props;
 
     this.props.firebase.user(authUser.uid).update({
       completedQuiz: true,
+      recommendedCol: {
+        [this.randomKey()]: false,
+      },
     });
   }
 
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Vilka är dina favoritparfymer idag?</h1>
@@ -49,7 +69,7 @@ class QuestionSix extends Component {
             </Link>
           </ButtonWrapper>
         </FlexContainerColumn>
-      </div>
+      </Section>
     );
   }
 }

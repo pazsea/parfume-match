@@ -17,8 +17,11 @@ import {
   ImageFlexContainer,
   ImageFlexSpacing,
   RelativeContainer,
+  SkipDiv,
   TextInsideImage,
 } from './styles';
+import { Section } from '../../styleConstants/section.js';
+
 import quizStep1Everything from '../../images/quizStep1Everything.jpg';
 import quizStep1Man from '../../images/quizStep1Man.jpg';
 import quizStep1Unisex from '../../images/quizStep1Unisex.jpg';
@@ -60,7 +63,7 @@ class QuizPage extends Component {
 
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Sniph quiz: Hitta din kollektion</h1>
@@ -81,15 +84,17 @@ class QuizPage extends Component {
               <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
             </button>
           </QuizIntroButton>
-          <button
-            onClick={event =>
-              this.skipQuiz(event, this.props.authUser)
-            }
-          >
-            Hoppa över
-          </button>
+          <SkipDiv>
+            <button
+              onClick={event =>
+                this.skipQuiz(event, this.props.authUser)
+              }
+            >
+              Hoppa över
+            </button>
+          </SkipDiv>
         </FlexContainerColumn>
-      </div>
+      </Section>
     );
   }
 }
@@ -97,7 +102,7 @@ class QuizPage extends Component {
 export class QuestionOne extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Vilken parfymtyp är du ute efter?</h1>
@@ -148,7 +153,7 @@ export class QuestionOne extends Component {
             </Link>
           </ImageFlexContainer>
         </FlexContainerColumn>
-      </div>
+      </Section>
     );
   }
 }
@@ -156,7 +161,7 @@ export class QuestionOne extends Component {
 export class QuestionTwo extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Hur avancerad är din parfymsmak?</h1>
@@ -197,7 +202,7 @@ export class QuestionTwo extends Component {
             </Link>
           </ImageFlexContainer>
         </FlexContainerColumn>
-      </div>
+      </Section>
     );
   }
 }
@@ -205,7 +210,7 @@ export class QuestionTwo extends Component {
 export class QuestionThree extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>När vill du dofta extra härligt?</h1>
@@ -286,7 +291,7 @@ export class QuestionThree extends Component {
             <Link to={ROUTES.QUESTIONFOUR}>Nästa</Link>
           </button>
         </QuizIntroButton>
-      </div>
+      </Section>
     );
   }
 }
@@ -294,7 +299,7 @@ export class QuestionThree extends Component {
 export class QuestionFour extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Vilka är dina favoritdrycker?</h1>
@@ -376,7 +381,7 @@ export class QuestionFour extends Component {
             <Link to={ROUTES.QUESTIONFIVE}>Nästa</Link>
           </button>
         </QuizIntroButton>
-      </div>
+      </Section>
     );
   }
 }
@@ -384,7 +389,7 @@ export class QuestionFour extends Component {
 export class QuestionFive extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Hur vill du känna dig i din parfym?</h1>
@@ -446,7 +451,7 @@ export class QuestionFive extends Component {
             <Link to={ROUTES.QUESTIONSIX}>Nästa</Link>
           </button>
         </QuizIntroButton>
-      </div>
+      </Section>
     );
   }
 }

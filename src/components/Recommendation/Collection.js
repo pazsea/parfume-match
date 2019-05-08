@@ -22,17 +22,26 @@ class Collection extends Component {
   };
 
   componentDidMount() {
-    this.props.firebase
-      .user(this.props.authUser.uid)
-      .child('recommendedCol')
-      .once('value', snapshot => {
-        if (snapshot.val()) {
-          const collection = Object.keys(snapshot.val());
-          this.setState({ selectedCol: collection, loading: false });
-        } else {
-          return null;
-        }
-      });
+    const { firebase, authUser } = this.props;
+    if (authUser.recommendedCol) {
+      const propsRecommend = Object.keys(authUser.recommendedCol);
+      this.setState({ selectedCol: propsRecommend, loading: false });
+    } else {
+      firebase
+        .user(this.props.authUser.uid)
+        .child('recommendedCol')
+        .once('value', snapshot => {
+          if (snapshot.val()) {
+            const collection = Object.keys(snapshot.val());
+            this.setState({
+              selectedCol: collection,
+              loading: false,
+            });
+          } else {
+            return null;
+          }
+        });
+    }
   }
 
   render() {

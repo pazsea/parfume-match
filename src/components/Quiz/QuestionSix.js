@@ -12,6 +12,7 @@ import {
   QuizInput,
   ButtonWrapper,
 } from './styles';
+import { Section } from '../../styleConstants/section.js';
 
 class QuestionSix extends Component {
   getRandomInt(max) {
@@ -43,7 +44,7 @@ class QuestionSix extends Component {
 
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Vilka är dina favoritparfymer idag?</h1>
@@ -68,7 +69,7 @@ class QuestionSix extends Component {
             </Link>
           </ButtonWrapper>
         </FlexContainerColumn>
-      </div>
+      </Section>
     );
   }
 }

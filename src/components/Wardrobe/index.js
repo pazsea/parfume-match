@@ -4,6 +4,8 @@ import Truncate from 'react-truncate';
 import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
+import { Section } from '../../styleConstants/section.js';
+
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
@@ -36,7 +38,7 @@ class WardrobePage extends Component {
     const { tabOpen, isTruncated, value, rating } = this.state;
     const nombre = 1;
     return (
-      <Fragment>
+      <Section>
         <s.QuizTitle>
           <h1>Wardrobe</h1>
         </s.QuizTitle>
@@ -87,7 +89,7 @@ class WardrobePage extends Component {
             ) : null}
           </s.ParfumeDiv>
         </s.Wrapper>
-        <s.Wrapper>
+        {/* <s.Wrapper>
           <s.ImageDiv>
             <img alt="parfume bottle" src={parfume1} />
           </s.ImageDiv>
@@ -133,8 +135,8 @@ class WardrobePage extends Component {
               />
             ) : null}
           </s.ParfumeDiv>
-        </s.Wrapper>
-      </Fragment>
+        </s.Wrapper> */}
+      </Section>
     );
   }
 }

@@ -12,6 +12,7 @@ import {
   Description,
   SubscribeButton,
 } from './styles';
+import { Section } from '../../styleConstants/section.js';
 import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
@@ -22,26 +23,26 @@ class Collection extends Component {
   };
 
   componentDidMount() {
-    const { firebase, authUser } = this.props;
-    if (authUser.recommendedCol) {
-      console.log('inside PROPPPPS!');
-      const propsRecommend = Object.keys(authUser.recommendedCol);
-      this.setState({ selectedCol: propsRecommend });
-    } else {
-      firebase
-        .user(this.props.authUser.uid)
-        .child('recommendedCol')
-        .once('value', snapshot => {
-          if (snapshot.val()) {
-            const collection = Object.keys(snapshot.val());
-            this.setState({
-              selectedCol: collection,
-            });
-          } else {
-            return null;
-          }
-        });
-    }
+    const { firebase } = this.props;
+    // if (authUser.recommendedCol) {
+    //   console.log('inside PROPPPPS!');
+    //   const propsRecommend = Object.keys(authUser.recommendedCol);
+    //   this.setState({ selectedCol: propsRecommend });
+    // } else {
+    firebase
+      .user(this.props.authUser.uid)
+      .child('recommendedCol')
+      .once('value', snapshot => {
+        if (snapshot.val()) {
+          const collection = Object.keys(snapshot.val());
+          this.setState({
+            selectedCol: collection,
+          });
+        } else {
+          return null;
+        }
+      });
+
     this.setState({ loading: false });
   }
 
@@ -50,13 +51,18 @@ class Collection extends Component {
 
     if (loading) {
       console.log(selectedCol);
-      return <h2>LADDAR.....</h2>;
+
+      return (
+        <Section>
+          {' '}
+          <h2>LADDAR.....</h2>
+        </Section>
+      );
     } else if (selectedCol === undefined) {
       return (
-        <h2>
-          Du har ingen rekommenderad kollektion. Har du fyllt i quiz
-          spelet?
-        </h2>
+        <Section>
+          <h2>Laddar....</h2>
+        </Section>
       );
     } else {
       const {
@@ -66,7 +72,7 @@ class Collection extends Component {
         firstDescription,
       } = this.props[selectedCol];
       return (
-        <Fragment>
+        <Section>
           <Header headerImage={headerImage} />
 
           <FlexContainer>
@@ -110,7 +116,7 @@ class Collection extends Component {
               </Description>
             </TextFlexContainer>
           </FlexContainer>
-        </Fragment>
+        </Section>
       );
     }
   }

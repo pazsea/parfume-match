@@ -24,8 +24,9 @@ class Collection extends Component {
   componentDidMount() {
     const { firebase, authUser } = this.props;
     if (authUser.recommendedCol) {
+      console.log('inside PROPPPPS!');
       const propsRecommend = Object.keys(authUser.recommendedCol);
-      this.setState({ selectedCol: propsRecommend, loading: false });
+      this.setState({ selectedCol: propsRecommend });
     } else {
       firebase
         .user(this.props.authUser.uid)
@@ -35,20 +36,22 @@ class Collection extends Component {
             const collection = Object.keys(snapshot.val());
             this.setState({
               selectedCol: collection,
-              loading: false,
             });
           } else {
             return null;
           }
         });
     }
+    this.setState({ loading: false });
   }
 
   render() {
     const { loading, selectedCol } = this.state;
 
-    if (loading || selectedCol === undefined) {
+    if (loading) {
       console.log(selectedCol);
+      return <h2>LADDAR.....</h2>;
+    } else if (selectedCol === undefined) {
       return (
         <h2>
           Du har ingen rekommenderad kollektion. Har du fyllt i quiz
@@ -56,7 +59,6 @@ class Collection extends Component {
         </h2>
       );
     } else {
-      console.log(this.state.selectedCol);
       const {
         image,
         headerImage,

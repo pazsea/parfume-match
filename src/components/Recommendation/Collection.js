@@ -35,6 +35,7 @@ class Collection extends Component {
       .once('value', snapshot => {
         if (snapshot.val()) {
           const collection = Object.keys(snapshot.val());
+          // Object.keys(snapshot.val()) = namnet på kollektionen
           this.setState({
             selectedCol: collection,
           });
@@ -44,6 +45,16 @@ class Collection extends Component {
       });
 
     this.setState({ loading: false });
+  }
+
+  setActiveCollection() {
+    const { firebase } = this.props;
+    const { selectedCol } = this.state;
+
+    firebase
+      .user(this.props.authUser.uid)
+      .child('recommendedCol')
+      .update({ [selectedCol]: true });
   }
 
   render() {
@@ -85,7 +96,7 @@ class Collection extends Component {
               <h2>159 KR/MÅNAD</h2>
 
               <SubscribeButton>
-                <button>
+                <button onClick={this.setActiveCollection()}>
                   <Link to={ROUTES.HOME}>Prenumerera</Link>
                 </button>
               </SubscribeButton>

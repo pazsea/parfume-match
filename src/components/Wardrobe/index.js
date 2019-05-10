@@ -36,106 +36,64 @@ class WardrobePage extends Component {
 
   render() {
     const { tabOpen, isTruncated, value, rating } = this.state;
+    const { collection } = this.props;
     const nombre = 1;
     return (
       <Section>
         <s.QuizTitle>
           <h1>Wardrobe</h1>
         </s.QuizTitle>
-        <s.Wrapper>
-          <s.ImageDiv>
-            <img alt="parfume bottle" src={parfume1} />
-          </s.ImageDiv>
-          <s.ParfumeDiv>
-            <s.ButtonDiv tabOpen={tabOpen}>
-              <button
-                value={'descriptionTab' + nombre}
-                onClick={e => this.toggleTab(e)}
-              >
-                Description
-              </button>
-              <button
-                value={'ratingTab' + nombre}
-                onClick={e => this.toggleTab(e)}
-              >
-                My Rating
-              </button>
-            </s.ButtonDiv>
-            <s.HeaderDiv>Parfym</s.HeaderDiv>
-            <s.StarsDiv>
-              <StarRatingComponent
-                name="rate1"
-                starCount={5}
-                value={rating}
-                onStarClick={this.onStarClick.bind(this)}
-              />
-            </s.StarsDiv>
-            {tabOpen === 'descriptionTab' + nombre ||
-            tabOpen === '' ? (
-              <DescriptionWrapper
-                rating={rating}
-                isTruncated={isTruncated}
-                toggleTruncate={this.toggleTruncate}
-                tabOpen={tabOpen}
-              />
-            ) : tabOpen === 'ratingTab' + nombre ? (
-              <RatingWrapper
-                handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
-                value={value}
-                starClick={this.onStarClick}
-                tabOpen={tabOpen}
-              />
-            ) : null}
-          </s.ParfumeDiv>
-        </s.Wrapper>
-        {/* <s.Wrapper>
-          <s.ImageDiv>
-            <img alt="parfume bottle" src={parfume1} />
-          </s.ImageDiv>
-          <s.ParfumeDiv>
-            <s.ButtonDiv tabOpen={tabOpen}>
-              <button
-                value={'descriptionTab' + nombre}
-                onClick={e => this.toggleTab(e)}
-              >
-                Description
-              </button>
-              <button
-                value={'ratingTab' + nombre}
-                onClick={e => this.toggleTab(e)}
-              >
-                My Rating
-              </button>
-            </s.ButtonDiv>
-            <s.HeaderDiv>Parfym</s.HeaderDiv>
-            <s.StarsDiv>
-              <StarRatingComponent
-                name="rate1"
-                starCount={5}
-                value={rating}
-                onStarClick={this.onStarClick.bind(this)}
-              />
-            </s.StarsDiv>
-            {tabOpen === 'descriptionTab' + nombre ||
-            tabOpen === '' ? (
-              <DescriptionWrapper
-                rating={rating}
-                isTruncated={isTruncated}
-                toggleTruncate={this.toggleTruncate}
-                tabOpen={tabOpen}
-              />
-            ) : tabOpen === 'ratingTab' + nombre ? (
-              <RatingWrapper
-                handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
-                value={value}
-                starClick={this.onStarClick}
-                tabOpen={tabOpen}
-              />
-            ) : null}
-          </s.ParfumeDiv>
-        </s.Wrapper> */}
+        {collection.slice(0, 3).map(item => (
+          <Fragment>
+            <s.Wrapper>
+              <s.ImageDiv>
+                <img alt="parfume bottle" src={parfume1} />
+              </s.ImageDiv>
+              <s.ParfumeDiv>
+                <s.ButtonDiv tabOpen={tabOpen}>
+                  <button
+                    value={'descriptionTab' + nombre}
+                    onClick={e => this.toggleTab(e)}
+                  >
+                    Description
+                  </button>
+                  <button
+                    value={'ratingTab' + nombre}
+                    onClick={e => this.toggleTab(e)}
+                  >
+                    My Rating
+                  </button>
+                </s.ButtonDiv>
+                <s.HeaderDiv>{item.name}</s.HeaderDiv>
+                <s.StarsDiv>
+                  <StarRatingComponent
+                    name="rate1"
+                    starCount={5}
+                    value={rating}
+                    onStarClick={this.onStarClick.bind(this)}
+                  />
+                </s.StarsDiv>
+                {tabOpen === 'descriptionTab' + nombre ||
+                tabOpen === '' ? (
+                  <DescriptionWrapper
+                    rating={rating}
+                    isTruncated={isTruncated}
+                    toggleTruncate={this.toggleTruncate}
+                    tabOpen={tabOpen}
+                  />
+                ) : tabOpen === 'ratingTab' + nombre ? (
+                  <RatingWrapper
+                    handleSubmit={this.handleSubmit}
+                    handleChange={this.handleChange}
+                    value={value}
+                    starClick={this.onStarClick}
+                    tabOpen={tabOpen}
+                  />
+                ) : null}
+              </s.ParfumeDiv>
+            </s.Wrapper>
+          </Fragment>
+        ))}
       </Section>
     );
   }
@@ -192,6 +150,7 @@ function RatingWrapper({ handleSubmit, handleChange, value }) {
 
 const mapStateToProps = state => ({
   users: state.userState.users,
+  collection: state.sortedParfumesState.Clean,
 });
 
 const mapDispatchToProps = dispatch => ({

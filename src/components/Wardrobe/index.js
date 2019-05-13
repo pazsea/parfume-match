@@ -34,29 +34,6 @@ class WardrobePage extends Component {
     firebase.wardrobe(currentUser).off();
   }
 
-  descriptionChange(event, name) {
-    const value = event.target.value;
-    console.log(this.state.myRating[name].ownDesc);
-    const path = this.state.myRating[name];
-
-    this.setState({ value });
-
-    // this.setState({ [name + ' ' + 'textEdit']: value });
-  }
-
-  descriptionSubmit(event, name) {
-    // console.log(name);
-    event.preventDefault();
-
-    const text = event.target.value;
-    const { firebase, currentUser } = this.props;
-
-    firebase
-      .wardrobe(currentUser)
-      .child(name)
-      .update({ ownDesc: text });
-  }
-
   onStarClick(nextValue, prevValue, name) {
     const { firebase, currentUser } = this.props;
 
@@ -97,7 +74,7 @@ class WardrobePage extends Component {
                   <img alt="parfume bottle" src={parfume1} />
                 </s.ImageDiv>
                 <s.ParfumeDiv>
-                  <s.ButtonDiv tabOpen={tabOpen}>
+                  <s.ButtonDiv tabOpen={tabOpen} index={index}>
                     <button
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
@@ -127,6 +104,12 @@ class WardrobePage extends Component {
                       onStarClick={this.onStarClick.bind(this)}
                     />
                   </s.StarsDiv>
+                  <div>
+                    {item.base_note_id} {item.top_note_id}{' '}
+                    {item.heart_note_id}
+                    {/* item.top_note_id &&
+                      item.heart_note_id} */}
+                  </div>
 
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper

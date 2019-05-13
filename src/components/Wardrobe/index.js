@@ -104,12 +104,12 @@ class WardrobePage extends Component {
                       onStarClick={this.onStarClick.bind(this)}
                     />
                   </s.StarsDiv>
-                  <div>
+                  {/* <div>
                     {item.base_note_id} {item.top_note_id}{' '}
                     {item.heart_note_id}
-                    {/* item.top_note_id &&
-                      item.heart_note_id} */}
-                  </div>
+                    {item.top_note_id &&
+                      item.heart_note_id}
+                  </div> */}
 
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper

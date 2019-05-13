@@ -31,7 +31,7 @@ export const ParfumeDiv = styled.div`
   flex-basis: 40%;
   display: flex;
   flex-direction: column;
-  box-shadow: 4px 2px 2px black;
+  /* box-shadow: 4px 2px 2px black; */
   border: 1px solid #ccc;
 `;
 
@@ -56,14 +56,18 @@ export const ButtonDiv = styled.div`
   }
   button:nth-child(1) {
     border-bottom: ${props =>
-      props.tabOpen === 'descriptionTab1' ? '1px solid black' : null};
+      props.tabOpen === 'descriptionTab' + [props.index]
+        ? '1px solid black'
+        : null};
   }
 
   button:nth-child(2) {
     margin-left: 0.9em;
 
     border-bottom: ${props =>
-      props.tabOpen === 'ratingTab1' ? '1px solid black' : null};
+      props.tabOpen === 'ratingTab' + [props.index]
+        ? '1px solid black'
+        : null};
   }
   button:hover {
     background-color: #ddd;

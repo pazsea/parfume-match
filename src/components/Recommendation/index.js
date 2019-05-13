@@ -25,42 +25,42 @@ import * as DESC from './descriptions.js';
 class RecommendationsPage extends Component {
   state = {
     //Mockup logik. Förberedelse för Firebase.
-    aesthetic: {
+    'FÖR MÄN: Aesthetic': {
       image: collectionWithTextAesthetic,
       headerImage: headerForMen,
       title: 'FÖR MÄN: AESTHETIC',
       firstDescription: DESC.firstTextAesthetic,
       secondDescription: DESC.secondTextAesthetic,
     },
-    avantGarde: {
+    'Avant-Garde': {
       image: collectionWithTextAvantgarde,
       headerImage: headerAvantGarde,
       title: 'AVANT-GARDE',
       firstDescription: DESC.firstTextAvantGarde,
       secondDescription: DESC.secondTextAvantGarde,
     },
-    clean: {
+    Clean: {
       image: collectionWithTextClean,
       headerImage: headerClean,
       title: 'CLEAN',
       firstDescription: DESC.firstTextClean,
       secondDescription: DESC.secondTextClean,
     },
-    femaleClassics: {
+    'Female Classics': {
       image: collectionWithTextFemaleClassics,
       headerImage: headerFemaleClassics,
       title: 'FEMALE CLASSICS',
       firstDescription: DESC.firstTextFemaleClassics,
       secondDescription: DESC.secondTextFemaleClassics,
     },
-    trendingNow: {
+    'Trending Now': {
       image: collectionWithTextTrendingNow,
       headerImage: headerTrendingNow,
       title: 'TRENDING NOW',
       firstDescription: DESC.firstTextTrendingNow,
       secondDescription: DESC.secondTextTrendingNow,
     },
-    workPlay: {
+    'FÖR MÄN: Work/Play': {
       image: collectionWithTextWorkPlay,
       headerImage: headerWorkPlay,
       title: 'FÖR MÄN: WORK/PLAY',
@@ -68,23 +68,6 @@ class RecommendationsPage extends Component {
       secondDescription: DESC.secondTextWorkPlay,
     },
   };
-
-  // componentWillMount() {
-  //   this.getCollection();
-  // }
-  // getCollection() {
-  //   this.props.firebase
-  //     .user(this.props.authUser.uid)
-  //     .child('recommendedCol')
-  //     .once('value', snapshot => {
-  //       const collection = Object.keys(snapshot.val());
-  //       console.log('HÄÄÄÄÄR ÄR FIREBASE ' + collection);
-  //       const selected = this.state[collection];
-  //       console.log('HÄÄÄÄÄR ÄR FIREBASE ' + selected[0]);
-
-  //       return selected;
-  //     });
-  // }
 
   getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));

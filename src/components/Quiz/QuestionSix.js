@@ -20,12 +20,12 @@ class QuestionSix extends Component {
   }
   randomKey = () => {
     const keys = [
-      'aesthetic',
-      'avantGarde',
-      'clean',
-      'femaleClassics',
-      'trendingNow',
-      'workPlay',
+      'FÖR MÄN: Aesthetic',
+      'Avant-Garde',
+      'Clean',
+      'Female Classics',
+      'Trending Now',
+      'FÖR MÄN: Work/Play',
     ];
     console.log('VALD KOLLEKTION' + keys[this.getRandomInt(6)]);
     return keys[this.getRandomInt(6)];

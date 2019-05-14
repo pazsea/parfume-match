@@ -5,7 +5,7 @@ import { SignoutBtn } from './styles';
 
 const SignOutButton = ({ firebase }) => (
   <SignoutBtn type="button" onClick={firebase.doSignOut}>
-    Sign Out
+    Sign Out <i class="fas fa-sign-out-alt fa-lg" />
   </SignoutBtn>
 );
 

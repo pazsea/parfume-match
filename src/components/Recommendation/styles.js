@@ -1,4 +1,3 @@
-// import styled from 'styled-components';
 import styled from 'styled-components/macro';
 
 export const Slider = styled.div`
@@ -52,9 +51,7 @@ export const BackArrow = styled.div`
 
 export const CleanImage = styled.div`
   background: blue;
-  /* align-self: center; */
   background-repeat: no-repeat;
-  /* height: 300px; */
 `;
 
 export const Header = styled.div`

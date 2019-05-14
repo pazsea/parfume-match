@@ -13,6 +13,7 @@ import {
   MobileCart,
 } from './styles';
 
+import logo from '../../images/logoblack.png';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
@@ -44,56 +45,56 @@ class NavigationAuth extends Component {
 
     if (bigSize) {
       return (
-        <Nav isActive={isActive}>
-          {/* <div id="logo">
-      <p>Logga</p>
-    </div> */}
-          <ul>
-            <li>
-              <Link onClick={this.toggleNav} to={ROUTES.HOME}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
-                Account
-              </Link>
-            </li>
-            <li>
-              <Link onClick={this.toggleNav} to={ROUTES.QUIZ}>
-                Doft-Quiz
-              </Link>
-            </li>
-
-            {authUser.roles.includes(ROLES.ADMIN) && (
+        <Fragment>
+          <Nav isActive={isActive}>
+            <img src={logo} />
+            <ul>
               <li>
-                <Link onClick={this.toggleNav} to={ROUTES.ADMIN}>
-                  Admin
+                <Link onClick={this.toggleNav} to={ROUTES.HOME}>
+                  Home
                 </Link>
               </li>
-            )}
-            <li>
-              <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
-                Wardrobe
-              </Link>
-            </li>
-            <li>
-              <SignOutButton />
-            </li>
-          </ul>
-          <button
-            className={isActive ? openNav : closeNav}
-            type="button"
-            onClick={this.toggleNav}
-          >
-            <span className="hamburger-box">
-              <span className="hamburger-inner" />
-            </span>
-          </button>
-          <CartBtn>
-            <Carts />
-          </CartBtn>
-        </Nav>
+              <li>
+                <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
+                  Account
+                </Link>
+              </li>
+              <li>
+                <Link onClick={this.toggleNav} to={ROUTES.QUIZ}>
+                  Doft-Quiz
+                </Link>
+              </li>
+
+              {authUser.roles.includes(ROLES.ADMIN) && (
+                <li>
+                  <Link onClick={this.toggleNav} to={ROUTES.ADMIN}>
+                    Admin
+                  </Link>
+                </li>
+              )}
+              <li>
+                <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
+                  Wardrobe
+                </Link>
+              </li>
+              <li>
+                <SignOutButton />
+              </li>
+            </ul>
+            <button
+              className={isActive ? openNav : closeNav}
+              type="button"
+              onClick={this.toggleNav}
+            >
+              <span className="hamburger-box">
+                <span className="hamburger-inner" />
+              </span>
+            </button>
+            <CartBtn>
+              <Carts />
+            </CartBtn>
+          </Nav>
+        </Fragment>
       );
     } else if (mediumSize || smallSize) {
       return (

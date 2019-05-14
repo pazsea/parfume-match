@@ -1,10 +1,10 @@
 import React from 'react';
-
+import { NextArrow } from './styles';
 const RightArrow = props => {
   return (
-    <div className="nextArrow" onClick={props.goToNextSlide}>
+    <NextArrow onClick={props.goToNextSlide}>
       <i className="fa fa-arrow-right fa-2x" aria-hidden="true" />
-    </div>
+    </NextArrow>
   );
 };
 

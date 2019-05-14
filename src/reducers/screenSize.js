@@ -1,6 +1,8 @@
+import * as a from '../constants/actionTypes';
+
 function sreenSizeReducer(state = null, action) {
   switch (action.type) {
-    case 'SIZE': {
+    case a.SIZE: {
       return Object.assign(
         {},
         {

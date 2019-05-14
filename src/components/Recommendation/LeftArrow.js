@@ -1,10 +1,11 @@
 import React from 'react';
+import { BackArrow } from './styles';
 
 const LeftArrow = props => {
   return (
-    <div className="backArrow" onClick={props.goToPrevSlide}>
+    <BackArrow onClick={props.goToPrevSlide}>
       <i className="fa fa-arrow-left fa-2x" aria-hidden="true" />
-    </div>
+    </BackArrow>
   );
 };
 

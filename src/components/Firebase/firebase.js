@@ -3,12 +3,12 @@ import 'firebase/auth';
 import 'firebase/database';
 
 var config = {
-  apiKey: "AIzaSyDPzLW1VpAUC5x9OPF4pCJO9j5e5hO4bp4",
-  authDomain: "gjtpsniph.firebaseapp.com",
-  databaseURL: "https://gjtpsniph.firebaseio.com",
-  projectId: "gjtpsniph",
-  storageBucket: "gjtpsniph.appspot.com",
-  messagingSenderId: "315707951148"
+  apiKey: 'AIzaSyDPzLW1VpAUC5x9OPF4pCJO9j5e5hO4bp4',
+  authDomain: 'gjtpsniph.firebaseapp.com',
+  databaseURL: 'https://gjtpsniph.firebaseio.com',
+  projectId: 'gjtpsniph',
+  storageBucket: 'gjtpsniph.appspot.com',
+  messagingSenderId: '315707951148',
 };
 class Firebase {
   constructor() {
@@ -93,6 +93,8 @@ class Firebase {
   // *** User API ***
 
   user = uid => this.db.ref(`users/${uid}`);
+
+  wardrobe = uid => this.db.ref(`wardrobe/${uid}`);
 
   users = () => this.db.ref('users');
 

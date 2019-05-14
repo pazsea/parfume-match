@@ -150,8 +150,10 @@ function RatingWrapper({ handleSubmit, handleChange, value }) {
 
 const mapStateToProps = state => ({
   users: state.userState.users,
-  collection: state.sortedParfumesState.Clean,
+  collection: state.userState.users.uid,
 });
+// ta kollektionen som är true i recommended collection i firebase.
+// hittar inte det jag lägger till efter users i state...
 
 const mapDispatchToProps = dispatch => ({
   onSetUsers: users => dispatch({ type: 'USERS_SET', users }),

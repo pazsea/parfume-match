@@ -10,8 +10,19 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: flex-end;
   top: 0;
-  position: fixed;
+  position: sticky;
   width: 100%;
+  background: black;
+  img {
+    color: white;
+    margin-top: 0.5%;
+    width: 120px;
+    height: 33px;
+    align-self: center;
+    top: 0;
+    left: 4%;
+    position: absolute;
+  }
 
   ul {
     list-style: none;
@@ -37,7 +48,7 @@ export const Nav = styled.nav`
       /* border: 1px solid red; */
       a {
         text-decoration: none;
-        color: black;
+        color: white;
       }
     }
   }
@@ -45,6 +56,7 @@ export const Nav = styled.nav`
   button:nth-child(1) {
     border: none;
     background: none;
+    color: red;
 
     /* border: 1px solid red; */
   }
@@ -64,6 +76,7 @@ export const CartBtn = styled.button`
 
 export const Carts = styled(Cart)`
   /* align-self: center; */
+  color: white;
   width: 2.35rem;
   height: 2.35rem;
   padding-bottom: 0.3rem;

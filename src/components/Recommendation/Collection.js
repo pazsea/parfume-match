@@ -24,44 +24,50 @@ class Collection extends Component {
 
   componentDidMount() {
     const { firebase } = this.props;
-    // if (authUser.recommendedCol) {
-    //   console.log('inside PROPPPPS!');
-    //   const propsRecommend = Object.keys(authUser.recommendedCol);
-    //   this.setState({ selectedCol: propsRecommend });
-    // } else {
+
     firebase
       .user(this.props.authUser.uid)
       .child('recommendedCol')
       .once('value', snapshot => {
         if (snapshot.val()) {
           const collection = Object.keys(snapshot.val());
+          // Object.keys(snapshot.val()) = namnet på kollektionen
           this.setState({
+            loading: false,
             selectedCol: collection,
           });
         } else {
-          return null;
+          return this.setState({ loading: false });
         }
       });
+  }
 
-    this.setState({ loading: false });
+  setRecColToSelected() {
+    const { firebase, authUser } = this.props;
+    const { selectedCol } = this.state;
+
+    firebase.user(authUser.uid).update({
+      recommendedCol: null,
+      selectedCol: {
+        [selectedCol]: true,
+      },
+    });
   }
 
   render() {
     const { loading, selectedCol } = this.state;
 
     if (loading) {
-      console.log(selectedCol);
-
       return (
         <Section>
-          {' '}
           <h2>LADDAR.....</h2>
         </Section>
       );
     } else if (selectedCol === undefined) {
       return (
         <Section>
-          <h2>Laddar....</h2>
+          <h2>Du har ingen rekommenderad kollektion....</h2>
+          {/* // Lägg till felhantering (en knapp till Quizet) */}
         </Section>
       );
     } else {
@@ -72,7 +78,7 @@ class Collection extends Component {
         firstDescription,
       } = this.props[selectedCol];
       return (
-        <Section>
+        <div>
           <Header headerImage={headerImage} />
 
           <FlexContainer>
@@ -85,8 +91,8 @@ class Collection extends Component {
               <h2>159 KR/MÅNAD</h2>
 
               <SubscribeButton>
-                <button>
-                  <Link to={ROUTES.HOME}>Prenumerera</Link>
+                <button onClick={() => this.setRecColToSelected()}>
+                  <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
                 </button>
               </SubscribeButton>
 
@@ -116,7 +122,7 @@ class Collection extends Component {
               </Description>
             </TextFlexContainer>
           </FlexContainer>
-        </Section>
+        </div>
       );
     }
   }

@@ -15,20 +15,45 @@ class WardrobePage extends Component {
     isTruncated: false,
     tabOpen: '',
     loading: true,
+
     // rating: 5,
   };
+
+  //-KLAR
+  // I COLLECTION JS PÅ PRENUMERA KNAPPEN SÅ UPPDATERAR VI SELECTED COL.
+  // MEN FÖR ATT TA BORT RECOMMENDED SÅ GÖR DU SAMMA KOD FAST I
+  // RECOMMENDEN == NULL
+  //-KLAR
+
+  //Visa tre parfymer från selected col i Wardrobe.
+  //1. Connecta till firebase och plocka ut rätt kollektion.
+
+  // OBJECT KEYS PÅ SELECTED COL OCH SET STATE SOM LIKNAR
+  // "SelectedCol: Female Classics"
+  // RENDERA UT THIS.PROPS.COLLECTION[this.state.selectedCol]
 
   componentDidMount() {
     const { firebase, currentUser } = this.props;
     firebase.wardrobe(currentUser).on('value', snapshot => {
       const myRating = snapshot.val();
       if (myRating) {
-        this.setState({ loading: false, myRating });
-      } else {
-        this.setState({ loading: false });
+        this.setState({ myRating });
       }
     });
+    firebase
+      .user(currentUser)
+      .child('selectedCol')
+      .once('value', snapshot => {
+        const subCol = snapshot.val();
+        if (subCol) {
+          const subKey = Object.keys(subCol);
+          this.setState({ loading: false, subscription: subKey });
+        } else {
+          this.setState({ loading: false });
+        }
+      });
   }
+
   componentWillUnmount() {
     const { firebase, currentUser } = this.props;
     firebase.wardrobe(currentUser).off();
@@ -57,17 +82,25 @@ class WardrobePage extends Component {
   };
 
   render() {
-    const { tabOpen, isTruncated, loading } = this.state;
-    const { collection } = this.props;
+    const {
+      tabOpen,
+      isTruncated,
+      loading,
+      subscription,
+    } = this.state;
     if (loading) {
       return <p>Loading...</p>;
+    } else if (!subscription) {
+      return <p>Du har ingen aktiv prenumeration....</p>;
     } else {
+      const subCollection = this.props.allCollections[subscription];
+
       return (
         <Section>
           <s.QuizTitle>
             <h1>Wardrobe</h1>
           </s.QuizTitle>
-          {collection.slice(0, 2).map((item, index) => (
+          {subCollection.slice(0, 2).map((item, index) => (
             <Fragment>
               <s.Wrapper>
                 <s.ImageDiv>
@@ -95,21 +128,21 @@ class WardrobePage extends Component {
                       name={item.name}
                       starCount={5}
                       value={
-                        this.state.myRating &&
-                        this.state.myRating[item.name] &&
-                        this.state.myRating[item.name].rating
-                          ? this.state.myRating[item.name].rating
+                        this.state.myRating
+                          ? this.state.myRating[item.name] &&
+                            this.state.myRating[item.name].rating
+                            ? this.state.myRating[item.name].rating
+                            : 0
                           : 0
                       }
                       onStarClick={this.onStarClick.bind(this)}
                     />
                   </s.StarsDiv>
-                  {/* <div>
+                  <div>
                     {item.base_note_id} {item.top_note_id}{' '}
                     {item.heart_note_id}
-                    {item.top_note_id &&
-                      item.heart_note_id}
-                  </div> */}
+                    {item.top_note_id && item.heart_note_id}
+                  </div>
 
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper
@@ -117,6 +150,7 @@ class WardrobePage extends Component {
                       firebase={this.props.firebase}
                       currentUser={this.props.currentUser}
                       textFirebase={
+                        this.state.myRating &&
                         this.state.myRating[item.name].ownDesc
                           ? this.state.myRating[item.name].ownDesc
                           : ''
@@ -209,7 +243,7 @@ function RatingWrapper({
 
 const mapStateToProps = state => ({
   currentUser: state.sessionState.authUser.uid,
-  collection: state.sortedParfumesState.Clean,
+  allCollections: state.sortedParfumesState,
 });
 
 const mapDispatchToProps = dispatch => ({

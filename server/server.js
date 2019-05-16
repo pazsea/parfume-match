@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const SELECT_PARFUMES_STATE =
-  'select * from tbl_shop_items as tsi join tbl_shops as ts on tsi.shop_id=ts.shop_id join tbl_collections as tc on ts.shop_id=tc.shop_id ORDER BY `item_id` ASC';
+  'select * from tbl_shop_items as tsi join tbl_shops as ts on tsi.shop_id=ts.shop_id join tbl_collections as tc on ts.shop_id=tc.shop_id';
 
 const connection = mysql.createConnection({
   host: 'remotemysql.com',

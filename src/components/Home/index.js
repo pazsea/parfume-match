@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { Section } from '../../styleConstants/section.js';
 
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
@@ -19,12 +20,14 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Home Page</h1>
-        <p>The Home Page is accessible by every signed in user.</p>
+      <Section>
+        <div>
+          <h1>Home Page</h1>
+          <p>The Home Page is accessible by every signed in user.</p>
 
-        <Messages users={this.props.users} />
-      </div>
+          <Messages users={this.props.users} />
+        </div>
+      </Section>
     );
   }
 }

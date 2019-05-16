@@ -5,6 +5,7 @@ import messageReducer from './message';
 import screenSizeReducer from './screenSize';
 import loadStatusReducer from './loadStatus';
 import bulkLoadReducer from './bulkLoad';
+import sortParfumeReducer from './sortParfumes';
 
 const rootReducer = combineReducers({
   sessionState: sessionReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   screenSizeState: screenSizeReducer,
   loadStatusState: loadStatusReducer,
   sniphBulkDataState: bulkLoadReducer,
+  sortedParfumesState: sortParfumeReducer,
 });
 
 export default rootReducer;

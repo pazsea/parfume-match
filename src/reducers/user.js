@@ -22,7 +22,7 @@ function userReducer(state = INITIAL_STATE, action) {
     case a.USERS_SET: {
       return applySetUsers(state, action);
     }
-    case a.USERS_SET: {
+    case a.USER_SET: {
       return applySetUser(state, action);
     }
     default:

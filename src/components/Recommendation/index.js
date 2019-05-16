@@ -25,42 +25,42 @@ import * as DESC from './descriptions.js';
 class RecommendationsPage extends Component {
   state = {
     //Mockup logik. Förberedelse för Firebase.
-    aesthetic: {
+    'FÖR MÄN: Aesthetic': {
       image: collectionWithTextAesthetic,
       headerImage: headerForMen,
       title: 'FÖR MÄN: AESTHETIC',
       firstDescription: DESC.firstTextAesthetic,
       secondDescription: DESC.secondTextAesthetic,
     },
-    avantGarde: {
+    'Avant-Garde': {
       image: collectionWithTextAvantgarde,
       headerImage: headerAvantGarde,
       title: 'AVANT-GARDE',
       firstDescription: DESC.firstTextAvantGarde,
       secondDescription: DESC.secondTextAvantGarde,
     },
-    clean: {
+    Clean: {
       image: collectionWithTextClean,
       headerImage: headerClean,
       title: 'CLEAN',
       firstDescription: DESC.firstTextClean,
       secondDescription: DESC.secondTextClean,
     },
-    femaleClassics: {
+    'Female Classics': {
       image: collectionWithTextFemaleClassics,
       headerImage: headerFemaleClassics,
       title: 'FEMALE CLASSICS',
       firstDescription: DESC.firstTextFemaleClassics,
       secondDescription: DESC.secondTextFemaleClassics,
     },
-    trendingNow: {
+    'Trending Now': {
       image: collectionWithTextTrendingNow,
       headerImage: headerTrendingNow,
       title: 'TRENDING NOW',
       firstDescription: DESC.firstTextTrendingNow,
       secondDescription: DESC.secondTextTrendingNow,
     },
-    workPlay: {
+    'FÖR MÄN: Work/Play': {
       image: collectionWithTextWorkPlay,
       headerImage: headerWorkPlay,
       title: 'FÖR MÄN: WORK/PLAY',
@@ -69,12 +69,20 @@ class RecommendationsPage extends Component {
     },
   };
 
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+  randomKey = () => {
+    const keys = Object.keys(this.state);
+    return keys[this.getRandomInt(6)];
+  };
+
   render() {
-    var userCollection = 'workPlay';
+    console.log('INDEX COLLECTION RENDERAS');
 
     return (
       <div>
-        <Collection colSuggested={this.state[userCollection]} />
+        <Collection {...this.state} />
       </div>
     );
   }
@@ -82,6 +90,7 @@ class RecommendationsPage extends Component {
 
 const mapStateToProps = state => ({
   users: state.userState.users,
+  authUser: state.sessionState.authUser,
 });
 
 const mapDispatchToProps = dispatch => ({

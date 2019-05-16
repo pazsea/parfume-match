@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import { connect } from 'react-redux';
 import {
   FlexContainerRow,
   FlexContainerColumn,
@@ -16,9 +17,11 @@ import {
   ImageFlexContainer,
   ImageFlexSpacing,
   RelativeContainer,
+  SkipDiv,
   TextInsideImage,
-  QuizInput,
 } from './styles';
+import { Section } from '../../styleConstants/section.js';
+
 import quizStep1Everything from '../../images/quizStep1Everything.jpg';
 import quizStep1Man from '../../images/quizStep1Man.jpg';
 import quizStep1Unisex from '../../images/quizStep1Unisex.jpg';
@@ -43,13 +46,24 @@ import quizStep5Elegant from '../../images/quizStep5Elegant.jpg';
 import quizStep5Unique from '../../images/quizStep5Unique.jpg';
 import quizStep5Sensual from '../../images/quizStep5Sensual.jpg';
 
-// Quiz page är huvudkomponenten som har tre states för slutföring.
-// Quiz page har tre komponenter renderas utifall state är tillgängligt.
-
 class QuizPage extends Component {
+  skipQuiz = (event, authUser) => {
+    this.props.firebase
+      .users()
+      .child(authUser.uid)
+      .update({ completedQuiz: true })
+      .then(
+        this.props.firebase
+          .user(this.props.authUser.uid)
+          .once('value', snapshot => {
+            this.props.onSetAuthUser(snapshot.val());
+          }),
+      );
+  };
+
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Sniph quiz: Hitta din kollektion</h1>
@@ -70,8 +84,17 @@ class QuizPage extends Component {
               <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
             </button>
           </QuizIntroButton>
+          <SkipDiv>
+            <button
+              onClick={event =>
+                this.skipQuiz(event, this.props.authUser)
+              }
+            >
+              Hoppa över
+            </button>
+          </SkipDiv>
         </FlexContainerColumn>
-      </div>
+      </Section>
     );
   }
 }
@@ -79,7 +102,7 @@ class QuizPage extends Component {
 export class QuestionOne extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Vilken parfymtyp är du ute efter?</h1>
@@ -130,7 +153,7 @@ export class QuestionOne extends Component {
             </Link>
           </ImageFlexContainer>
         </FlexContainerColumn>
-      </div>
+      </Section>
     );
   }
 }
@@ -138,7 +161,7 @@ export class QuestionOne extends Component {
 export class QuestionTwo extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Hur avancerad är din parfymsmak?</h1>
@@ -179,7 +202,7 @@ export class QuestionTwo extends Component {
             </Link>
           </ImageFlexContainer>
         </FlexContainerColumn>
-      </div>
+      </Section>
     );
   }
 }
@@ -187,7 +210,7 @@ export class QuestionTwo extends Component {
 export class QuestionThree extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>När vill du dofta extra härligt?</h1>
@@ -268,7 +291,7 @@ export class QuestionThree extends Component {
             <Link to={ROUTES.QUESTIONFOUR}>Nästa</Link>
           </button>
         </QuizIntroButton>
-      </div>
+      </Section>
     );
   }
 }
@@ -276,7 +299,7 @@ export class QuestionThree extends Component {
 export class QuestionFour extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Vilka är dina favoritdrycker?</h1>
@@ -358,7 +381,7 @@ export class QuestionFour extends Component {
             <Link to={ROUTES.QUESTIONFIVE}>Nästa</Link>
           </button>
         </QuizIntroButton>
-      </div>
+      </Section>
     );
   }
 }
@@ -366,7 +389,7 @@ export class QuestionFour extends Component {
 export class QuestionFive extends Component {
   render() {
     return (
-      <div>
+      <Section>
         <FlexContainerColumn>
           <QuizTitle>
             <h1>Hur vill du känna dig i din parfym?</h1>
@@ -428,45 +451,27 @@ export class QuestionFive extends Component {
             <Link to={ROUTES.QUESTIONSIX}>Nästa</Link>
           </button>
         </QuizIntroButton>
-      </div>
+      </Section>
     );
   }
 }
 
-export class QuestionSix extends Component {
-  render() {
-    return (
-      <div>
-        <FlexContainerColumn>
-          <QuizTitle>
-            <h1>Vilka är dina favoritparfymer idag?</h1>
-            <QuizSubTitle>
-              <h2>______</h2>
-            </QuizSubTitle>
-          </QuizTitle>
-          <QuizInput>
-            <textarea
-              placeholder="Skriv namnen på parfymer du tycker om och
-          tryck return efter varje. I vissa fall ger vi förslag och då
-          är det bra om du väljer dem i listan för bättre matchning."
-            />
-          </QuizInput>
-          <QuizIntroButton>
-            <button>
-              <Link to={ROUTES.RECOMMENDATION}>
-                Visa min Sniph-kollektion
-              </Link>
-            </button>
-          </QuizIntroButton>
-        </FlexContainerColumn>
-      </div>
-    );
-  }
-}
+const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
+});
+
+const mapDispatchToProps = dispatch => ({
+  onSetAuthUser: authUser =>
+    dispatch({ type: 'AUTH_USER_SET', authUser }),
+});
 
 const condition = authUser => !!authUser;
 
 export default compose(
   withFirebase,
   withAuthorization(condition),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 )(QuizPage);

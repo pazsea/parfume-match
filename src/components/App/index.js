@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { withAuthentication } from '../Session';
 
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
@@ -17,14 +18,14 @@ import QuizPage, {
   QuestionThree,
   QuestionFour,
   QuestionFive,
-  QuestionSix,
 } from '../Quiz';
+
+import QuestionSix from '../Quiz/QuestionSix';
 import RecommendationsPage from '../Recommendation';
 import WardrobePage from '../Wardrobe';
 import UpdatePerfumes from '../UpdatePerfumes';
 import * as a from '../../constants/actionTypes';
 import * as ROUTES from '../../constants/routes';
-import { withAuthentication } from '../Session';
 
 class App extends Component {
   state = {
@@ -33,7 +34,9 @@ class App extends Component {
     parfumes: [],
   };
   componentWillMount() {
-    this.props.startFetch();
+    if (!this.props.fetchCompleted) {
+      this.props.startFetch();
+    }
     this.handleResize();
     window.addEventListener('resize', () => {
       this.setState({
@@ -42,6 +45,17 @@ class App extends Component {
       });
       this.handleResize();
     });
+  }
+
+  componentDidMount() {
+    this.props.firebase.users().on('value', snapshot => {
+      this.props.onSetUsers(snapshot.val());
+    });
+  }
+
+  componentWillUnmount() {
+    this.props.firebase.users().off();
+    this.props.firebase.user().off();
   }
 
   handleResize() {
@@ -61,10 +75,11 @@ class App extends Component {
   }
 
   render() {
-    return this.props.fetchCompleted ? (
+    const { authUser } = this.props;
+    return (
       <Router>
         <div>
-          <Navigation />
+          {authUser && authUser.completedQuiz ? <Navigation /> : null}
 
           <Route
             exact
@@ -100,28 +115,34 @@ class App extends Component {
             path={ROUTES.RECOMMENDATION}
             component={RecommendationsPage}
           />
+<<<<<<< HEAD
           <Route path={ROUTES.WARDROBE} component={WardrobePage} />
           <Route
             path={ROUTES.UPDATEPERFUMES}
             component={UpdatePerfumes}
+=======
+          <Route
+            path={ROUTES.WARDROBE}
+            component={
+              authUser && authUser.completedQuiz
+                ? WardrobePage
+                : QuizPage
+            }
+>>>>>>> master
           />
         </div>
       </Router>
-    ) : (
-      <Loading />
     );
   }
 }
 
-function Loading(props) {
-  return <h1>Loading....</h1>;
-}
-
 const mapStateToProps = state => ({
+  authUser: state.sessionState.authUser,
   fetchCompleted: state.loadStatusState.stateFetched,
 });
 
 const mapDispatchToProps = dispatch => ({
+  onSetUsers: users => dispatch({ type: 'USERS_SET', users }),
   setSize: size => dispatch({ type: a.SIZE, size }),
   startFetch: () =>
     dispatch({
@@ -129,10 +150,13 @@ const mapDispatchToProps = dispatch => ({
     }),
 });
 
+// const condition = authUser => !!authUser;
+
 export default compose(
   withAuthentication,
   connect(
     mapStateToProps,
     mapDispatchToProps,
   ),
+  // withAuthorization(condition),
 )(App);

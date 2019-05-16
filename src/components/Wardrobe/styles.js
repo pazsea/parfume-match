@@ -74,6 +74,19 @@ export const ButtonDiv = styled.div`
   }
 `;
 
+export const NotesDiv = styled.div`
+  display: flex;
+  flex: 0.5;
+  align-items: center;
+  font-size: 0.7em;
+  margin-left: 0.4em;
+  margin-bottom: 0.3em;
+  img {
+    width: 40px;
+    height: 40px;
+  }
+`;
+
 export const StarsDiv = styled.div`
   flex: 1;
   font-size: 2em;

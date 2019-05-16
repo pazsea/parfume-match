@@ -78,8 +78,6 @@ class RecommendationsPage extends Component {
   };
 
   render() {
-    console.log('INDEX COLLECTION RENDERAS');
-
     return (
       <div>
         <Collection {...this.state} />

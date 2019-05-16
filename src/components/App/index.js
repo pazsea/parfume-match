@@ -23,6 +23,7 @@ import QuizPage, {
 import QuestionSix from '../Quiz/QuestionSix';
 import RecommendationsPage from '../Recommendation';
 import WardrobePage from '../Wardrobe';
+import UpdatePerfumes from '../UpdatePerfumes';
 import * as a from '../../constants/actionTypes';
 import * as ROUTES from '../../constants/routes';
 
@@ -114,6 +115,12 @@ class App extends Component {
             path={ROUTES.RECOMMENDATION}
             component={RecommendationsPage}
           />
+<<<<<<< HEAD
+          <Route path={ROUTES.WARDROBE} component={WardrobePage} />
+          <Route
+            path={ROUTES.UPDATEPERFUMES}
+            component={UpdatePerfumes}
+=======
           <Route
             path={ROUTES.WARDROBE}
             component={
@@ -121,6 +128,7 @@ class App extends Component {
                 ? WardrobePage
                 : QuizPage
             }
+>>>>>>> master
           />
         </div>
       </Router>

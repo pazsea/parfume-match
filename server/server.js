@@ -100,19 +100,99 @@ app.put('/parfumes/:id/:content', (req, res) => {
   );
 });
 
-// app.delete('/parfumes/:id', (req, res) => {
-//   console.log(req.params.id);
-//   const sphinx_idx = req.params.id;
-//   const DELETE_ID_FROM_DATABASE = `DELETE FROM tbl_sphinx_data WHERE sphinx_idx = '${sphinx_idx}'`;
+//-------------- ADMIN ----------------
 
-//   connection.query(DELETE_ID_FROM_DATABASE, (err, result) => {
-//     if (err) {
-//       return res.send(err);
-//     } else {
-//       return res.send('Success' + result);
-//     }
-//   });
-// });
+const SELECT_ALL_PERFUMES =
+  'select * from tbl_shop_items ORDER BY `item_id` ASC';
+
+app.get('/admin/list-perfumes', (req, res) => {
+  connection.query(SELECT_ALL_PERFUMES, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.json({
+        parfumes: results,
+      });
+    }
+  });
+});
+
+const SELECT_ALL_NOTES =
+  'select * from tbl_perfume_notes ORDER BY `name` ASC';
+
+app.get('/admin/list-notes', (req, res) => {
+  connection.query(SELECT_ALL_NOTES, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.json({
+        parfumes: results,
+      });
+    }
+  });
+});
+
+app.post('/admin/add-perfume', (req, res) => {
+  console.log('insert: ' + req.body);
+  const {
+    name,
+    brand,
+    man_address,
+    base_note_id,
+    heart_note_id,
+    top_note_id,
+  } = req.body;
+  const INSERT_PERFUME_QUERY = `INSERT INTO tbl_shop_items (name, brand, man_address, base_note_id,
+    heart_note_id,
+    top_note_id) VALUES('${name}','${brand}','${man_address}','${base_note_id}','${heart_note_id}','${top_note_id}')`; //INSERT INTO tbl_sphinx_data (sphinx_idx, update_time) VALUES('${idx}', NOW() )`;
+  connection.query(
+    INSERT_PERFUME_QUERY,
+
+    (err, result) => {
+      if (err) {
+        console.log('insert: ' + err);
+        return res.send(err);
+      } else {
+        console.log('insert: success');
+
+        return res.send('SUCCESS');
+      }
+    },
+  );
+});
+
+app.put('/admin/update-perfume', (req, res) => {
+  console.log('UPDATE ' + req.body);
+  const { item_id, name, brand, man_address } = req.body;
+
+  const UPDATE_PERFUME_QUERY = `UPDATE tbl_shop_items SET name ='${name}', brand ='${brand}', man_address ='${man_address}' WHERE item_id = '${item_id}'`;
+  console.log('UPDATE ' + UPDATE_PERFUME_QUERY);
+  connection.query(
+    UPDATE_PARFUME_QUERY,
+
+    (err, result) => {
+      if (err) {
+        return res.send(err);
+      } else {
+        return res.send('Success' + result);
+      }
+    },
+  );
+});
+
+app.delete('/admin/delete-perfume/:id', (req, res) => {
+  console.log(req.params.id);
+  const item_id = req.params.id;
+  const DELETE_PARFUME_QUERY = `DELETE FROM tbl_shop_items WHERE item_id = '${item_id}'`;
+
+  connection.query(DELETE_PARFUME_QUERY, (err, result) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send('Success' + result);
+    }
+  });
+});
 
 app.listen(4000, () => {
   console.log(`Products server listening on port 4000`);

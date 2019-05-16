@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { compose } from 'recompose';
+
+import { withFirebase } from '../Firebase';
 import { connect } from 'react-redux';
 import '../../hamburger.css';
 import {
@@ -18,13 +21,22 @@ import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 
-const Navigation = ({ authUser, bigSize, mediumSize, smallSize }) =>
+const Navigation = ({
+  authUser,
+  bigSize,
+  mediumSize,
+  smallSize,
+  firebase,
+  onSetAuthUser,
+}) =>
   authUser ? (
     <NavigationAuth
+      firebase={firebase}
       authUser={authUser}
       bigSize={bigSize}
       mediumSize={mediumSize}
       smallSize={smallSize}
+      onSetAuthUser={onSetAuthUser}
     />
   ) : null;
 
@@ -32,6 +44,18 @@ class NavigationAuth extends Component {
   state = {
     isActive: false,
   };
+
+  componentDidMount() {
+    const {
+      firebase,
+      onSetAuthUser,
+      authUser: { uid },
+    } = this.props;
+
+    firebase.user(uid).on('value', snapshot => {
+      onSetAuthUser(snapshot.val());
+    });
+  }
 
   toggleNav = () => {
     this.setState(prevState => ({
@@ -165,4 +189,15 @@ const mapStateToProps = state => ({
   smallSize: state.screenSizeState.smallSize,
 });
 
-export default connect(mapStateToProps)(Navigation);
+const mapDispatchToProps = dispatch => ({
+  onSetAuthUser: authUser =>
+    dispatch({ type: 'AUTH_USER_SET', authUser }),
+});
+
+export default compose(
+  withFirebase,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)(Navigation);

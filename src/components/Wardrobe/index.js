@@ -9,6 +9,7 @@ import { Section } from '../../styleConstants/section.js';
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
+import noteslogo from '../../images/noteslogo.png';
 
 class WardrobePage extends Component {
   state = {
@@ -59,13 +60,27 @@ class WardrobePage extends Component {
     firebase.wardrobe(currentUser).off();
   }
 
-  onStarClick(nextValue, prevValue, name) {
+  onStarClick(base, heart, top, nextValue, prevValue, name) {
+    console.log(base);
+    console.log(heart);
+    console.log(top);
+
+    console.log(nextValue);
+    console.log(prevValue);
+
+    console.log(name);
+
     const { firebase, currentUser } = this.props;
 
     firebase
       .wardrobe(currentUser)
-      .child(name)
-      .update({ rating: nextValue });
+      .child('ratedNotes')
+      .once('value');
+
+    // firebase
+    //   .wardrobe(currentUser)
+    //   .child(name)
+    //   .update({ rating: nextValue });
   }
 
   toggleTab = e => {
@@ -100,7 +115,7 @@ class WardrobePage extends Component {
           <s.QuizTitle>
             <h1>Wardrobe</h1>
           </s.QuizTitle>
-          {subCollection.slice(0, 2).map((item, index) => (
+          {subCollection.slice(0, 3).map((item, index) => (
             <Fragment>
               <s.Wrapper>
                 <s.ImageDiv>
@@ -124,25 +139,33 @@ class WardrobePage extends Component {
                   <s.HeaderDiv>{item.name}</s.HeaderDiv>
                   <s.StarsDiv>
                     <StarRatingComponent
+                      shit={item.base_note_id}
                       key={item.name + index}
                       name={item.name}
                       starCount={5}
+                      bubbles={item.base_note_id}
                       value={
-                        this.state.myRating
-                          ? this.state.myRating[item.name] &&
-                            this.state.myRating[item.name].rating
-                            ? this.state.myRating[item.name].rating
-                            : 0
-                          : 0
+                        3
+                        // this.state.myRating
+                        //   ? this.state.myRating[item.name] &&
+                        //     this.state.myRating[item.name].rating
+                        //     ? this.state.myRating[item.name].rating
+                        //     : 0
+                        //   : 0
                       }
-                      onStarClick={this.onStarClick.bind(this)}
+                      onStarClick={this.onStarClick.bind(
+                        this,
+                        item.base_note_id,
+                        item.heart_note_id,
+                        item.top_note_id,
+                      )}
                     />
                   </s.StarsDiv>
-                  <div>
-                    {item.base_note_id} {item.top_note_id}{' '}
+                  <s.NotesDiv>
+                    <img src={noteslogo} />
+                    {item.base_note_id}, {item.top_note_id},{' '}
                     {item.heart_note_id}
-                    {item.top_note_id && item.heart_note_id}
-                  </div>
+                  </s.NotesDiv>
 
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper

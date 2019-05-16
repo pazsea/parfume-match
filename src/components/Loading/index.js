@@ -1,30 +1,31 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { GooSpinner } from 'react-spinners-kit';
+import { LoadingDiv, Middle } from './styles';
 
-import { withAuthorization } from '../Session';
-import { withFirebase } from '../Firebase';
-import Messages from '../Messages';
+// https://github.com/dmitrymorozoff/react-spinners-kit
 
-class HomePage extends Component {
-  componentDidMount() {}
+class Loading extends Component {
+  constructor(props) {
+    super(props);
 
-  componentWillUnmount() {}
+    this.state = {
+      loading: true,
+    };
+  }
 
   render() {
+    const { loading } = this.state;
     return (
-      <div>
-        <p>Loading.....</p>
-      </div>
+      <LoadingDiv>
+        <Middle>
+          <GooSpinner size={30} color="#000" loading={loading} />
+        </Middle>
+        <Middle>
+          <p>Loading...</p>
+        </Middle>
+      </LoadingDiv>
     );
   }
 }
 
-export default compose(
-  withFirebase,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-  withAuthorization(condition),
-)(HomePage);
+export default Loading;

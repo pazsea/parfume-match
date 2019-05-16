@@ -115,12 +115,6 @@ class App extends Component {
             path={ROUTES.RECOMMENDATION}
             component={RecommendationsPage}
           />
-<<<<<<< HEAD
-          <Route path={ROUTES.WARDROBE} component={WardrobePage} />
-          <Route
-            path={ROUTES.UPDATEPERFUMES}
-            component={UpdatePerfumes}
-=======
           <Route
             path={ROUTES.WARDROBE}
             component={
@@ -128,7 +122,6 @@ class App extends Component {
                 ? WardrobePage
                 : QuizPage
             }
->>>>>>> master
           />
         </div>
       </Router>

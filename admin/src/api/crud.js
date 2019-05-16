@@ -1,73 +1,68 @@
-const HN_BASE_URL = 'http://localhost:3310/tasks/';
+const ADMIN_URL = 'http://localhost:4000/admin/';
+//const { name, item_id, brand, man_address } = post;
 
 const fetchCrud = () =>
-  fetch(HN_BASE_URL)
-    .then(response => {
-        return response.json();
-    }
-);
+  fetch(ADMIN_URL + 'list-perfumes').then(response => {
+    return response.json();
+  });
+
+const fetchNotes = () =>
+  fetch(ADMIN_URL + 'list-notes').then(response => {
+    return response.json();
+  });
 
 const updateCrud = query =>
-
-  fetch(HN_BASE_URL + query.id, {
+  fetch(ADMIN_URL + 'update-perfume', {
     method: 'PUT',
-    
+
     headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      "task" : query.task,
-      "status" : query.status,
-    })
-
-  }
-    
-    )
+      item_id: query.item_id,
+      name: query.name,
+      status: query.status,
+      brand: query.brand,
+      man_address: query.man_address,
+      base_note_id: query.base_note_id,
+      heart_note_id: query.heart_note_id,
+      top_note_id: query.top_note_id,
+    }),
+  })
     .then(response => response.json())
-    .catch(error => console.log('error: ' + error))
-  ;
+    .catch(error => console.log('error: ' + error));
 
 const deleteCrud = query =>
-    fetch(HN_BASE_URL + query, {
-      method: 'DELETE',
-      
-      headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          
-      }
-    }
-      
-      )
-      .then(response => response.json())
-      .catch(error => console.log('error: ' + error))
-;
+  fetch(ADMIN_URL + 'delete-perfume/' + query, {
+    method: 'DELETE',
 
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => response.json())
+    .catch(error => console.log('error: ' + error));
 
 const newCrud = query =>
-      fetch(HN_BASE_URL, {
-        method: 'POST',
-        
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            
-        },
-        body: JSON.stringify({
-          "task" : query.task,
-          "status" : query.status,
-        })
-    })
-        .then(response => response.json()).then(()=>console.log(JSON.stringify(query)))
-        .catch(error => console.error(error));
+  fetch(ADMIN_URL + 'add-perfume', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: query.name,
+      status: query.status,
+      brand: query.brand,
+      man_address: query.man_address,
+      base_note_id: query.base_note_id,
+      heart_note_id: query.heart_note_id,
+      top_note_id: query.top_note_id,
+    }),
+  })
+    .then(response => response.json())
+    .catch(error => console.error(error));
 
-
-
-export {
-        fetchCrud,
-        updateCrud,
-        deleteCrud,
-        newCrud,
-};
+export { fetchCrud, fetchNotes, updateCrud, deleteCrud, newCrud };

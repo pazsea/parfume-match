@@ -27,14 +27,15 @@ class QuestionSix extends Component {
       'Trending Now',
       'FÖR MÄN: Work/Play',
     ];
-    console.log('VALD KOLLEKTION' + keys[this.getRandomInt(6)]);
     return keys[this.getRandomInt(6)];
   };
 
   skipQuiz() {
-    const { authUser } = this.props;
+    const {
+      authUser: { uid },
+    } = this.props;
 
-    this.props.firebase.user(authUser.uid).update({
+    this.props.firebase.user(uid).update({
       completedQuiz: true,
       recommendedCol: {
         [this.randomKey()]: false,

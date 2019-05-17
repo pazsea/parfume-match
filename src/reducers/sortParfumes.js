@@ -29,11 +29,11 @@ const noteState = [
   { name: 'WOODY' },
   { name: 'SMOKY' },
   { name: 'TEA' },
-  { name: 'ALCOHOLIC_DISTILLED' },
-  { name: 'ALCOHOLIC_FERMENTED' },
-  { name: 'NON_CLASSIFIED' },
-  { name: 'UNKNOWN' },
-  { name: 'UNKNOWN' },
+  { name: 'ALCOHOLIC DISTILLED' },
+  { name: 'ALCOHOLIC ERMENTED' },
+  { name: 'MEATY' },
+  { name: 'SPRING' },
+  { name: 'LEMON' },
 ];
 
 const sortingParfumes = (state, action) => {

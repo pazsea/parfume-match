@@ -5,65 +5,64 @@ import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import { Section } from '../../styleConstants/section.js';
+import * as a from '../../constants/actionTypes';
 
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
+import noteslogo from '../../images/noteslogo.png';
 
 class WardrobePage extends Component {
   state = {
     isTruncated: false,
     tabOpen: '',
     loading: true,
-
-    // rating: 5,
   };
 
-  //-KLAR
-  // I COLLECTION JS PÅ PRENUMERA KNAPPEN SÅ UPPDATERAR VI SELECTED COL.
-  // MEN FÖR ATT TA BORT RECOMMENDED SÅ GÖR DU SAMMA KOD FAST I
-  // RECOMMENDEN == NULL
-  //-KLAR
-
-  //Visa tre parfymer från selected col i Wardrobe.
-  //1. Connecta till firebase och plocka ut rätt kollektion.
-
-  // OBJECT KEYS PÅ SELECTED COL OCH SET STATE SOM LIKNAR
-  // "SelectedCol: Female Classics"
-  // RENDERA UT THIS.PROPS.COLLECTION[this.state.selectedCol]
-
   componentDidMount() {
-    const { firebase, currentUser } = this.props;
-    firebase.wardrobe(currentUser).on('value', snapshot => {
-      const myRating = snapshot.val();
-      if (myRating) {
-        this.setState({ myRating });
-      }
+    const {
+      authUser: { selectedCol },
+      myRating,
+    } = this.props;
+
+    this.setState({
+      loading: false,
+      myRating,
+      subscription: selectedCol
+        ? Object.keys(selectedCol)
+        : selectedCol,
     });
-    firebase
-      .user(currentUser)
-      .child('selectedCol')
-      .once('value', snapshot => {
-        const subCol = snapshot.val();
-        if (subCol) {
-          const subKey = Object.keys(subCol);
-          this.setState({ loading: false, subscription: subKey });
-        } else {
-          this.setState({ loading: false });
-        }
-      });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.myRating !== this.props.myRating) {
+      this.setState({ myRating: this.props.myRating });
+    }
   }
 
   componentWillUnmount() {
-    const { firebase, currentUser } = this.props;
-    firebase.wardrobe(currentUser).off();
+    const {
+      firebase,
+      authUser: { uid },
+    } = this.props;
+    firebase.wardrobe(uid).off();
   }
 
-  onStarClick(nextValue, prevValue, name) {
-    const { firebase, currentUser } = this.props;
+  onStarClick(base, heart, top, nextValue, prevValue, name) {
+    // console.log(base);
+    // console.log(heart);
+    // console.log(top);
+
+    // console.log(nextValue);
+    // console.log(prevValue);
+    // console.log(name);
+
+    const {
+      firebase,
+      authUser: { uid },
+    } = this.props;
 
     firebase
-      .wardrobe(currentUser)
+      .wardrobe(uid)
       .child(name)
       .update({ rating: nextValue });
   }
@@ -100,7 +99,7 @@ class WardrobePage extends Component {
           <s.QuizTitle>
             <h1>Wardrobe</h1>
           </s.QuizTitle>
-          {subCollection.slice(0, 2).map((item, index) => (
+          {subCollection.slice(0, 3).map((item, index) => (
             <Fragment>
               <s.Wrapper>
                 <s.ImageDiv>
@@ -124,9 +123,11 @@ class WardrobePage extends Component {
                   <s.HeaderDiv>{item.name}</s.HeaderDiv>
                   <s.StarsDiv>
                     <StarRatingComponent
+                      shit={item.base_note_id}
                       key={item.name + index}
                       name={item.name}
                       starCount={5}
+                      bubbles={item.base_note_id}
                       value={
                         this.state.myRating
                           ? this.state.myRating[item.name] &&
@@ -135,20 +136,25 @@ class WardrobePage extends Component {
                             : 0
                           : 0
                       }
-                      onStarClick={this.onStarClick.bind(this)}
+                      onStarClick={this.onStarClick.bind(
+                        this,
+                        item.base_note_id,
+                        item.heart_note_id,
+                        item.top_note_id,
+                      )}
                     />
                   </s.StarsDiv>
-                  <div>
-                    {item.base_note_id} {item.top_note_id}{' '}
+                  <s.NotesDiv>
+                    <img src={noteslogo} />
+                    {item.base_note_id}, {item.top_note_id},{' '}
                     {item.heart_note_id}
-                    {item.top_note_id && item.heart_note_id}
-                  </div>
+                  </s.NotesDiv>
 
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper
                       name={item.name}
                       firebase={this.props.firebase}
-                      currentUser={this.props.currentUser}
+                      authUser={this.props.authUser.uid}
                       textFirebase={
                         this.state.myRating &&
                         this.state.myRating[item.name].ownDesc
@@ -199,12 +205,7 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
   );
 }
 
-function RatingWrapper({
-  name,
-  textFirebase,
-  firebase,
-  currentUser,
-}) {
+function RatingWrapper({ name, textFirebase, firebase, authUser }) {
   const [editText, setEditText] = useState(textFirebase);
 
   const textChange = e => {
@@ -216,7 +217,7 @@ function RatingWrapper({
     event.preventDefault();
 
     firebase
-      .wardrobe(currentUser)
+      .wardrobe(authUser)
       .child(name)
       .update({ ownDesc: editText });
   };
@@ -242,7 +243,8 @@ function RatingWrapper({
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.sessionState.authUser.uid,
+  myRating: state.wardrobeState.myWardrobe,
+  authUser: state.sessionState.authUser,
   allCollections: state.sortedParfumesState,
 });
 

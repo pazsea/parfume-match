@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { compose } from 'recompose';
+
+import { withFirebase } from '../Firebase';
 import { connect } from 'react-redux';
 import '../../hamburger.css';
 import {
@@ -16,15 +19,27 @@ import {
 import logo from '../../images/logoblack.png';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
+import * as a from '../../constants/actionTypes';
 import * as ROLES from '../../constants/roles';
 
-const Navigation = ({ authUser, bigSize, mediumSize, smallSize }) =>
+const Navigation = ({
+  authUser,
+  bigSize,
+  mediumSize,
+  smallSize,
+  firebase,
+  onSetAuthUser,
+  onSetWardrobe,
+}) =>
   authUser ? (
     <NavigationAuth
+      firebase={firebase}
       authUser={authUser}
       bigSize={bigSize}
       mediumSize={mediumSize}
       smallSize={smallSize}
+      onSetAuthUser={onSetAuthUser}
+      onSetWardrobe={onSetWardrobe}
     />
   ) : null;
 
@@ -32,6 +47,32 @@ class NavigationAuth extends Component {
   state = {
     isActive: false,
   };
+
+  componentDidMount() {
+    const {
+      firebase,
+      onSetAuthUser,
+      onSetWardrobe,
+      authUser: { uid },
+    } = this.props;
+
+    firebase.wardrobe(uid).on('value', snapshot => {
+      onSetWardrobe(snapshot.val());
+    });
+
+    firebase.user(uid).on('value', snapshot => {
+      onSetAuthUser(snapshot.val());
+    });
+  }
+
+  componentWillUnmount() {
+    const {
+      firebase,
+      authUser: { uid },
+    } = this.props;
+    firebase.wardrobe(uid).off();
+    firebase.user(uid).off();
+  }
 
   toggleNav = () => {
     this.setState(prevState => ({
@@ -165,4 +206,17 @@ const mapStateToProps = state => ({
   smallSize: state.screenSizeState.smallSize,
 });
 
-export default connect(mapStateToProps)(Navigation);
+const mapDispatchToProps = dispatch => ({
+  onSetAuthUser: authUser =>
+    dispatch({ type: a.AUTH_USER_SET, authUser }),
+  onSetWardrobe: wardrobe =>
+    dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
+});
+
+export default compose(
+  withFirebase,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)(Navigation);

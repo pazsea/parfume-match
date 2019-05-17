@@ -30,7 +30,9 @@ class WardrobePage extends Component {
     this.setState({
       loading: false,
       myRating,
-      subscription: Object.keys(selectedCol),
+      subscription: selectedCol
+        ? Object.keys(selectedCol)
+        : selectedCol,
     });
     // firebase.wardrobe(authUser).on('value', snapshot => {
     //   const myRating = snapshot.val();

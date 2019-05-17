@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import { Section } from '../../styleConstants/section.js';
-import * as a from '../constants/actionTypes';
+import * as a from '../../constants/actionTypes';
 
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';

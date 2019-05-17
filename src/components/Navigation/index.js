@@ -28,6 +28,7 @@ const Navigation = ({
   smallSize,
   firebase,
   onSetAuthUser,
+  onSetWardrobe,
 }) =>
   authUser ? (
     <NavigationAuth
@@ -37,6 +38,7 @@ const Navigation = ({
       mediumSize={mediumSize}
       smallSize={smallSize}
       onSetAuthUser={onSetAuthUser}
+      onSetWardrobe={onSetWardrobe}
     />
   ) : null;
 
@@ -51,6 +53,10 @@ class NavigationAuth extends Component {
       onSetAuthUser,
       authUser: { uid },
     } = this.props;
+
+    firebase.wardrobe(uid).on('value', snapshot => {
+      onSetWardrobe(snapshot.val());
+    });
 
     firebase.user(uid).on('value', snapshot => {
       onSetAuthUser(snapshot.val());
@@ -191,7 +197,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onSetAuthUser: authUser =>
-    dispatch({ type: 'AUTH_USER_SET', authUser }),
+    dispatch({ type: a.AUTH_USER_SET, authUser }),
+  onSetWardrobe: wardrobe =>
+    dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
 });
 
 export default compose(

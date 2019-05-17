@@ -65,6 +65,15 @@ class NavigationAuth extends Component {
     });
   }
 
+  componentWillUnmount() {
+    const {
+      firebase,
+      authUser: { uid },
+    } = this.props;
+    firebase.wardrobe(uid).off();
+    firebase.user(uid).off();
+  }
+
   toggleNav = () => {
     this.setState(prevState => ({
       isActive: !prevState.isActive,

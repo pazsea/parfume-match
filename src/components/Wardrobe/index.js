@@ -17,48 +17,53 @@ class WardrobePage extends Component {
     isTruncated: false,
     tabOpen: '',
     loading: true,
-
-    // rating: 5,
   };
 
-  //-KLAR
-  // I COLLECTION JS PÅ PRENUMERA KNAPPEN SÅ UPPDATERAR VI SELECTED COL.
-  // MEN FÖR ATT TA BORT RECOMMENDED SÅ GÖR DU SAMMA KOD FAST I
-  // RECOMMENDEN == NULL
-  //-KLAR
-
-  //Visa tre parfymer från selected col i Wardrobe.
-  //1. Connecta till firebase och plocka ut rätt kollektion.
-
-  // OBJECT KEYS PÅ SELECTED COL OCH SET STATE SOM LIKNAR
-  // "SelectedCol: Female Classics"
-  // RENDERA UT THIS.PROPS.COLLECTION[this.state.selectedCol]
-
   componentDidMount() {
-    const { firebase, currentUser } = this.props;
-    firebase.wardrobe(currentUser).on('value', snapshot => {
-      const myRating = snapshot.val();
-      if (myRating) {
-        this.setState({ myRating });
-      }
+    const {
+      // firebase,
+      authUser: { selectedCol },
+      // authUser,
+      myRating,
+    } = this.props;
+
+    this.setState({
+      loading: false,
+      myRating,
+      subscription: Object.keys(selectedCol),
     });
-    firebase
-      .user(currentUser)
-      .child('selectedCol')
-      .once('value', snapshot => {
-        const subCol = snapshot.val();
-        if (subCol) {
-          const subKey = Object.keys(subCol);
-          this.setState({ loading: false, subscription: subKey });
-        } else {
-          this.setState({ loading: false });
-        }
-      });
+    // firebase.wardrobe(authUser).on('value', snapshot => {
+    //   const myRating = snapshot.val();
+    //   if (myRating) {
+    //     this.setState({ myRating });
+    //   }
+    // });
+
+    // firebase
+    //   .user(uid)
+    //   .child('selectedCol')
+    //   .once('value', snapshot => {
+    //     const subCol = snapshot.val();
+    //     if (subCol) {
+    //       const subKey = Object.keys(subCol);
+    //       this.setState({ loading: false, subscription: subKey });
+    //     } else {
+    //       this.setState({ loading: false });
+    //     }
+    //   });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.myRating !== this.props.myRating) {
+      this.setState({ myRating: this.props.myRating });
+    }
   }
 
   componentWillUnmount() {
-    const { firebase, currentUser } = this.props;
-    firebase.wardrobe(currentUser).off();
+    const {
+      firebase,
+      authUser: { uid },
+    } = this.props;
+    firebase.wardrobe(uid).off();
   }
 
   onStarClick(base, heart, top, nextValue, prevValue, name) {
@@ -71,17 +76,20 @@ class WardrobePage extends Component {
 
     console.log(name);
 
-    const { firebase, currentUser } = this.props;
-
-    firebase
-      .wardrobe(currentUser)
-      .child('ratedNotes')
-      .once('value');
+    const {
+      firebase,
+      authUser: { uid },
+    } = this.props;
 
     // firebase
-    //   .wardrobe(currentUser)
-    //   .child(name)
-    //   .update({ rating: nextValue });
+    //   .wardrobe(authUser)
+    //   .child('ratedNotes')
+    //   .once('value');
+
+    firebase
+      .wardrobe(uid)
+      .child(name)
+      .update({ rating: nextValue });
   }
 
   toggleTab = e => {
@@ -146,13 +154,12 @@ class WardrobePage extends Component {
                       starCount={5}
                       bubbles={item.base_note_id}
                       value={
-                        3
-                        // this.state.myRating
-                        //   ? this.state.myRating[item.name] &&
-                        //     this.state.myRating[item.name].rating
-                        //     ? this.state.myRating[item.name].rating
-                        //     : 0
-                        //   : 0
+                        this.state.myRating
+                          ? this.state.myRating[item.name] &&
+                            this.state.myRating[item.name].rating
+                            ? this.state.myRating[item.name].rating
+                            : 0
+                          : 0
                       }
                       onStarClick={this.onStarClick.bind(
                         this,
@@ -172,7 +179,7 @@ class WardrobePage extends Component {
                     <RatingWrapper
                       name={item.name}
                       firebase={this.props.firebase}
-                      currentUser={this.props.currentUser}
+                      authUser={this.props.authUser.uid}
                       textFirebase={
                         this.state.myRating &&
                         this.state.myRating[item.name].ownDesc
@@ -223,12 +230,7 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
   );
 }
 
-function RatingWrapper({
-  name,
-  textFirebase,
-  firebase,
-  currentUser,
-}) {
+function RatingWrapper({ name, textFirebase, firebase, authUser }) {
   const [editText, setEditText] = useState(textFirebase);
 
   const textChange = e => {
@@ -240,7 +242,7 @@ function RatingWrapper({
     event.preventDefault();
 
     firebase
-      .wardrobe(currentUser)
+      .wardrobe(authUser)
       .child(name)
       .update({ ownDesc: editText });
   };
@@ -266,7 +268,8 @@ function RatingWrapper({
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.sessionState.authUser.uid,
+  myRating: state.wardrobeState.myWardrobe,
+  authUser: state.sessionState.authUser,
   allCollections: state.sortedParfumesState,
 });
 

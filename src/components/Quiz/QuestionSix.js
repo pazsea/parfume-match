@@ -30,7 +30,7 @@ class QuestionSix extends Component {
     return keys[this.getRandomInt(6)];
   };
 
-  skipQuiz() {
+  skipQuiz(e) {
     const {
       authUser: { uid },
     } = this.props;
@@ -64,7 +64,7 @@ class QuestionSix extends Component {
             <Link
               id="link"
               to={ROUTES.RECOMMENDATION}
-              onClick={() => this.skipQuiz()}
+              onClick={e => this.skipQuiz(e)}
             >
               Visa min Sniph-kollektion
             </Link>

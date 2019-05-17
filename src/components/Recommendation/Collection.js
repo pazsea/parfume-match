@@ -40,7 +40,7 @@ class Collection extends Component {
     }
   }
 
-  setRecColToSelected() {
+  setRecColToSelected(e) {
     const { firebase, authUser } = this.props;
     const { recommendedCol } = this.state;
 
@@ -89,7 +89,7 @@ class Collection extends Component {
               <h2>159 KR/MÅNAD</h2>
 
               <SubscribeButton>
-                <button onClick={() => this.setRecColToSelected()}>
+                <button onClick={e => this.setRecColToSelected(e)}>
                   <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
                 </button>
               </SubscribeButton>

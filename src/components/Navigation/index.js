@@ -61,17 +61,9 @@ class NavigationAuth extends Component {
     });
 
     firebase.user(uid).on('value', snapshot => {
-      onSetAuthUser(snapshot.val());
+      const aUser = Object.assign({}, snapshot.val(), { uid });
+      onSetAuthUser(aUser);
     });
-  }
-
-  componentWillUnmount() {
-    const {
-      firebase,
-      authUser: { uid },
-    } = this.props;
-    firebase.wardrobe(uid).off();
-    firebase.user(uid).off();
   }
 
   toggleNav = () => {

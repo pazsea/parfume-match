@@ -34,8 +34,16 @@ class WardrobePage extends Component {
     });
   }
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.myRating !== this.props.myRating) {
-      this.setState({ myRating: this.props.myRating });
+    if (
+      prevProps.myRating !== this.props.myRating ||
+      prevProps.authUser !== this.props.authUser
+    ) {
+      this.setState({
+        myRating: this.props.myRating,
+        subscription: this.props.authUser.selectedCol
+          ? Object.keys(this.props.authUser.selectedCol)
+          : this.props.authUser.selectedCol,
+      });
     }
   }
 

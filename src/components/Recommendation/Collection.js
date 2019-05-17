@@ -38,24 +38,6 @@ class Collection extends Component {
         loading: false,
       });
     }
-
-    // const { firebase } = this.props;
-
-    // firebase
-    //   .user(this.props.authUser.uid)
-    //   .child('recommendedCol')
-    //   .once('value', snapshot => {
-    //     if (snapshot.val()) {
-    //       const collection = Object.keys(snapshot.val());
-    //       // Object.keys(snapshot.val()) = namnet på kollektionen
-    //       this.setState({
-    //         loading: false,
-    //         selectedCol: collection,
-    //       });
-    //     } else {
-    //       return this.setState({ loading: false });
-    //     }
-    //   });
   }
 
   setRecColToSelected() {

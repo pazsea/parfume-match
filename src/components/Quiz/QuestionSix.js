@@ -27,7 +27,6 @@ class QuestionSix extends Component {
       'Trending Now',
       'FÖR MÄN: Work/Play',
     ];
-    console.log('VALD KOLLEKTION' + keys[this.getRandomInt(6)]);
     return keys[this.getRandomInt(6)];
   };
 

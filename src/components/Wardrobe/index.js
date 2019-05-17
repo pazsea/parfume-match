@@ -21,9 +21,7 @@ class WardrobePage extends Component {
 
   componentDidMount() {
     const {
-      // firebase,
       authUser: { selectedCol },
-      // authUser,
       myRating,
     } = this.props;
 
@@ -34,25 +32,6 @@ class WardrobePage extends Component {
         ? Object.keys(selectedCol)
         : selectedCol,
     });
-    // firebase.wardrobe(authUser).on('value', snapshot => {
-    //   const myRating = snapshot.val();
-    //   if (myRating) {
-    //     this.setState({ myRating });
-    //   }
-    // });
-
-    // firebase
-    //   .user(uid)
-    //   .child('selectedCol')
-    //   .once('value', snapshot => {
-    //     const subCol = snapshot.val();
-    //     if (subCol) {
-    //       const subKey = Object.keys(subCol);
-    //       this.setState({ loading: false, subscription: subKey });
-    //     } else {
-    //       this.setState({ loading: false });
-    //     }
-    //   });
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.myRating !== this.props.myRating) {
@@ -69,24 +48,18 @@ class WardrobePage extends Component {
   }
 
   onStarClick(base, heart, top, nextValue, prevValue, name) {
-    console.log(base);
-    console.log(heart);
-    console.log(top);
+    // console.log(base);
+    // console.log(heart);
+    // console.log(top);
 
-    console.log(nextValue);
-    console.log(prevValue);
-
-    console.log(name);
+    // console.log(nextValue);
+    // console.log(prevValue);
+    // console.log(name);
 
     const {
       firebase,
       authUser: { uid },
     } = this.props;
-
-    // firebase
-    //   .wardrobe(authUser)
-    //   .child('ratedNotes')
-    //   .once('value');
 
     firebase
       .wardrobe(uid)

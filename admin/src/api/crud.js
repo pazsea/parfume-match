@@ -1,5 +1,4 @@
 const ADMIN_URL = 'http://localhost:4000/admin/';
-//const { name, item_id, brand, man_address } = post;
 
 const fetchCrud = () =>
   fetch(ADMIN_URL + 'list-perfumes').then(response => {

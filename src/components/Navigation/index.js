@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { compose } from 'recompose';
 
-import { withFirebase } from '../Firebase';
+import { withAuthentication } from '../Session/';
 import { connect } from 'react-redux';
 import '../../hamburger.css';
 import {
@@ -64,8 +64,19 @@ class NavigationAuth extends Component {
       const aUser = Object.assign({}, snapshot.val(), { uid });
       onSetAuthUser(aUser);
     });
+    console.log('NAAAAAVEN HAR MOUntat!!!!!!!!!SdADADSDD');
   }
 
+  componentWillMount() {
+    console.log('NAAAAAVEN HAR UNMOUNTAT!!!!!!!!!SdADADSDD');
+    // const {
+    //   firebase,
+    //   authUser: { uid },
+    // } = this.props;
+
+    // firebase.user(uid).off();
+    // firebase.wardrobe(uid).off();
+  }
   toggleNav = () => {
     this.setState(prevState => ({
       isActive: !prevState.isActive,
@@ -206,7 +217,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  withFirebase,
+  withAuthentication,
   connect(
     mapStateToProps,
     mapDispatchToProps,

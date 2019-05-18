@@ -10,6 +10,8 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
+import Explore from '../Explore';
+
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import QuizPage, {
@@ -93,6 +95,8 @@ class App extends Component {
             component={PasswordForgetPage}
           />
           <Route path={ROUTES.HOME} component={HomePage} />
+          <Route path={ROUTES.EXPLORE} component={Explore} />
+
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route path={ROUTES.ADMIN} component={AdminPage} />
           <Route path={ROUTES.QUIZ} component={QuizPage} />

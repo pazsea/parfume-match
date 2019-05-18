@@ -116,23 +116,24 @@ class WardrobePage extends Component {
     // const to = this.newValue(top, clickedPoints);
 
     // console.log(ba, he, to);
-    firebase
-      .wardrobe(uid)
-      .update({
-        ratedNotes: {
-          [base]: this.newValue(base, clickedPoints),
-          [heart]: this.newValue(heart, clickedPoints),
-          [top]: this.newValue(top, clickedPoints),
-        },
-      })
-      .then(
-        firebase
-          .wardrobe(uid)
-          .child(name)
-          .update({
-            rating: nextValue,
-          }),
-      );
+    if (nextValue !== prevValue) {
+      firebase
+        .wardrobe(uid)
+        .child(name)
+        .update({
+          rating: nextValue,
+        })
+        .then(
+          firebase
+            .wardrobe(uid)
+            .child('ratedNotes')
+            .update({
+              [base]: this.newValue(base, clickedPoints),
+              [heart]: this.newValue(heart, clickedPoints),
+              [top]: this.newValue(top, clickedPoints),
+            }),
+        );
+    }
   }
 
   toggleTab = e => {
@@ -259,15 +260,17 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
           </span>
         }
       >
-        2017 års stora lansering från parfymprofilen Pierre Guillaumes
-        doftkollektion "Huitième Art" är en makalös splash av fruktiga
-        ackord, träiga noter och mustiga kryddor. 2017 års stora
-        lansering från parfymprofilen Pierre Guillaumes doftkollektion
-        "Huitième Art" är en makalös splash av fruktiga ackord, träiga
-        noter och mustiga kryddor.
+        2017's great launch from the perfume profile Pierre
+        Guillaume's fragrance collection "Huitième Art" is an
+        incomparable splash of fruity chords, woody notes and rich
+        spices. 2017's great launch from the perfume profile Pierre
+        Guillaume's fragrance collection "Huitième Art" is an
+        incomparable splash of fruity chords, woody notes and rich
+        spices.
         <br />
-        Att du inom kort känner att du bara måste duscha dig i Aqaysos
-        är inte otänkbart. Blir detta doften som förändrar ditt liv?
+        The fact that you soon feel that you just have to shower in
+        Aqaysos is not unthinkable. Is this the scent that changes
+        your life?
       </Truncate>
     </s.DescriptionDiv>
   );

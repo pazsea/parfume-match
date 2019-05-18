@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { compose } from 'recompose';
+import { getKeysWithHighestValue } from '../../constants/functions';
 
 import { withAuthentication } from '../Session/';
 import { connect } from 'react-redux';
@@ -53,11 +54,29 @@ class NavigationAuth extends Component {
       firebase,
       onSetAuthUser,
       onSetWardrobe,
+
       authUser: { uid },
     } = this.props;
 
+    //KALKULERA TOP NOTES DIREKT OCH SEDAN SKICKA TILL FIREBASE
+
     firebase.wardrobe(uid).on('value', snapshot => {
-      onSetWardrobe(snapshot.val());
+      if (snapshot.val()) {
+        onSetWardrobe(snapshot.val());
+        firebase.user(uid).update({
+          topNotes: Object.assign(
+            {},
+            getKeysWithHighestValue(snapshot.val().ratedNotes, 2),
+          ),
+        });
+        // onSetTopNotes(
+        //   Object.assign(
+        //     {},
+        //     { ratedNotes: snapshot.val().ratedNotes },
+        //     { uid },
+        //   ),
+        // );
+      }
     });
 
     firebase.user(uid).on('value', snapshot => {
@@ -95,12 +114,17 @@ class NavigationAuth extends Component {
             <ul>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.HOME}>
-                  Home
+                  Hem
                 </Link>
               </li>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
-                  Account
+                  Mitt Konto
+                </Link>
+              </li>
+              <li>
+                <Link onClick={this.toggleNav} to={ROUTES.EXPLORE}>
+                  Utforska
                 </Link>
               </li>
               <li>
@@ -118,7 +142,7 @@ class NavigationAuth extends Component {
               )}
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
-                  Wardrobe
+                  Garderob
                 </Link>
               </li>
               <li>

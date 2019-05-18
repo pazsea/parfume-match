@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import { Section } from '../../styleConstants/section.js';
-import * as a from '../../constants/actionTypes';
+import { calculatePoints } from '../../constants/functions';
 
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
@@ -55,24 +55,84 @@ class WardrobePage extends Component {
     firebase.wardrobe(uid).off();
   }
 
+  newValue(note, value) {
+    const { myRating } = this.props;
+
+    if (myRating) {
+      if (myRating.ratedNotes) {
+        if (myRating.ratedNotes[note]) {
+          if (value > 0) {
+            const add = parseInt(myRating.ratedNotes[note] + value);
+            return add;
+          } else if (value < 0) {
+            const subtract = parseInt(
+              myRating.ratedNotes[note] + value,
+            );
+            return subtract;
+          }
+        }
+      } else {
+        return value;
+      }
+    } else {
+      return value;
+    }
+  }
+
   onStarClick(base, heart, top, nextValue, prevValue, name) {
-    // console.log(base);
-    // console.log(heart);
-    // console.log(top);
-
-    // console.log(nextValue);
-    // console.log(prevValue);
-    // console.log(name);
-
     const {
       firebase,
       authUser: { uid },
     } = this.props;
 
+    const clickedPoints = calculatePoints(nextValue, prevValue);
+
+    // const existingNotes = incomingNotes.map(existingNote => {
+    //   if (existingNote && ratedNotes[existingNote]) {
+    //     if (Math.sign(clickedPoints) === 1) {
+    //       return ratedNotes[existingNote] + clickedPoints;
+    //     } else if (Math.sign(clickedPoints) === -1) {
+    //       return ratedNotes[existingNote]- clickedPoints;
+    //     }
+    //   }
+    // });
+
+    // const shit = ratedNotes
+    //   ? ratedNotes.map(note => {
+    //       if (note[name]) {
+    //         if (Math.sign(clickedPoints) === 1) {
+    //           return note[name] + clickedPoints;
+    //         } else if (Math.sign(clickedPoints) === -1) {
+    //           return note[name] - clickedPoints;
+    //         }
+    //       } else {
+    //         return clickedPoints;
+    //       }
+    //     })
+    //   : null;
+
+    // const ba = this.newValue(base, clickedPoints);
+    // const he = this.newValue(heart, clickedPoints);
+    // const to = this.newValue(top, clickedPoints);
+
+    // console.log(ba, he, to);
     firebase
       .wardrobe(uid)
-      .child(name)
-      .update({ rating: nextValue });
+      .update({
+        ratedNotes: {
+          [base]: this.newValue(base, clickedPoints),
+          [heart]: this.newValue(heart, clickedPoints),
+          [top]: this.newValue(top, clickedPoints),
+        },
+      })
+      .then(
+        firebase
+          .wardrobe(uid)
+          .child(name)
+          .update({
+            rating: nextValue,
+          }),
+      );
   }
 
   toggleTab = e => {

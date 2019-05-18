@@ -49,8 +49,7 @@ import quizStep5Sensual from '../../images/quizStep5Sensual.jpg';
 class QuizPage extends Component {
   skipQuiz = (event, authUser) => {
     this.props.firebase
-      .users()
-      .child(authUser.uid)
+      .user(this.props.authUser.uid)
       .update({ completedQuiz: true })
       .then(
         this.props.firebase
@@ -59,6 +58,8 @@ class QuizPage extends Component {
             this.props.onSetAuthUser(snapshot.val());
           }),
       );
+
+    this.props.history.push(ROUTES.HOME);
   };
 
   render() {
@@ -85,12 +86,8 @@ class QuizPage extends Component {
             </button>
           </QuizIntroButton>
           <SkipDiv>
-            <button
-              onClick={event =>
-                this.skipQuiz(event, this.props.authUser)
-              }
-            >
-              Hoppa över
+            <button onClick={event => this.skipQuiz(event)}>
+              HOPPA ÖVER
             </button>
           </SkipDiv>
         </FlexContainerColumn>

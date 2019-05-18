@@ -64,7 +64,7 @@ class QuestionSix extends Component {
             <Link
               id="link"
               to={ROUTES.RECOMMENDATION}
-              onClick={() => this.skipQuiz()}
+              onClick={e => this.skipQuiz(e)}
             >
               Visa min Sniph-kollektion
             </Link>

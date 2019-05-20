@@ -11,6 +11,7 @@ import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import AccountPage from '../Account';
+import ProfilePage from '../Profile';
 import AdminPage from '../Admin';
 import QuizPage, {
   QuestionOne,
@@ -95,6 +96,7 @@ class App extends Component {
           <Route path={ROUTES.HOME} component={HomePage} />
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route path={ROUTES.ADMIN} component={AdminPage} />
+          <Route path={ROUTES.PROFILE} component={ProfilePage} />
           <Route path={ROUTES.QUIZ} component={QuizPage} />
           <Route path={ROUTES.QUESTIONONE} component={QuestionOne} />
           <Route path={ROUTES.QUESTIONTWO} component={QuestionTwo} />

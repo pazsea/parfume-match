@@ -87,35 +87,6 @@ class WardrobePage extends Component {
 
     const clickedPoints = calculatePoints(nextValue, prevValue);
 
-    // const existingNotes = incomingNotes.map(existingNote => {
-    //   if (existingNote && ratedNotes[existingNote]) {
-    //     if (Math.sign(clickedPoints) === 1) {
-    //       return ratedNotes[existingNote] + clickedPoints;
-    //     } else if (Math.sign(clickedPoints) === -1) {
-    //       return ratedNotes[existingNote]- clickedPoints;
-    //     }
-    //   }
-    // });
-
-    // const shit = ratedNotes
-    //   ? ratedNotes.map(note => {
-    //       if (note[name]) {
-    //         if (Math.sign(clickedPoints) === 1) {
-    //           return note[name] + clickedPoints;
-    //         } else if (Math.sign(clickedPoints) === -1) {
-    //           return note[name] - clickedPoints;
-    //         }
-    //       } else {
-    //         return clickedPoints;
-    //       }
-    //     })
-    //   : null;
-
-    // const ba = this.newValue(base, clickedPoints);
-    // const he = this.newValue(heart, clickedPoints);
-    // const to = this.newValue(top, clickedPoints);
-
-    // console.log(ba, he, to);
     if (nextValue !== prevValue) {
       firebase
         .wardrobe(uid)
@@ -124,14 +95,13 @@ class WardrobePage extends Component {
           rating: nextValue,
         })
         .then(
-          firebase
-            .wardrobe(uid)
-            .child('ratedNotes')
-            .update({
+          firebase.wardrobe(uid).update({
+            ratedNotes: {
               [base]: this.newValue(base, clickedPoints),
               [heart]: this.newValue(heart, clickedPoints),
               [top]: this.newValue(top, clickedPoints),
-            }),
+            },
+          }),
         );
     }
   }

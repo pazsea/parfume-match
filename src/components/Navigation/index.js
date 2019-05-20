@@ -54,7 +54,6 @@ class NavigationAuth extends Component {
       firebase,
       onSetAuthUser,
       onSetWardrobe,
-
       authUser: { uid },
     } = this.props;
 
@@ -62,20 +61,14 @@ class NavigationAuth extends Component {
 
     firebase.wardrobe(uid).on('value', snapshot => {
       if (snapshot.val()) {
+        const objectWithHighestNotes = Object.assign(
+          {},
+          getKeysWithHighestValue(snapshot.val().ratedNotes, 2),
+        );
         onSetWardrobe(snapshot.val());
-        firebase.user(uid).update({
-          topNotes: Object.assign(
-            {},
-            getKeysWithHighestValue(snapshot.val().ratedNotes, 2),
-          ),
+        firebase.topNote(uid).update({
+          ...objectWithHighestNotes,
         });
-        // onSetTopNotes(
-        //   Object.assign(
-        //     {},
-        //     { ratedNotes: snapshot.val().ratedNotes },
-        //     { uid },
-        //   ),
-        // );
       }
     });
 
@@ -83,16 +76,20 @@ class NavigationAuth extends Component {
       const aUser = Object.assign({}, snapshot.val(), { uid });
       onSetAuthUser(aUser);
     });
-    console.log('NAAAAAVEN HAR MOUntat!!!!!!!!!SdADADSDD');
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (prevProps.authUser !== this.props.authUser) {
+  //     if(this.props.authUser.topNotes) {
+  //       this.props.onSetExploring(this.props.authUser.topNotes, this.props.)
+  //     }
+  //   }
+  // }
   componentWillMount() {
-    console.log('NAAAAAVEN HAR UNMOUNTAT!!!!!!!!!SdADADSDD');
     // const {
     //   firebase,
     //   authUser: { uid },
     // } = this.props;
-
     // firebase.user(uid).off();
     // firebase.wardrobe(uid).off();
   }

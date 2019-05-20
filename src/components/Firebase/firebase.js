@@ -96,6 +96,10 @@ class Firebase {
 
   wardrobe = uid => this.db.ref(`wardrobe/${uid}`);
 
+  topNote = uid => this.db.ref(`topNotes/${uid}`);
+
+  topNotes = () => this.db.ref('topNotes');
+
   users = () => this.db.ref('users');
 
   // *** Message API ***

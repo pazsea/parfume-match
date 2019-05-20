@@ -50,6 +50,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.props.firebase.topNotes().once('value', snapshot => {
+      this.props.onSetTopNotes(snapshot.val());
+      console.log('ON LISTENER STARTAD ' + snapshot.val());
+    });
     this.props.firebase.users().on('value', snapshot => {
       this.props.onSetUsers(snapshot.val());
     });
@@ -57,7 +61,7 @@ class App extends Component {
 
   componentWillUnmount() {
     this.props.firebase.users().off();
-    this.props.firebase.user().off();
+    // this.props.firebase.topNotes().off();
   }
 
   handleResize() {
@@ -139,7 +143,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetUsers: users => dispatch({ type: 'USERS_SET', users }),
+  onSetUsers: users => dispatch({ type: a.USERS_SET, users }),
+  onSetTopNotes: notes => dispatch({ type: a.TOP_NOTES_SET, notes }),
+
   setSize: size => dispatch({ type: a.SIZE, size }),
   startFetch: () =>
     dispatch({

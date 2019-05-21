@@ -148,9 +148,12 @@ class WardrobePage extends Component {
 
     if (loading) {
       return <Loading />;
-    } else if (!authUser.selectedCol) {
+    } else if (authUser.selectedCol === null) {
       return <NoCollection />;
     } else if (this.props.allCollections) {
+      console.log(this.props.allCollections);
+      console.log(authUser.selectedCol);
+
       const subCollection = this.props.allCollections[
         Object.keys(authUser.selectedCol)
       ];

@@ -61,7 +61,7 @@ class App extends Component {
       const val = snapshot.val();
       this.props.onSetTopNotes(val);
 
-      if (authUser && val[authUser.uid] !== undefined) {
+      if (authUser && val !== null && val[authUser.uid] !== null) {
         const {
           authUser: { uid },
           calculateWardrobes,
@@ -78,7 +78,7 @@ class App extends Component {
           authUser: { uid },
           onSetWardrobe,
         } = this.props;
-        if (val[uid]) {
+        if (val !== null && val[uid] !== null) {
           const objectWithHighestNotes = Object.assign(
             {},
             getKeysWithHighestValue(val[uid].ratedNotes, 2),

@@ -5,7 +5,7 @@ import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import { Section } from '../../styleConstants/section.js';
-import * as a from '../../constants/actionTypes';
+import { calculatePoints } from '../../constants/functions';
 
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
@@ -18,36 +18,35 @@ class WardrobePage extends Component {
   state = {
     isTruncated: false,
     tabOpen: '',
-    loading: true,
   };
 
-  componentDidMount() {
-    const {
-      authUser: { selectedCol },
-      myRating,
-    } = this.props;
+  // componentDidMount() {
+  //   const {
+  //     authUser: { selectedCol },
+  //     myRating,
+  //   } = this.props;
 
-    this.setState({
-      loading: false,
-      myRating,
-      subscription: selectedCol
-        ? Object.keys(selectedCol)
-        : selectedCol,
-    });
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevProps.myRating !== this.props.myRating ||
-      prevProps.authUser !== this.props.authUser
-    ) {
-      this.setState({
-        myRating: this.props.myRating,
-        subscription: this.props.authUser.selectedCol
-          ? Object.keys(this.props.authUser.selectedCol)
-          : this.props.authUser.selectedCol,
-      });
-    }
-  }
+  //   this.setState({
+  //     loading: false,
+  //     myRating,
+  //     subscription: selectedCol
+  //       ? Object.keys(selectedCol)
+  //       : selectedCol,
+  //   });
+  // }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     prevProps.myRating !== this.props.myRating ||
+  //     prevProps.authUser !== this.props.authUser
+  //   ) {
+  //     this.setState({
+  //       myRating: this.props.myRating,
+  //       subscription: this.props.authUser.selectedCol
+  //         ? Object.keys(this.props.authUser.selectedCol)
+  //         : this.props.authUser.selectedCol,
+  //     });
+  //   }
+  // }
 
   componentWillUnmount() {
     const {
@@ -57,24 +56,77 @@ class WardrobePage extends Component {
     firebase.wardrobe(uid).off();
   }
 
+  newValue(note, value) {
+    const { myRating } = this.props;
+    console.log('value ' + value + ' note: ' + note);
+    if (myRating) {
+      if (myRating.ratedNotes) {
+        if (myRating.ratedNotes[note]) {
+          return parseInt(myRating.ratedNotes[note] + value);
+          // if (value > 0) {
+          //   const add = parseInt(myRating.ratedNotes[note] + value);
+          //   return add;
+          // } else if (value < 0) {
+          //   const subtract = parseInt(
+          //     myRating.ratedNotes[note] + value,
+          //   );
+          //  return subtract;
+          //}
+        }
+      } else {
+        return value;
+      }
+    } else {
+      return value;
+    }
+  }
+
   onStarClick(base, heart, top, nextValue, prevValue, name) {
-    // console.log(base);
-    // console.log(heart);
-    // console.log(top);
-
-    // console.log(nextValue);
-    // console.log(prevValue);
-    // console.log(name);
-
     const {
       firebase,
       authUser: { uid },
     } = this.props;
+    console.log('yo' + base + heart + top);
+    const clickedPoints = calculatePoints(nextValue, prevValue);
 
     firebase
       .wardrobe(uid)
       .child(name)
-      .update({ rating: nextValue });
+      .update({
+        rating: nextValue,
+      })
+      .then(
+        firebase
+          .wardrobe(uid)
+          .child('ratedNotes')
+          .update({
+            [base]: 0,
+            [heart]: 0,
+            [top]: 0,
+          }),
+      );
+
+    if (nextValue !== prevValue) {
+      console.log('base: ' + this.newValue(base, clickedPoints));
+      console.log('heart: ' + this.newValue(heart, clickedPoints));
+      console.log('top: ' + this.newValue(top, clickedPoints));
+      firebase
+        .wardrobe(uid)
+        .child(name)
+        .update({
+          rating: nextValue,
+        })
+        .then(
+          firebase
+            .wardrobe(uid)
+            .child('ratedNotes')
+            .update({
+              [base]: this.newValue(base, clickedPoints),
+              [heart]: this.newValue(heart, clickedPoints),
+              [top]: this.newValue(top, clickedPoints),
+            }),
+        );
+    }
   }
 
   toggleTab = e => {
@@ -91,18 +143,24 @@ class WardrobePage extends Component {
   };
 
   render() {
-    const {
-      tabOpen,
-      isTruncated,
-      loading,
-      subscription,
-    } = this.state;
+    const { tabOpen, isTruncated, loading } = this.state;
+    const { authUser, myRating, firebase } = this.props;
+
     if (loading) {
       return <Loading />;
-    } else if (!subscription) {
+    } else if (!authUser.selectedCol) {
       return <NoCollection />;
-    } else {
-      const subCollection = this.props.allCollections[subscription];
+    } else if (this.props.allCollections) {
+      const subCollection = this.props.allCollections[
+        Object.keys(authUser.selectedCol)
+      ];
+      // =======
+      //       return <Loading />;
+      //     } else if (!subscription) {
+      //       return <NoCollection />;
+      //     } else {
+      //       const subCollection = this.props.allCollections[subscription];
+      // >>>>>>> master
 
       return (
         <Section>
@@ -139,10 +197,10 @@ class WardrobePage extends Component {
                       starCount={5}
                       bubbles={item.base_note_id}
                       value={
-                        this.state.myRating
-                          ? this.state.myRating[item.name] &&
-                            this.state.myRating[item.name].rating
-                            ? this.state.myRating[item.name].rating
+                        myRating
+                          ? myRating[item.name] &&
+                            myRating[item.name].rating
+                            ? myRating[item.name].rating
                             : 0
                           : 0
                       }
@@ -163,12 +221,11 @@ class WardrobePage extends Component {
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper
                       name={item.name}
-                      firebase={this.props.firebase}
-                      authUser={this.props.authUser.uid}
+                      firebase={firebase}
+                      authUser={authUser.uid}
                       textFirebase={
-                        this.state.myRating &&
-                        this.state.myRating[item.name].ownDesc
-                          ? this.state.myRating[item.name].ownDesc
+                        myRating && myRating[item.name].ownDesc
+                          ? myRating[item.name].ownDesc
                           : ''
                       }
                       tabOpen={tabOpen}
@@ -201,15 +258,17 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
           </span>
         }
       >
-        2017 års stora lansering från parfymprofilen Pierre Guillaumes
-        doftkollektion "Huitième Art" är en makalös splash av fruktiga
-        ackord, träiga noter och mustiga kryddor. 2017 års stora
-        lansering från parfymprofilen Pierre Guillaumes doftkollektion
-        "Huitième Art" är en makalös splash av fruktiga ackord, träiga
-        noter och mustiga kryddor.
+        2017's great launch from the perfume profile Pierre
+        Guillaume's fragrance collection "Huitième Art" is an
+        incomparable splash of fruity chords, woody notes and rich
+        spices. 2017's great launch from the perfume profile Pierre
+        Guillaume's fragrance collection "Huitième Art" is an
+        incomparable splash of fruity chords, woody notes and rich
+        spices.
         <br />
-        Att du inom kort känner att du bara måste duscha dig i Aqaysos
-        är inte otänkbart. Blir detta doften som förändrar ditt liv?
+        The fact that you soon feel that you just have to shower in
+        Aqaysos is not unthinkable. Is this the scent that changes
+        your life?
       </Truncate>
     </s.DescriptionDiv>
   );

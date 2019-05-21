@@ -20,49 +20,47 @@ import Loading from '../Loading';
 
 class Collection extends Component {
   state = {
-    loading: true,
+    // loading: true,
   };
 
-  componentDidMount() {
-    const {
-      authUser: { recommendedCol },
-    } = this.props;
+  // componentDidMount() {
+  //   const {
+  //     authUser: { recommendedCol },
+  //   } = this.props;
 
-    if (recommendedCol) {
-      const key = Object.keys(recommendedCol);
-      this.setState({
-        loading: false,
-        recommendedCol: key,
-      });
-    } else {
-      this.setState({
-        loading: false,
-      });
-    }
-  }
+  //   if (recommendedCol) {
+  //     const key = Object.keys(recommendedCol);
+  //     this.setState({
+  //       loading: false,
+  //       recommendedCol: key,
+  //     });
+  //   } else {
+  //     this.setState({
+  //       loading: false,
+  //     });
+  //   }
+  // }
 
   setRecColToSelected(e) {
     const { firebase, authUser } = this.props;
-    const { recommendedCol } = this.state;
-
+    // const { recommendedCol } = this.state;
+    console.log(authUser.recommendedCol);
     firebase.user(authUser.uid).update({
       recommendedCol: null,
       selectedCol: {
-        [recommendedCol]: true,
+        [Object.keys(authUser.recommendedCol)]: true,
       },
     });
   }
 
   render() {
-    const { loading, recommendedCol } = this.state;
+    // const { loading, recommendedCol } = this.state;
+    const { authUser } = this.props;
 
-    if (loading) {
-      return (
-        <Section>
-          <Loading />
-        </Section>
-      );
-    } else if (recommendedCol === undefined) {
+    // if (users) {
+    //   return <div>LADDAR...</div>;
+    // }
+    if (!authUser.recommendedCol) {
       return (
         <Section>
           <h2>Du har ingen rekommenderad kollektion....</h2>
@@ -75,7 +73,7 @@ class Collection extends Component {
         headerImage,
         title,
         firstDescription,
-      } = this.props[recommendedCol];
+      } = this.props[Object.keys(this.props.authUser.recommendedCol)];
       return (
         <div>
           <Header headerImage={headerImage} />
@@ -128,7 +126,7 @@ class Collection extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.userState.users,
+  users: state.userState,
   authUser: state.sessionState.authUser,
 });
 

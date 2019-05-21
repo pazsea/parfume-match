@@ -52,31 +52,31 @@ class NavigationAuth extends Component {
     const {
       firebase,
       onSetAuthUser,
-      onSetWardrobe,
+
       authUser: { uid },
     } = this.props;
 
-    firebase.wardrobe(uid).on('value', snapshot => {
-      onSetWardrobe(snapshot.val());
-    });
+    //KALKULERA TOP NOTES DIREKT OCH SEDAN SKICKA TILL FIREBASE
+
+    // firebase.wardrobe(uid).on('value', snapshot => {
+    //   if (snapshot.val()) {
+    //     const objectWithHighestNotes = Object.assign(
+    //       {},
+    //       getKeysWithHighestValue(snapshot.val().ratedNotes, 2),
+    //     );
+    //     onSetWardrobe(snapshot.val());
+    //     firebase.topNote(uid).update({
+    //       ...objectWithHighestNotes,
+    //     });
+    //   }
+    // });
 
     firebase.user(uid).on('value', snapshot => {
       const aUser = Object.assign({}, snapshot.val(), { uid });
       onSetAuthUser(aUser);
     });
-    console.log('NAAAAAVEN HAR MOUntat!!!!!!!!!SdADADSDD');
   }
 
-  componentWillMount() {
-    console.log('NAAAAAVEN HAR UNMOUNTAT!!!!!!!!!SdADADSDD');
-    // const {
-    //   firebase,
-    //   authUser: { uid },
-    // } = this.props;
-
-    // firebase.user(uid).off();
-    // firebase.wardrobe(uid).off();
-  }
   toggleNav = () => {
     this.setState(prevState => ({
       isActive: !prevState.isActive,
@@ -96,12 +96,17 @@ class NavigationAuth extends Component {
             <ul>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.HOME}>
-                  Home
+                  Hem
                 </Link>
               </li>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
-                  Account
+                  Mitt Konto
+                </Link>
+              </li>
+              <li>
+                <Link onClick={this.toggleNav} to={ROUTES.EXPLORE}>
+                  Utforska
                 </Link>
               </li>
               <li>
@@ -119,7 +124,7 @@ class NavigationAuth extends Component {
               )}
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
-                  Wardrobe
+                  Garderob
                 </Link>
               </li>
               <li>
@@ -213,8 +218,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onSetAuthUser: authUser =>
     dispatch({ type: a.AUTH_USER_SET, authUser }),
-  onSetWardrobe: wardrobe =>
-    dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
+  // onSetWardrobe: wardrobe =>
+  //   dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
 });
 
 export default compose(

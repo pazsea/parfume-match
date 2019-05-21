@@ -9,6 +9,8 @@ import { Section } from '../../styleConstants/section.js';
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
+import Loading from '../Loading';
+import NoCollection from '../Recommendation/No-collection';
 
 class WardrobePage extends Component {
   state = {
@@ -89,9 +91,9 @@ class WardrobePage extends Component {
       subscription,
     } = this.state;
     if (loading) {
-      return <p>Loading...</p>;
+      return <Loading />;
     } else if (!subscription) {
-      return <p>Du har ingen aktiv prenumeration....</p>;
+      return <NoCollection />;
     } else {
       const subCollection = this.props.allCollections[subscription];
 

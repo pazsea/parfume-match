@@ -27,14 +27,15 @@ class QuestionSix extends Component {
       'Trending Now',
       'FÖR MÄN: Work/Play',
     ];
-    console.log('VALD KOLLEKTION' + keys[this.getRandomInt(6)]);
     return keys[this.getRandomInt(6)];
   };
 
-  skipQuiz() {
-    const { authUser } = this.props;
+  skipQuiz(e) {
+    const {
+      authUser: { uid },
+    } = this.props;
 
-    this.props.firebase.user(authUser.uid).update({
+    this.props.firebase.user(uid).update({
       completedQuiz: true,
       recommendedCol: {
         [this.randomKey()]: false,
@@ -63,7 +64,7 @@ class QuestionSix extends Component {
             <Link
               id="link"
               to={ROUTES.RECOMMENDATION}
-              onClick={() => this.skipQuiz()}
+              onClick={e => this.skipQuiz(e)}
             >
               Visa min Sniph-kollektion
             </Link>

@@ -24,39 +24,37 @@ class Collection extends Component {
   };
 
   componentDidMount() {
-    const { firebase } = this.props;
+    const {
+      authUser: { recommendedCol },
+    } = this.props;
 
-    firebase
-      .user(this.props.authUser.uid)
-      .child('recommendedCol')
-      .once('value', snapshot => {
-        if (snapshot.val()) {
-          const collection = Object.keys(snapshot.val());
-          // Object.keys(snapshot.val()) = namnet på kollektionen
-          this.setState({
-            loading: false,
-            selectedCol: collection,
-          });
-        } else {
-          return this.setState({ loading: false });
-        }
+    if (recommendedCol) {
+      const key = Object.keys(recommendedCol);
+      this.setState({
+        loading: false,
+        recommendedCol: key,
       });
+    } else {
+      this.setState({
+        loading: false,
+      });
+    }
   }
 
-  setRecColToSelected() {
+  setRecColToSelected(e) {
     const { firebase, authUser } = this.props;
-    const { selectedCol } = this.state;
+    const { recommendedCol } = this.state;
 
     firebase.user(authUser.uid).update({
       recommendedCol: null,
       selectedCol: {
-        [selectedCol]: true,
+        [recommendedCol]: true,
       },
     });
   }
 
   render() {
-    const { loading, selectedCol } = this.state;
+    const { loading, recommendedCol } = this.state;
 
     if (loading) {
       return (
@@ -64,7 +62,7 @@ class Collection extends Component {
           <Loading />
         </Section>
       );
-    } else if (selectedCol === undefined) {
+    } else if (recommendedCol === undefined) {
       return (
         <Section>
           <h2>Du har ingen rekommenderad kollektion....</h2>
@@ -77,7 +75,7 @@ class Collection extends Component {
         headerImage,
         title,
         firstDescription,
-      } = this.props[selectedCol];
+      } = this.props[recommendedCol];
       return (
         <div>
           <Header headerImage={headerImage} />
@@ -92,7 +90,7 @@ class Collection extends Component {
               <h2>159 KR/MÅNAD</h2>
 
               <SubscribeButton>
-                <button onClick={() => this.setRecColToSelected()}>
+                <button onClick={e => this.setRecColToSelected(e)}>
                   <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
                 </button>
               </SubscribeButton>

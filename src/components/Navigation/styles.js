@@ -7,6 +7,8 @@ export const openNav = 'hamburger hamburger--spring is-active';
 export const closeNav = 'hamburger hamburger--spring';
 
 export const Nav = styled.nav`
+  z-index: 90;
+
   display: flex;
   justify-content: flex-end;
   top: 0;

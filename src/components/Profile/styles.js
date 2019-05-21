@@ -23,7 +23,7 @@ export const FlexLeftContainer = styled.div`
   /* justify-content: flex-start; */
   flex-grow: 1;
   margin-right: 10px;
-  margin-left: 50px;
+  margin-left: 5rem;
   width: 35%;
 `;
 
@@ -47,6 +47,7 @@ export const QuizIntroButton = styled.div`
     background-color: black;
     border: none;
     color: white;
+    margin-bottom: 4rem;
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
@@ -82,7 +83,7 @@ export const ProfilePicture = styled.div`
 `;
 export const Header = styled.div`
   display: flex;
-  flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
   /* top: 0; */
   background-image: url(${props => props.headerImage});
   width: 100%;
@@ -90,6 +91,8 @@ export const Header = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   margin-bottom: 2rem;
+  justify-content: center;
+  align-content: center;
 `;
 export const Blog = styled.div`
   width: 80%;
@@ -98,6 +101,18 @@ export const Blog = styled.div`
 
 export const TitleCenter = styled.div`
   text-align: center;
+  display: flex;
+  flex-direction: column;
+`;
+export const TitleOnHeaderCenter = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 4rem;
+  color: white;
+`;
+
+export const TextCenter = styled.div`
+  width: 50%;
 `;
 
 export const SubscribeButton = styled.div`
@@ -127,4 +142,13 @@ export const SubscribeButton = styled.div`
       color: white;
     }
   }
+`;
+
+export const NoCollectionWrapper = styled.div`
+  display: flex;
+  background-color: lightgrey;
+  flex-direction: column;
+  width: 100%;
+  /* justify-content: center; */
+  align-items: center;
 `;

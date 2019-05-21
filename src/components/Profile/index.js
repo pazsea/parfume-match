@@ -25,51 +25,206 @@ class ProfilePage extends Component {
     this.props.firebase.users().off();
   }
 
+  setRecColToSelected() {
+    const { firebase, authUser } = this.props;
+    const { selectedCol } = this.state;
+
+    firebase.user(authUser.uid).update({
+      selectedCol: {
+        [selectedCol]: true,
+      },
+    });
+  }
   // Användaren har ingen recommendedCol: Visa Quiz-knapp + text.
   // Användaren har endast recommendedCol: Visa Prenumerationsknapp + text.
   // Användaren har en selectedCol: "Allt" content visas
 
   render() {
     const { loading } = this.state;
-    const {
-      subscription,
-      authUser,
-      recommendedCol,
-      selectedCol,
-    } = this.props;
-    console.log('recommendedCol ' + recommendedCol);
-    console.log('suggestedCol ' + selectedCol);
 
-    if (loading) {
-      return <p>Loading...</p>;
-    } else if (!recommendedCol || selectedCol) {
-      // else if (!subscription) {
+    const { subscription, authUser } = this.props;
+
+    // console.log(
+    //   'recommendedCol ' + Object.keys(authUser.recommendedCol),
+    // );
+
+    // FÖRSTA VILLKORET
+    if (!authUser.recommendedCol && !authUser.selectedCol) {
       return (
         <Fragment>
-          <s.TitleCenter>
-            <h1>Starta ditt doft-quiz nu</h1>
-          </s.TitleCenter>
-          <s.QuizIntroButton>
-            <button>
-              <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
-            </button>
-          </s.QuizIntroButton>
+          <s.NoCollectionWrapper>
+            <s.TitleCenter>
+              <h1>Starta ditt doft-quiz nu</h1>
+            </s.TitleCenter>
+            <s.TextCenter>
+              <p>
+                Svårt att bestämma dig för vilken av våra kollektioner
+                som passar dig? Ingen fara! Gör vårt Sniph quiz så
+                kommer vi att kunna ge dig en bättre rekommendation.
+                Du kan göra testet flera gånger och som medlem kan du
+                byta kollektion när du vill.
+              </p>
+            </s.TextCenter>
+
+            <s.QuizIntroButton>
+              <button>
+                <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
+              </button>
+            </s.QuizIntroButton>
+          </s.NoCollectionWrapper>
+
+          <s.FlexContainer>
+            <s.FlexContainerRow>
+              <s.FlexLeftContainer>
+                <s.Blog>
+                  <h2>Senaste bloginlägg</h2>
+                  <p>
+                    <i>2019-05-19</i>
+                    <br />
+                    Mors dag är här innan du hinner blinka! Se till
+                    att du är redo att överraska de viktigaste
+                    mammorna i ditt liv med en speciell gåva. Med
+                    Sniph kommer din rara mor att få upptäcka olika
+                    dofter utvalda av experter, en present som kommer
+                    överraska långt bortom mors dag. Scrolla ner för
+                    att läsa mer om varför Sniph är en alldeles unik
+                    gåva, och skäm bort din mamma med någon av våra
+                    härliga gåvotips.{'   '}
+                    <a href="url">Läs mer</a>
+                  </p>
+                </s.Blog>
+                <h2>Min beskrivning</h2>
+                <textarea />
+                <br />
+                <button>Spara</button>
+              </s.FlexLeftContainer>
+              <s.FlexRightContainer>
+                <s.ProfileContent>
+                  <div>
+                    <h2>Profil</h2>
+                    <div>
+                      <h2>{this.props.authUser.username}</h2>
+                      <s.ProfilePicture>
+                        <img
+                          alt="profile pic"
+                          src={profile_picture_placeholder}
+                        />
+                      </s.ProfilePicture>
+                      {/* Namnet på Användaren 
+            Bild på användaren, hårdkoda så länge.
+            bakgrunder vara aktiv kollektion knapp till
+            wardrobe/rekommenderad kollektion knapp till
+            recommendation/ placeholder med quizknappen 
+            textarea för beskrivning*/}
+                    </div>
+
+                    <s.QuizIntroButton>
+                      <button>
+                        <Link to={ROUTES.QUESTIONONE}>
+                          Starta doft-quiz
+                        </Link>
+                      </button>
+                    </s.QuizIntroButton>
+                  </div>
+                </s.ProfileContent>
+              </s.FlexRightContainer>
+            </s.FlexContainerRow>
+          </s.FlexContainer>
         </Fragment>
       );
-    } else if (!recommendedCol) {
+
+      // ANDRA VILLKORET
+    } else if (authUser.recommendedCol && !authUser.selectedCol) {
+      const colHeader = JSON.stringify(
+        Object.keys(authUser.recommendedCol),
+      );
+      console.log(colHeader);
       return (
         <Fragment>
-          <s.TitleCenter>
-            <h1>Prenumerera</h1>
-          </s.TitleCenter>
+          <s.Header
+            headerImage={
+              colHeader.includes('FÖR MÄN: Aesthetic')
+                ? headerForMen
+                : colHeader.includes('Avant-Garde')
+                ? headerAvantgard
+                : colHeader.includes('Clean')
+                ? headerClean
+                : colHeader.includes('Female Classics')
+                ? headerFemaleClassics
+                : colHeader.includes('Trending Now')
+                ? headerTrendingNow
+                : colHeader.includes('FÖR MÄN: Work/Play')
+                ? headerWorkPlay
+                : null
+            }
+          >
+            <s.TitleOnHeaderCenter>
+              <h1>
+                Din rekommenderade kollektion är{' '}
+                <i>{Object.keys(authUser.recommendedCol)}</i>
+              </h1>
+              <s.SubscribeButton>
+                <button onClick={() => this.setRecColToSelected()}>
+                  <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
+                </button>
+              </s.SubscribeButton>
+            </s.TitleOnHeaderCenter>
+          </s.Header>
 
-          <s.SubscribeButton>
-            <button onClick={() => this.setRecColToSelected()}>
-              <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
-            </button>
-          </s.SubscribeButton>
+          <s.FlexContainer>
+            <s.FlexContainerRow>
+              <s.FlexLeftContainer>
+                <s.Blog>
+                  <h2>Senaste bloginlägg</h2>
+                  <p>
+                    <i>2019-05-19</i>
+                    <br />
+                    Mors dag är här innan du hinner blinka! Se till
+                    att du är redo att överraska de viktigaste
+                    mammorna i ditt liv med en speciell gåva. Med
+                    Sniph kommer din rara mor att få upptäcka olika
+                    dofter utvalda av experter, en present som kommer
+                    överraska långt bortom mors dag. Scrolla ner för
+                    att läsa mer om varför Sniph är en alldeles unik
+                    gåva, och skäm bort din mamma med någon av våra
+                    härliga gåvotips.{'   '}
+                    <a href="url">Läs mer</a>
+                  </p>
+                </s.Blog>
+                <h2>Min beskrivning</h2>
+                <textarea />
+                <br />
+                <button>Spara</button>
+              </s.FlexLeftContainer>
+              <s.FlexRightContainer>
+                <s.ProfileContent>
+                  <div>
+                    <h2>Profil</h2>
+                    <div>
+                      <h2>{this.props.authUser.username}</h2>
+                      <s.ProfilePicture>
+                        <img
+                          alt="profile pic"
+                          src={profile_picture_placeholder}
+                        />
+                      </s.ProfilePicture>
+                    </div>
+
+                    <s.QuizIntroButton>
+                      <button>
+                        <Link to={ROUTES.QUESTIONONE}>
+                          Starta doft-quiz
+                        </Link>
+                      </button>
+                    </s.QuizIntroButton>
+                  </div>
+                </s.ProfileContent>
+              </s.FlexRightContainer>
+            </s.FlexContainerRow>
+          </s.FlexContainer>
         </Fragment>
       );
+      // TREDJE OCH SISTA VILLKORET
     } else {
       return (
         <Fragment>
@@ -103,7 +258,7 @@ class ProfilePage extends Component {
               <s.FlexRightContainer>
                 <s.ProfileContent>
                   <div>
-                    <h1>Profil</h1>
+                    <h2>Profil</h2>
                     <div>
                       <h2>{this.props.authUser.username}</h2>
                       <s.ProfilePicture>
@@ -112,12 +267,6 @@ class ProfilePage extends Component {
                           src={profile_picture_placeholder}
                         />
                       </s.ProfilePicture>
-                      {/* Namnet på Användaren 
-            Bild på användaren, hårdkoda så länge.
-            bakgrunder vara aktiv kollektion knapp till
-            wardrobe/rekommenderad kollektion knapp till
-            recommendation/ placeholder med quizknappen 
-            textarea för beskrivning*/}
                     </div>
 
                     <s.QuizIntroButton>

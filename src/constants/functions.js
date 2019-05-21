@@ -12,7 +12,6 @@ export function calculatePoints(next, prev) {
 
 export function getKeysWithHighestValue(o, n) {
   if (o) {
-    console.log(o);
     var keys = Object.keys(o);
     keys.sort(function(a, b) {
       return o[b] - o[a];

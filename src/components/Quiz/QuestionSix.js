@@ -33,9 +33,10 @@ class QuestionSix extends Component {
   skipQuiz() {
     const {
       authUser: { uid },
+      firebase,
     } = this.props;
 
-    this.props.firebase.user(uid).update({
+    firebase.user(uid).update({
       completedQuiz: true,
       recommendedCol: {
         [this.randomKey()]: false,

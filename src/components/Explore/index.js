@@ -14,31 +14,31 @@ class Explore extends Component {
     loading: true,
   };
 
-  componentDidMount() {
-    console.log('CDM ran');
-    const {
-      authUser: { uid },
-      topNotes,
-    } = this.props;
-    if (this.state.stateFetched === true) {
-      console.log('STARTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-      const { [uid]: myNotes, ...otherNotes } = topNotes.notes;
+  // componentDidMount() {
+  //   console.log('CDM ran');
+  //   const {
+  //     authUser: { uid },
+  //     topNotes,
+  //   } = this.props;
+  //   if (this.state.stateFetched === true) {
+  //     console.log('STARTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+  //     const { [uid]: myNotes, ...otherNotes } = topNotes.notes;
 
-      this.setState({
-        wardrobeMatches: getTopWardrobes(myNotes, otherNotes),
-        loading: false,
-      });
-    }
-  }
+  //     this.setState({
+  //       wardrobeMatches: getTopWardrobes(myNotes, otherNotes),
+  //       loading: false,
+  //     });
+  //   }
+  // }
 
-  componentDidUpdate(prevProps) {
-    console.log('CDU ran');
-    const { topNotes } = this.props;
-    if (prevProps.topNotes !== topNotes) {
-      console.log('KOMPONENTEN UPPTÄCKTE UPPDATERING');
-      this.setState({ stateFetched: true });
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   console.log('CDU ran');
+  //   const { topNotes } = this.props;
+  //   if (prevProps.topNotes !== topNotes) {
+  //     console.log('KOMPONENTEN UPPTÄCKTE UPPDATERING');
+  //     this.setState({ stateFetched: true });
+  //   }
+  // }
 
   render() {
     const { loading } = this.state;

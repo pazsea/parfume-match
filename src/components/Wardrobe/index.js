@@ -16,36 +16,35 @@ class WardrobePage extends Component {
   state = {
     isTruncated: false,
     tabOpen: '',
-    loading: true,
   };
 
-  componentDidMount() {
-    const {
-      authUser: { selectedCol },
-      myRating,
-    } = this.props;
+  // componentDidMount() {
+  //   const {
+  //     authUser: { selectedCol },
+  //     myRating,
+  //   } = this.props;
 
-    this.setState({
-      loading: false,
-      myRating,
-      subscription: selectedCol
-        ? Object.keys(selectedCol)
-        : selectedCol,
-    });
-  }
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevProps.myRating !== this.props.myRating ||
-      prevProps.authUser !== this.props.authUser
-    ) {
-      this.setState({
-        myRating: this.props.myRating,
-        subscription: this.props.authUser.selectedCol
-          ? Object.keys(this.props.authUser.selectedCol)
-          : this.props.authUser.selectedCol,
-      });
-    }
-  }
+  //   this.setState({
+  //     loading: false,
+  //     myRating,
+  //     subscription: selectedCol
+  //       ? Object.keys(selectedCol)
+  //       : selectedCol,
+  //   });
+  // }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     prevProps.myRating !== this.props.myRating ||
+  //     prevProps.authUser !== this.props.authUser
+  //   ) {
+  //     this.setState({
+  //       myRating: this.props.myRating,
+  //       subscription: this.props.authUser.selectedCol
+  //         ? Object.keys(this.props.authUser.selectedCol)
+  //         : this.props.authUser.selectedCol,
+  //     });
+  //   }
+  // }
 
   componentWillUnmount() {
     const {
@@ -120,18 +119,17 @@ class WardrobePage extends Component {
   };
 
   render() {
-    const {
-      tabOpen,
-      isTruncated,
-      loading,
-      subscription,
-    } = this.state;
+    const { tabOpen, isTruncated, loading } = this.state;
+    const { authUser, myRating, firebase } = this.props;
+
     if (loading) {
       return <p>Loading...</p>;
-    } else if (!subscription) {
+    } else if (!authUser.selectedCol) {
       return <p>Du har ingen aktiv prenumeration....</p>;
-    } else {
-      const subCollection = this.props.allCollections[subscription];
+    } else if (this.props.allCollections) {
+      const subCollection = this.props.allCollections[
+        Object.keys(authUser.selectedCol)
+      ];
 
       return (
         <Section>
@@ -168,10 +166,10 @@ class WardrobePage extends Component {
                       starCount={5}
                       bubbles={item.base_note_id}
                       value={
-                        this.state.myRating
-                          ? this.state.myRating[item.name] &&
-                            this.state.myRating[item.name].rating
-                            ? this.state.myRating[item.name].rating
+                        myRating
+                          ? myRating[item.name] &&
+                            myRating[item.name].rating
+                            ? myRating[item.name].rating
                             : 0
                           : 0
                       }
@@ -192,12 +190,11 @@ class WardrobePage extends Component {
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper
                       name={item.name}
-                      firebase={this.props.firebase}
-                      authUser={this.props.authUser.uid}
+                      firebase={firebase}
+                      authUser={authUser.uid}
                       textFirebase={
-                        this.state.myRating &&
-                        this.state.myRating[item.name].ownDesc
-                          ? this.state.myRating[item.name].ownDesc
+                        myRating && myRating[item.name].ownDesc
+                          ? myRating[item.name].ownDesc
                           : ''
                       }
                       tabOpen={tabOpen}

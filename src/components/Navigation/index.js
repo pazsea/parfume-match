@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { compose } from 'recompose';
-import { getKeysWithHighestValue } from '../../constants/functions';
 
 import { withAuthentication } from '../Session/';
 import { connect } from 'react-redux';
@@ -53,24 +52,24 @@ class NavigationAuth extends Component {
     const {
       firebase,
       onSetAuthUser,
-      onSetWardrobe,
+
       authUser: { uid },
     } = this.props;
 
     //KALKULERA TOP NOTES DIREKT OCH SEDAN SKICKA TILL FIREBASE
 
-    firebase.wardrobe(uid).on('value', snapshot => {
-      if (snapshot.val()) {
-        const objectWithHighestNotes = Object.assign(
-          {},
-          getKeysWithHighestValue(snapshot.val().ratedNotes, 2),
-        );
-        onSetWardrobe(snapshot.val());
-        firebase.topNote(uid).update({
-          ...objectWithHighestNotes,
-        });
-      }
-    });
+    // firebase.wardrobe(uid).on('value', snapshot => {
+    //   if (snapshot.val()) {
+    //     const objectWithHighestNotes = Object.assign(
+    //       {},
+    //       getKeysWithHighestValue(snapshot.val().ratedNotes, 2),
+    //     );
+    //     onSetWardrobe(snapshot.val());
+    //     firebase.topNote(uid).update({
+    //       ...objectWithHighestNotes,
+    //     });
+    //   }
+    // });
 
     firebase.user(uid).on('value', snapshot => {
       const aUser = Object.assign({}, snapshot.val(), { uid });
@@ -78,21 +77,6 @@ class NavigationAuth extends Component {
     });
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.authUser !== this.props.authUser) {
-  //     if(this.props.authUser.topNotes) {
-  //       this.props.onSetExploring(this.props.authUser.topNotes, this.props.)
-  //     }
-  //   }
-  // }
-  componentWillMount() {
-    // const {
-    //   firebase,
-    //   authUser: { uid },
-    // } = this.props;
-    // firebase.user(uid).off();
-    // firebase.wardrobe(uid).off();
-  }
   toggleNav = () => {
     this.setState(prevState => ({
       isActive: !prevState.isActive,
@@ -233,8 +217,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onSetAuthUser: authUser =>
     dispatch({ type: a.AUTH_USER_SET, authUser }),
-  onSetWardrobe: wardrobe =>
-    dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
+  // onSetWardrobe: wardrobe =>
+  //   dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
 });
 
 export default compose(

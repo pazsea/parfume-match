@@ -10,6 +10,8 @@ import * as a from '../../constants/actionTypes';
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
+import Loading from '../Loading';
+import NoCollection from '../Recommendation/No-collection';
 import noteslogo from '../../images/noteslogo.png';
 
 class WardrobePage extends Component {
@@ -96,9 +98,9 @@ class WardrobePage extends Component {
       subscription,
     } = this.state;
     if (loading) {
-      return <p>Loading...</p>;
+      return <Loading />;
     } else if (!subscription) {
-      return <p>Du har ingen aktiv prenumeration....</p>;
+      return <NoCollection />;
     } else {
       const subCollection = this.props.allCollections[subscription];
 

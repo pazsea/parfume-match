@@ -119,3 +119,11 @@ export const SubscribeButton = styled.div`
     }
   }
 `;
+
+export const NoCollectionDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 30%;
+  padding-top: 1em;
+`;

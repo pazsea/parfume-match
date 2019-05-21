@@ -92,6 +92,7 @@ class NavigationAuth extends Component {
         <Fragment>
           <Nav isActive={isActive}>
             <img src={logo} />
+
             <ul>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.HOME}>

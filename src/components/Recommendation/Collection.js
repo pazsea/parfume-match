@@ -16,6 +16,7 @@ import { Section } from '../../styleConstants/section.js';
 import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
+import Loading from '../Loading';
 
 class Collection extends Component {
   state = {
@@ -58,7 +59,7 @@ class Collection extends Component {
     if (loading) {
       return (
         <Section>
-          <h2>LADDAR.....</h2>
+          <Loading />
         </Section>
       );
     } else if (recommendedCol === undefined) {

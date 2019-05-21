@@ -6,7 +6,6 @@ import { Section } from '../../styleConstants/section.js';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import Messages from '../Messages';
-import Loading from '../Loading/index.js';
 
 class HomePage extends Component {
   componentDidMount() {

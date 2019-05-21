@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import MessageList from './MessageList';
+import Loading from '../Loading';
 
 class Messages extends Component {
   constructor(props) {
@@ -89,7 +90,7 @@ class Messages extends Component {
           </button>
         )}
 
-        {loading && <div>Loading ...</div>}
+        {loading && <Loading />}
 
         {messages && (
           <MessageList

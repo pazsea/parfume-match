@@ -10,6 +10,8 @@ import { calculatePoints } from '../../constants/functions';
 import * as s from './styles';
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
+import Loading from '../Loading';
+import NoCollection from '../Recommendation/No-collection';
 import noteslogo from '../../images/noteslogo.png';
 
 class WardrobePage extends Component {
@@ -56,19 +58,20 @@ class WardrobePage extends Component {
 
   newValue(note, value) {
     const { myRating } = this.props;
-
+    console.log('value ' + value + ' note: ' + note);
     if (myRating) {
       if (myRating.ratedNotes) {
         if (myRating.ratedNotes[note]) {
-          if (value > 0) {
-            const add = parseInt(myRating.ratedNotes[note] + value);
-            return add;
-          } else if (value < 0) {
-            const subtract = parseInt(
-              myRating.ratedNotes[note] + value,
-            );
-            return subtract;
-          }
+          return parseInt(myRating.ratedNotes[note] + value);
+          // if (value > 0) {
+          //   const add = parseInt(myRating.ratedNotes[note] + value);
+          //   return add;
+          // } else if (value < 0) {
+          //   const subtract = parseInt(
+          //     myRating.ratedNotes[note] + value,
+          //   );
+          //  return subtract;
+          //}
         }
       } else {
         return value;
@@ -83,10 +86,30 @@ class WardrobePage extends Component {
       firebase,
       authUser: { uid },
     } = this.props;
-
+    console.log('yo' + base + heart + top);
     const clickedPoints = calculatePoints(nextValue, prevValue);
 
+    firebase
+      .wardrobe(uid)
+      .child(name)
+      .update({
+        rating: nextValue,
+      })
+      .then(
+        firebase
+          .wardrobe(uid)
+          .child('ratedNotes')
+          .update({
+            [base]: 0,
+            [heart]: 0,
+            [top]: 0,
+          }),
+      );
+
     if (nextValue !== prevValue) {
+      console.log('base: ' + this.newValue(base, clickedPoints));
+      console.log('heart: ' + this.newValue(heart, clickedPoints));
+      console.log('top: ' + this.newValue(top, clickedPoints));
       firebase
         .wardrobe(uid)
         .child(name)
@@ -94,13 +117,14 @@ class WardrobePage extends Component {
           rating: nextValue,
         })
         .then(
-          firebase.wardrobe(uid).update({
-            ratedNotes: {
+          firebase
+            .wardrobe(uid)
+            .child('ratedNotes')
+            .update({
               [base]: this.newValue(base, clickedPoints),
               [heart]: this.newValue(heart, clickedPoints),
               [top]: this.newValue(top, clickedPoints),
-            },
-          }),
+            }),
         );
     }
   }
@@ -123,13 +147,20 @@ class WardrobePage extends Component {
     const { authUser, myRating, firebase } = this.props;
 
     if (loading) {
-      return <p>Loading...</p>;
+      return <Loading />;
     } else if (!authUser.selectedCol) {
-      return <p>Du har ingen aktiv prenumeration....</p>;
+      return <NoCollection />;
     } else if (this.props.allCollections) {
       const subCollection = this.props.allCollections[
         Object.keys(authUser.selectedCol)
       ];
+      // =======
+      //       return <Loading />;
+      //     } else if (!subscription) {
+      //       return <NoCollection />;
+      //     } else {
+      //       const subCollection = this.props.allCollections[subscription];
+      // >>>>>>> master
 
       return (
         <Section>

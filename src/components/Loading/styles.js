@@ -5,6 +5,7 @@ export const LoadingDiv = styled.div`
   flex-direction: column;
   margin: 0 auto;
   width: 20%;
+  padding-top: 1em;
 `;
 
 export const Middle = styled.div`

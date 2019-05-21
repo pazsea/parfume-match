@@ -16,6 +16,7 @@ import { Section } from '../../styleConstants/section.js';
 import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
+import Loading from '../Loading';
 
 class Collection extends Component {
   state = {

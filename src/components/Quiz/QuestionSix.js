@@ -37,7 +37,7 @@ class QuestionSix extends Component {
     this.props.firebase.user(authUser.uid).update({
       completedQuiz: true,
       recommendedCol: {
-        [this.randomKey()]: false,
+        [this.randomKey()]: true,
       },
     });
   }

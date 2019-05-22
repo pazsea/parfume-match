@@ -61,12 +61,11 @@ class App extends Component {
       const val = snapshot.val();
       this.props.onSetTopNotes(val);
 
-      if (authUser && val !== null && val[authUser.uid] !== null) {
+      if (authUser && val && val[authUser.uid]) {
         const {
           authUser: { uid },
           calculateWardrobes,
         } = this.props;
-        console.log('DU KOMMER IN ' + val);
         const { [uid]: myNotes, ...otherNotes } = val;
         calculateWardrobes(myNotes, otherNotes);
       }
@@ -78,7 +77,7 @@ class App extends Component {
           authUser: { uid },
           onSetWardrobe,
         } = this.props;
-        if (val !== null && val[uid] !== null) {
+        if (val && val[uid]) {
           const objectWithHighestNotes = Object.assign(
             {},
             getKeysWithHighestValue(val[uid].ratedNotes, 2),

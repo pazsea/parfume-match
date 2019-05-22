@@ -14,9 +14,9 @@ const persistConfig = {
   key: 'root',
   storage,
   whitelist: [
-    // 'sniphBulkDataState',
-    // 'loadStatusState',
-    // 'sortedParfumesState',
+    'sniphBulkDataState',
+    'loadStatusState',
+    'sortedParfumesState',
   ],
   // stateReconciler: autoMergeLevel1,
 };

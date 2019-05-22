@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import { compose } from 'recompose';
+
+import { withAuthentication } from '../Session/';
 import { connect } from 'react-redux';
 import '../../hamburger.css';
 import {
@@ -16,15 +19,27 @@ import {
 import logo from '../../images/logoblack.png';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
+import * as a from '../../constants/actionTypes';
 import * as ROLES from '../../constants/roles';
 
-const Navigation = ({ authUser, bigSize, mediumSize, smallSize }) =>
+const Navigation = ({
+  authUser,
+  bigSize,
+  mediumSize,
+  smallSize,
+  firebase,
+  onSetAuthUser,
+  onSetWardrobe,
+}) =>
   authUser ? (
     <NavigationAuth
+      firebase={firebase}
       authUser={authUser}
       bigSize={bigSize}
       mediumSize={mediumSize}
       smallSize={smallSize}
+      onSetAuthUser={onSetAuthUser}
+      onSetWardrobe={onSetWardrobe}
     />
   ) : null;
 
@@ -32,6 +47,35 @@ class NavigationAuth extends Component {
   state = {
     isActive: false,
   };
+
+  componentDidMount() {
+    const {
+      firebase,
+      onSetAuthUser,
+
+      authUser: { uid },
+    } = this.props;
+
+    //KALKULERA TOP NOTES DIREKT OCH SEDAN SKICKA TILL FIREBASE
+
+    // firebase.wardrobe(uid).on('value', snapshot => {
+    //   if (snapshot.val()) {
+    //     const objectWithHighestNotes = Object.assign(
+    //       {},
+    //       getKeysWithHighestValue(snapshot.val().ratedNotes, 2),
+    //     );
+    //     onSetWardrobe(snapshot.val());
+    //     firebase.topNote(uid).update({
+    //       ...objectWithHighestNotes,
+    //     });
+    //   }
+    // });
+
+    firebase.user(uid).on('value', snapshot => {
+      const aUser = Object.assign({}, snapshot.val(), { uid });
+      onSetAuthUser(aUser);
+    });
+  }
 
   toggleNav = () => {
     this.setState(prevState => ({
@@ -48,15 +92,21 @@ class NavigationAuth extends Component {
         <Fragment>
           <Nav isActive={isActive}>
             <img src={logo} />
+
             <ul>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.HOME}>
-                  Home
+                  Hem
                 </Link>
               </li>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
-                  Account
+                  Mitt Konto
+                </Link>
+              </li>
+              <li>
+                <Link onClick={this.toggleNav} to={ROUTES.EXPLORE}>
+                  Utforska
                 </Link>
               </li>
               <li>
@@ -74,7 +124,7 @@ class NavigationAuth extends Component {
               )}
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
-                  Wardrobe
+                  Garderob
                 </Link>
               </li>
               <li>
@@ -165,4 +215,17 @@ const mapStateToProps = state => ({
   smallSize: state.screenSizeState.smallSize,
 });
 
-export default connect(mapStateToProps)(Navigation);
+const mapDispatchToProps = dispatch => ({
+  onSetAuthUser: authUser =>
+    dispatch({ type: a.AUTH_USER_SET, authUser }),
+  // onSetWardrobe: wardrobe =>
+  //   dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
+});
+
+export default compose(
+  withAuthentication,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)(Navigation);

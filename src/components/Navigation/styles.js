@@ -7,6 +7,8 @@ export const openNav = 'hamburger hamburger--spring is-active';
 export const closeNav = 'hamburger hamburger--spring';
 
 export const Nav = styled.nav`
+  z-index: 90;
+
   display: flex;
   justify-content: flex-end;
   top: 0;
@@ -15,12 +17,12 @@ export const Nav = styled.nav`
   background: black;
   img {
     color: white;
-    margin-top: 0.5%;
+    margin-top: 1%;
     width: 120px;
     height: 33px;
     align-self: center;
     top: 0;
-    left: 4%;
+    left: 2%;
     position: absolute;
   }
 
@@ -56,7 +58,7 @@ export const Nav = styled.nav`
   button:nth-child(1) {
     border: none;
     background: none;
-    color: red;
+    color: rgb(255, 73, 73);
 
     /* border: 1px solid red; */
   }

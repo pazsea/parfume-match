@@ -16,53 +16,50 @@ import { Section } from '../../styleConstants/section.js';
 import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
+import Loading from '../Loading';
 
 class Collection extends Component {
   state = {
-    loading: true,
+    // loading: true,
   };
 
-  componentDidMount() {
-    const { firebase } = this.props;
+  // componentDidMount() {
+  //   const {
+  //     authUser: { recommendedCol },
+  //   } = this.props;
 
-    firebase
-      .user(this.props.authUser.uid)
-      .child('recommendedCol')
-      .once('value', snapshot => {
-        if (snapshot.val()) {
-          const collection = Object.keys(snapshot.val());
-          // Object.keys(snapshot.val()) = namnet på kollektionen
-          this.setState({
-            loading: false,
-            selectedCol: collection,
-          });
-        } else {
-          return this.setState({ loading: false });
-        }
-      });
-  }
+  //   if (recommendedCol) {
+  //     const key = Object.keys(recommendedCol);
+  //     this.setState({
+  //       loading: false,
+  //       recommendedCol: key,
+  //     });
+  //   } else {
+  //     this.setState({
+  //       loading: false,
+  //     });
+  //   }
+  // }
 
-  setRecColToSelected() {
+  setRecColToSelected(e) {
     const { firebase, authUser } = this.props;
-    const { selectedCol } = this.state;
-
+    // const { recommendedCol } = this.state;
+    console.log(authUser.recommendedCol);
     firebase.user(authUser.uid).update({
       selectedCol: {
-        [selectedCol]: true,
+        [Object.keys(authUser.recommendedCol)]: true,
       },
     });
   }
 
   render() {
-    const { loading, selectedCol } = this.state;
+    // const { loading, recommendedCol } = this.state;
+    const { authUser } = this.props;
 
-    if (loading) {
-      return (
-        <Section>
-          <h2>LADDAR.....</h2>
-        </Section>
-      );
-    } else if (selectedCol === undefined) {
+    // if (users) {
+    //   return <div>LADDAR...</div>;
+    // }
+    if (!authUser.recommendedCol) {
       return (
         <Section>
           <h2>Du har ingen rekommenderad kollektion....</h2>
@@ -75,7 +72,7 @@ class Collection extends Component {
         headerImage,
         title,
         firstDescription,
-      } = this.props[selectedCol];
+      } = this.props[Object.keys(this.props.authUser.recommendedCol)];
       return (
         <div>
           <Header headerImage={headerImage} />
@@ -90,7 +87,7 @@ class Collection extends Component {
               <h2>159 KR/MÅNAD</h2>
 
               <SubscribeButton>
-                <button onClick={() => this.setRecColToSelected()}>
+                <button onClick={e => this.setRecColToSelected(e)}>
                   <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
                 </button>
               </SubscribeButton>
@@ -128,7 +125,7 @@ class Collection extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.userState.users,
+  users: state.userState,
   authUser: state.sessionState.authUser,
 });
 

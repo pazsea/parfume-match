@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { withAuthentication } from '../Session';
+import { getKeysWithHighestValue } from '../../constants/functions';
 
 import Navigation from '../Navigation';
 import LandingPage from '../Landing';
@@ -10,6 +11,8 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
+import Explore from '../Explore';
+
 import AccountPage from '../Account';
 import ProfilePage from '../Profile';
 import AdminPage from '../Admin';
@@ -49,6 +52,46 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const {
+      authUser,
+      firebase,
+      onSetTopNotes,
+      onSetWardrobe,
+    } = this.props;
+    firebase.topNotes().on('value', snapshot => {
+      const val = snapshot.val();
+      this.props.onSetTopNotes(val);
+
+      if (authUser && val !== null && val[authUser.uid] !== null) {
+        const {
+          authUser: { uid },
+          calculateWardrobes,
+        } = this.props;
+        console.log('DU KOMMER IN ' + val);
+        const { [uid]: myNotes, ...otherNotes } = val;
+        calculateWardrobes(myNotes, otherNotes);
+      }
+    });
+    firebase.wardrobes().on('value', snapshot => {
+      const val = snapshot.val();
+      if (authUser) {
+        const {
+          authUser: { uid },
+          onSetWardrobe,
+        } = this.props;
+        if (val !== null && val[uid] !== null) {
+          const objectWithHighestNotes = Object.assign(
+            {},
+            getKeysWithHighestValue(val[uid].ratedNotes, 2),
+          );
+          onSetWardrobe(val[uid]);
+          firebase.topNote(uid).update({
+            ...objectWithHighestNotes,
+          });
+        }
+      }
+    });
+
     this.props.firebase.users().on('value', snapshot => {
       this.props.onSetUsers(snapshot.val());
     });
@@ -56,7 +99,6 @@ class App extends Component {
 
   componentWillUnmount() {
     this.props.firebase.users().off();
-    this.props.firebase.user().off();
   }
 
   handleResize() {
@@ -94,6 +136,8 @@ class App extends Component {
             component={PasswordForgetPage}
           />
           <Route path={ROUTES.HOME} component={HomePage} />
+          <Route path={ROUTES.EXPLORE} component={Explore} />
+
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route path={ROUTES.ADMIN} component={AdminPage} />
           <Route path={ROUTES.PROFILE} component={ProfilePage} />
@@ -134,10 +178,17 @@ class App extends Component {
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser,
   fetchCompleted: state.loadStatusState.stateFetched,
+  topNotes: state.topNotesState,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetUsers: users => dispatch({ type: 'USERS_SET', users }),
+  onSetUsers: users => dispatch({ type: a.USERS_SET, users }),
+  onSetTopNotes: notes => dispatch({ type: a.TOP_NOTES_SET, notes }),
+  calculateWardrobes: (myNotes, otherNotes) =>
+    dispatch({ type: a.SET_SIMILAR_WARDROBES, myNotes, otherNotes }),
+  onSetWardrobe: wardrobe =>
+    dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
+
   setSize: size => dispatch({ type: a.SIZE, size }),
   startFetch: () =>
     dispatch({

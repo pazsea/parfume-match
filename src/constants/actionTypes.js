@@ -4,6 +4,10 @@ export const USERS_SET = 'USERS_SET';
 export const USER_SET = 'USER_SET';
 
 export const AUTH_USER_SET = 'AUTH_USER_SET';
+export const WARDROBE_USER_SET = 'WARDROBE_USER_SET';
+export const TOP_NOTES_SET = 'TOP_NOTES_SET';
+export const SET_SIMILAR_WARDROBES = 'SET_SIMILAR_WARDROBES';
+
 export const SIZE = 'SIZE';
 export const STATE_FETCH_SUCCESS = 'STATE_FETCH_SUCCESS';
 export const SNIPH_BULK_SUCCESS = 'SNIPH_BULK_SUCCESS';

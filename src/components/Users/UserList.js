@@ -5,6 +5,7 @@ import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import Loading from '../Loading';
 
 class UserList extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class UserList extends Component {
     return (
       <div>
         <h2>Users</h2>
-        {loading && <div>Loading ...</div>}
+        {loading && <Loading />}
         <ul>
           {users.map(user => (
             <li key={user.uid}>

@@ -7,7 +7,9 @@ function sortingWardrobes(state, action) {
     const topNotes = action.otherNotes[user];
     // console.log(user + " has " + topNotes)
     // console.log("====")
+
     const matchFrequency = topNotes.reduce((notes, value) => {
+      //Det är här det går åt helvete
       if (action.myNotes.includes(value)) {
         notes[user] = notes[user] ? notes[user] + 1 : 1;
       }

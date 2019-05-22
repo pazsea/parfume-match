@@ -46,7 +46,6 @@ class Collection extends Component {
     // const { recommendedCol } = this.state;
     console.log(authUser.recommendedCol);
     firebase.user(authUser.uid).update({
-      recommendedCol: null,
       selectedCol: {
         [Object.keys(authUser.recommendedCol)]: true,
       },

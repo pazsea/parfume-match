@@ -14,7 +14,6 @@ import HomePage from '../Home';
 import Explore from '../Explore';
 
 import AccountPage from '../Account';
-import ProfilePage from '../Profile';
 import AdminPage from '../Admin';
 import QuizPage, {
   QuestionOne,
@@ -62,12 +61,11 @@ class App extends Component {
       const val = snapshot.val();
       this.props.onSetTopNotes(val);
 
-      if (authUser && val !== null && val[authUser.uid] !== null) {
+      if (authUser && val && val[authUser.uid]) {
         const {
           authUser: { uid },
           calculateWardrobes,
         } = this.props;
-        console.log('DU KOMMER IN ' + val);
         const { [uid]: myNotes, ...otherNotes } = val;
         calculateWardrobes(myNotes, otherNotes);
       }
@@ -79,7 +77,7 @@ class App extends Component {
           authUser: { uid },
           onSetWardrobe,
         } = this.props;
-        if (val !== null && val[uid] !== null) {
+        if (val && val[uid]) {
           const objectWithHighestNotes = Object.assign(
             {},
             getKeysWithHighestValue(val[uid].ratedNotes, 2),
@@ -140,7 +138,6 @@ class App extends Component {
 
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route path={ROUTES.ADMIN} component={AdminPage} />
-          <Route path={ROUTES.PROFILE} component={ProfilePage} />
           <Route path={ROUTES.QUIZ} component={QuizPage} />
           <Route path={ROUTES.QUESTIONONE} component={QuestionOne} />
           <Route path={ROUTES.QUESTIONTWO} component={QuestionTwo} />

@@ -99,6 +99,9 @@ class WardrobePage extends Component {
         .child(name)
         .update({
           rating: nextValue,
+          base: [base],
+          heart: [heart],
+          top: [top],
         })
         .then(
           firebase

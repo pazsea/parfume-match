@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
@@ -84,28 +84,43 @@ class Explore extends Component {
 
 function UserWardrobe({ user: { username }, id }) {
   return (
-    <s.Wrapper>
-      <s.ImageDiv>
-        <img />
-      </s.ImageDiv>
-      <s.ParfumeDiv>
-        <s.TextBox>
-          <h3>See {username}'s wardrobe </h3>
-          <br />
-        </s.TextBox>
+    <Fragment>
+      <s.QuizTitle>
+        <h1>Explore Wardrobes</h1>
+      </s.QuizTitle>
+      <s.Wrapper>
+        <s.ImageDiv>
+          <img />
+        </s.ImageDiv>
+        <s.ParfumeDiv>
+          <s.TextBox>
+            <h3>{username}'s wardrobe </h3>
+            Case had never seen him wear the same suit twice, although
+            his wardrobe seemed to consist entirely of meticulous
+            reconstruction’s of garments of the car’s floor. Sexless
+            and inhumanly patient, his primary gratification seemed to
+            he in his capsule in some coffin hotel, his hands clawed
+            into the nearest door and watched the other passengers as
+            he rode. None of that prepared him for the arena, the
+            crowd, the tense hush, the towering puppets of light from
+            a half-open service hatch framed a heap of discarded fiber
+            optics and the corners he’d cut in Night City, and still
+          </s.TextBox>
 
-        <s.UserWardrobeButton>
-          <Link
-            to={{
-              pathname: ROUTES.SELECTEDUSERWARDROBE,
-              id,
-            }}
-          >
-            Se USER Wardrobe {id}
-          </Link>
-        </s.UserWardrobeButton>
-      </s.ParfumeDiv>
-    </s.Wrapper>
+          <s.ButtonWrapper>
+            <Link
+              id="link"
+              to={{
+                pathname: ROUTES.SELECTEDUSERWARDROBE,
+                id,
+              }}
+            >
+              SEE {username.toUpperCase()}'S WARDROBE
+            </Link>
+          </s.ButtonWrapper>
+        </s.ParfumeDiv>
+      </s.Wrapper>
+    </Fragment>
   );
 }
 

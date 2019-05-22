@@ -18,25 +18,42 @@ class SelectedUserWardrobe extends Component {
     tabOpen: '',
   };
 
+  toggleTab = e => {
+    const tabValue = e.target.value;
+    this.setState({
+      tabOpen: tabValue,
+    });
+  };
+
+  toggleTruncate = () => {
+    this.setState(prevState => ({
+      isTruncated: !prevState.isTruncated,
+    }));
+  };
+
   render() {
-    const { tabOpen, isTruncated, loading } = this.state;
+    const { tabOpen, isTruncated } = this.state;
 
     const {
       users,
       userWardrobes,
+      parfumesState,
       location: { id },
     } = this.props;
 
     if (users && userWardrobes && id) {
-      const wardrobe = userWardrobes[id];
+      const wardrobe = userWardrobes[id].parfumes;
       const userWardrobeKeys = Object.keys(wardrobe);
-      console.log(userWardrobeKeys);
+      const selectedCol = Object.keys(users[id].selectedCol);
+      console.log(selectedCol);
       // console.log(subCollection.rating);
 
       return (
         <Section>
           <s.QuizTitle>
-            <h1>Wardrobe</h1>
+            <h1>
+              {users ? users[id].username + ' ' : 'User '}Wardrobe
+            </h1>
           </s.QuizTitle>
           {userWardrobeKeys.map((parfume, index) => (
             <Fragment>
@@ -50,43 +67,49 @@ class SelectedUserWardrobe extends Component {
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      Description
+                      My Rating
                     </button>
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      My Rating
+                      Description
                     </button>
                   </s.ButtonDiv>
-                  <s.HeaderDiv>{wardrobe}</s.HeaderDiv>
+                  <s.HeaderDiv>{parfume}</s.HeaderDiv>
                   <s.StarsDiv>
                     <StarRatingComponent
-                      key={wardrobe + index}
-                      name={wardrobe}
+                      key={parfume + index}
+                      name={parfume}
                       starCount={5}
                       editing={false}
-                      value={parfume.rating ? parfume.rating : 0}
+                      value={
+                        wardrobe[parfume].rating
+                          ? wardrobe[parfume].rating
+                          : 0
+                      }
                     />
                   </s.StarsDiv>
                   <s.NotesDiv>
                     <img src={noteslogo} />
-                    {parfume.base_note_id}, {parfume.top_note_id},{' '}
-                    {parfume.heart_note_id}
+                    {wardrobe[parfume].base},{' '}
+                    {wardrobe[parfume].heart}, {wardrobe[parfume].top}
                   </s.NotesDiv>
 
                   {tabOpen === 'ratingTab' + index ? (
-                    <RatingWrapper
-                      name={parfume}
-                      textFirebase={
-                        parfume.ownDesc ? parfume.ownDesc : ''
-                      }
-                      tabOpen={tabOpen}
-                    />
-                  ) : (
                     <DescriptionWrapper
                       isTruncated={isTruncated}
                       toggleTruncate={this.toggleTruncate}
+                      tabOpen={tabOpen}
+                    />
+                  ) : (
+                    <RatingWrapper
+                      name={parfume}
+                      textFirebase={
+                        wardrobe[parfume].ownDesc
+                          ? wardrobe[parfume].ownDesc
+                          : ''
+                      }
                       tabOpen={tabOpen}
                     />
                   )}
@@ -129,37 +152,14 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
   );
 }
 
-function RatingWrapper({ name, textFirebase, firebase, authUser }) {
-  const [editText, setEditText] = useState(textFirebase);
-
-  const textChange = e => {
-    const text = e.target.value;
-    setEditText(text);
-  };
-
-  const descriptionSubmit = event => {
-    event.preventDefault();
-
-    firebase
-      .wardrobe(authUser)
-      .child(name)
-      .update({ ownDesc: editText });
-  };
-
+function RatingWrapper({ textFirebase }) {
   return (
     <Fragment>
-      <s.RatingForm onSubmit={e => descriptionSubmit(e)}>
+      <s.RatingForm>
         <s.RatingBox
           type="text"
           className="ratingBox"
-          value={editText}
-          onChange={e => textChange(e)}
-        />
-
-        <s.RatingButton
-          className="ratingButton"
-          type="submit"
-          value="Submit"
+          value={textFirebase}
         />
       </s.RatingForm>
     </Fragment>
@@ -168,9 +168,8 @@ function RatingWrapper({ name, textFirebase, firebase, authUser }) {
 
 const mapStateToProps = state => ({
   users: state.userState.users,
-  // topNotes: state.topNotesState,
-  // authUser: state.sessionState.authUser,
   userWardrobes: state.userWardrobesState,
+  parfumesState: state.sortedParfumesState,
 });
 
 const condition = authUser => !!authUser;

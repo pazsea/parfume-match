@@ -150,7 +150,7 @@ class WardrobePage extends Component {
       return <Loading />;
     } else if (!authUser.selectedCol) {
       return <NoCollection />;
-    } else if (this.props.allCollections) {
+    } else if (this.props.allCollections && authUser.selectedCol) {
       const subCollection = this.props.allCollections[
         Object.keys(authUser.selectedCol)
       ];

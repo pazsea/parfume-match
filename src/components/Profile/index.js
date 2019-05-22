@@ -27,13 +27,16 @@ class ProfilePage extends Component {
 
   setRecColToSelected() {
     const { firebase, authUser } = this.props;
-    const { selectedCol } = this.state;
+    const recommendedCol = Object.keys(authUser.recommendedCol);
+
+    console.log('SHIIIT ' + recommendedCol);
 
     firebase.user(authUser.uid).update({
       selectedCol: {
-        [selectedCol]: true,
+        [recommendedCol]: true,
       },
     });
+    // console.log('SelectedCol ' + selectedCol);
   }
   // Användaren har ingen recommendedCol: Visa Quiz-knapp + text.
   // Användaren har endast recommendedCol: Visa Prenumerationsknapp + text.
@@ -44,12 +47,11 @@ class ProfilePage extends Component {
 
     const { subscription, authUser } = this.props;
 
-    console.log('RENDER');
     // console.log(
     //   'recommendedCol ' + Object.keys(authUser.recommendedCol),
     // );
 
-    // FÖRSTA VILLKORET
+    // FÖRSTA VILLKORET MAN HAR VARKEN REC ELLER SELECTED
     if (!authUser.recommendedCol && !authUser.selectedCol) {
       return (
         <Fragment>
@@ -134,12 +136,10 @@ class ProfilePage extends Component {
         </Fragment>
       );
 
-      // ANDRA VILLKORET
+      // ANDRA VILLKORET MAN HAR RECOMMENDED
     } else if (authUser.recommendedCol && !authUser.selectedCol) {
-      const colHeader = JSON.stringify(
-        Object.keys(authUser.selectedCol),
-      );
-      console.log(colHeader);
+      const colHeader = Object.keys(authUser.recommendedCol);
+      // console.log(colHeader);
       return (
         <Fragment>
           <s.Header
@@ -161,14 +161,18 @@ class ProfilePage extends Component {
           >
             <s.TitleOnHeaderCenter>
               <h1>
-                Nuvarande kollektion{' '}
-                <i>{Object.keys(authUser.selectedCol)}</i>
+                Rekommenderad kollektion <i>{colHeader}</i>
               </h1>
-              <s.SubscribeButton>
-                <button onClick={() => this.setRecColToSelected()}>
-                  <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
-                </button>
-              </s.SubscribeButton>
+
+              <s.ButtonWrapper>
+                <Link
+                  id="link"
+                  onClick={e => this.setRecColToSelected(e)}
+                  to={ROUTES.WARDROBE}
+                >
+                  Prenumerera
+                </Link>
+              </s.ButtonWrapper>
             </s.TitleOnHeaderCenter>
           </s.Header>
 
@@ -225,11 +229,10 @@ class ProfilePage extends Component {
           </s.FlexContainer>
         </Fragment>
       );
-      // TREDJE OCH SISTA VILLKORET
+      // TREDJE OCH SISTA VILLKORET MAN HAR RECOMMENDED OCH SELECTED
     } else {
-      const colHeader = JSON.stringify(
-        Object.keys(authUser.selectedCol),
-      );
+      const colHeader = Object.keys(authUser.selectedCol);
+
       return (
         <Fragment>
           <s.Header
@@ -251,14 +254,18 @@ class ProfilePage extends Component {
           >
             <s.TitleOnHeaderCenter>
               <h1>
-                Nuvarande kollektion{' '}
-                <i>{Object.keys(authUser.selectedCol)}</i>
+                Nuvarande kollektion <i>{colHeader}</i>
               </h1>
-              <s.SubscribeButton>
-                <button onClick={() => this.setRecColToSelected()}>
-                  <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
-                </button>
-              </s.SubscribeButton>
+
+              <s.ButtonWrapper>
+                <Link
+                  id="link"
+                  onClick={e => this.setRecColToSelected(e)}
+                  to={ROUTES.WARDROBE}
+                >
+                  Visa doftgarderob
+                </Link>
+              </s.ButtonWrapper>
             </s.TitleOnHeaderCenter>
           </s.Header>
 

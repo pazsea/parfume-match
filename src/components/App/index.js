@@ -12,6 +12,7 @@ import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
 import HomePage from '../Home';
 import Explore from '../Explore';
+import ProfilePage from '../Profile';
 
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
@@ -166,6 +167,7 @@ class App extends Component {
                 : QuizPage
             }
           />
+          <Route path={ROUTES.PROFILE} component={ProfilePage} />
         </div>
       </Router>
     );

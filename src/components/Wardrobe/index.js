@@ -299,6 +299,7 @@ function RatingWrapper({ name, textFirebase, firebase, authUser }) {
           className="ratingBox"
           value={editText}
           onChange={e => textChange(e)}
+          rows="4"
         />
 
         <s.RatingButton

@@ -40,9 +40,11 @@ export const ButtonDiv = styled.div`
   flex: 2;
   flex-direction: row;
   overflow: hidden;
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
   background-color: white;
   align-items: center;
+  margin: 0 auto; /* Ny */
+  padding: 0.5em 0; /* Ny */
 
   button {
     cursor: pointer;
@@ -51,8 +53,9 @@ export const ButtonDiv = styled.div`
     font-weight: 700;
     background: none;
     height: fit-content;
-    padding: 0;
+    padding: 0.3em 0;
     margin-left: 0.4em;
+    border: 1px solid transparent; /* För att innehållet inte ska tryckas ned vid hover */
   }
   button:nth-child(1) {
     border-bottom: ${props =>
@@ -69,8 +72,10 @@ export const ButtonDiv = styled.div`
         ? '1px solid black'
         : null};
   }
+
   button:hover {
-    background-color: #ddd;
+    /* background-color: #ddd; */
+    border-bottom: 1px solid #ccc; /* Ny */
   }
 `;
 
@@ -79,8 +84,10 @@ export const NotesDiv = styled.div`
   flex: 0.5;
   align-items: center;
   font-size: 0.7em;
-  margin-left: 0.4em;
+  /* margin-left: 0.4em; */
   margin-bottom: 0.3em;
+  margin-left: 1em;
+  margin-top: 0.5em;
   img {
     width: 40px;
     height: 40px;
@@ -89,26 +96,33 @@ export const NotesDiv = styled.div`
 
 export const StarsDiv = styled.div`
   flex: 1;
-  font-size: 2em;
-  margin-left: 0.4em;
+  font-size: 1.3em;
+  /* margin-left: 0.4em; */
+  margin: 0 auto;
 `;
+
 export const HeaderDiv = styled.div`
   flex: 1;
-  margin-left: 0.4em;
+  /* margin-left: 0.4em; */
   font-family: 'Montserrat', sans-serif;
   font-weight: 200;
   font-size: 1.4em;
-  padding: 0.1em 0;
+  padding: 0.2em 0;
+  margin: 0 auto; /* Ny */
 `;
 
 //DESCRIPTION TAB
 
 export const DescriptionDiv = styled.div`
   flex: 8;
-  margin-left: 0.4em;
+  /* margin-left: 0.4em; */
   font-size: 1em;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
+  /* padding: 0.5em; */
+  margin-left: 1em;
+  margin-bottom: 1em;
+  margin-top: 0.4em;
 `;
 
 //MY RATING TAB
@@ -124,21 +138,39 @@ export const RatingForm = styled.form`
 
 export const RatingBox = styled.textarea`
   flex: 5;
-  margin: 0 0.4em 0.4em 0.4em;
+  /* margin: 0 0.4em 0.4em 0.4em; */
+  padding: 0.5em;
+  width: 93%;
+  margin: 0 auto;
+  margin-top: 1em;
+  margin-bottom: 1.1em;
+  font-size: 1em;
+  font-family: 'Roboto';
 `;
 
 export const RatingButton = styled.input`
   flex: 1;
   color: #fff;
   background: #000;
-  margin: 0 0.4em 0.4em 0.4em;
-  border: 2px solid #000;
+  /* margin: 0 0.4em 0.4em 0.4em; */
+  /* border: 1px solid #000; */
   text-transform: uppercase;
+
+  padding: 10px 25px;
+  font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
+    sans-serif;
+
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.8em;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 1em;
 
   :hover {
     color: #000;
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
     cursor: pointer;
   }
 `;

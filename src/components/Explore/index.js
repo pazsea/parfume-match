@@ -7,6 +7,7 @@ import { getTopWardrobes } from '../../constants/functions';
 
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
+import Loading from '../Loading';
 
 class Explore extends Component {
   state = {
@@ -43,7 +44,7 @@ class Explore extends Component {
   render() {
     const { loading } = this.state;
     if (loading) {
-      return <p>LOADING....</p>;
+      return <Loading />;
     } else {
       return (
         <div>

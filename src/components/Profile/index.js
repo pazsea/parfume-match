@@ -27,13 +27,16 @@ class ProfilePage extends Component {
 
   setRecColToSelected() {
     const { firebase, authUser } = this.props;
-    const { selectedCol } = this.state;
+    const recommendedCol = Object.keys(authUser.recommendedCol);
+
+    console.log('SHIIIT ' + recommendedCol);
 
     firebase.user(authUser.uid).update({
       selectedCol: {
-        [selectedCol]: true,
+        [recommendedCol]: true,
       },
     });
+    // console.log('SelectedCol ' + selectedCol);
   }
   // Användaren har ingen recommendedCol: Visa Quiz-knapp + text.
   // Användaren har endast recommendedCol: Visa Prenumerationsknapp + text.
@@ -48,7 +51,7 @@ class ProfilePage extends Component {
     //   'recommendedCol ' + Object.keys(authUser.recommendedCol),
     // );
 
-    // FÖRSTA VILLKORET
+    // FÖRSTA VILLKORET MAN HAR VARKEN REC ELLER SELECTED
     if (!authUser.recommendedCol && !authUser.selectedCol) {
       return (
         <Fragment>
@@ -133,12 +136,10 @@ class ProfilePage extends Component {
         </Fragment>
       );
 
-      // ANDRA VILLKORET
+      // ANDRA VILLKORET MAN HAR RECOMMENDED
     } else if (authUser.recommendedCol && !authUser.selectedCol) {
-      const colHeader = JSON.stringify(
-        Object.keys(authUser.selectedCol),
-      );
-      console.log(colHeader);
+      const colHeader = Object.keys(authUser.recommendedCol);
+      // console.log(colHeader);
       return (
         <Fragment>
           <s.Header
@@ -160,14 +161,18 @@ class ProfilePage extends Component {
           >
             <s.TitleOnHeaderCenter>
               <h1>
-                Nuvarande kollektion{' '}
-                <i>{Object.keys(authUser.selectedCol)}</i>
+                Rekommenderad kollektion <i>{colHeader}</i>
               </h1>
-              <s.SubscribeButton>
-                <button onClick={() => this.setRecColToSelected()}>
-                  <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
-                </button>
-              </s.SubscribeButton>
+
+              <s.ButtonWrapper>
+                <Link
+                  id="link"
+                  onClick={e => this.setRecColToSelected(e)}
+                  to={ROUTES.WARDROBE}
+                >
+                  Prenumerera
+                </Link>
+              </s.ButtonWrapper>
             </s.TitleOnHeaderCenter>
           </s.Header>
 
@@ -224,8 +229,99 @@ class ProfilePage extends Component {
           </s.FlexContainer>
         </Fragment>
       );
-      // TREDJE OCH SISTA VILLKORET
+      // TREDJE OCH SISTA VILLKORET MAN HAR RECOMMENDED OCH SELECTED
     } else {
+      const colHeader = Object.keys(authUser.selectedCol);
+
+      return (
+        <Fragment>
+          <s.Header
+            headerImage={
+              colHeader.includes('FÖR MÄN: Aesthetic')
+                ? headerForMen
+                : colHeader.includes('Avant-Garde')
+                ? headerAvantgard
+                : colHeader.includes('Clean')
+                ? headerClean
+                : colHeader.includes('Female Classics')
+                ? headerFemaleClassics
+                : colHeader.includes('Trending Now')
+                ? headerTrendingNow
+                : colHeader.includes('FÖR MÄN: Work/Play')
+                ? headerWorkPlay
+                : null
+            }
+          >
+            <s.TitleOnHeaderCenter>
+              <h1>
+                Nuvarande kollektion <i>{colHeader}</i>
+              </h1>
+
+              <s.ButtonWrapper>
+                <Link
+                  id="link"
+                  onClick={e => this.setRecColToSelected(e)}
+                  to={ROUTES.WARDROBE}
+                >
+                  Visa doftgarderob
+                </Link>
+              </s.ButtonWrapper>
+            </s.TitleOnHeaderCenter>
+          </s.Header>
+
+          <s.FlexContainer>
+            <s.FlexContainerRow>
+              <s.FlexLeftContainer>
+                <s.Blog>
+                  <h2>Senaste bloginlägg</h2>
+                  <p>
+                    <i>2019-05-19</i>
+                    <br />
+                    Mors dag är här innan du hinner blinka! Se till
+                    att du är redo att överraska de viktigaste
+                    mammorna i ditt liv med en speciell gåva. Med
+                    Sniph kommer din rara mor att få upptäcka olika
+                    dofter utvalda av experter, en present som kommer
+                    överraska långt bortom mors dag. Scrolla ner för
+                    att läsa mer om varför Sniph är en alldeles unik
+                    gåva, och skäm bort din mamma med någon av våra
+                    härliga gåvotips.{'   '}
+                    <a href="url">Läs mer</a>
+                  </p>
+                </s.Blog>
+                <h2>Min beskrivning</h2>
+                <textarea />
+                <br />
+                <button>Spara</button>
+              </s.FlexLeftContainer>
+              <s.FlexRightContainer>
+                <s.ProfileContent>
+                  <div>
+                    <h2>Profil</h2>
+                    <div>
+                      <h2>{this.props.authUser.username}</h2>
+                      <s.ProfilePicture>
+                        <img
+                          alt="profile pic"
+                          src={profile_picture_placeholder}
+                        />
+                      </s.ProfilePicture>
+                    </div>
+
+                    <s.QuizIntroButton>
+                      <button>
+                        <Link to={ROUTES.QUESTIONONE}>
+                          Starta doft-quiz
+                        </Link>
+                      </button>
+                    </s.QuizIntroButton>
+                  </div>
+                </s.ProfileContent>
+              </s.FlexRightContainer>
+            </s.FlexContainerRow>
+          </s.FlexContainer>
+        </Fragment>
+      );
     }
   }
 }

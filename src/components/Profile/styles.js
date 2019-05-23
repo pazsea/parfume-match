@@ -73,9 +73,9 @@ export const ProfilePicture = styled.div`
     display: none;
   }
   img {
-    height: 10rem;
+    height: 15rem;
     width: auto;
-    border-radius: 50%;
+    border-radius: 10%;
     cursor: cell;
   }
 `;

@@ -15,8 +15,12 @@ export const ImageDiv = styled.div`
 
   img {
     height: 15rem;
+    min-width: 12rem;
     width: auto;
+
+    max-width: 17rem;
     border-radius: 50%;
+    /* border: 1px solid black; */
     align-self: center;
     /* width: 50%;
     height: 300px; */
@@ -24,7 +28,7 @@ export const ImageDiv = styled.div`
 `;
 
 export const ParfumeDiv = styled.div`
-  flex-basis: 50%;
+  flex-basis: 35%;
   display: flex;
   flex-direction: column;
   height: 300px;
@@ -42,13 +46,16 @@ export const QuizTitle = styled.div`
 
 export const TextBox = styled.div`
   flex: 4;
-  margin: 0.2em 0.4em 0.4em 0.4em;
+  margin: 0.8em 0.8em 0.8em 0.8em;
   overflow-y: hidden;
-  font-size: 1em;
+  font-size: 1.1em;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
+  font-style: italic;
   h3 {
-    margin: 0;
+    margin: 0 0 0.4em 0;
+    font-style: normal;
+    font-weight: 900;
   }
 `;
 

@@ -144,6 +144,16 @@ export const SubscribeButton = styled.div`
   }
 `;
 
+export const DescriptionBox = styled.div`
+  width: 80%;
+  flex-wrap: wrap;
+  textarea {
+    width: 80%;
+    height: 7rem;
+    flex-wrap: wrap;
+  }
+`;
+
 export const NoCollectionWrapper = styled.div`
   display: flex;
   background-color: lightgrey;
@@ -156,6 +166,7 @@ export const NoCollectionWrapper = styled.div`
 export const ButtonWrapper = styled.div`
   width: 100%;
   text-align: center;
+
   #link {
     background-color: black;
     border: none;
@@ -171,6 +182,86 @@ export const ButtonWrapper = styled.div`
     text-transform: uppercase;
     display: inline-block;
     font-size: 16px;
+    a:visited {
+      text-decoration: none;
+      color: white;
+    }
+    a:link {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  #input {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
+      sans-serif;
+
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 12px;
+    a:visited {
+      text-decoration: none;
+      color: white;
+    }
+    a:link {
+      text-decoration: none;
+      color: white;
+    }
+  }
+`;
+
+export const SmallButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  text-align: center;
+
+  #link {
+    justify-content: flex-start;
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
+      sans-serif;
+
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 16px;
+    a:visited {
+      text-decoration: none;
+      color: white;
+    }
+    a:link {
+      text-decoration: none;
+      color: white;
+    }
+  }
+  #input {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
+      sans-serif;
+
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 12px;
     a:visited {
       text-decoration: none;
       color: white;

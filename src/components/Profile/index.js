@@ -6,6 +6,8 @@ import * as ROUTES from '../../constants/routes';
 import * as s from './styles';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 import profile_picture_placeholder from '../../images/profile_picture_placeholder.jpg';
 import headerAvantgard from '../../images/headerAvantgard.jpg';
 import headerClean from '../../images/headerClean.jpg';
@@ -104,9 +106,8 @@ class ProfilePage extends Component {
               <s.FlexRightContainer>
                 <s.ProfileContent>
                   <div>
-                    <h2>Profil</h2>
+                    <h2>{this.props.authUser.username}</h2>
                     <div>
-                      <h2>{this.props.authUser.username}</h2>
                       <s.ProfilePicture>
                         <img
                           alt="profile pic"
@@ -120,14 +121,6 @@ class ProfilePage extends Component {
             recommendation/ placeholder med quizknappen 
             textarea för beskrivning*/}
                     </div>
-
-                    <s.QuizIntroButton>
-                      <button>
-                        <Link to={ROUTES.QUESTIONONE}>
-                          Starta doft-quiz
-                        </Link>
-                      </button>
-                    </s.QuizIntroButton>
                   </div>
                 </s.ProfileContent>
               </s.FlexRightContainer>
@@ -204,9 +197,8 @@ class ProfilePage extends Component {
               <s.FlexRightContainer>
                 <s.ProfileContent>
                   <div>
-                    <h2>Profil</h2>
+                    <h2>{this.props.authUser.username}</h2>
                     <div>
-                      <h2>{this.props.authUser.username}</h2>
                       <s.ProfilePicture>
                         <img
                           alt="profile pic"
@@ -214,14 +206,6 @@ class ProfilePage extends Component {
                         />
                       </s.ProfilePicture>
                     </div>
-
-                    <s.QuizIntroButton>
-                      <button>
-                        <Link to={ROUTES.QUESTIONONE}>
-                          Starta doft-quiz
-                        </Link>
-                      </button>
-                    </s.QuizIntroButton>
                   </div>
                 </s.ProfileContent>
               </s.FlexRightContainer>
@@ -272,34 +256,56 @@ class ProfilePage extends Component {
           <s.FlexContainer>
             <s.FlexContainerRow>
               <s.FlexLeftContainer>
-                <s.Blog>
-                  <h2>Senaste bloginlägg</h2>
-                  <p>
-                    <i>2019-05-19</i>
-                    <br />
-                    Mors dag är här innan du hinner blinka! Se till
-                    att du är redo att överraska de viktigaste
-                    mammorna i ditt liv med en speciell gåva. Med
-                    Sniph kommer din rara mor att få upptäcka olika
-                    dofter utvalda av experter, en present som kommer
-                    överraska långt bortom mors dag. Scrolla ner för
-                    att läsa mer om varför Sniph är en alldeles unik
-                    gåva, och skäm bort din mamma med någon av våra
-                    härliga gåvotips.{'   '}
-                    <a href="url">Läs mer</a>
-                  </p>
-                </s.Blog>
-                <h2>Min beskrivning</h2>
-                <textarea />
-                <br />
-                <button>Spara</button>
+                <Tabs>
+                  <TabList>
+                    <Tab>Sniph Blogg</Tab>
+                    <Tab>Min beskrivning</Tab>
+                  </TabList>
+                  <TabPanel>
+                    <s.Blog>
+                      <h2>Senaste bloginlägg</h2>
+                      <p>
+                        <i>2019-05-19</i>
+                        <br />
+                        Mors dag är här innan du hinner blinka! Se
+                        till att du är redo att överraska de
+                        viktigaste mammorna i ditt liv med en speciell
+                        gåva. Med Sniph kommer din rara mor att få
+                        upptäcka olika dofter utvalda av experter, en
+                        present som kommer överraska långt bortom mors
+                        dag. Scrolla ner för att läsa mer om varför
+                        Sniph är en alldeles unik gåva, och skäm bort
+                        din mamma med någon av våra härliga gåvotips.
+                        {'   '}
+                        <a href="url">Läs mer</a>
+                      </p>
+                    </s.Blog>
+                  </TabPanel>
+                  <TabPanel>
+                    <s.Blog>
+                      <h2>Min beskrivning</h2>
+                      <s.DescriptionBox>
+                        <textarea id="link" rows="15" cols="200" />
+                        <br />
+                      </s.DescriptionBox>
+                      <s.ButtonWrapper>
+                        <Link
+                          id="input"
+                          onClick={e => this.setRecColToSelected(e)}
+                          to={ROUTES.PROFILE}
+                        >
+                          Spara
+                        </Link>
+                      </s.ButtonWrapper>
+                    </s.Blog>
+                  </TabPanel>
+                </Tabs>
               </s.FlexLeftContainer>
               <s.FlexRightContainer>
                 <s.ProfileContent>
                   <div>
-                    <h2>Profil</h2>
+                    <h2>{this.props.authUser.username}</h2>
                     <div>
-                      <h2>{this.props.authUser.username}</h2>
                       <s.ProfilePicture>
                         <img
                           alt="profile pic"
@@ -307,14 +313,6 @@ class ProfilePage extends Component {
                         />
                       </s.ProfilePicture>
                     </div>
-
-                    <s.QuizIntroButton>
-                      <button>
-                        <Link to={ROUTES.QUESTIONONE}>
-                          Starta doft-quiz
-                        </Link>
-                      </button>
-                    </s.QuizIntroButton>
                   </div>
                 </s.ProfileContent>
               </s.FlexRightContainer>

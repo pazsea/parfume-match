@@ -67,13 +67,14 @@ class SelectedUserWardrobe extends Component {
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      My Rating
+                      {users ? users[id].username + '' : 'User'}'s
+                      Recension
                     </button>
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      Description
+                      Parfym Beskrivning
                     </button>
                   </s.ButtonDiv>
                   <s.HeaderDiv>{parfume}</s.HeaderDiv>

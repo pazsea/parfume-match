@@ -96,7 +96,7 @@ class NavigationAuth extends Component {
             <ul>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.PROFILE}>
-                  Profile
+                  Profil
                 </Link>
               </li>
               <li>
@@ -110,13 +110,13 @@ class NavigationAuth extends Component {
                 </Link>
               </li>
 
-              {authUser.roles.includes(ROLES.ADMIN) && (
+              {/* {authUser.roles.includes(ROLES.ADMIN) && (
                 <li>
                   <Link onClick={this.toggleNav} to={ROUTES.ADMIN}>
                     Admin
                   </Link>
                 </li>
-              )}
+              )} */}
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
                   Garderob

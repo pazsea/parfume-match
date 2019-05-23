@@ -16,38 +16,12 @@ class Explore extends Component {
     stateFetched: false,
   };
 
-  // componentDidMount() {
-  //   console.log('CDM ran');
-  //   const {
-  //     authUser: { uid },
-  //     topNotes,
-  //   } = this.props;
-  //   if (this.state.stateFetched === true) {
-  //     console.log('STARTAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-  //     const { [uid]: myNotes, ...otherNotes } = topNotes.notes;
-
-  //     this.setState({
-  //       wardrobeMatches: getTopWardrobes(myNotes, otherNotes),
-  //       loading: false,
-  //     });
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps) {
-  //   console.log('CDU ran');
-  //   const { topNotes } = this.props;
-  //   if (prevProps.topNotes !== topNotes) {
-  //     console.log('KOMPONENTEN UPPTÄCKTE UPPDATERING');
-  //     this.setState({ stateFetched: true });
-  //   }
-  // }
-
   render() {
     const { recommendedWardrobes, users, userWardrobes } = this.props;
     return (
       <div>
         <s.QuizTitle>
-          <h1>Explore Wardrobes</h1>
+          <h1>Utforska Garderober</h1>
         </s.QuizTitle>
         {recommendedWardrobes && users && userWardrobes ? (
           recommendedWardrobes.map(uid => (
@@ -62,26 +36,6 @@ class Explore extends Component {
           <p>Du har inte betygsatt någon parfym än...</p>
         )}
       </div>
-      // <div>
-      //   <s.Wrapper>
-      //     <s.ImageDiv>
-      //       <img />
-      //     </s.ImageDiv>
-      //     <s.ParfumeDiv>
-      //       <s.TextBox>heeelo</s.TextBox>
-
-      //       <s.UserWardrobeButton>
-      //         Se USER Wardrobe
-      //       </s.UserWardrobeButton>
-      //     </s.ParfumeDiv>
-      //   </s.Wrapper>
-      //   <s.Wrapper>
-      //     <s.ImageDiv>
-      //       <img />
-      //     </s.ImageDiv>
-      //     <s.ParfumeDiv>heeelo</s.ParfumeDiv>
-      //   </s.Wrapper>
-      // </div>
     );
   }
 }
@@ -99,7 +53,7 @@ function UserWardrobe({
         </s.ImageDiv>
         <s.ParfumeDiv>
           <s.TextBox>
-            <h3>{username}'s wardrobe </h3>
+            <h3>{username}'s garderob </h3>
             Case had never seen him wear the same suit twice, although
             his wardrobe seemed to consist entirely of meticulous
             reconstruction’s of garments of the car’s floor. Sexless
@@ -120,7 +74,7 @@ function UserWardrobe({
                 id,
               }}
             >
-              SEE {username.toUpperCase()}'S WARDROBE
+              SE {username.toUpperCase()}'S GARDEROB
             </Link>
           </s.ButtonWrapper>
         </s.ParfumeDiv>

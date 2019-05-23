@@ -117,14 +117,6 @@ class WardrobePage extends Component {
               [heart]: this.newValue(heart, clickedPoints),
               [top]: this.newValue(top, clickedPoints),
             }),
-          // .then(
-          //   firebase
-          //     .wardrobe(uid)
-          //     .child('ratedNotes')
-          //     .update({
-          //       [base]: ba,
-          //     }),
-          // ),
         );
     }
   }
@@ -154,20 +146,13 @@ class WardrobePage extends Component {
       const subCollection = this.props.allCollections[
         Object.keys(authUser.selectedCol)
       ];
-      // =======
-      //       return <Loading />;
-      //     } else if (!subscription) {
-      //       return <NoCollection />;
-      //     } else {
-      //       const subCollection = this.props.allCollections[subscription];
-      // >>>>>>> master
 
       return (
         <Section>
           <s.QuizTitle>
-            <h1>Wardrobe</h1>
+            <h1>Min doft garderob</h1>
           </s.QuizTitle>
-          {subCollection.slice(0, 3).map((item, index) => (
+          {subCollection.slice(0, 8).map((item, index) => (
             <Fragment>
               <s.Wrapper>
                 <s.ImageDiv>
@@ -179,13 +164,13 @@ class WardrobePage extends Component {
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      Description
+                      Parfym Beskrivning
                     </button>
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      My Rating
+                      Recension
                     </button>
                   </s.ButtonDiv>
                   <s.HeaderDiv>{item.name}</s.HeaderDiv>

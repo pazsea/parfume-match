@@ -52,7 +52,7 @@ class SelectedUserWardrobe extends Component {
         <Section>
           <s.QuizTitle>
             <h1>
-              {users ? users[id].username + ' ' : 'User '}Wardrobe
+              {users ? users[id].username + '' : 'User'}'s Wardrobe
             </h1>
           </s.QuizTitle>
           {userWardrobeKeys.map((parfume, index) => (

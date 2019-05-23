@@ -93,6 +93,9 @@ export const Header = styled.div`
 export const Blog = styled.div`
   width: 80%;
   flex-wrap: wrap;
+  a {
+    color: black;
+  }
 `;
 
 export const TitleCenter = styled.div`

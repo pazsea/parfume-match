@@ -61,6 +61,8 @@ class WardrobePage extends Component {
     console.log('value ' + value + ' note: ' + note);
     if (myWardrobe) {
       if (myWardrobe.ratedNotes) {
+        console.log('INNE I NEW VALUE NOTE ' + note);
+
         if (myWardrobe.ratedNotes[note]) {
           return parseInt(myWardrobe.ratedNotes[note] + value);
           // if (value > 0) {
@@ -72,8 +74,11 @@ class WardrobePage extends Component {
           //   );
           //  return subtract;
           //}
+        } else {
+          return value;
         }
       } else {
+        console.log('hör borde det komma in nåogt ' + value);
         return value;
       }
     } else {
@@ -90,7 +95,7 @@ class WardrobePage extends Component {
     const clickedPoints = calculatePoints(nextValue, prevValue);
 
     if (nextValue !== prevValue) {
-      console.log('base: ' + this.newValue(base, clickedPoints));
+      const ba = this.newValue(base, clickedPoints);
       console.log('heart: ' + this.newValue(heart, clickedPoints));
       console.log('top: ' + this.newValue(top, clickedPoints));
       firebase
@@ -112,6 +117,14 @@ class WardrobePage extends Component {
               [heart]: this.newValue(heart, clickedPoints),
               [top]: this.newValue(top, clickedPoints),
             }),
+          // .then(
+          //   firebase
+          //     .wardrobe(uid)
+          //     .child('ratedNotes')
+          //     .update({
+          //       [base]: ba,
+          //     }),
+          // ),
         );
     }
   }
@@ -275,6 +288,7 @@ function RatingWrapper({ name, textFirebase, firebase, authUser }) {
 
     firebase
       .wardrobe(authUser)
+      .child('parfumes')
       .child(name)
       .update({ ownDesc: editText });
   };

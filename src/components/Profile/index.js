@@ -38,20 +38,12 @@ class ProfilePage extends Component {
         [recommendedCol]: true,
       },
     });
-    // console.log('SelectedCol ' + selectedCol);
   }
-  // Användaren har ingen recommendedCol: Visa Quiz-knapp + text.
-  // Användaren har endast recommendedCol: Visa Prenumerationsknapp + text.
-  // Användaren har en selectedCol: "Allt" content visas
 
   render() {
     const { loading } = this.state;
 
     const { subscription, authUser } = this.props;
-
-    // console.log(
-    //   'recommendedCol ' + Object.keys(authUser.recommendedCol),
-    // );
 
     // FÖRSTA VILLKORET MAN HAR VARKEN REC ELLER SELECTED
     if (!authUser.recommendedCol && !authUser.selectedCol) {
@@ -59,7 +51,7 @@ class ProfilePage extends Component {
         <Fragment>
           <s.NoCollectionWrapper>
             <s.TitleCenter>
-              <h1>Starta ditt doft-quiz nu</h1>
+              <h1>Starta ditt doft-quiz</h1>
             </s.TitleCenter>
             <s.TextCenter>
               <p>
@@ -81,27 +73,50 @@ class ProfilePage extends Component {
           <s.FlexContainer>
             <s.FlexContainerRow>
               <s.FlexLeftContainer>
-                <s.Blog>
-                  <h2>Senaste bloginlägg</h2>
-                  <p>
-                    <i>2019-05-19</i>
-                    <br />
-                    Mors dag är här innan du hinner blinka! Se till
-                    att du är redo att överraska de viktigaste
-                    mammorna i ditt liv med en speciell gåva. Med
-                    Sniph kommer din rara mor att få upptäcka olika
-                    dofter utvalda av experter, en present som kommer
-                    överraska långt bortom mors dag. Scrolla ner för
-                    att läsa mer om varför Sniph är en alldeles unik
-                    gåva, och skäm bort din mamma med någon av våra
-                    härliga gåvotips.{'   '}
-                    <a href="url">Läs mer</a>
-                  </p>
-                </s.Blog>
-                <h2>Min beskrivning</h2>
-                <textarea />
-                <br />
-                <button>Spara</button>
+                <Tabs>
+                  <TabList>
+                    <Tab>Sniph Blogg</Tab>
+                    <Tab>Min beskrivning</Tab>
+                  </TabList>
+                  <TabPanel>
+                    <s.Blog>
+                      <h2>Senaste bloginlägg</h2>
+                      <p>
+                        <i>2019-05-19</i>
+                        <br />
+                        Mors dag är här innan du hinner blinka! Se
+                        till att du är redo att överraska de
+                        viktigaste mammorna i ditt liv med en speciell
+                        gåva. Med Sniph kommer din rara mor att få
+                        upptäcka olika dofter utvalda av experter, en
+                        present som kommer överraska långt bortom mors
+                        dag. Scrolla ner för att läsa mer om varför
+                        Sniph är en alldeles unik gåva, och skäm bort
+                        din mamma med någon av våra härliga gåvotips.
+                        {'   '}
+                        <a href="url">Läs mer</a>
+                      </p>
+                    </s.Blog>
+                  </TabPanel>
+                  <TabPanel>
+                    <s.Blog>
+                      <h2>Min beskrivning</h2>
+                      <s.DescriptionBox>
+                        <textarea id="link" rows="15" cols="210" />
+                        <br />
+                      </s.DescriptionBox>
+                      <s.SmallButtonWrapper>
+                        <Link
+                          id="input"
+                          onClick={e => this.setRecColToSelected(e)}
+                          to={ROUTES.PROFILE}
+                        >
+                          Spara
+                        </Link>
+                      </s.SmallButtonWrapper>
+                    </s.Blog>
+                  </TabPanel>
+                </Tabs>
               </s.FlexLeftContainer>
               <s.FlexRightContainer>
                 <s.ProfileContent>
@@ -114,12 +129,6 @@ class ProfilePage extends Component {
                           src={profile_picture_placeholder}
                         />
                       </s.ProfilePicture>
-                      {/* Namnet på Användaren 
-            Bild på användaren, hårdkoda så länge.
-            bakgrunder vara aktiv kollektion knapp till
-            wardrobe/rekommenderad kollektion knapp till
-            recommendation/ placeholder med quizknappen 
-            textarea för beskrivning*/}
                     </div>
                   </div>
                 </s.ProfileContent>
@@ -132,7 +141,7 @@ class ProfilePage extends Component {
       // ANDRA VILLKORET MAN HAR RECOMMENDED
     } else if (authUser.recommendedCol && !authUser.selectedCol) {
       const colHeader = Object.keys(authUser.recommendedCol);
-      // console.log(colHeader);
+
       return (
         <Fragment>
           <s.Header
@@ -172,27 +181,50 @@ class ProfilePage extends Component {
           <s.FlexContainer>
             <s.FlexContainerRow>
               <s.FlexLeftContainer>
-                <s.Blog>
-                  <h2>Senaste bloginlägg</h2>
-                  <p>
-                    <i>2019-05-19</i>
-                    <br />
-                    Mors dag är här innan du hinner blinka! Se till
-                    att du är redo att överraska de viktigaste
-                    mammorna i ditt liv med en speciell gåva. Med
-                    Sniph kommer din rara mor att få upptäcka olika
-                    dofter utvalda av experter, en present som kommer
-                    överraska långt bortom mors dag. Scrolla ner för
-                    att läsa mer om varför Sniph är en alldeles unik
-                    gåva, och skäm bort din mamma med någon av våra
-                    härliga gåvotips.{'   '}
-                    <a href="url">Läs mer</a>
-                  </p>
-                </s.Blog>
-                <h2>Min beskrivning</h2>
-                <textarea />
-                <br />
-                <button>Spara</button>
+                <Tabs>
+                  <TabList>
+                    <Tab>Sniph Blogg</Tab>
+                    <Tab>Min beskrivning</Tab>
+                  </TabList>
+                  <TabPanel>
+                    <s.Blog>
+                      <h2>Senaste bloginlägg</h2>
+                      <p>
+                        <i>2019-05-19</i>
+                        <br />
+                        Mors dag är här innan du hinner blinka! Se
+                        till att du är redo att överraska de
+                        viktigaste mammorna i ditt liv med en speciell
+                        gåva. Med Sniph kommer din rara mor att få
+                        upptäcka olika dofter utvalda av experter, en
+                        present som kommer överraska långt bortom mors
+                        dag. Scrolla ner för att läsa mer om varför
+                        Sniph är en alldeles unik gåva, och skäm bort
+                        din mamma med någon av våra härliga gåvotips.
+                        {'   '}
+                        <a href="url">Läs mer</a>
+                      </p>
+                    </s.Blog>
+                  </TabPanel>
+                  <TabPanel>
+                    <s.Blog>
+                      <h2>Min beskrivning</h2>
+                      <s.DescriptionBox>
+                        <textarea id="link" rows="15" cols="210" />
+                        <br />
+                      </s.DescriptionBox>
+                      <s.SmallButtonWrapper>
+                        <Link
+                          id="input"
+                          onClick={e => this.setRecColToSelected(e)}
+                          to={ROUTES.PROFILE}
+                        >
+                          Spara
+                        </Link>
+                      </s.SmallButtonWrapper>
+                    </s.Blog>
+                  </TabPanel>
+                </Tabs>
               </s.FlexLeftContainer>
               <s.FlexRightContainer>
                 <s.ProfileContent>
@@ -285,10 +317,10 @@ class ProfilePage extends Component {
                     <s.Blog>
                       <h2>Min beskrivning</h2>
                       <s.DescriptionBox>
-                        <textarea id="link" rows="15" cols="200" />
+                        <textarea id="link" rows="15" cols="210" />
                         <br />
                       </s.DescriptionBox>
-                      <s.ButtonWrapper>
+                      <s.SmallButtonWrapper>
                         <Link
                           id="input"
                           onClick={e => this.setRecColToSelected(e)}
@@ -296,7 +328,7 @@ class ProfilePage extends Component {
                         >
                           Spara
                         </Link>
-                      </s.ButtonWrapper>
+                      </s.SmallButtonWrapper>
                     </s.Blog>
                   </TabPanel>
                 </Tabs>
@@ -327,9 +359,6 @@ class ProfilePage extends Component {
 const mapStateToProps = state => ({
   authUser: state.sessionState.authUser,
 });
-
-// As the second argument passed in to connect,
-// mapDispatchToProps is used for dispatching actions to the store.
 
 const mapDispatchToProps = dispatch => ({
   onSetUsers: users => dispatch({ type: 'USERS_SET', users }),

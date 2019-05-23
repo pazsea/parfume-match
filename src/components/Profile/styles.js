@@ -13,14 +13,13 @@ export const FlexContainerRow = styled.div`
 export const FlexRightContainer = styled.div`
   display: flex;
   justify-content: center;
-  /* justify-content: flex-end; */
+
   flex-grow: 2;
   margin-left: 10px;
   margin-right: 20px;
 `;
 
 export const FlexLeftContainer = styled.div`
-  /* justify-content: flex-start; */
   flex-grow: 1;
   margin-right: 10px;
   margin-left: 5rem;
@@ -28,7 +27,6 @@ export const FlexLeftContainer = styled.div`
 `;
 
 export const ProfileContent = styled.div`
-  /* flex-direction: column; */
   justify-content: center;
   text-align: center;
   h1,
@@ -70,10 +68,6 @@ export const QuizIntroButton = styled.div`
   }
 `;
 
-// export const CollectionBackground = styled.div`
-//   background-color: lightgreen;
-// `;
-
 export const ProfilePicture = styled.div`
   img {
     height: 10rem;
@@ -83,8 +77,6 @@ export const ProfilePicture = styled.div`
 `;
 export const Header = styled.div`
   display: flex;
-  /* flex-direction: row-reverse; */
-  /* top: 0; */
   background-image: url(${props => props.headerImage});
   width: 100%;
   height: 35vh;
@@ -159,8 +151,10 @@ export const NoCollectionWrapper = styled.div`
   background-color: lightgrey;
   flex-direction: column;
   width: 100%;
-  /* justify-content: center; */
+  height: 35vh;
+  margin-bottom: 2rem;
   align-items: center;
+  justify-content: center;
 `;
 
 export const ButtonWrapper = styled.div`

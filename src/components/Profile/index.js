@@ -25,17 +25,6 @@ class ProfilePage extends Component {
     progress: 0,
   };
 
-  componentDidMount() {
-    // const { authUser, firebase } = this.props;
-    // firebase.user(authUser.uid).on('value', snapshot => {
-    //   const val = snapshot.val();
-    //   if (val.profilePic) {
-    //     console.log(val.profilePic.url);
-    //     this.setState({ url: val.profilePic.url });
-    //   }
-    // });
-  }
-
   componentWillMount() {
     this.props.firebase.users().off();
   }
@@ -60,7 +49,7 @@ class ProfilePage extends Component {
       uploadTask.on(
         'state_changed',
         snapshot => {
-          // progrss function ....
+          // progress function ....
 
           const progress = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
@@ -85,7 +74,7 @@ class ProfilePage extends Component {
                 .user(authUser.uid)
                 .child('profilePic')
                 .set({ url: url })
-                .then(this.setState({ loading: false }));
+                .then(this.setState({ loading: false, image: null }));
             });
         },
       );
@@ -203,11 +192,13 @@ class ProfilePage extends Component {
                           />
                         </div>
                       </s.ProfilePicture>
-                      <s.QuizIntroButton>
-                        <button onClick={this.handleUpload}>
-                          UPLOAD PICTURE
-                        </button>
-                      </s.QuizIntroButton>
+                      {this.state.image ? (
+                        <s.QuizIntroButton>
+                          <button onClick={this.handleUpload}>
+                            UPLOAD PICTURE
+                          </button>
+                        </s.QuizIntroButton>
+                      ) : null}
                     </div>
                   </div>
                 </s.ProfileContent>
@@ -327,11 +318,13 @@ class ProfilePage extends Component {
                           />
                         </div>
                       </s.ProfilePicture>
-                      <s.QuizIntroButton>
-                        <button onClick={this.handleUpload}>
-                          UPLOAD PICTURE
-                        </button>
-                      </s.QuizIntroButton>
+                      {this.state.image ? (
+                        <s.QuizIntroButton>
+                          <button onClick={this.handleUpload}>
+                            UPLOAD PICTURE
+                          </button>
+                        </s.QuizIntroButton>
+                      ) : null}
                     </div>
                   </div>
                 </s.ProfileContent>
@@ -450,11 +443,13 @@ class ProfilePage extends Component {
                           />
                         </div>
                       </s.ProfilePicture>
-                      <s.QuizIntroButton>
-                        <button onClick={this.handleUpload}>
-                          UPLOAD PICTURE
-                        </button>
-                      </s.QuizIntroButton>
+                      {this.state.image ? (
+                        <s.QuizIntroButton>
+                          <button onClick={this.handleUpload}>
+                            UPLOAD PICTURE
+                          </button>
+                        </s.QuizIntroButton>
+                      ) : null}
                     </div>
                   </div>
                 </s.ProfileContent>

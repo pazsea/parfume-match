@@ -20,34 +20,6 @@ class WardrobePage extends Component {
     tabOpen: '',
   };
 
-  // componentDidMount() {
-  //   const {
-  //     authUser: { selectedCol },
-  //     myWardrobe,
-  //   } = this.props;
-
-  //   this.setState({
-  //     loading: false,
-  //     myWardrobe,
-  //     subscription: selectedCol
-  //       ? Object.keys(selectedCol)
-  //       : selectedCol,
-  //   });
-  // }
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (
-  //     prevProps.myWardrobe !== this.props.myWardrobe ||
-  //     prevProps.authUser !== this.props.authUser
-  //   ) {
-  //     this.setState({
-  //       myWardrobe: this.props.myWardrobe,
-  //       subscription: this.props.authUser.selectedCol
-  //         ? Object.keys(this.props.authUser.selectedCol)
-  //         : this.props.authUser.selectedCol,
-  //     });
-  //   }
-  // }
-
   componentWillUnmount() {
     const {
       firebase,
@@ -65,20 +37,10 @@ class WardrobePage extends Component {
 
         if (myWardrobe.ratedNotes[note]) {
           return parseInt(myWardrobe.ratedNotes[note] + value);
-          // if (value > 0) {
-          //   const add = parseInt(myWardrobe.ratedNotes[note] + value);
-          //   return add;
-          // } else if (value < 0) {
-          //   const subtract = parseInt(
-          //     myWardrobe.ratedNotes[note] + value,
-          //   );
-          //  return subtract;
-          //}
         } else {
           return value;
         }
       } else {
-        console.log('hör borde det komma in nåogt ' + value);
         return value;
       }
     } else {

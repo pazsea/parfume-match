@@ -3,6 +3,8 @@ import * as ROUTES from '../../constants/routes';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import * as a from '../../constants/actionTypes';
+
 import './styles.css';
 import {
   Header,
@@ -23,23 +25,17 @@ class Collection extends Component {
     // loading: true,
   };
 
-  // componentDidMount() {
-  //   const {
-  //     authUser: { recommendedCol },
-  //   } = this.props;
-
-  //   if (recommendedCol) {
-  //     const key = Object.keys(recommendedCol);
-  //     this.setState({
-  //       loading: false,
-  //       recommendedCol: key,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       loading: false,
-  //     });
-  //   }
-  // }
+  componentDidMount() {
+    const {
+      firebase,
+      onSetAuthUser,
+      authUser: { uid },
+    } = this.props;
+    firebase.user(uid).on('value', snapshot => {
+      const aUser = Object.assign({}, snapshot.val(), { uid });
+      onSetAuthUser(aUser);
+    });
+  }
 
   setRecColToSelected(e) {
     const { firebase, authUser } = this.props;
@@ -131,6 +127,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onSetUsers: users => dispatch({ type: 'USERS_SET', users }),
+
+  onSetAuthUser: authUser =>
+    dispatch({ type: a.AUTH_USER_SET, authUser }),
+  // onSetWardrobe: wardrobe =>
+  //   dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
 });
 
 const condition = authUser => !!authUser;

@@ -450,6 +450,11 @@ class ProfilePage extends Component {
                           />
                         </div>
                       </s.ProfilePicture>
+                      <s.QuizIntroButton>
+                        <button onClick={this.handleUpload}>
+                          UPLOAD PICTURE
+                        </button>
+                      </s.QuizIntroButton>
                     </div>
                   </div>
                 </s.ProfileContent>

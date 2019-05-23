@@ -49,7 +49,7 @@ export const QuizIntroButton = styled.div`
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
-
+    cursor: pointer;
     font-weight: bold;
     color: white;
     text-align: center;
@@ -69,10 +69,14 @@ export const QuizIntroButton = styled.div`
 `;
 
 export const ProfilePicture = styled.div`
+  #file-input {
+    display: none;
+  }
   img {
     height: 10rem;
     width: auto;
     border-radius: 50%;
+    cursor: cell;
   }
 `;
 export const Header = styled.div`
@@ -157,11 +161,13 @@ export const NoCollectionWrapper = styled.div`
   justify-content: center;
 `;
 
-export const ButtonWrapper = styled.div`
+export const SmallButtonWrapper = styled.div`
+  display: flex;
   width: 100%;
   text-align: center;
 
   #link {
+    justify-content: flex-start;
     background-color: black;
     border: none;
     color: white;
@@ -211,13 +217,10 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const SmallButtonWrapper = styled.div`
-  display: flex;
+export const ButtonWrapper = styled.div`
   width: 100%;
   text-align: center;
-
   #link {
-    justify-content: flex-start;
     background-color: black;
     border: none;
     color: white;
@@ -232,30 +235,6 @@ export const SmallButtonWrapper = styled.div`
     text-transform: uppercase;
     display: inline-block;
     font-size: 16px;
-    a:visited {
-      text-decoration: none;
-      color: white;
-    }
-    a:link {
-      text-decoration: none;
-      color: white;
-    }
-  }
-  #input {
-    background-color: black;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
-      sans-serif;
-
-    font-weight: bold;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    display: inline-block;
-    font-size: 12px;
     a:visited {
       text-decoration: none;
       color: white;

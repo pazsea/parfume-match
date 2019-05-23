@@ -9,6 +9,9 @@ import { withFirebase } from '../Firebase';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import profile_picture_placeholder from '../../images/profile_picture_placeholder.jpg';
+import Loading from '../Loading';
+
+import placeholder from '../../images/placeholder.png';
 import headerAvantgard from '../../images/headerAvantgard.jpg';
 import headerClean from '../../images/headerClean.jpg';
 import headerFemaleClassics from '../../images/headerFemaleClassics.jpg';
@@ -19,13 +22,75 @@ import headerWorkPlay from '../../images/headerWorkPlay.jpg';
 class ProfilePage extends Component {
   state = {
     loading: false,
+    progress: 0,
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    // const { authUser, firebase } = this.props;
+    // firebase.user(authUser.uid).on('value', snapshot => {
+    //   const val = snapshot.val();
+    //   if (val.profilePic) {
+    //     console.log(val.profilePic.url);
+    //     this.setState({ url: val.profilePic.url });
+    //   }
+    // });
+  }
 
   componentWillMount() {
     this.props.firebase.users().off();
   }
+
+  handleChange = e => {
+    if (e.target.files[0]) {
+      const image = e.target.files[0];
+      this.setState(() => ({ image }));
+    }
+  };
+
+  handleUpload = () => {
+    const { image } = this.state;
+    if (image) {
+      const { firebase, authUser } = this.props;
+      this.setState({ loading: true });
+      const uploadTask = firebase
+        .imageUser()
+        .child(authUser.uid)
+        .child(image.name)
+        .put(image);
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          // progrss function ....
+
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+          );
+          this.setState({ progress });
+        },
+        error => {
+          // error function ....
+          console.log(error);
+        },
+        () => {
+          // complete function ....
+          firebase
+            .imageUser()
+            .child(authUser.uid)
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              console.log(url);
+
+              firebase
+                .user(authUser.uid)
+                .child('profilePic')
+                .set({ url: url })
+                .then(this.setState({ loading: false }));
+            });
+        },
+      );
+    }
+  };
 
   setRecColToSelected() {
     const { firebase, authUser } = this.props;
@@ -41,9 +106,7 @@ class ProfilePage extends Component {
   }
 
   render() {
-    const { loading } = this.state;
-
-    const { subscription, authUser } = this.props;
+    const { authUser } = this.props;
 
     // FÖRSTA VILLKORET MAN HAR VARKEN REC ELLER SELECTED
     if (!authUser.recommendedCol && !authUser.selectedCol) {
@@ -124,11 +187,27 @@ class ProfilePage extends Component {
                     <h2>{this.props.authUser.username}</h2>
                     <div>
                       <s.ProfilePicture>
-                        <img
-                          alt="profile pic"
-                          src={profile_picture_placeholder}
-                        />
+                        <div class="image-upload">
+                          <label for="file-input">
+                            {this.state.loading ? (
+                              <Loading />
+                            ) : (
+                              <img src={authUser.profilePic.url} />
+                            )}
+                          </label>
+
+                          <input
+                            id="file-input"
+                            type="file"
+                            onChange={this.handleChange}
+                          />
+                        </div>
                       </s.ProfilePicture>
+                      <s.QuizIntroButton>
+                        <button onClick={this.handleUpload}>
+                          UPLOAD PICTURE
+                        </button>
+                      </s.QuizIntroButton>
                     </div>
                   </div>
                 </s.ProfileContent>
@@ -232,11 +311,27 @@ class ProfilePage extends Component {
                     <h2>{this.props.authUser.username}</h2>
                     <div>
                       <s.ProfilePicture>
-                        <img
-                          alt="profile pic"
-                          src={profile_picture_placeholder}
-                        />
+                        <div class="image-upload">
+                          <label for="file-input">
+                            {this.state.loading ? (
+                              <Loading />
+                            ) : (
+                              <img src={authUser.profilePic.url} />
+                            )}
+                          </label>
+
+                          <input
+                            id="file-input"
+                            type="file"
+                            onChange={this.handleChange}
+                          />
+                        </div>
                       </s.ProfilePicture>
+                      <s.QuizIntroButton>
+                        <button onClick={this.handleUpload}>
+                          UPLOAD PICTURE
+                        </button>
+                      </s.QuizIntroButton>
                     </div>
                   </div>
                 </s.ProfileContent>
@@ -339,10 +434,21 @@ class ProfilePage extends Component {
                     <h2>{this.props.authUser.username}</h2>
                     <div>
                       <s.ProfilePicture>
-                        <img
-                          alt="profile pic"
-                          src={profile_picture_placeholder}
-                        />
+                        <div class="image-upload">
+                          <label for="file-input">
+                            {this.state.loading ? (
+                              <Loading />
+                            ) : (
+                              <img src={authUser.profilePic.url} />
+                            )}
+                          </label>
+
+                          <input
+                            id="file-input"
+                            type="file"
+                            onChange={this.handleChange}
+                          />
+                        </div>
                       </s.ProfilePicture>
                     </div>
                   </div>

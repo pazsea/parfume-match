@@ -26,8 +26,9 @@ import QuizPage, {
 
 import QuestionSix from '../Quiz/QuestionSix';
 import RecommendationsPage from '../Recommendation';
+import SelectedUserWardrobe from '../Explore/SelectedUserWardrobe';
+
 import WardrobePage from '../Wardrobe';
-import UpdatePerfumes from '../UpdatePerfumes';
 import * as a from '../../constants/actionTypes';
 import * as ROUTES from '../../constants/routes';
 
@@ -57,10 +58,11 @@ class App extends Component {
       firebase,
       onSetTopNotes,
       onSetWardrobe,
+      onSetWardrobes,
     } = this.props;
     firebase.topNotes().on('value', snapshot => {
       const val = snapshot.val();
-      this.props.onSetTopNotes(val);
+      onSetTopNotes(val);
 
       if (authUser && val && val[authUser.uid]) {
         const {
@@ -73,10 +75,10 @@ class App extends Component {
     });
     firebase.wardrobes().on('value', snapshot => {
       const val = snapshot.val();
+      onSetWardrobes(val);
       if (authUser) {
         const {
           authUser: { uid },
-          onSetWardrobe,
         } = this.props;
         if (val && val[uid]) {
           const objectWithHighestNotes = Object.assign(
@@ -136,6 +138,10 @@ class App extends Component {
           />
           <Route path={ROUTES.HOME} component={HomePage} />
           <Route path={ROUTES.EXPLORE} component={Explore} />
+          <Route
+            path={ROUTES.SELECTEDUSERWARDROBE}
+            component={SelectedUserWardrobe}
+          />
 
           <Route path={ROUTES.ACCOUNT} component={AccountPage} />
           <Route path={ROUTES.ADMIN} component={AdminPage} />
@@ -187,6 +193,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: a.SET_SIMILAR_WARDROBES, myNotes, otherNotes }),
   onSetWardrobe: wardrobe =>
     dispatch({ type: a.WARDROBE_USER_SET, wardrobe }),
+  onSetWardrobes: wardrobes =>
+    dispatch({ type: a.WARDROBES_USERS_SET, wardrobes }),
 
   setSize: size => dispatch({ type: a.SIZE, size }),
   startFetch: () =>

@@ -26,7 +26,7 @@ function sortingWardrobes(state, action) {
     return resultObject[a] - resultObject[b];
   });
 
-  return sort.slice(0, 2);
+  return sort.slice(0, 4);
 }
 
 function setWardrobeReducer(state = null, action) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { LandingDiv } from './styles';
 import SignInPage from '../SignIn/';
-import HomePage from '../Home';
+import Profile from '../Profile';
 
 function Landing({ authUser }) {
   if (!authUser) {
@@ -12,7 +12,7 @@ function Landing({ authUser }) {
       </LandingDiv>
     );
   } else {
-    return <HomePage />;
+    return <Profile />;
   }
 }
 

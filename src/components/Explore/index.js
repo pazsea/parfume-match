@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import placeholder from '../../images/placeholder.png';
 
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
@@ -45,6 +46,9 @@ class Explore extends Component {
     const { recommendedWardrobes, users, userWardrobes } = this.props;
     return (
       <div>
+        <s.QuizTitle>
+          <h1>Explore Wardrobes</h1>
+        </s.QuizTitle>
         {recommendedWardrobes && users && userWardrobes ? (
           recommendedWardrobes.map(uid => (
             <UserWardrobe
@@ -82,15 +86,16 @@ class Explore extends Component {
   }
 }
 
-function UserWardrobe({ user: { username }, id }) {
+function UserWardrobe({
+  user: { username, profilePic },
+  id,
+  authUser,
+}) {
   return (
     <Fragment>
-      <s.QuizTitle>
-        <h1>Explore Wardrobes</h1>
-      </s.QuizTitle>
       <s.Wrapper>
         <s.ImageDiv>
-          <img />
+          <img src={profilePic ? profilePic.url : placeholder} />
         </s.ImageDiv>
         <s.ParfumeDiv>
           <s.TextBox>
@@ -126,8 +131,6 @@ function UserWardrobe({ user: { username }, id }) {
 
 const mapStateToProps = state => ({
   users: state.userState.users,
-  // topNotes: state.topNotesState,
-  // authUser: state.sessionState.authUser,
   recommendedWardrobes: state.recommendedWardrobesState,
   userWardrobes: state.userWardrobesState,
 });

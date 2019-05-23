@@ -6,7 +6,9 @@ import * as ROUTES from '../../constants/routes';
 import * as s from './styles';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
-import profile_picture_placeholder from '../../images/profile_picture_placeholder.jpg';
+import Loading from '../Loading';
+
+import placeholder from '../../images/placeholder.png';
 import headerAvantgard from '../../images/headerAvantgard.jpg';
 import headerClean from '../../images/headerClean.jpg';
 import headerFemaleClassics from '../../images/headerFemaleClassics.jpg';
@@ -17,13 +19,75 @@ import headerWorkPlay from '../../images/headerWorkPlay.jpg';
 class ProfilePage extends Component {
   state = {
     loading: false,
+    progress: 0,
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    // const { authUser, firebase } = this.props;
+    // firebase.user(authUser.uid).on('value', snapshot => {
+    //   const val = snapshot.val();
+    //   if (val.profilePic) {
+    //     console.log(val.profilePic.url);
+    //     this.setState({ url: val.profilePic.url });
+    //   }
+    // });
+  }
 
   componentWillMount() {
     this.props.firebase.users().off();
   }
+
+  handleChange = e => {
+    if (e.target.files[0]) {
+      const image = e.target.files[0];
+      this.setState(() => ({ image }));
+    }
+  };
+
+  handleUpload = () => {
+    const { image } = this.state;
+    if (image) {
+      const { firebase, authUser } = this.props;
+      this.setState({ loading: true });
+      const uploadTask = firebase
+        .imageUser()
+        .child(authUser.uid)
+        .child(image.name)
+        .put(image);
+      uploadTask.on(
+        'state_changed',
+        snapshot => {
+          // progrss function ....
+
+          const progress = Math.round(
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+          );
+          this.setState({ progress });
+        },
+        error => {
+          // error function ....
+          console.log(error);
+        },
+        () => {
+          // complete function ....
+          firebase
+            .imageUser()
+            .child(authUser.uid)
+            .child(image.name)
+            .getDownloadURL()
+            .then(url => {
+              console.log(url);
+
+              firebase
+                .user(authUser.uid)
+                .child('profilePic')
+                .set({ url: url })
+                .then(this.setState({ loading: false }));
+            });
+        },
+      );
+    }
+  };
 
   setRecColToSelected() {
     const { firebase, authUser } = this.props;
@@ -43,38 +107,51 @@ class ProfilePage extends Component {
   // Användaren har en selectedCol: "Allt" content visas
 
   render() {
-    const { loading } = this.state;
-
-    const { subscription, authUser } = this.props;
+    const { authUser } = this.props;
 
     // console.log(
     //   'recommendedCol ' + Object.keys(authUser.recommendedCol),
     // );
 
     // FÖRSTA VILLKORET MAN HAR VARKEN REC ELLER SELECTED
-    if (!authUser.recommendedCol && !authUser.selectedCol) {
+    if (authUser.recommendedCol && authUser.selectedCol) {
+      const colHeader = Object.keys(authUser.selectedCol);
+
       return (
         <Fragment>
-          <s.NoCollectionWrapper>
-            <s.TitleCenter>
-              <h1>Starta ditt doft-quiz nu</h1>
-            </s.TitleCenter>
-            <s.TextCenter>
-              <p>
-                Svårt att bestämma dig för vilken av våra kollektioner
-                som passar dig? Ingen fara! Gör vårt Sniph quiz så
-                kommer vi att kunna ge dig en bättre rekommendation.
-                Du kan göra testet flera gånger och som medlem kan du
-                byta kollektion när du vill.
-              </p>
-            </s.TextCenter>
+          <s.Header
+            headerImage={
+              colHeader.includes('FÖR MÄN: Aesthetic')
+                ? headerForMen
+                : colHeader.includes('Avant-Garde')
+                ? headerAvantgard
+                : colHeader.includes('Clean')
+                ? headerClean
+                : colHeader.includes('Female Classics')
+                ? headerFemaleClassics
+                : colHeader.includes('Trending Now')
+                ? headerTrendingNow
+                : colHeader.includes('FÖR MÄN: Work/Play')
+                ? headerWorkPlay
+                : null
+            }
+          >
+            <s.TitleOnHeaderCenter>
+              <h1>
+                Nuvarande kollektion <i>{colHeader}</i>
+              </h1>
 
-            <s.QuizIntroButton>
-              <button>
-                <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
-              </button>
-            </s.QuizIntroButton>
-          </s.NoCollectionWrapper>
+              <s.ButtonWrapper>
+                <Link
+                  id="link"
+                  onClick={e => this.setRecColToSelected(e)}
+                  to={ROUTES.WARDROBE}
+                >
+                  Visa doftgarderob
+                </Link>
+              </s.ButtonWrapper>
+            </s.TitleOnHeaderCenter>
+          </s.Header>
 
           <s.FlexContainer>
             <s.FlexContainerRow>
@@ -104,30 +181,31 @@ class ProfilePage extends Component {
               <s.FlexRightContainer>
                 <s.ProfileContent>
                   <div>
-                    <h2>Profil</h2>
                     <div>
                       <h2>{this.props.authUser.username}</h2>
                       <s.ProfilePicture>
-                        <img
-                          alt="profile pic"
-                          src={profile_picture_placeholder}
-                        />
-                      </s.ProfilePicture>
-                      {/* Namnet på Användaren 
-            Bild på användaren, hårdkoda så länge.
-            bakgrunder vara aktiv kollektion knapp till
-            wardrobe/rekommenderad kollektion knapp till
-            recommendation/ placeholder med quizknappen 
-            textarea för beskrivning*/}
-                    </div>
+                        <div class="image-upload">
+                          <label for="file-input">
+                            {this.state.loading ? (
+                              <Loading />
+                            ) : (
+                              <img src={authUser.profilePic.url} />
+                            )}
+                          </label>
 
-                    <s.QuizIntroButton>
-                      <button>
-                        <Link to={ROUTES.QUESTIONONE}>
-                          Starta doft-quiz
-                        </Link>
-                      </button>
-                    </s.QuizIntroButton>
+                          <input
+                            id="file-input"
+                            type="file"
+                            onChange={this.handleChange}
+                          />
+                        </div>
+                      </s.ProfilePicture>
+                      <s.QuizIntroButton>
+                        <button onClick={this.handleUpload}>
+                          UPLOAD PICTURE
+                        </button>
+                      </s.QuizIntroButton>
+                    </div>
                   </div>
                 </s.ProfileContent>
               </s.FlexRightContainer>
@@ -204,24 +282,31 @@ class ProfilePage extends Component {
               <s.FlexRightContainer>
                 <s.ProfileContent>
                   <div>
-                    <h2>Profil</h2>
                     <div>
                       <h2>{this.props.authUser.username}</h2>
                       <s.ProfilePicture>
-                        <img
-                          alt="profile pic"
-                          src={profile_picture_placeholder}
-                        />
-                      </s.ProfilePicture>
-                    </div>
+                        <div class="image-upload">
+                          <label for="file-input">
+                            {this.state.loading ? (
+                              <Loading />
+                            ) : (
+                              <img src={authUser.profilePic.url} />
+                            )}
+                          </label>
 
-                    <s.QuizIntroButton>
-                      <button>
-                        <Link to={ROUTES.QUESTIONONE}>
-                          Starta doft-quiz
-                        </Link>
-                      </button>
-                    </s.QuizIntroButton>
+                          <input
+                            id="file-input"
+                            type="file"
+                            onChange={this.handleChange}
+                          />
+                        </div>
+                      </s.ProfilePicture>
+                      <s.QuizIntroButton>
+                        <button onClick={this.handleUpload}>
+                          UPLOAD PICTURE
+                        </button>
+                      </s.QuizIntroButton>
+                    </div>
                   </div>
                 </s.ProfileContent>
               </s.FlexRightContainer>
@@ -231,43 +316,28 @@ class ProfilePage extends Component {
       );
       // TREDJE OCH SISTA VILLKORET MAN HAR RECOMMENDED OCH SELECTED
     } else {
-      const colHeader = Object.keys(authUser.selectedCol);
-
       return (
         <Fragment>
-          <s.Header
-            headerImage={
-              colHeader.includes('FÖR MÄN: Aesthetic')
-                ? headerForMen
-                : colHeader.includes('Avant-Garde')
-                ? headerAvantgard
-                : colHeader.includes('Clean')
-                ? headerClean
-                : colHeader.includes('Female Classics')
-                ? headerFemaleClassics
-                : colHeader.includes('Trending Now')
-                ? headerTrendingNow
-                : colHeader.includes('FÖR MÄN: Work/Play')
-                ? headerWorkPlay
-                : null
-            }
-          >
-            <s.TitleOnHeaderCenter>
-              <h1>
-                Nuvarande kollektion <i>{colHeader}</i>
-              </h1>
+          <s.NoCollectionWrapper>
+            <s.TitleCenter>
+              <h1>Starta ditt doft-quiz nu</h1>
+            </s.TitleCenter>
+            <s.TextCenter>
+              <p>
+                Svårt att bestämma dig för vilken av våra kollektioner
+                som passar dig? Ingen fara! Gör vårt Sniph quiz så
+                kommer vi att kunna ge dig en bättre rekommendation.
+                Du kan göra testet flera gånger och som medlem kan du
+                byta kollektion när du vill.
+              </p>
+            </s.TextCenter>
 
-              <s.ButtonWrapper>
-                <Link
-                  id="link"
-                  onClick={e => this.setRecColToSelected(e)}
-                  to={ROUTES.WARDROBE}
-                >
-                  Visa doftgarderob
-                </Link>
-              </s.ButtonWrapper>
-            </s.TitleOnHeaderCenter>
-          </s.Header>
+            <s.QuizIntroButton>
+              <button>
+                <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
+              </button>
+            </s.QuizIntroButton>
+          </s.NoCollectionWrapper>
 
           <s.FlexContainer>
             <s.FlexContainerRow>
@@ -297,24 +367,31 @@ class ProfilePage extends Component {
               <s.FlexRightContainer>
                 <s.ProfileContent>
                   <div>
-                    <h2>Profil</h2>
                     <div>
                       <h2>{this.props.authUser.username}</h2>
                       <s.ProfilePicture>
-                        <img
-                          alt="profile pic"
-                          src={profile_picture_placeholder}
-                        />
-                      </s.ProfilePicture>
-                    </div>
+                        <div class="image-upload">
+                          <label for="file-input">
+                            {this.state.loading ? (
+                              <Loading />
+                            ) : (
+                              <img src={authUser.profilePic.url} />
+                            )}
+                          </label>
 
-                    <s.QuizIntroButton>
-                      <button>
-                        <Link to={ROUTES.QUESTIONONE}>
-                          Starta doft-quiz
-                        </Link>
-                      </button>
-                    </s.QuizIntroButton>
+                          <input
+                            id="file-input"
+                            type="file"
+                            onChange={this.handleChange}
+                          />
+                        </div>
+                      </s.ProfilePicture>
+                      <s.QuizIntroButton>
+                        <button onClick={this.handleUpload}>
+                          UPLOAD PICTURE
+                        </button>
+                      </s.QuizIntroButton>
+                    </div>
                   </div>
                 </s.ProfileContent>
               </s.FlexRightContainer>
@@ -323,6 +400,9 @@ class ProfilePage extends Component {
         </Fragment>
       );
     }
+    // } else {
+    //   return <div>shiit</div>;
+    // }
   }
 }
 

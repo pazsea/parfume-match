@@ -14,10 +14,12 @@ export const ImageDiv = styled.div`
   justify-content: center;
 
   img {
+    height: 15rem;
+    width: auto;
+    border-radius: 50%;
     align-self: center;
-    width: 50%;
-    /* height: auto; */
-    border: 1px solid blue;
+    /* width: 50%;
+    height: 300px; */
   }
 `;
 

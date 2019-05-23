@@ -4,7 +4,7 @@ export const LoadingDiv = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  width: 20%;
+  width: 100%;
   padding-top: 1em;
 `;
 

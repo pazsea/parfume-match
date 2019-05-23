@@ -51,7 +51,7 @@ export const QuizIntroButton = styled.div`
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
-
+    cursor: pointer;
     font-weight: bold;
     color: white;
     text-align: center;
@@ -75,10 +75,14 @@ export const QuizIntroButton = styled.div`
 // `;
 
 export const ProfilePicture = styled.div`
+  #file-input {
+    display: none;
+  }
   img {
     height: 10rem;
     width: auto;
     border-radius: 50%;
+    cursor: cell;
   }
 `;
 export const Header = styled.div`

@@ -20,13 +20,16 @@ function sortingWardrobes(state, action) {
     resultObject[user] = matchFrequency[user];
   });
 
+  Object.keys(resultObject).forEach(
+    key => !resultObject[key] && delete resultObject[key],
+  );
   var keys = Object.keys(resultObject);
 
   var sort = keys.sort(function(a, b) {
     return resultObject[a] - resultObject[b];
   });
 
-  return sort.slice(0, 4);
+  return sort.reverse().slice(0, 4);
 }
 
 function setWardrobeReducer(state = null, action) {

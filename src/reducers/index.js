@@ -9,6 +9,7 @@ import sortParfumeReducer from './sortParfumes';
 import wardrobeReducer from './wardrobe';
 import topNotesReducer from './topNotes';
 import setWardrobeReducer from './setWardrobes';
+import setWardrobesReducer from './userWardrobes';
 
 const rootReducer = combineReducers({
   sessionState: sessionReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   sortedParfumesState: sortParfumeReducer,
   wardrobeState: wardrobeReducer,
   topNotesState: topNotesReducer,
-  recommendedWardrobes: setWardrobeReducer,
+  recommendedWardrobesState: setWardrobeReducer,
+  userWardrobesState: setWardrobesReducer,
 });
 
 export default rootReducer;

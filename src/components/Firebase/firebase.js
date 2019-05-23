@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/storage';
 
 var config = {
   apiKey: 'AIzaSyDPzLW1VpAUC5x9OPF4pCJO9j5e5hO4bp4',
@@ -23,6 +24,7 @@ class Firebase {
 
     this.auth = app.auth();
     this.db = app.database();
+    this.storage = app.storage();
 
     /* Social Sign In Method Provider */
 
@@ -91,6 +93,8 @@ class Firebase {
     });
 
   // *** User API ***
+
+  imageUser = () => this.storage.ref(`images/`);
 
   user = uid => this.db.ref(`users/${uid}`);
 

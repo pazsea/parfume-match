@@ -78,6 +78,7 @@ export const TextBox = styled.div`
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   font-style: italic;
+  border: none;
   h3 {
     margin: 0 0 0.4em 0;
     font-style: normal;

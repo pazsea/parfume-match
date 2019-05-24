@@ -150,17 +150,53 @@ export const SubscribeButton = styled.div`
     }
   }
 `;
+export const DescButtonDiv = styled.div`
+  flex: 3;
+  display: flex;
+`;
+
+export const RatingButton = styled.button`
+  flex: 1;
+  color: #fff;
+  background: #000;
+  border: 2px solid #000;
+  text-transform: uppercase;
+  margin-left: 0.4em;
+
+  :hover {
+    color: #000;
+    background: white;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+`;
+
+export const EditButton = styled.button`
+  flex: 1;
+  font-weight: ${props => (props.editState ? 'bold' : '300')};
+  color: ${props => (props.editState ? 'darkgreen' : '#fff')};
+  background: ${props => (props.editState ? 'yellow' : '#000')};
+  border: 2px solid #000;
+  margin-right: 0.4em;
+  text-transform: uppercase;
+
+  :hover {
+    color: #000;
+    background: white;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+`;
 
 export const DescriptionBox = styled.div`
   width: 100%;
-  border: 1px solid red;
+  flex-wrap: wrap;
+`;
 
-  form {
-    width: 100%;
-    textarea {
-      width: 100%;
-    }
-  }
+export const DescTextArea = styled.textarea`
+  width: 100%;
+  height: 16rem;
+  flex-wrap: wrap;
 `;
 
 export const NoCollectionWrapper = styled.div`

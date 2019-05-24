@@ -62,5 +62,5 @@ export function getTopWardrobes(myNotes, otherNotes) {
     return resultObject[a] - resultObject[b];
   });
 
-  return sort.slice(0, 2);
+  return sort.slice(0, 5);
 }

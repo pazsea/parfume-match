@@ -163,6 +163,7 @@ export const RatingBox = styled.textarea`
   margin: 0 0.4em 0.4em 0.4em;
   font-family: 'Montserrat', sans-serif;
   font-size: 1.3em;
+  font-style: ${props => (props.editState ? 'none' : 'italic')};
   border: ${props => (props.editState ? '1px solid grey' : 'none')};
 `;
 

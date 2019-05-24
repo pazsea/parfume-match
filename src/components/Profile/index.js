@@ -155,15 +155,21 @@ class ProfilePage extends Component {
                         <textarea id="link" rows="15" cols="210" />
                         <br />
                       </s.DescriptionBox>
-                      <s.SmallButtonWrapper>
-                        <Link
-                          id="input"
-                          onClick={e => this.setRecColToSelected(e)}
-                          to={ROUTES.PROFILE}
+                      <s.DescButtonDiv>
+                        <s.EditButton
+                        // editState={editState}
+                        // onClick={() => changeEditState()}
                         >
-                          Spara
-                        </Link>
-                      </s.SmallButtonWrapper>
+                          EDIT
+                        </s.EditButton>
+                        <s.RatingButton
+                        // className="ratingButton"
+                        // value="SAVE"
+                        // onClick={e => descriptionSubmit(e)}
+                        >
+                          SAVE
+                        </s.RatingButton>
+                      </s.DescButtonDiv>
                     </s.Blog>
                   </TabPanel>
                 </Tabs>
@@ -414,18 +420,23 @@ class ProfilePage extends Component {
                     <s.Blog>
                       <h2>Min beskrivning</h2>
                       <s.DescriptionBox>
-                        <textarea id="link" rows="15" cols="210" />
-                        <br />
+                        <s.DescTextArea />
                       </s.DescriptionBox>
-                      <s.SmallButtonWrapper>
-                        <Link
-                          id="input"
-                          onClick={e => this.setRecColToSelected(e)}
-                          to={ROUTES.PROFILE}
+                      <s.DescButtonDiv>
+                        <s.EditButton
+                        // editState={editState}
+                        // onClick={() => changeEditState()}
                         >
-                          Spara
-                        </Link>
-                      </s.SmallButtonWrapper>
+                          EDIT
+                        </s.EditButton>
+                        <s.RatingButton
+                        // className="ratingButton"
+                        // value="SAVE"
+                        // onClick={e => descriptionSubmit(e)}
+                        >
+                          SAVE
+                        </s.RatingButton>
+                      </s.DescButtonDiv>
                     </s.Blog>
                   </TabPanel>
                 </Tabs>

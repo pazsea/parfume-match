@@ -162,6 +162,7 @@ export const RatingButton = styled.button`
   border: 2px solid #000;
   text-transform: uppercase;
   margin-left: 0.4em;
+  font-size: 1.1em;
 
   :hover {
     color: #000;
@@ -179,6 +180,7 @@ export const EditButton = styled.button`
   border: 2px solid #000;
   margin-right: 0.4em;
   text-transform: uppercase;
+  font-size: 1.1em;
 
   :hover {
     color: #000;
@@ -191,12 +193,17 @@ export const EditButton = styled.button`
 export const DescriptionBox = styled.div`
   width: 100%;
   flex-wrap: wrap;
-`;
-
-export const DescTextArea = styled.textarea`
-  width: 100%;
-  height: 16rem;
-  flex-wrap: wrap;
+  textarea {
+    flex: 5;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6em;
+    font-style: ${props => (props.editState ? 'none' : 'italic')};
+    border: ${props =>
+      props.editState ? '3px solid gold' : '1px solid grey'};
+    width: 100%;
+    height: 16rem;
+    flex-wrap: wrap;
+  }
 `;
 
 export const NoCollectionWrapper = styled.div`

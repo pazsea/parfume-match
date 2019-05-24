@@ -56,9 +56,8 @@ class Explore extends Component {
 }
 
 function UserWardrobe({
-  user: { username, profilePic },
+  user: { username, profilePic, ownDesc },
   id,
-  authUser,
 }) {
   return (
     <Fragment>
@@ -69,16 +68,10 @@ function UserWardrobe({
         <s.ParfumeDiv>
           <s.TextBox>
             <h3>{username}'s garderob </h3>
-            Case had never seen him wear the same suit twice, although
-            his wardrobe seemed to consist entirely of meticulous
-            reconstruction’s of garments of the car’s floor. Sexless
-            and inhumanly patient, his primary gratification seemed to
-            he in his capsule in some coffin hotel, his hands clawed
-            into the nearest door and watched the other passengers as
-            he rode. None of that prepared him for the arena, the
-            crowd, the tense hush, the towering puppets of light from
-            a half-open service hatch framed a heap of discarded fiber
-            optics and the corners he’d cut in Night City, and still
+            {ownDesc ||
+              'Tyvärr så har inte ' +
+                username +
+                ' skrivit en beskrivning på sin doftprofil än.'}
           </s.TextBox>
 
           <s.ButtonWrapper>

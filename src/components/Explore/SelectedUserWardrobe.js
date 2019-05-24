@@ -7,6 +7,9 @@ import { Section } from '../../styleConstants/section.js';
 import StarRatingComponent from 'react-star-rating-component';
 import noteslogo from '../../images/noteslogo.png';
 
+import * as profileStyle from '../Profile/styles';
+import sprayheader from '../../images/sprayheader.jpg';
+
 import parfume1 from '../../images/parfume1.jpg';
 
 import { withAuthorization } from '../Session';
@@ -50,11 +53,25 @@ class SelectedUserWardrobe extends Component {
 
       return (
         <Section>
-          <s.QuizTitle>
-            <h1>
-              {users ? users[id].username + '' : 'User'}'s Wardrobe
-            </h1>
-          </s.QuizTitle>
+          <profileStyle.Header headerImage={sprayheader}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                class="svg--sm"
+                fill="white"
+                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+              />
+            </svg>
+            <s.TitleCenter>
+              <h1>
+                {users ? users[id].username + '' : 'User'}'s Wardrobe
+              </h1>
+            </s.TitleCenter>
+          </profileStyle.Header>
+
           {userWardrobeKeys.map((parfume, index) => (
             <Fragment>
               <s.Wrapper>

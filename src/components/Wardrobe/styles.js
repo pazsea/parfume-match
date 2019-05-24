@@ -11,7 +11,8 @@ export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 0.8em 0;
+  /* margin: 0.8em 0; */
+  margin: 2em 0;
 `;
 
 // ONE WHOLE CARD

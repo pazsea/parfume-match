@@ -159,7 +159,6 @@ class WardrobePage extends Component {
                   <s.HeaderDiv>{item.name}</s.HeaderDiv>
                   <s.StarsDiv>
                     <StarRatingComponent
-                      shit={item.base_note_id}
                       key={item.name + index}
                       name={item.name}
                       starCount={5}
@@ -188,11 +187,14 @@ class WardrobePage extends Component {
 
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper
+                      editState={this.state[item.name] + index}
                       name={item.name}
                       firebase={firebase}
                       authUser={authUser.uid}
+                      index={index}
                       textFirebase={
                         myWardrobe &&
+                        myWardrobe.parfumes[item.name] &&
                         myWardrobe.parfumes[item.name].ownDesc
                           ? myWardrobe.parfumes[item.name].ownDesc
                           : ''
@@ -243,40 +245,68 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
   );
 }
 
-function RatingWrapper({ name, textFirebase, firebase, authUser }) {
+function RatingWrapper({
+  edit,
+  name,
+  textFirebase,
+  firebase,
+  authUser,
+  index,
+}) {
   const [editText, setEditText] = useState(textFirebase);
+  const [editState, setEditState] = useState(false);
 
   const textChange = e => {
     const text = e.target.value;
     setEditText(text);
   };
+  const changeEditState = () => {
+    setEditState(true);
+  };
 
   const descriptionSubmit = event => {
+    console.log('DESC SUBMIT RUNS');
     event.preventDefault();
 
     firebase
       .wardrobe(authUser)
       .child('parfumes')
       .child(name)
-      .update({ ownDesc: editText });
+      .update({ ownDesc: editText })
+      .then(setEditState(false));
   };
 
   return (
     <Fragment>
-      <s.RatingForm onSubmit={e => descriptionSubmit(e)}>
-        <s.RatingBox
-          type="text"
-          className="ratingBox"
-          value={editText}
-          onChange={e => textChange(e)}
-        />
-
+      {/* <s.RatingForm onSubmit={e => descriptionSubmit(e)}> */}
+      <s.RatingBox
+        type="text"
+        className="ratingBox"
+        value={editText}
+        onChange={e => textChange(e)}
+        readOnly={editState ? false : true}
+        editState={editState}
+        placeholder={
+          editText
+            ? editText
+            : 'Tryck på edit knappen här nere för att skriva en bedömning av parfymen.'
+        }
+      />
+      <s.DescButtonDiv>
+        <s.EditButton
+          editState={editState}
+          onClick={() => changeEditState()}
+        >
+          EDIT
+        </s.EditButton>
         <s.RatingButton
           className="ratingButton"
-          type="submit"
-          value="Submit"
-        />
-      </s.RatingForm>
+          value="SAVE"
+          onClick={e => descriptionSubmit(e)}
+        >
+          SAVE
+        </s.RatingButton>
+      </s.DescButtonDiv>
     </Fragment>
   );
 }

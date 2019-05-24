@@ -100,7 +100,7 @@ export const Header = styled.div`
 `;
 export const Blog = styled.div`
   width: 80%;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   a {
     color: black;
   }
@@ -152,12 +152,14 @@ export const SubscribeButton = styled.div`
 `;
 
 export const DescriptionBox = styled.div`
-  width: 80%;
-  flex-wrap: wrap;
-  textarea {
+  width: 100%;
+  border: 1px solid red;
+
+  form {
     width: 100%;
-    height: 7rem;
-    flex-wrap: wrap;
+    textarea {
+      width: 100%;
+    }
   }
 `;
 

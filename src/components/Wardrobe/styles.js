@@ -8,6 +8,11 @@ export const QuizTitle = styled.div`
   font-size: 1em;
 `;
 
+export const DescButtonDiv = styled.div`
+  flex: 1;
+  display: flex;
+`;
+
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -138,7 +143,6 @@ export const DescriptionDiv = styled.div`
   margin-left: 0.4em;
   margin-right: 0.4em;
 
-  font-size: 1em;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
 `;
@@ -157,12 +161,32 @@ export const RatingForm = styled.form`
 export const RatingBox = styled.textarea`
   flex: 5;
   margin: 0 0.4em 0.4em 0.4em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.3em;
+  border: ${props => (props.editState ? '1px solid grey' : 'none')};
 `;
 
-export const RatingButton = styled.input`
+export const RatingButton = styled.button`
   flex: 1;
   color: #fff;
   background: #000;
+  margin: 0 0.4em 0.4em 0.4em;
+  border: 2px solid #000;
+  text-transform: uppercase;
+
+  :hover {
+    color: #000;
+    background: white;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+`;
+
+export const EditButton = styled.button`
+  flex: 1;
+  font-weight: ${props => (props.editState ? 'bold' : '300')};
+  color: ${props => (props.editState ? 'darkgreen' : '#fff')};
+  background: ${props => (props.editState ? 'yellow' : '#000')};
   margin: 0 0.4em 0.4em 0.4em;
   border: 2px solid #000;
   text-transform: uppercase;

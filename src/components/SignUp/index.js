@@ -78,6 +78,10 @@ class SignUpFormBase extends Component {
           roles,
           publicWardrobe,
           completedQuiz,
+          profilePic: {
+            url:
+              'https://firebasestorage.googleapis.com/v0/b/gjtpsniph.appspot.com/o/appImages%2Fplaceholder.png?alt=media&token=2eb0f78d-2880-4dab-8c6f-077ae0f1d6c3',
+          },
         });
       })
       // .then(() => {

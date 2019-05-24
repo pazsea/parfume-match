@@ -13,6 +13,8 @@ import parfume1 from '../../images/parfume1.jpg';
 import Loading from '../Loading';
 import NoCollection from '../Recommendation/No-collection';
 import noteslogo from '../../images/noteslogo.png';
+import wardrobeHeader from '../../images/wardrobeheader.jpg';
+// import wardrobeHeader from '../../images/wardrobeheader_cropped.jpg';
 
 class WardrobePage extends Component {
   state = {
@@ -23,12 +25,12 @@ class WardrobePage extends Component {
   // componentDidMount() {
   //   const {
   //     authUser: { selectedCol },
-  //     myRating,
+  //     myWardrobe,
   //   } = this.props;
 
   //   this.setState({
   //     loading: false,
-  //     myRating,
+  //     myWardrobe,
   //     subscription: selectedCol
   //       ? Object.keys(selectedCol)
   //       : selectedCol,
@@ -36,11 +38,11 @@ class WardrobePage extends Component {
   // }
   // componentDidUpdate(prevProps, prevState) {
   //   if (
-  //     prevProps.myRating !== this.props.myRating ||
+  //     prevProps.myWardrobe !== this.props.myWardrobe ||
   //     prevProps.authUser !== this.props.authUser
   //   ) {
   //     this.setState({
-  //       myRating: this.props.myRating,
+  //       myWardrobe: this.props.myWardrobe,
   //       subscription: this.props.authUser.selectedCol
   //         ? Object.keys(this.props.authUser.selectedCol)
   //         : this.props.authUser.selectedCol,
@@ -57,23 +59,28 @@ class WardrobePage extends Component {
   }
 
   newValue(note, value) {
-    const { myRating } = this.props;
+    const { myWardrobe } = this.props;
     console.log('value ' + value + ' note: ' + note);
-    if (myRating) {
-      if (myRating.ratedNotes) {
-        if (myRating.ratedNotes[note]) {
-          return parseInt(myRating.ratedNotes[note] + value);
+    if (myWardrobe) {
+      if (myWardrobe.ratedNotes) {
+        console.log('INNE I NEW VALUE NOTE ' + note);
+
+        if (myWardrobe.ratedNotes[note]) {
+          return parseInt(myWardrobe.ratedNotes[note] + value);
           // if (value > 0) {
-          //   const add = parseInt(myRating.ratedNotes[note] + value);
+          //   const add = parseInt(myWardrobe.ratedNotes[note] + value);
           //   return add;
           // } else if (value < 0) {
           //   const subtract = parseInt(
-          //     myRating.ratedNotes[note] + value,
+          //     myWardrobe.ratedNotes[note] + value,
           //   );
           //  return subtract;
           //}
+        } else {
+          return value;
         }
       } else {
+        console.log('hör borde det komma in nåogt ' + value);
         return value;
       }
     } else {
@@ -89,32 +96,19 @@ class WardrobePage extends Component {
     console.log('yo' + base + heart + top);
     const clickedPoints = calculatePoints(nextValue, prevValue);
 
-    firebase
-      .wardrobe(uid)
-      .child(name)
-      .update({
-        rating: nextValue,
-      })
-      .then(
-        firebase
-          .wardrobe(uid)
-          .child('ratedNotes')
-          .update({
-            [base]: 0,
-            [heart]: 0,
-            [top]: 0,
-          }),
-      );
-
     if (nextValue !== prevValue) {
-      console.log('base: ' + this.newValue(base, clickedPoints));
+      const ba = this.newValue(base, clickedPoints);
       console.log('heart: ' + this.newValue(heart, clickedPoints));
       console.log('top: ' + this.newValue(top, clickedPoints));
       firebase
         .wardrobe(uid)
+        .child('parfumes')
         .child(name)
         .update({
           rating: nextValue,
+          base: [base],
+          heart: [heart],
+          top: [top],
         })
         .then(
           firebase
@@ -125,6 +119,14 @@ class WardrobePage extends Component {
               [heart]: this.newValue(heart, clickedPoints),
               [top]: this.newValue(top, clickedPoints),
             }),
+          // .then(
+          //   firebase
+          //     .wardrobe(uid)
+          //     .child('ratedNotes')
+          //     .update({
+          //       [base]: ba,
+          //     }),
+          // ),
         );
     }
   }
@@ -144,13 +146,13 @@ class WardrobePage extends Component {
 
   render() {
     const { tabOpen, isTruncated, loading } = this.state;
-    const { authUser, myRating, firebase } = this.props;
+    const { authUser, myWardrobe, firebase } = this.props;
 
     if (loading) {
       return <Loading />;
     } else if (!authUser.selectedCol) {
       return <NoCollection />;
-    } else if (this.props.allCollections) {
+    } else if (this.props.allCollections && authUser.selectedCol) {
       const subCollection = this.props.allCollections[
         Object.keys(authUser.selectedCol)
       ];
@@ -163,10 +165,12 @@ class WardrobePage extends Component {
       // >>>>>>> master
 
       return (
-        <Section>
-          <s.QuizTitle>
-            <h1>Wardrobe</h1>
-          </s.QuizTitle>
+        <s.SectionDiv>
+          <s.HeaderWardrobe headerImageWardrobe={wardrobeHeader}>
+            <s.QuizTitle>
+              <h1>Doftgarderob</h1>
+            </s.QuizTitle>
+          </s.HeaderWardrobe>
           {subCollection.slice(0, 3).map((item, index) => (
             <Fragment>
               <s.Wrapper>
@@ -179,13 +183,13 @@ class WardrobePage extends Component {
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      Description
+                      Beskrivning
                     </button>
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      My Rating
+                      Mitt betyg
                     </button>
                   </s.ButtonDiv>
                   <s.HeaderDiv>{item.name}</s.HeaderDiv>
@@ -197,10 +201,10 @@ class WardrobePage extends Component {
                       starCount={5}
                       bubbles={item.base_note_id}
                       value={
-                        myRating
-                          ? myRating[item.name] &&
-                            myRating[item.name].rating
-                            ? myRating[item.name].rating
+                        myWardrobe
+                          ? myWardrobe.parfumes[item.name] &&
+                            myWardrobe.parfumes[item.name].rating
+                            ? myWardrobe.parfumes[item.name].rating
                             : 0
                           : 0
                       }
@@ -224,8 +228,9 @@ class WardrobePage extends Component {
                       firebase={firebase}
                       authUser={authUser.uid}
                       textFirebase={
-                        myRating && myRating[item.name].ownDesc
-                          ? myRating[item.name].ownDesc
+                        myWardrobe &&
+                        myWardrobe.parfumes[item.name].ownDesc
+                          ? myWardrobe.parfumes[item.name].ownDesc
                           : ''
                       }
                       tabOpen={tabOpen}
@@ -241,7 +246,7 @@ class WardrobePage extends Component {
               </s.Wrapper>
             </Fragment>
           ))}
-        </Section>
+        </s.SectionDiv>
       );
     }
   }
@@ -287,6 +292,7 @@ function RatingWrapper({ name, textFirebase, firebase, authUser }) {
 
     firebase
       .wardrobe(authUser)
+      .child('parfumes')
       .child(name)
       .update({ ownDesc: editText });
   };
@@ -313,7 +319,7 @@ function RatingWrapper({ name, textFirebase, firebase, authUser }) {
 }
 
 const mapStateToProps = state => ({
-  myRating: state.wardrobeState.myWardrobe,
+  myWardrobe: state.wardrobeState.myWardrobe,
   authUser: state.sessionState.authUser,
   allCollections: state.sortedParfumesState,
 });

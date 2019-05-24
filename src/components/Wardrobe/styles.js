@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
 export const QuizTitle = styled.div`
-  text-align: center;
-  letter-spacing: 0;
-  font-weight: 900;
-  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0 auto;
+  color: white;
+  justify-content: center;
+  h1 {
+    font-size: 2.5em;
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -53,9 +57,9 @@ export const ButtonDiv = styled.div`
     font-size: 1.2em;
     font-weight: 700;
     background: none;
-    height: fit-content;
+    /* height: fit-content; */
     padding: 0.3em 0;
-    margin-left: 0.4em;
+    /* margin-left: 0.4em; */
     border: 1px solid transparent; /* För att innehållet inte ska tryckas ned vid hover */
   }
   button:nth-child(1) {
@@ -174,4 +178,21 @@ export const RatingButton = styled.input`
     border: 1px solid black;
     cursor: pointer;
   }
+`;
+
+export const HeaderWardrobe = styled.div`
+  display: flex;
+  background-image: url(${props => props.headerImageWardrobe});
+  width: 100%;
+  height: 35vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* margin-bottom: 2rem; */
+  justify-content: center;
+  align-content: center;
+  background-position-y: 100%;
+`;
+
+export const SectionDiv = styled.section`
+  margin-top: 0;
 `;

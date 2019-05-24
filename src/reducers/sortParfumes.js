@@ -16,7 +16,7 @@ const noteState = [
   { name: 'GOURMANDY' },
   { name: 'MOSSY' },
   { name: 'GREEN' },
-  { name: 'RESINOUS' },
+  { name: 'CITRIC' },
   { name: 'LEATHER' },
   { name: 'TEXTILE' },
   { name: 'SYNTHETIC' },

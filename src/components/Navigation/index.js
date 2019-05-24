@@ -95,13 +95,8 @@ class NavigationAuth extends Component {
 
             <ul>
               <li>
-                <Link onClick={this.toggleNav} to={ROUTES.HOME}>
-                  Hem
-                </Link>
-              </li>
-              <li>
-                <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
-                  Mitt Konto
+                <Link onClick={this.toggleNav} to={ROUTES.PROFILE}>
+                  Profile
                 </Link>
               </li>
               <li>
@@ -170,28 +165,28 @@ class NavigationAuth extends Component {
           <NavDiv isActive={isActive}>
             <ul>
               <li>
-                <Link onClick={this.toggleNav} to={ROUTES.HOME}>
-                  Home
+                <Link onClick={this.toggleNav} to={ROUTES.PROFILE}>
+                  Profile
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link onClick={this.toggleNav} to={ROUTES.ACCOUNT}>
                   Account
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.QUIZ}>
                   Doft-Quiz
                 </Link>
               </li>
 
-              {authUser.roles.includes(ROLES.ADMIN) && (
+              {/* {authUser.roles.includes(ROLES.ADMIN) && (
                 <li>
                   <Link onClick={this.toggleNav} to={ROUTES.ADMIN}>
                     Admin
                   </Link>
                 </li>
-              )}
+              )} */}
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.WARDROBE}>
                   My Wardrobe

@@ -21,7 +21,7 @@ class Loading extends Component {
           <GooSpinner size={30} color="#000" loading={loading} />
         </Middle>
         <Middle>
-          <p>Loading...</p>
+          <p>Laddar...</p>
         </Middle>
       </LoadingDiv>
     );

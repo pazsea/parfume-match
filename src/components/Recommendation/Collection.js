@@ -19,6 +19,7 @@ import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import Loading from '../Loading';
+import NoCollection from './No-collection';
 
 class Collection extends Component {
   state = {
@@ -58,7 +59,7 @@ class Collection extends Component {
     if (!authUser.recommendedCol) {
       return (
         <Section>
-          <h2>Du har ingen rekommenderad kollektion....</h2>
+          <NoCollection />
           {/* // Lägg till felhantering (en knapp till Quizet) */}
         </Section>
       );

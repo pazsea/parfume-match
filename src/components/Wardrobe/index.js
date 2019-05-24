@@ -13,6 +13,8 @@ import parfume1 from '../../images/parfume1.jpg';
 import Loading from '../Loading';
 import NoCollection from '../Recommendation/No-collection';
 import noteslogo from '../../images/noteslogo.png';
+import wardrobeHeader from '../../images/wardrobeheader.jpg';
+// import wardrobeHeader from '../../images/wardrobeheader_cropped.jpg';
 
 class WardrobePage extends Component {
   state = {
@@ -163,10 +165,12 @@ class WardrobePage extends Component {
       // >>>>>>> master
 
       return (
-        <Section>
-          <s.QuizTitle>
-            <h1>Wardrobe</h1>
-          </s.QuizTitle>
+        <s.SectionDiv>
+          <s.HeaderWardrobe headerImageWardrobe={wardrobeHeader}>
+            <s.QuizTitle>
+              <h1>Doftgarderob</h1>
+            </s.QuizTitle>
+          </s.HeaderWardrobe>
           {subCollection.slice(0, 3).map((item, index) => (
             <Fragment>
               <s.Wrapper>
@@ -179,13 +183,13 @@ class WardrobePage extends Component {
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      Description
+                      Beskrivning
                     </button>
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      My Rating
+                      Mitt betyg
                     </button>
                   </s.ButtonDiv>
                   <s.HeaderDiv>{item.name}</s.HeaderDiv>
@@ -242,7 +246,7 @@ class WardrobePage extends Component {
               </s.Wrapper>
             </Fragment>
           ))}
-        </Section>
+        </s.SectionDiv>
       );
     }
   }
@@ -301,6 +305,7 @@ function RatingWrapper({ name, textFirebase, firebase, authUser }) {
           className="ratingBox"
           value={editText}
           onChange={e => textChange(e)}
+          rows="4"
         />
 
         <s.RatingButton

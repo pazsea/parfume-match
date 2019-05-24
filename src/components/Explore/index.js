@@ -8,6 +8,7 @@ import * as s from './styles';
 
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
+import Loading from '../Loading';
 
 import * as ROUTES from '../../constants/routes';
 

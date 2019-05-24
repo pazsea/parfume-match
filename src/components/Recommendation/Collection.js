@@ -90,7 +90,7 @@ class Collection extends Component {
 
               <Description>
                 {firstDescription.split('/n').map((desc, index) => (
-                  <p>{desc}</p>
+                  <p key={index}>{desc}</p>
                 ))}
                 <ul>
                   <li>Ny doft varje månad</li>

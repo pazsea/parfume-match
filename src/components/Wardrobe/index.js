@@ -8,10 +8,13 @@ import { Section } from '../../styleConstants/section.js';
 import { calculatePoints } from '../../constants/functions';
 
 import * as s from './styles';
+import * as profileStyle from '../Profile/styles';
+
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
 import Loading from '../Loading';
 import NoCollection from '../Recommendation/No-collection';
+import sprayheader from '../../images/sprayheader.jpg';
 import noteslogo from '../../images/noteslogo.png';
 
 class WardrobePage extends Component {
@@ -105,15 +108,33 @@ class WardrobePage extends Component {
     } else if (!authUser.selectedCol) {
       return <NoCollection />;
     } else if (this.props.allCollections && authUser.selectedCol) {
-      const subCollection = this.props.allCollections[
-        Object.keys(authUser.selectedCol)
-      ];
+      const selectedColKey = Object.keys(authUser.selectedCol);
+      const subCollection = this.props.allCollections[selectedColKey];
 
       return (
         <Section>
-          <s.QuizTitle>
-            <h1>Min doft garderob</h1>
-          </s.QuizTitle>
+          <profileStyle.Header headerImage={sprayheader}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                class="svg--sm"
+                fill="white"
+                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+              />
+            </svg>
+            <s.TitleCenter>
+              <h1>
+                {authUser.username + "'s" + ' '} <br />
+                doft garderob
+              </h1>
+              <p>
+                Aktiv kollektion: <i>{selectedColKey}</i>
+              </p>
+            </s.TitleCenter>
+          </profileStyle.Header>
           {subCollection.slice(0, 8).map((item, index) => (
             <Fragment>
               <s.Wrapper>

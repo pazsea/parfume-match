@@ -7,12 +7,13 @@ const INITIAL_STATE = {
 function loadStatusReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case a.STATE_FETCH_SUCCESS: {
-      return Object.assign(
-        {},
-        {
-          stateFetched: true,
-        },
-      );
+      return { stateFetched: true };
+      // return Object.assign(
+      //   {},
+      //   {
+      //     stateFetched: true,
+      //   },
+      // );
     }
     default:
       return state;

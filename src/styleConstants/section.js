@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 export const Section = styled.section`
-  margin-top: 1%;
+  margin: 0;
 `;

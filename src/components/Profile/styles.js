@@ -23,7 +23,7 @@ export const FlexLeftContainer = styled.div`
   flex-grow: 1;
   margin-right: 10px;
   margin-left: 5rem;
-  width: 35%;
+  width: 30%;
 `;
 
 export const ProfileContent = styled.div`
@@ -82,6 +82,7 @@ export const ProfilePicture = styled.div`
 export const Header = styled.div`
   display: flex;
   background-image: url(${props => props.headerImage});
+  position: relative;
   width: 100%;
   height: 35vh;
   background-size: cover;
@@ -89,6 +90,13 @@ export const Header = styled.div`
   margin-bottom: 2rem;
   justify-content: center;
   align-content: center;
+
+  svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+  }
 `;
 export const Blog = styled.div`
   width: 80%;
@@ -147,7 +155,7 @@ export const DescriptionBox = styled.div`
   width: 80%;
   flex-wrap: wrap;
   textarea {
-    width: 80%;
+    width: 100%;
     height: 7rem;
     flex-wrap: wrap;
   }

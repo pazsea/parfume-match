@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import placeholder from '../../images/placeholder.png';
+import * as profileStyle from '../Profile/styles';
+import happypeople from '../../images/happypeople.jpg';
 
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
@@ -20,9 +22,22 @@ class Explore extends Component {
     const { recommendedWardrobes, users, userWardrobes } = this.props;
     return (
       <div>
-        <s.QuizTitle>
-          <h1>Utforska Garderober</h1>
-        </s.QuizTitle>
+        <profileStyle.Header headerImage={happypeople}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+          >
+            <polygon
+              class="svg--sm"
+              fill="white"
+              points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+            />
+          </svg>
+          <s.TitleCenter>
+            <h1>Upptäck dina parfym vänner</h1>
+          </s.TitleCenter>
+        </profileStyle.Header>
         {recommendedWardrobes && users && userWardrobes ? (
           recommendedWardrobes.map(uid => (
             <UserWardrobe

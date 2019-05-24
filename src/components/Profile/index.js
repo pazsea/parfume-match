@@ -8,10 +8,8 @@ import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import profile_picture_placeholder from '../../images/profile_picture_placeholder.jpg';
 import Loading from '../Loading';
 
-import placeholder from '../../images/placeholder.png';
 import headerAvantgard from '../../images/headerAvantgard.jpg';
 import headerClean from '../../images/headerClean.jpg';
 import headerFemaleClassics from '../../images/headerFemaleClassics.jpg';
@@ -356,6 +354,17 @@ class ProfilePage extends Component {
                 : null
             }
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                class="svg--sm"
+                fill="white"
+                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+              />
+            </svg>
             <s.TitleOnHeaderCenter>
               <h1>
                 Nuvarande kollektion <i>{colHeader}</i>

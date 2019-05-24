@@ -101,7 +101,7 @@ class NavigationAuth extends Component {
               </li>
               <li>
                 <Link onClick={this.toggleNav} to={ROUTES.EXPLORE}>
-                  Utforska
+                  Upptäck
                 </Link>
               </li>
               <li>

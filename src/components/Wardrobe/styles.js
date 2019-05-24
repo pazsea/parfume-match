@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import wardrobeheader from '../../images/wardrobeheader.png';
 
 export const QuizTitle = styled.div`
   text-align: center;
@@ -23,6 +24,7 @@ export const ImageDiv = styled.div`
   img {
     align-self: center;
     width: 50%;
+    background: none;
     /* height: auto; */
   }
 `;
@@ -31,6 +33,7 @@ export const ParfumeDiv = styled.div`
   flex-basis: 40%;
   display: flex;
   flex-direction: column;
+  background: white;
   /* box-shadow: 4px 2px 2px black; */
   border: 1px solid #ccc;
 `;
@@ -87,6 +90,33 @@ export const NotesDiv = styled.div`
   }
 `;
 
+export const TitleCenter = styled.div`
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  font-size: 1.5em;
+  flex-direction: column;
+  color: black;
+  border: 5px double black;
+  margin-top: 1%;
+  height: fit-content;
+  width: 20%;
+  padding: 0 1.5%;
+  h1 {
+    margin: 6% 0;
+  }
+  p {
+    i {
+      color: lightgreen;
+      font-weight: bold;
+    }
+  }
+  /* font-weight: bold; */
+  background-color: rgba(255, 255, 255, 0.6);
+  font-family: 'Amatic SC', cursive;
+`;
+
 export const StarsDiv = styled.div`
   flex: 1;
   font-size: 2em;
@@ -106,6 +136,8 @@ export const HeaderDiv = styled.div`
 export const DescriptionDiv = styled.div`
   flex: 8;
   margin-left: 0.4em;
+  margin-right: 0.4em;
+
   font-size: 1em;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;

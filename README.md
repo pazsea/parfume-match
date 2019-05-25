@@ -1,7 +1,7 @@
 <p align="center">
-  <a href="https://gatsbyjs.org">
+
     <img alt="Gatsby" src="https://firebasestorage.googleapis.com/v0/b/gjtpsniph.appspot.com/o/appImages%2FsniphLogo.png?alt=media&token=9562e27a-c1d9-46fd-b760-c0625049e9a3" width="200" />
-  </a>
+
 </p>
 <h1 align="center">
   An GJTP project.

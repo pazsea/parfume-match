@@ -1,111 +1,86 @@
-# react-redux-firebase-authentication
+<p align="center">
+<a href=# >
+    <img alt="Gatsby" src="https://firebasestorage.googleapis.com/v0/b/gjtpsniph.appspot.com/o/appImages%2FsniphLogo.png?alt=media&token=9562e27a-c1d9-46fd-b760-c0625049e9a3" width="200" />
+    </a>
+</p>
+<h1 align="center">
+  An GJTP project.
+</h1>
 
-[![Build Status](https://travis-ci.org/the-road-to-react-with-firebase/react-redux-firebase-authentication.svg?branch=master)](https://travis-ci.org/the-road-to-react-with-firebase/react-redux-firebase-authentication) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/the-road-to-react-with-firebase/react-redux-firebase-authentication.svg)](https://greenkeeper.io/)
+## 🚩 Project Goal
 
-* [React + Firebase Tutorial](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/)
-* [React + Firebase + Redux Tutorial](https://www.robinwieruch.de/react-firebase-redux-tutorial)
-* [Live Version of half of the Tutorial](https://react-firebase-authentication.wieruch.com/)
+GJTP is an collection of awesome front end developers. We collaborated with an company called Sniph whos business revolves parfumes. They wanted ways of improving their customer experience by having them stay longer on their site.
 
-## Variations
+This project works towards that goal. 
 
-* [Only React Version](https://github.com/the-road-to-react-with-firebase/react-firebase-authentication)
-* [MobX Version](https://github.com/the-road-to-react-with-firebase/react-mobx-firebase-authentication)
-* [Gatsby Version](https://github.com/the-road-to-react-with-firebase/react-gatsby-firebase-authentication)
-* [Firestore Version](https://github.com/the-road-to-react-with-firebase/react-firestore-authentication)
-* [Semantic UI Version](https://github.com/the-road-to-react-with-firebase/react-semantic-ui-firebase-authentication)
+  <a href="https://www.patricksjobergportfolio.se">
+    Live demo.
+  </a>
+  
+  Gif
 
-## Features
 
-* uses:
-  * only React (create-react-app)
-  * firebase
-  * react-router
-  * **redux**
-* features:
-  * Sign In
-  * Sign Up
-  * Sign Out
-  * Password Forget
-  * Password Change
-  * Verification Email
-  * Protected Routes with Authorization
-  * Roles-based Authorization
-  * Social Logins with Google, Facebook and Twitter
-  * Linking of Social Logins on Account dashboard
-  * Auth Persistence with Local Storage
-  * Database with Users and Messages
+## What’s In This Document
 
-## License
+- [Key functions](#-key-functions)
+- [How to run this project](#-how-to-run-this-project)
+- [Attributes](#-attributes)
+- [Authors](#-authors)
 
-### Commercial license
 
-If you want to use this starter project to develop commercial sites, themes, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. Purchase an commercial license for different team sizes:
 
-* [1 Developer](https://gum.co/react-with-firebase-starter-pack-developer)
-* [Team of up to 8 Developers](https://gum.co/react-with-firebase-starter-pack-team)
-* [Unlimited Developers of an Organization](https://gum.co/react-with-firebase-starter-pack-organization)
+## 🔔 Key Functions
 
-It grants you also access to the other starter projects in this GitHub organization.
+- **Create, login, reset/change password** All these features exists using firebase. You can also upload your own profile picture.
 
-### Open source license
+- **Wardrobe Component** The user gets prompted to answer a short quiz after creating an user. This will generate an recommended parfume collection for the user to subsribe to. Using redux, saga, node.js and an SQL database we fetch data and sort the parfumes to the respective collection. The user gets the correct render from the collection in which she/he has selected.
 
-If you are creating an open source application under a license compatible with the [GNU GPL license v3](https://www.gnu.org/licenses/gpl-3.0.html), you may use this starter project under the terms of the GPLv3.
+- **Rating function** Every parfume is avaible for the user to rate from 1 - 5 stars. When the user rates an parfume she/he also rates the containing notes. We have created and function that calculates the users top 5 notes.
 
-## Installation
+- **Matching function** With the rating function that calculates the users top 5 notes, we also have an function that calculates which users have the most in common with the logged in user. 
 
-* `git clone git@github.com:the-road-to-react-with-firebase/react-redux-firebase-authentication.git`
-* `cd react-redux-firebase-authentication`
-* `npm install`
-* `npm start`
-* visit http://localhost:3000
+- **Explore Component** We render all matching users that gets returned from the matching function with its respective wardrobes. So the logged in user can explore new parfumes.
 
-Get an overview of Firebase, how to create a project, what kind of features Firebase offers, and how to navigate through the Firebase project dashboard in this [visual tutorial for Firebase](https://www.robinwieruch.de/firebase-tutorial/).
+- **Redux persist** We also use an library for persisting state on local storage. Our SQL database is static so this doesnt need to fetch all the time. Instead we fetch it once and store it on the users local storage.
 
-### Firebase Configuration
 
-* copy/paste your configuration from your Firebase project's dashboard into one of these files
-  * *src/components/Firebase/firebase.js* file
-  * *.env* file
-  * *.env.development* and *.env.production* files
 
-The *.env* or *.env.development* and *.env.production* files could look like the following then:
+## 💻 How to run this project
+1. **Install from the root folder, GJTP**
 
-```
-REACT_APP_API_KEY=AIzaSyBtxZ3phPeXcsZsRTySIXa7n33NtQ
-REACT_APP_AUTH_DOMAIN=react-firebase-s2233d64f8.firebaseapp.com
-REACT_APP_DATABASE_URL=https://react-firebase-s2233d64f8.firebaseio.com
-REACT_APP_PROJECT_ID=react-firebase-s2233d64f8
-REACT_APP_STORAGE_BUCKET=react-firebase-s2233d64f8.appspot.com
-REACT_APP_MESSAGING_SENDER_ID=701928454501
-```
+   ```shell
+   npm install
 
-### Activate Sign-In Methods
+   ```
 
-![firebase-enable-google-social-login_640](https://user-images.githubusercontent.com/2479967/49687774-e0a31e80-fb42-11e8-9d8a-4b4c794134e6.jpg)
+2. **Install the server**
 
-* Email/Password
-* [Google](https://www.robinwieruch.de/react-firebase-social-login/)
-* [Facebook](https://www.robinwieruch.de/firebase-facebook-login/)
-* [Twitter](https://www.robinwieruch.de/firebase-twitter-login/)
-* [Troubleshoot](https://www.robinwieruch.de/react-firebase-social-login/)
+   There is an folder called "server" that you need to:
+   
+   ```shell
+   npm install
 
-### Activate Verification E-Mail
+   ```
+   
+   When that is finished, use nodemon like this:
+   
+      ```shell
+   nodemon server.js
 
-* add a redirect URL for redirecting a user after an email verification into one of these files
-  * *src/components/Firebase/firebase.js* file
-  * *.env* file
-  * *.env.development* and *.env.production* files
+   ```
 
-The *.env* or *.env.development* and *.env.production* files could look like the following then (excl. the Firebase configuration).
+3. **Run the app**
 
-**Development:**
+   Now you are ready to run the app from the root folder GJTP
 
-```
-REACT_APP_CONFIRMATION_EMAIL_REDIRECT=http://localhost:3000
-```
+   ```sh
+   npm start
+   ```
+   
+## 👏 Attributes
+<a href="https://www.robinwieruch.de/">https://www.robinwieruch.de/</a> Big thanks to Robin for his toturials about Readux, React, Saga. Always an big help. Supported us student with his books for free which was greatly appreciated. <br>
 
-**Production:**
 
-```
-REACT_APP_CONFIRMATION_EMAIL_REDIRECT=https://mydomain.com
-```
+## 📓 Authors
+Patrick Sjöberg <a href="https://github.com/pazsea">@pazsea</a> 
+

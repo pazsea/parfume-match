@@ -23,7 +23,7 @@ export const FlexLeftContainer = styled.div`
   flex-grow: 1;
   margin-right: 10px;
   margin-left: 5rem;
-  width: 35%;
+  width: 30%;
 `;
 
 export const ProfileContent = styled.div`
@@ -73,15 +73,16 @@ export const ProfilePicture = styled.div`
     display: none;
   }
   img {
-    height: 10rem;
+    height: 15rem;
     width: auto;
-    border-radius: 50%;
+    border-radius: 10%;
     cursor: cell;
   }
 `;
 export const Header = styled.div`
   display: flex;
   background-image: url(${props => props.headerImage});
+  position: relative;
   width: 100%;
   height: 35vh;
   background-size: cover;
@@ -89,10 +90,17 @@ export const Header = styled.div`
   margin-bottom: 2rem;
   justify-content: center;
   align-content: center;
+
+  svg {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+  }
 `;
 export const Blog = styled.div`
   width: 80%;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   a {
     color: black;
   }
@@ -106,7 +114,7 @@ export const TitleCenter = styled.div`
 export const TitleOnHeaderCenter = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 4rem;
+  margin-top: 2rem;
   color: white;
 `;
 
@@ -142,13 +150,58 @@ export const SubscribeButton = styled.div`
     }
   }
 `;
+export const DescButtonDiv = styled.div`
+  flex: 3;
+  display: flex;
+`;
+
+export const RatingButton = styled.button`
+  flex: 1;
+  color: #fff;
+  background: #000;
+  border: 2px solid #000;
+  text-transform: uppercase;
+  margin-left: 0.4em;
+  font-size: 1.1em;
+
+  :hover {
+    color: #000;
+    background: white;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+`;
+
+export const EditButton = styled.button`
+  flex: 1;
+  font-weight: ${props => (props.editState ? 'bold' : '300')};
+  color: ${props => (props.editState ? 'darkgreen' : '#fff')};
+  background: ${props => (props.editState ? 'yellow' : '#000')};
+  border: 2px solid #000;
+  margin-right: 0.4em;
+  text-transform: uppercase;
+  font-size: 1.1em;
+
+  :hover {
+    color: #000;
+    background: white;
+    border: 2px solid black;
+    cursor: pointer;
+  }
+`;
 
 export const DescriptionBox = styled.div`
-  width: 80%;
+  width: 100%;
   flex-wrap: wrap;
   textarea {
-    width: 80%;
-    height: 7rem;
+    flex: 5;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6em;
+    font-style: ${props => (props.editState ? 'none' : 'italic')};
+    border: ${props =>
+      props.editState ? '3px solid gold' : '1px solid grey'};
+    width: 100%;
+    height: 16rem;
     flex-wrap: wrap;
   }
 `;

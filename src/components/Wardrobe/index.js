@@ -8,47 +8,39 @@ import { Section } from '../../styleConstants/section.js';
 import { calculatePoints } from '../../constants/functions';
 
 import * as s from './styles';
+import * as profileStyle from '../Profile/styles';
+
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
 import Loading from '../Loading';
 import NoCollection from '../Recommendation/No-collection';
 import noteslogo from '../../images/noteslogo.png';
-import wardrobeHeader from '../../images/wardrobeheader.jpg';
-// import wardrobeHeader from '../../images/wardrobeheader_cropped.jpg';
+
+import oceanic from '../../images/oceanic.jpg';
+import tabaChoko from '../../images/tabachoko.jpg';
+import cementRose from '../../images/cementrose.jpg';
+import sideshow from '../../images/sideshow.png';
+import darkSaphir from '../../images/darksaphir.jpg';
+import coccobello from '../../images/Coccobello.jpg';
+import rayOfLight from '../../images/rayoflight.png';
+import louanges from '../../images/louangesprofanes.jpg';
+
+const parfumePics = {
+  'Oceanic Encre': oceanic,
+  'Taba Choko': tabaChoko,
+  'Cement Rose': cementRose,
+  Sideshow: sideshow,
+  'Dark Saphir': darkSaphir,
+  Coccobello: coccobello,
+  'Ray of Light': rayOfLight,
+  'PG19 Louanges Profanes': louanges,
+};
 
 class WardrobePage extends Component {
   state = {
     isTruncated: false,
     tabOpen: '',
   };
-
-  // componentDidMount() {
-  //   const {
-  //     authUser: { selectedCol },
-  //     myWardrobe,
-  //   } = this.props;
-
-  //   this.setState({
-  //     loading: false,
-  //     myWardrobe,
-  //     subscription: selectedCol
-  //       ? Object.keys(selectedCol)
-  //       : selectedCol,
-  //   });
-  // }
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (
-  //     prevProps.myWardrobe !== this.props.myWardrobe ||
-  //     prevProps.authUser !== this.props.authUser
-  //   ) {
-  //     this.setState({
-  //       myWardrobe: this.props.myWardrobe,
-  //       subscription: this.props.authUser.selectedCol
-  //         ? Object.keys(this.props.authUser.selectedCol)
-  //         : this.props.authUser.selectedCol,
-  //     });
-  //   }
-  // }
 
   componentWillUnmount() {
     const {
@@ -67,20 +59,10 @@ class WardrobePage extends Component {
 
         if (myWardrobe.ratedNotes[note]) {
           return parseInt(myWardrobe.ratedNotes[note] + value);
-          // if (value > 0) {
-          //   const add = parseInt(myWardrobe.ratedNotes[note] + value);
-          //   return add;
-          // } else if (value < 0) {
-          //   const subtract = parseInt(
-          //     myWardrobe.ratedNotes[note] + value,
-          //   );
-          //  return subtract;
-          //}
         } else {
           return value;
         }
       } else {
-        console.log('hör borde det komma in nåogt ' + value);
         return value;
       }
     } else {
@@ -119,14 +101,6 @@ class WardrobePage extends Component {
               [heart]: this.newValue(heart, clickedPoints),
               [top]: this.newValue(top, clickedPoints),
             }),
-          // .then(
-          //   firebase
-          //     .wardrobe(uid)
-          //     .child('ratedNotes')
-          //     .update({
-          //       [base]: ba,
-          //     }),
-          // ),
         );
     }
   }
@@ -153,29 +127,41 @@ class WardrobePage extends Component {
     } else if (!authUser.selectedCol) {
       return <NoCollection />;
     } else if (this.props.allCollections && authUser.selectedCol) {
-      const subCollection = this.props.allCollections[
-        Object.keys(authUser.selectedCol)
-      ];
-      // =======
-      //       return <Loading />;
-      //     } else if (!subscription) {
-      //       return <NoCollection />;
-      //     } else {
-      //       const subCollection = this.props.allCollections[subscription];
-      // >>>>>>> master
+      const selectedColKey = Object.keys(authUser.selectedCol);
+      const subCollection = this.props.allCollections[selectedColKey];
 
       return (
-        <s.SectionDiv>
-          <s.HeaderWardrobe headerImageWardrobe={wardrobeHeader}>
-            <s.QuizTitle>
-              <h1>Doftgarderob</h1>
-            </s.QuizTitle>
-          </s.HeaderWardrobe>
-          {subCollection.slice(0, 3).map((item, index) => (
+        <Section>
+          <s.Header>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                class="svg--sm"
+                fill="white"
+                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+              />
+            </svg>
+            <s.TitleCenter>
+              <h1>
+                {authUser.username + "'s" + ' '} <br />
+                doft garderob
+              </h1>
+              <p>
+                Aktiv kollektion: <i>{selectedColKey}</i>
+              </p>
+            </s.TitleCenter>
+          </s.Header>
+          {subCollection.slice(0, 8).map((item, index) => (
             <Fragment>
               <s.Wrapper>
                 <s.ImageDiv>
-                  <img alt="parfume bottle" src={parfume1} />
+                  <img
+                    alt="parfume bottle"
+                    src={parfumePics[item.name] || parfume1}
+                  />
                 </s.ImageDiv>
                 <s.ParfumeDiv>
                   <s.ButtonDiv tabOpen={tabOpen} index={index}>
@@ -195,7 +181,6 @@ class WardrobePage extends Component {
                   <s.HeaderDiv>{item.name}</s.HeaderDiv>
                   <s.StarsDiv>
                     <StarRatingComponent
-                      shit={item.base_note_id}
                       key={item.name + index}
                       name={item.name}
                       starCount={5}
@@ -224,11 +209,14 @@ class WardrobePage extends Component {
 
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper
+                      editState={this.state[item.name] + index}
                       name={item.name}
                       firebase={firebase}
                       authUser={authUser.uid}
+                      index={index}
                       textFirebase={
                         myWardrobe &&
+                        myWardrobe.parfumes[item.name] &&
                         myWardrobe.parfumes[item.name].ownDesc
                           ? myWardrobe.parfumes[item.name].ownDesc
                           : ''
@@ -246,7 +234,7 @@ class WardrobePage extends Component {
               </s.Wrapper>
             </Fragment>
           ))}
-        </s.SectionDiv>
+        </Section>
       );
     }
   }
@@ -279,41 +267,68 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
   );
 }
 
-function RatingWrapper({ name, textFirebase, firebase, authUser }) {
+function RatingWrapper({
+  edit,
+  name,
+  textFirebase,
+  firebase,
+  authUser,
+  index,
+}) {
   const [editText, setEditText] = useState(textFirebase);
+  const [editState, setEditState] = useState(false);
 
   const textChange = e => {
     const text = e.target.value;
     setEditText(text);
   };
+  const changeEditState = () => {
+    setEditState(true);
+  };
 
   const descriptionSubmit = event => {
+    console.log('DESC SUBMIT RUNS');
     event.preventDefault();
 
     firebase
       .wardrobe(authUser)
       .child('parfumes')
       .child(name)
-      .update({ ownDesc: editText });
+      .update({ ownDesc: editText })
+      .then(setEditState(false));
   };
 
   return (
     <Fragment>
-      <s.RatingForm onSubmit={e => descriptionSubmit(e)}>
-        <s.RatingBox
-          type="text"
-          className="ratingBox"
-          value={editText}
-          onChange={e => textChange(e)}
-          rows="4"
-        />
+      <s.RatingBox
+        type="text"
+        className="ratingBox"
+        value={editText}
+        onChange={e => textChange(e)}
+        readOnly={editState ? false : true}
+        editState={editState}
+        placeholder={
+          editText
+            ? editText
+            : 'Tryck på edit knappen här nere för att skriva en bedömning av parfymen.'
+        }
+      />
+      <s.DescButtonDiv>
+        <s.EditButton
+          editState={editState}
+          onClick={() => changeEditState()}
+        >
+          EDIT
+        </s.EditButton>
 
         <s.RatingButton
           className="ratingButton"
-          type="submit"
-          value="Submit"
-        />
-      </s.RatingForm>
+          value="SAVE"
+          onClick={e => descriptionSubmit(e)}
+        >
+          SAVE
+        </s.RatingButton>
+      </s.DescButtonDiv>
     </Fragment>
   );
 }

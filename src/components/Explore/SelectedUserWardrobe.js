@@ -7,11 +7,34 @@ import { Section } from '../../styleConstants/section.js';
 import StarRatingComponent from 'react-star-rating-component';
 import noteslogo from '../../images/noteslogo.png';
 
+import * as profileStyle from '../Profile/styles';
+import sprayheader from '../../images/sprayheader.jpg';
+
 import parfume1 from '../../images/parfume1.jpg';
+
+import oceanic from '../../images/oceanic.jpg';
+import tabaChoko from '../../images/tabachoko.jpg';
+import cementRose from '../../images/cementrose.jpg';
+import sideshow from '../../images/sideshow.png';
+import darkSaphir from '../../images/darksaphir.jpg';
+import coccobello from '../../images/Coccobello.jpg';
+import rayOfLight from '../../images/rayoflight.png';
+import louanges from '../../images/louangesprofanes.jpg';
 
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import * as s from '../Wardrobe/styles';
+
+const parfumePics = {
+  'Oceanic Encre': oceanic,
+  'Taba Choko': tabaChoko,
+  'Cement Rose': cementRose,
+  Sideshow: sideshow,
+  'Dark Saphir': darkSaphir,
+  Coccobello: coccobello,
+  'Ray of Light': rayOfLight,
+  'PG19 Louanges Profanes': louanges,
+};
 class SelectedUserWardrobe extends Component {
   state = {
     isTruncated: false,
@@ -50,16 +73,33 @@ class SelectedUserWardrobe extends Component {
 
       return (
         <Section>
-          <s.QuizTitle>
-            <h1>
-              {users ? users[id].username + '' : 'User'}'s Wardrobe
-            </h1>
-          </s.QuizTitle>
+          <profileStyle.Header headerImage={sprayheader}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                class="svg--sm"
+                fill="white"
+                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+              />
+            </svg>
+            <s.TitleCenter>
+              <h1>
+                {users ? users[id].username + '' : 'User'}'s Wardrobe
+              </h1>
+            </s.TitleCenter>
+          </profileStyle.Header>
+
           {userWardrobeKeys.map((parfume, index) => (
             <Fragment>
               <s.Wrapper>
                 <s.ImageDiv>
-                  <img alt="parfume bottle" src={parfume1} />
+                  <img
+                    alt="parfume bottle"
+                    src={parfumePics[parfume] || parfume1}
+                  />
                 </s.ImageDiv>
                 <s.ParfumeDiv>
                   <s.ButtonDiv tabOpen={tabOpen} index={index}>
@@ -67,13 +107,14 @@ class SelectedUserWardrobe extends Component {
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      My Rating
+                      {users ? users[id].username + '' : 'User'}'s
+                      Recension
                     </button>
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      Description
+                      Parfym Beskrivning
                     </button>
                   </s.ButtonDiv>
                   <s.HeaderDiv>{parfume}</s.HeaderDiv>
@@ -105,6 +146,7 @@ class SelectedUserWardrobe extends Component {
                   ) : (
                     <RatingWrapper
                       name={parfume}
+                      username={users[id].username}
                       textFirebase={
                         wardrobe[parfume].ownDesc
                           ? wardrobe[parfume].ownDesc
@@ -152,14 +194,19 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
   );
 }
 
-function RatingWrapper({ textFirebase }) {
+function RatingWrapper({ textFirebase, username }) {
   return (
     <Fragment>
       <s.RatingForm>
         <s.RatingBox
           type="text"
           className="ratingBox"
-          value={textFirebase}
+          value={
+            textFirebase ||
+            'Tyvärr så har inte ' +
+              username +
+              ' skrivit en beskrivning på denna parfym ännu.'
+          }
         />
       </s.RatingForm>
     </Fragment>

@@ -8,10 +8,8 @@ import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import profile_picture_placeholder from '../../images/profile_picture_placeholder.jpg';
 import Loading from '../Loading';
 
-import placeholder from '../../images/placeholder.png';
 import headerAvantgard from '../../images/headerAvantgard.jpg';
 import headerClean from '../../images/headerClean.jpg';
 import headerFemaleClassics from '../../images/headerFemaleClassics.jpg';
@@ -23,28 +21,40 @@ class ProfilePage extends Component {
   state = {
     loading: false,
     progress: 0,
+    editState: false,
+    ownDesc: this.props.authUser.ownDesc || '',
   };
 
-  componentDidMount() {
-    // const { authUser, firebase } = this.props;
-    // firebase.user(authUser.uid).on('value', snapshot => {
-    //   const val = snapshot.val();
-    //   if (val.profilePic) {
-    //     console.log(val.profilePic.url);
-    //     this.setState({ url: val.profilePic.url });
-    //   }
-    // });
-  }
+  changeEditState = () => {
+    this.setState({ editState: true });
+  };
 
-  componentWillMount() {
-    this.props.firebase.users().off();
-  }
+  // componentDidMount() {
+  //   const { authUser } = this.props;
+  // }
+
+  ownDescChange = e => {
+    const text = e.target.value;
+    this.setState({ ownDesc: text });
+  };
 
   handleChange = e => {
     if (e.target.files[0]) {
       const image = e.target.files[0];
       this.setState(() => ({ image }));
     }
+  };
+  sendOwnDescToDB = event => {
+    const {
+      firebase,
+      authUser: { uid },
+    } = this.props;
+    event.preventDefault();
+
+    firebase
+      .user(uid)
+      .update({ ownDesc: this.state.ownDesc })
+      .then(this.setState({ editState: false }));
   };
 
   handleUpload = () => {
@@ -60,7 +70,7 @@ class ProfilePage extends Component {
       uploadTask.on(
         'state_changed',
         snapshot => {
-          // progrss function ....
+          // progress function ....
 
           const progress = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
@@ -85,7 +95,7 @@ class ProfilePage extends Component {
                 .user(authUser.uid)
                 .child('profilePic')
                 .set({ url: url })
-                .then(this.setState({ loading: false }));
+                .then(this.setState({ loading: false, image: null }));
             });
         },
       );
@@ -164,19 +174,38 @@ class ProfilePage extends Component {
                   <TabPanel>
                     <s.Blog>
                       <h2>Min beskrivning</h2>
-                      <s.DescriptionBox>
-                        <textarea id="link" rows="15" cols="210" />
+                      <s.DescriptionBox
+                        editState={this.state.editState}
+                      >
+                        <textarea
+                          id="link"
+                          rows="15"
+                          cols="210"
+                          value={this.state.ownDesc}
+                          onChange={this.ownDescChange}
+                          placeholder={
+                            this.props.authUser.ownDesc ||
+                            'Vad har du för doft profil? Skriv gärna.'
+                          }
+                          readOnly={
+                            this.state.editState ? false : true
+                          }
+                        />
                         <br />
                       </s.DescriptionBox>
-                      <s.SmallButtonWrapper>
-                        <Link
-                          id="input"
-                          onClick={e => this.setRecColToSelected(e)}
-                          to={ROUTES.PROFILE}
+                      <s.DescButtonDiv>
+                        <s.EditButton
+                          editState={this.state.editState}
+                          onClick={this.changeEditState}
                         >
-                          Spara
-                        </Link>
-                      </s.SmallButtonWrapper>
+                          EDIT
+                        </s.EditButton>
+                        <s.RatingButton
+                          onClick={e => this.sendOwnDescToDB(e)}
+                        >
+                          SAVE
+                        </s.RatingButton>
+                      </s.DescButtonDiv>
                     </s.Blog>
                   </TabPanel>
                 </Tabs>
@@ -203,11 +232,13 @@ class ProfilePage extends Component {
                           />
                         </div>
                       </s.ProfilePicture>
-                      <s.QuizIntroButton>
-                        <button onClick={this.handleUpload}>
-                          UPLOAD PICTURE
-                        </button>
-                      </s.QuizIntroButton>
+                      {this.state.image ? (
+                        <s.QuizIntroButton>
+                          <button onClick={this.handleUpload}>
+                            UPLOAD PICTURE
+                          </button>
+                        </s.QuizIntroButton>
+                      ) : null}
                     </div>
                   </div>
                 </s.ProfileContent>
@@ -240,9 +271,20 @@ class ProfilePage extends Component {
                 : null
             }
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                class="svg--sm"
+                fill="white"
+                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+              />
+            </svg>
             <s.TitleOnHeaderCenter>
               <h1>
-                Rekommenderad kollektion <i>{colHeader}</i>
+                Nuvarande kollektion <i>{colHeader}</i>
               </h1>
 
               <s.ButtonWrapper>
@@ -288,19 +330,38 @@ class ProfilePage extends Component {
                   <TabPanel>
                     <s.Blog>
                       <h2>Min beskrivning</h2>
-                      <s.DescriptionBox>
-                        <textarea id="link" rows="15" cols="210" />
+                      <s.DescriptionBox
+                        editState={this.state.editState}
+                      >
+                        <textarea
+                          id="link"
+                          rows="15"
+                          cols="210"
+                          value={this.state.ownDesc}
+                          onChange={this.ownDescChange}
+                          placeholder={
+                            this.props.authUser.ownDesc ||
+                            'Vad har du för doft profil? Skriv gärna.'
+                          }
+                          readOnly={
+                            this.state.editState ? false : true
+                          }
+                        />
                         <br />
                       </s.DescriptionBox>
-                      <s.SmallButtonWrapper>
-                        <Link
-                          id="input"
-                          onClick={e => this.setRecColToSelected(e)}
-                          to={ROUTES.PROFILE}
+                      <s.DescButtonDiv>
+                        <s.EditButton
+                          editState={this.state.editState}
+                          onClick={this.changeEditState}
                         >
-                          Spara
-                        </Link>
-                      </s.SmallButtonWrapper>
+                          EDIT
+                        </s.EditButton>
+                        <s.RatingButton
+                          onClick={e => this.sendOwnDescToDB(e)}
+                        >
+                          SAVE
+                        </s.RatingButton>
+                      </s.DescButtonDiv>
                     </s.Blog>
                   </TabPanel>
                 </Tabs>
@@ -327,11 +388,13 @@ class ProfilePage extends Component {
                           />
                         </div>
                       </s.ProfilePicture>
-                      <s.QuizIntroButton>
-                        <button onClick={this.handleUpload}>
-                          UPLOAD PICTURE
-                        </button>
-                      </s.QuizIntroButton>
+                      {this.state.image ? (
+                        <s.QuizIntroButton>
+                          <button onClick={this.handleUpload}>
+                            UPLOAD PICTURE
+                          </button>
+                        </s.QuizIntroButton>
+                      ) : null}
                     </div>
                   </div>
                 </s.ProfileContent>
@@ -363,17 +426,24 @@ class ProfilePage extends Component {
                 : null
             }
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                class="svg--sm"
+                fill="white"
+                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+              />
+            </svg>
             <s.TitleOnHeaderCenter>
               <h1>
-                Nuvarande kollektion <i>{colHeader}</i>
+                Rekommenderad kollektion <i>{colHeader}</i>
               </h1>
 
               <s.ButtonWrapper>
-                <Link
-                  id="link"
-                  onClick={e => this.setRecColToSelected(e)}
-                  to={ROUTES.WARDROBE}
-                >
+                <Link id="link" to={ROUTES.WARDROBE}>
                   Visa doftgarderob
                 </Link>
               </s.ButtonWrapper>
@@ -411,19 +481,38 @@ class ProfilePage extends Component {
                   <TabPanel>
                     <s.Blog>
                       <h2>Min beskrivning</h2>
-                      <s.DescriptionBox>
-                        <textarea id="link" rows="15" cols="210" />
+                      <s.DescriptionBox
+                        editState={this.state.editState}
+                      >
+                        <textarea
+                          id="link"
+                          rows="15"
+                          cols="210"
+                          value={this.state.ownDesc}
+                          onChange={this.ownDescChange}
+                          placeholder={
+                            this.props.authUser.ownDesc ||
+                            'Vad har du för doft profil? Skriv gärna.'
+                          }
+                          readOnly={
+                            this.state.editState ? false : true
+                          }
+                        />
                         <br />
                       </s.DescriptionBox>
-                      <s.SmallButtonWrapper>
-                        <Link
-                          id="input"
-                          onClick={e => this.setRecColToSelected(e)}
-                          to={ROUTES.PROFILE}
+                      <s.DescButtonDiv>
+                        <s.EditButton
+                          editState={this.state.editState}
+                          onClick={this.changeEditState}
                         >
-                          Spara
-                        </Link>
-                      </s.SmallButtonWrapper>
+                          EDIT
+                        </s.EditButton>
+                        <s.RatingButton
+                          onClick={e => this.sendOwnDescToDB(e)}
+                        >
+                          SAVE
+                        </s.RatingButton>
+                      </s.DescButtonDiv>
                     </s.Blog>
                   </TabPanel>
                 </Tabs>
@@ -450,11 +539,13 @@ class ProfilePage extends Component {
                           />
                         </div>
                       </s.ProfilePicture>
-                      <s.QuizIntroButton>
-                        <button onClick={this.handleUpload}>
-                          UPLOAD PICTURE
-                        </button>
-                      </s.QuizIntroButton>
+                      {this.state.image ? (
+                        <s.QuizIntroButton>
+                          <button onClick={this.handleUpload}>
+                            UPLOAD PICTURE
+                          </button>
+                        </s.QuizIntroButton>
+                      ) : null}
                     </div>
                   </div>
                 </s.ProfileContent>

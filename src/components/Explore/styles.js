@@ -8,6 +8,33 @@ export const Wrapper = styled.div`
   /* border: 1px solid red; */
 `;
 
+export const TitleCenter = styled.div`
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  font-size: 1.1em;
+  /* font-size: 1.5em; */
+  flex-direction: column;
+  color: black;
+  border: 5px double black;
+  margin-top: 1%;
+  height: fit-content;
+  width: 20%;
+  padding: 0 1.5%;
+  h1 {
+    margin: 6% 0;
+  }
+  p {
+    i {
+      color: lightgreen;
+      font-weight: bold;
+    }
+  }
+  /* font-weight: bold; */
+  background-color: rgba(255, 255, 255, 0.6);
+  font-family: 'Amatic SC', cursive;
+`;
 export const ImageDiv = styled.div`
   flex-basis: 40%;
   display: flex;
@@ -15,8 +42,12 @@ export const ImageDiv = styled.div`
 
   img {
     height: 15rem;
+    min-width: 12rem;
     width: auto;
+
+    max-width: 17rem;
     border-radius: 50%;
+    /* border: 1px solid black; */
     align-self: center;
     /* width: 50%;
     height: 300px; */
@@ -24,7 +55,7 @@ export const ImageDiv = styled.div`
 `;
 
 export const ParfumeDiv = styled.div`
-  flex-basis: 50%;
+  flex-basis: 35%;
   display: flex;
   flex-direction: column;
   height: 300px;
@@ -42,13 +73,17 @@ export const QuizTitle = styled.div`
 
 export const TextBox = styled.div`
   flex: 4;
-  margin: 0.2em 0.4em 0.4em 0.4em;
+  margin: 0.8em 0.8em 0.8em 0.8em;
   overflow-y: hidden;
-  font-size: 1em;
+  font-size: 1.1em;
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
+  font-style: italic;
+  border: none;
   h3 {
-    margin: 0;
+    margin: 0 0 0.4em 0;
+    font-style: normal;
+    font-weight: 900;
   }
 `;
 

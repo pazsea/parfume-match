@@ -21,6 +21,10 @@ import {
   TextInsideImage,
 } from './styles';
 import { Section } from '../../styleConstants/section.js';
+import * as s from './styles';
+
+import * as profileStyle from '../Profile/styles';
+import doftquiz from '../../images/doftquiz.jpg';
 
 import quizStep1Everything from '../../images/quizStep1Everything.jpg';
 import quizStep1Man from '../../images/quizStep1Man.jpg';
@@ -66,18 +70,30 @@ class QuizPage extends Component {
     return (
       <Section>
         <FlexContainerColumn>
-          <QuizTitle>
-            <h1>Sniph quiz: Hitta din kollektion</h1>
-            <h2>______</h2>
-          </QuizTitle>
+          <profileStyle.Header headerImage={doftquiz}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <polygon
+                class="svg--sm"
+                fill="white"
+                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
+              />
+            </svg>
+            <s.TitleCenter>
+              <h1>Doft-Quiz</h1>
+            </s.TitleCenter>
+          </profileStyle.Header>
           <QuizIntroText>
             <p>
               Svårt att bestämma dig för vilken av våra kollektioner
               som passar dig?
               <br /> Ingen fara! Gör vårt Sniph quiz så kommer vi att
-              kunna ge dig en bättre rekommendation. Du kan göra
-              testet flera gånger och som medlem kan du byta
-              kollektion när du vill.
+              kunna ge dig en bättre rekommendation.
+              <br /> Du kan göra testet flera gånger och som medlem
+              kan du byta kollektion när du vill.
             </p>
           </QuizIntroText>
           <QuizIntroButton>

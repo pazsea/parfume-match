@@ -20,7 +20,32 @@ export const FlexContainerRow = styled.div`
 
   line-height: 1.563;
 `;
-
+export const TitleCenter = styled.div`
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  vertical-align: middle;
+  display: flex;
+  font-size: 1.5em;
+  flex-direction: column;
+  color: black;
+  border: 5px double black;
+  margin-top: 1%;
+  height: fit-content;
+  width: 20%;
+  padding: 0 1.5%;
+  h1 {
+    margin: 6% 0;
+  }
+  p {
+    i {
+      color: lightgreen;
+      font-weight: bold;
+    }
+  }
+  /* font-weight: bold; */
+  background-color: rgba(255, 255, 255, 0.6);
+  font-family: 'Amatic SC', cursive;
+`;
 export const FlexLeftContainer = styled.div`
   margin-right: 10px;
 `;
@@ -44,11 +69,13 @@ export const QuizSubTitle = styled.div`
 `;
 
 export const QuizIntroText = styled.div`
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+
   text-align: center;
   padding-bottom: 2rem;
-  font-family: 'PT Serif';
-  font-weight: 300;
-  font-size: 16px;
+
+  font-size: 1.2em;
 `;
 
 export const ImageFlexContainer = styled.div`
@@ -129,6 +156,7 @@ export const QuizIntroButton = styled.div`
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
+    min-width: 15%;
 
     font-weight: bold;
     color: white;
@@ -158,6 +186,7 @@ export const SkipDiv = styled.div`
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
+    min-width: 15%;
 
     font-weight: bold;
     /* color: white; */

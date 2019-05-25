@@ -1,111 +1,83 @@
-# react-redux-firebase-authentication
+<p align="center">
+  <a href="https://gatsbyjs.org">
+    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
+  </a>
+</p>
+<h1 align="center">
+  Gatsby v2
+</h1>
 
-[![Build Status](https://travis-ci.org/the-road-to-react-with-firebase/react-redux-firebase-authentication.svg?branch=master)](https://travis-ci.org/the-road-to-react-with-firebase/react-redux-firebase-authentication) [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/) [![Greenkeeper badge](https://badges.greenkeeper.io/the-road-to-react-with-firebase/react-redux-firebase-authentication.svg)](https://greenkeeper.io/)
+<h3 align="center">
+  ⚛️ 📄 :rocket:
+</h3>
+<h3 align="center">
+  Fast in every way that matters
+</h3>
 
-* [React + Firebase Tutorial](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/)
-* [React + Firebase + Redux Tutorial](https://www.robinwieruch.de/react-firebase-redux-tutorial)
-* [Live Version of half of the Tutorial](https://react-firebase-authentication.wieruch.com/)
 
-## Variations
 
-* [Only React Version](https://github.com/the-road-to-react-with-firebase/react-firebase-authentication)
-* [MobX Version](https://github.com/the-road-to-react-with-firebase/react-mobx-firebase-authentication)
-* [Gatsby Version](https://github.com/the-road-to-react-with-firebase/react-gatsby-firebase-authentication)
-* [Firestore Version](https://github.com/the-road-to-react-with-firebase/react-firestore-authentication)
-* [Semantic UI Version](https://github.com/the-road-to-react-with-firebase/react-semantic-ui-firebase-authentication)
 
-## Features
 
-* uses:
-  * only React (create-react-app)
-  * firebase
-  * react-router
-  * **redux**
-* features:
-  * Sign In
-  * Sign Up
-  * Sign Out
-  * Password Forget
-  * Password Change
-  * Verification Email
-  * Protected Routes with Authorization
-  * Roles-based Authorization
-  * Social Logins with Google, Facebook and Twitter
-  * Linking of Social Logins on Account dashboard
-  * Auth Persistence with Local Storage
-  * Database with Users and Messages
+## What’s In This Document
 
-## License
+- [Goal](#-goal)
+- [Key functions](#-key-functions)
+- [How to run this project](#-how-to-run-this-project)
+- [Attributes](#-attributes)
+- [Authors](#-authors)
+- [Thanks to Our Contributors and Sponsors](#-thanks-to-our-contributors-and-sponsors)
 
-### Commercial license
+## 🚀 Goal
 
-If you want to use this starter project to develop commercial sites, themes, projects, and applications, the Commercial license is the appropriate license. With this option, your source code is kept proprietary. Purchase an commercial license for different team sizes:
+GJTP is an collection of awesome front end developers. We collaborated with an company called Sniph whos business revolves parfumes. They wanted ways of improving their customer experience by having them stay longer on their site.
 
-* [1 Developer](https://gum.co/react-with-firebase-starter-pack-developer)
-* [Team of up to 8 Developers](https://gum.co/react-with-firebase-starter-pack-team)
-* [Unlimited Developers of an Organization](https://gum.co/react-with-firebase-starter-pack-organization)
+This project works towards that goal. 
 
-It grants you also access to the other starter projects in this GitHub organization.
 
-### Open source license
 
-If you are creating an open source application under a license compatible with the [GNU GPL license v3](https://www.gnu.org/licenses/gpl-3.0.html), you may use this starter project under the terms of the GPLv3.
+## 🎓 Key Functions
 
-## Installation
+- **Go Beyond Static Websites.** 
 
-* `git clone git@github.com:the-road-to-react-with-firebase/react-redux-firebase-authentication.git`
-* `cd react-redux-firebase-authentication`
-* `npm install`
-* `npm start`
-* visit http://localhost:3000
+- **Use a Modern Stack for Every Site.** 
 
-Get an overview of Firebase, how to create a project, what kind of features Firebase offers, and how to navigate through the Firebase project dashboard in this [visual tutorial for Firebase](https://www.robinwieruch.de/firebase-tutorial/).
+- **Load Data From Anywhere.** 
 
-### Firebase Configuration
+- **Performance Is Baked In.** 
 
-* copy/paste your configuration from your Firebase project's dashboard into one of these files
-  * *src/components/Firebase/firebase.js* file
-  * *.env* file
-  * *.env.development* and *.env.production* files
+- **Host at Scale for Pennies.** 
 
-The *.env* or *.env.development* and *.env.production* files could look like the following then:
 
-```
-REACT_APP_API_KEY=AIzaSyBtxZ3phPeXcsZsRTySIXa7n33NtQ
-REACT_APP_AUTH_DOMAIN=react-firebase-s2233d64f8.firebaseapp.com
-REACT_APP_DATABASE_URL=https://react-firebase-s2233d64f8.firebaseio.com
-REACT_APP_PROJECT_ID=react-firebase-s2233d64f8
-REACT_APP_STORAGE_BUCKET=react-firebase-s2233d64f8.appspot.com
-REACT_APP_MESSAGING_SENDER_ID=701928454501
-```
+## 💼 How to run this project
+1. **Install the Gatsby CLI.**
 
-### Activate Sign-In Methods
+   ```shell
+   npm install -g gatsby-cli
 
-![firebase-enable-google-social-login_640](https://user-images.githubusercontent.com/2479967/49687774-e0a31e80-fb42-11e8-9d8a-4b4c794134e6.jpg)
+   ```
 
-* Email/Password
-* [Google](https://www.robinwieruch.de/react-firebase-social-login/)
-* [Facebook](https://www.robinwieruch.de/firebase-facebook-login/)
-* [Twitter](https://www.robinwieruch.de/firebase-twitter-login/)
-* [Troubleshoot](https://www.robinwieruch.de/react-firebase-social-login/)
+2. **Create a Gatsby site from a Gatsby starter.**
 
-### Activate Verification E-Mail
+   Get your Gatsby blog set up in a single command:
 
-* add a redirect URL for redirecting a user after an email verification into one of these files
-  * *src/components/Firebase/firebase.js* file
-  * *.env* file
-  * *.env.development* and *.env.production* files
+   ```sh
+   # create a new Gatsby site using the default starter
+   gatsby new my-blazing-fast-site
+   ```
 
-The *.env* or *.env.development* and *.env.production* files could look like the following then (excl. the Firebase configuration).
+3. **Start the site in `develop` mode.**
 
-**Development:**
+   Next, move into your new site’s directory and start it up:
 
-```
-REACT_APP_CONFIRMATION_EMAIL_REDIRECT=http://localhost:3000
-```
+   ```sh
+   cd my-blazing-fast-site/
+   gatsby develop
+   ```
 
-**Production:**
+4. **Open the source code and start editing!**
 
-```
-REACT_APP_CONFIRMATION_EMAIL_REDIRECT=https://mydomain.com
-```
+   Your site is now running at `http://localhost:8000`. Open the `my-blazing-fast-site` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes, and the browser will update in real time!
+
+At this point, you’ve got a fully functional Gatsby website. For additional information on how you can customize your Gatsby site, see our [plugins](https://gatsbyjs.org/plugins/) and [the official tutorial](https://gatsbyjs.org/tutorial/).
+
+

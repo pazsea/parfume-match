@@ -14,8 +14,9 @@ import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
 import Loading from '../Loading';
 import NoCollection from '../Recommendation/No-collection';
-import sprayheader from '../../images/sprayheader.jpg';
 import noteslogo from '../../images/noteslogo.png';
+import wardrobeHeader from '../../images/wardrobeheader.jpg';
+// import wardrobeHeader from '../../images/wardrobeheader_cropped.jpg';
 
 class WardrobePage extends Component {
   state = {
@@ -113,7 +114,7 @@ class WardrobePage extends Component {
 
       return (
         <Section>
-          <profileStyle.Header headerImage={sprayheader}>
+          <s.Header>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 100 100"
@@ -134,7 +135,7 @@ class WardrobePage extends Component {
                 Aktiv kollektion: <i>{selectedColKey}</i>
               </p>
             </s.TitleCenter>
-          </profileStyle.Header>
+          </s.Header>
           {subCollection.slice(0, 8).map((item, index) => (
             <Fragment>
               <s.Wrapper>
@@ -147,13 +148,13 @@ class WardrobePage extends Component {
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      Parfym Beskrivning
+                      Beskrivning
                     </button>
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
                     >
-                      Recension
+                      Mitt betyg
                     </button>
                   </s.ButtonDiv>
                   <s.HeaderDiv>{item.name}</s.HeaderDiv>
@@ -278,7 +279,6 @@ function RatingWrapper({
 
   return (
     <Fragment>
-      {/* <s.RatingForm onSubmit={e => descriptionSubmit(e)}> */}
       <s.RatingBox
         type="text"
         className="ratingBox"
@@ -299,6 +299,7 @@ function RatingWrapper({
         >
           EDIT
         </s.EditButton>
+
         <s.RatingButton
           className="ratingButton"
           value="SAVE"

@@ -123,6 +123,7 @@ class SelectedUserWardrobe extends Component {
                   ) : (
                     <RatingWrapper
                       name={parfume}
+                      username={users[id].username}
                       textFirebase={
                         wardrobe[parfume].ownDesc
                           ? wardrobe[parfume].ownDesc
@@ -170,14 +171,19 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
   );
 }
 
-function RatingWrapper({ textFirebase }) {
+function RatingWrapper({ textFirebase, username }) {
   return (
     <Fragment>
       <s.RatingForm>
         <s.RatingBox
           type="text"
           className="ratingBox"
-          value={textFirebase}
+          value={
+            textFirebase ||
+            'Tyvärr så har inte ' +
+              username +
+              ' skrivit en beskrivning på denna parfym ännu.'
+          }
         />
       </s.RatingForm>
     </Fragment>

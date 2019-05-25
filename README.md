@@ -1,18 +1,3 @@
-<p align="center">
-  <a href="https://gatsbyjs.org">
-    <img alt="Gatsby" src="https://www.gatsbyjs.org/monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby v2
-</h1>
-
-<h3 align="center">
-  ⚛️ 📄 :rocket:
-</h3>
-<h3 align="center">
-  Fast in every way that matters
-</h3>
 
 
 
@@ -74,10 +59,6 @@ This project works towards that goal.
    gatsby develop
    ```
 
-4. **Open the source code and start editing!**
 
-   Your site is now running at `http://localhost:8000`. Open the `my-blazing-fast-site` directory in your code editor of choice and edit `src/pages/index.js`. Save your changes, and the browser will update in real time!
-
-At this point, you’ve got a fully functional Gatsby website. For additional information on how you can customize your Gatsby site, see our [plugins](https://gatsbyjs.org/plugins/) and [the official tutorial](https://gatsbyjs.org/tutorial/).
 
 

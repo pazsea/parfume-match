@@ -15,8 +15,26 @@ import parfume1 from '../../images/parfume1.jpg';
 import Loading from '../Loading';
 import NoCollection from '../Recommendation/No-collection';
 import noteslogo from '../../images/noteslogo.png';
-import wardrobeHeader from '../../images/wardrobeheader.jpg';
-// import wardrobeHeader from '../../images/wardrobeheader_cropped.jpg';
+
+import oceanic from '../../images/oceanic.jpg';
+import tabaChoko from '../../images/tabachoko.jpg';
+import cementRose from '../../images/cementrose.jpg';
+import sideshow from '../../images/sideshow.png';
+import darkSaphir from '../../images/darksaphir.jpg';
+import coccobello from '../../images/Coccobello.jpg';
+import rayOfLight from '../../images/rayoflight.png';
+import louanges from '../../images/louangesprofanes.jpg';
+
+const parfumePics = {
+  'Oceanic Encre': oceanic,
+  'Taba Choko': tabaChoko,
+  'Cement Rose': cementRose,
+  Sideshow: sideshow,
+  'Dark Saphir': darkSaphir,
+  Coccobello: coccobello,
+  'Ray of Light': rayOfLight,
+  'PG19 Louanges Profanes': louanges,
+};
 
 class WardrobePage extends Component {
   state = {
@@ -140,7 +158,10 @@ class WardrobePage extends Component {
             <Fragment>
               <s.Wrapper>
                 <s.ImageDiv>
-                  <img alt="parfume bottle" src={parfume1} />
+                  <img
+                    alt="parfume bottle"
+                    src={parfumePics[item.name] || parfume1}
+                  />
                 </s.ImageDiv>
                 <s.ParfumeDiv>
                   <s.ButtonDiv tabOpen={tabOpen} index={index}>

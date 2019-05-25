@@ -70,11 +70,11 @@ export const QuizSubTitle = styled.div`
 
 export const QuizIntroText = styled.div`
   font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
 
   text-align: center;
   padding-bottom: 2rem;
-  font-family: 'PT Serif';
-  font-weight: 300;
+
   font-size: 1.2em;
 `;
 
@@ -156,6 +156,7 @@ export const QuizIntroButton = styled.div`
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
+    min-width: 15%;
 
     font-weight: bold;
     color: white;
@@ -185,6 +186,7 @@ export const SkipDiv = styled.div`
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
+    min-width: 15%;
 
     font-weight: bold;
     /* color: white; */

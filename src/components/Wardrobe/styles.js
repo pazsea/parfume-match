@@ -112,7 +112,8 @@ export const TitleCenter = styled.div`
   text-align: center;
   vertical-align: middle;
   display: flex;
-  font-size: 1.5em;
+  /* height: 20%; */
+  font-size: 1.1em;
   flex-direction: column;
   color: black;
   border: 5px double black;
@@ -125,7 +126,7 @@ export const TitleCenter = styled.div`
   }
   p {
     i {
-      color: lightgreen;
+      color: pink;
       font-weight: bold;
     }
   }

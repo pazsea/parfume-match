@@ -91,9 +91,9 @@ class QuizPage extends Component {
               Svårt att bestämma dig för vilken av våra kollektioner
               som passar dig?
               <br /> Ingen fara! Gör vårt Sniph quiz så kommer vi att
-              kunna ge dig en bättre rekommendation. Du kan göra
-              testet flera gånger och som medlem kan du byta
-              kollektion när du vill.
+              kunna ge dig en bättre rekommendation.
+              <br /> Du kan göra testet flera gånger och som medlem
+              kan du byta kollektion när du vill.
             </p>
           </QuizIntroText>
           <QuizIntroButton>

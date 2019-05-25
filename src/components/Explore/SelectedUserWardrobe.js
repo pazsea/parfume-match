@@ -120,7 +120,7 @@ class SelectedUserWardrobe extends Component {
         </Section>
       );
     } else {
-      return <div>loading</div>;
+      return <div>Loading</div>;
     }
   }
 }

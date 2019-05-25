@@ -77,12 +77,10 @@ This project works towards that goal.
    npm start
    ```
    
-   
-
-## Attributes
+## 👏 Attributes
 <a href="https://www.robinwieruch.de/">https://www.robinwieruch.de/</a> Big thanks to Robin for his toturials about Readux, React, Saga. Always an big help. Supported us student with his books for free which was greatly appreciated. <br>
 
 
-## Authors
+## 📓 Authors
 Patrick Sjöberg <a href="https://github.com/pazsea">@pazsea</a> 
 

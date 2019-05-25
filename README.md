@@ -13,12 +13,6 @@ GJTP is an collection of awesome front end developers. We collaborated with an c
 
 This project works towards that goal. 
 
-  <a href="https://www.patricksjobergportfolio.se">
-    Live demo.
-  </a>
-  
-  Gif
-
 
 ## What’s In This Document
 

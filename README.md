@@ -1,64 +1,88 @@
+<p align="center">
+  <a href="https://gatsbyjs.org">
+    <img alt="Gatsby" src="https://firebasestorage.googleapis.com/v0/b/gjtpsniph.appspot.com/o/appImages%2FsniphLogo.png?alt=media&token=9562e27a-c1d9-46fd-b760-c0625049e9a3" width="200" />
+  </a>
+</p>
+<h1 align="center">
+  An GJTP project.
+</h1>
 
-
-
-
-
-## What’s In This Document
-
-- [Goal](#-goal)
-- [Key functions](#-key-functions)
-- [How to run this project](#-how-to-run-this-project)
-- [Attributes](#-attributes)
-- [Authors](#-authors)
-- [Thanks to Our Contributors and Sponsors](#-thanks-to-our-contributors-and-sponsors)
-
-## 🚀 Goal
+## 🚩 Project Goal
 
 GJTP is an collection of awesome front end developers. We collaborated with an company called Sniph whos business revolves parfumes. They wanted ways of improving their customer experience by having them stay longer on their site.
 
 This project works towards that goal. 
 
+  <a href="https://www.patricksjobergportfolio.se">
+    Live demo.
+  </a>
+  
+  Gif
 
 
-## 🎓 Key Functions
+## What’s In This Document
 
-- **Go Beyond Static Websites.** 
-
-- **Use a Modern Stack for Every Site.** 
-
-- **Load Data From Anywhere.** 
-
-- **Performance Is Baked In.** 
-
-- **Host at Scale for Pennies.** 
+- [Key functions](#-key-functions)
+- [How to run this project](#-how-to-run-this-project)
+- [Attributes](#-attributes)
+- [Authors](#-authors)
 
 
-## 💼 How to run this project
-1. **Install the Gatsby CLI.**
+
+## 🔔 Key Functions
+
+- **Create, login, reset/change password** All these features exists using firebase. You can also upload your own profile picture.
+
+- **Wardrobe Component** The user gets prompted to answer a short quiz after creating an user. This will generate an recommended parfume collection for the user to subsribe to. Using redux, saga, node.js and an SQL database we fetch data and sort the parfumes to the respective collection. The user gets the correct render from the collection in which she/he has selected.
+
+- **Rating function** Every parfume is avaible for the user to rate from 1 - 5 stars. When the user rates an parfume she/he also rates the containing notes. We have created and function that calculates the users top 5 notes.
+
+- **Matching function** With the rating function that calculates the users top 5 notes, we also have an function that calculates which users have the most in common with the logged in user. 
+
+- **Explore Component** We render all matching users that gets returned from the matching function with its respective wardrobes. So the logged in user can explore new parfumes.
+
+- **Redux persist** We also use an library for persisting state on local storage. Our SQL database is static so this doesnt need to fetch all the time. Instead we fetch it once and store it on the users local storage.
+
+
+
+## 💻 How to run this project
+1. **Install from the root folder, GJTP**
 
    ```shell
-   npm install -g gatsby-cli
+   npm install
 
    ```
 
-2. **Create a Gatsby site from a Gatsby starter.**
+2. **Install the server**
 
-   Get your Gatsby blog set up in a single command:
+   There is an folder called "server" that you need to:
+   
+   ```shell
+   npm install
+
+   ```
+   
+   When that is finished, use nodemon like this:
+   
+      ```shell
+   nodemon server.js
+
+   ```
+
+3. **Run the app**
+
+   Now you are ready to run the app from the root folder GJTP
 
    ```sh
-   # create a new Gatsby site using the default starter
-   gatsby new my-blazing-fast-site
+   npm start
    ```
+   
+   
 
-3. **Start the site in `develop` mode.**
-
-   Next, move into your new site’s directory and start it up:
-
-   ```sh
-   cd my-blazing-fast-site/
-   gatsby develop
-   ```
+## Attributes
+<a href="https://www.robinwieruch.de/">https://www.robinwieruch.de/</a> Big thanks to Robin for his toturials about Readux, React, Saga. Always an big help. Supported us student with his books for free which was greatly appreciated. <br>
 
 
-
+## Authors
+Patrick Sjöberg <a href="https://github.com/pazsea">@pazsea</a> 
 

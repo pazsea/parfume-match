@@ -4,7 +4,6 @@
 </a>
 </p>
 
-<img src="/src/images/sniph.png" alt="sniph"/>
 
 ## 🚩 Project Goal
 

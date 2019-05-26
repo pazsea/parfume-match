@@ -1,6 +1,8 @@
 <p align="center">
 <a href=# >
-    <img alt="Team GJTP" src="https://firebasestorage.googleapis.com/v0/b/gjtpsniph.appspot.com/o/appImages%2FsniphLogo.png?alt=media&token=9562e27a-c1d9-46fd-b760-c0625049e9a3" width="200" />
+
+<img src="/src/images/sniphlogo.png" alt="team GJTP" width="350"/>
+
     </a>
 </p>
 

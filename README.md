@@ -7,7 +7,7 @@
 
 ## 🚩 Project Goal
 
-GJTP is an collection of awesome front end developers. We collaborated with an company called Sniph whos business revolves parfumes. They wanted ways of improving their customer experience by having them stay longer on their site.
+GJTP is an collaboration project of awesome front end developers. We collaborated with an company called Sniph whos business revolves parfumes. They wanted ways of improving their customer experience by having them stay longer on their site.
 
 This project works towards that goal. 
 

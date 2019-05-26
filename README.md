@@ -13,7 +13,7 @@ GJTP is an collection of awesome front end developers. We collaborated with an c
 
 This project works towards that goal. 
 
-  <a href="http://gjtp.surge.sh/">
+  <a href="http://gjtp.surge.sh/" target="_blank">
     Live demo.
   </a>
 

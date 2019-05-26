@@ -1,9 +1,7 @@
 <p align="center">
-<a href=# >
-
+<a href="http://gjtp.surge.sh/" >
 <img src="/src/images/sniphlogo.png" alt="team GJTP" width="350"/>
-
-    </a>
+</a>
 </p>
 
 ## 🚩 Project Goal

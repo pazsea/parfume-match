@@ -64,5 +64,8 @@ The node.js server code is in the server folder but it is hosted on heroku also.
 
 
 ## 📓 Authors
-Patrick Sjöberg <a href="https://github.com/pazsea">@pazsea</a> 
+Patrick Sjöberg <a href="https://github.com/pazsea">@pazsea</a> <br>
+Gustav Lindberg <a href="https://github.com/glindberg">@glindberg</a><br>
+Tina Olsson <a href="https://github.com/tinaolsson">@tinaolsson</a><br>
+Johan <a href="https://github.com/Johan711024">@Johan711024</a>
 

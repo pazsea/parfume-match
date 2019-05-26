@@ -8,7 +8,6 @@ import { Section } from '../../styleConstants/section.js';
 import { calculatePoints } from '../../constants/functions';
 
 import * as s from './styles';
-import * as profileStyle from '../Profile/styles';
 
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
@@ -75,13 +74,9 @@ class WardrobePage extends Component {
       firebase,
       authUser: { uid },
     } = this.props;
-    console.log('yo' + base + heart + top);
     const clickedPoints = calculatePoints(nextValue, prevValue);
 
     if (nextValue !== prevValue) {
-      const ba = this.newValue(base, clickedPoints);
-      console.log('heart: ' + this.newValue(heart, clickedPoints));
-      console.log('top: ' + this.newValue(top, clickedPoints));
       firebase
         .wardrobe(uid)
         .child('parfumes')
@@ -139,7 +134,7 @@ class WardrobePage extends Component {
               preserveAspectRatio="none"
             >
               <polygon
-                class="svg--sm"
+                className="svg--sm"
                 fill="white"
                 points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
               />
@@ -155,16 +150,20 @@ class WardrobePage extends Component {
             </s.TitleCenter>
           </s.Header>
           {subCollection.slice(0, 8).map((item, index) => (
-            <Fragment>
-              <s.Wrapper>
-                <s.ImageDiv>
+            <Fragment key={'fragment ' + item.name + index}>
+              <s.Wrapper key={'wrapper ' + item.name + index}>
+                <s.ImageDiv key={'imagediv' + item.name + index}>
                   <img
                     alt="parfume bottle"
                     src={parfumePics[item.name] || parfume1}
                   />
                 </s.ImageDiv>
-                <s.ParfumeDiv>
-                  <s.ButtonDiv tabOpen={tabOpen} index={index}>
+                <s.ParfumeDiv key={'parfumeDiv' + item.name + index}>
+                  <s.ButtonDiv
+                    key={'buttonDIv' + item.name + index}
+                    tabOpen={tabOpen}
+                    index={index}
+                  >
                     <button
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
@@ -178,10 +177,12 @@ class WardrobePage extends Component {
                       Mitt betyg
                     </button>
                   </s.ButtonDiv>
-                  <s.HeaderDiv>{item.name}</s.HeaderDiv>
-                  <s.StarsDiv>
+                  <s.HeaderDiv key={'headerDiv' + item.name + index}>
+                    {item.name}
+                  </s.HeaderDiv>
+                  <s.StarsDiv key={'starsDiv' + item.name + index}>
                     <StarRatingComponent
-                      key={item.name + index}
+                      key={'starRatin ' + item.name + index}
                       name={item.name}
                       starCount={5}
                       bubbles={item.base_note_id}
@@ -201,14 +202,15 @@ class WardrobePage extends Component {
                       )}
                     />
                   </s.StarsDiv>
-                  <s.NotesDiv>
-                    <img src={noteslogo} />
+                  <s.NotesDiv key={'notesDiv ' + item.name + index}>
+                    <img alt="notesLogo" src={noteslogo} />
                     {item.base_note_id}, {item.top_note_id},{' '}
                     {item.heart_note_id}
                   </s.NotesDiv>
 
                   {tabOpen === 'ratingTab' + index ? (
                     <RatingWrapper
+                      key={'ratingWrapper ' + item.name + index}
                       editState={this.state[item.name] + index}
                       name={item.name}
                       firebase={firebase}
@@ -225,6 +227,7 @@ class WardrobePage extends Component {
                     />
                   ) : (
                     <DescriptionWrapper
+                      key={'description Warpper ' + item.name + index}
                       isTruncated={isTruncated}
                       toggleTruncate={this.toggleTruncate}
                       tabOpen={tabOpen}

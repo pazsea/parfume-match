@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import * as ROUTES from '../../constants/routes';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ import { Section } from '../../styleConstants/section.js';
 import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
-import Loading from '../Loading';
+
 import NoCollection from './No-collection';
 
 class Collection extends Component {

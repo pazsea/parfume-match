@@ -30,7 +30,7 @@ class Explore extends Component {
             preserveAspectRatio="none"
           >
             <polygon
-              class="svg--sm"
+              className="svg--sm"
               fill="white"
               points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
             />
@@ -64,7 +64,10 @@ function UserWardrobe({
     <Fragment>
       <s.Wrapper>
         <s.ImageDiv>
-          <img src={profilePic ? profilePic.url : placeholder} />
+          <img
+            alt={username + ' profile pic'}
+            src={profilePic ? profilePic.url : placeholder}
+          />
         </s.ImageDiv>
         <s.ParfumeDiv>
           <s.TextBox>

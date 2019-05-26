@@ -56,25 +56,15 @@ class NavigationAuth extends Component {
       authUser: { uid },
     } = this.props;
 
-    //KALKULERA TOP NOTES DIREKT OCH SEDAN SKICKA TILL FIREBASE
-
-    // firebase.wardrobe(uid).on('value', snapshot => {
-    //   if (snapshot.val()) {
-    //     const objectWithHighestNotes = Object.assign(
-    //       {},
-    //       getKeysWithHighestValue(snapshot.val().ratedNotes, 2),
-    //     );
-    //     onSetWardrobe(snapshot.val());
-    //     firebase.topNote(uid).update({
-    //       ...objectWithHighestNotes,
-    //     });
-    //   }
-    // });
-
     firebase.user(uid).on('value', snapshot => {
       const aUser = Object.assign({}, snapshot.val(), { uid });
       onSetAuthUser(aUser);
     });
+  }
+
+  componentWillUnmount() {
+    const { firebase } = this.props;
+    firebase.user().off();
   }
 
   toggleNav = () => {
@@ -84,14 +74,14 @@ class NavigationAuth extends Component {
   };
 
   render() {
-    const { authUser, bigSize, mediumSize, smallSize } = this.props;
+    const { bigSize, mediumSize, smallSize } = this.props;
     const { isActive } = this.state;
 
     if (bigSize) {
       return (
         <Fragment>
           <Nav isActive={isActive}>
-            <img src={logo} />
+            <img alt="logo" src={logo} />
 
             <ul>
               <li>

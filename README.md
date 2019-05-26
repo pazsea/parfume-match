@@ -1,6 +1,6 @@
 <p align="center">
 <a href="http://gjtp.surge.sh/" >
-<img src="/src/images/sniphlogo.png" alt="team GJTP" width="350"/>
+<img src="/src/images/gjtplogo.png" alt="team GJTP" width="350"/>
 </a>
 </p>
 

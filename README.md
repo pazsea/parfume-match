@@ -1,6 +1,6 @@
 <p align="center">
 <a href=# >
-    <img alt="Gatsby" src="https://firebasestorage.googleapis.com/v0/b/gjtpsniph.appspot.com/o/appImages%2FsniphLogo.png?alt=media&token=9562e27a-c1d9-46fd-b760-c0625049e9a3" width="200" />
+    <img alt="Team GJTP" src="https://firebasestorage.googleapis.com/v0/b/gjtpsniph.appspot.com/o/appImages%2FsniphLogo.png?alt=media&token=9562e27a-c1d9-46fd-b760-c0625049e9a3" width="200" />
     </a>
 </p>
 <h1 align="center">
@@ -51,29 +51,15 @@ This project works towards that goal.
 
    ```
 
-2. **Install the server**
-
-   There is an folder called "server" that you need to:
-   
-   ```shell
-   npm install
-
-   ```
-   
-   When that is finished, use nodemon like this:
-   
-      ```shell
-   nodemon server.js
-
-   ```
-
-3. **Run the app**
+2. **Run the app**
 
    Now you are ready to run the app from the root folder GJTP
 
    ```sh
    npm start
    ```
+The node.js server code is in the server folder but it is hosted on heroku also. But if you are interested you can run the node js server locally from there.
+ 
    
 ## 👏 Attributes
 <a href="https://www.robinwieruch.de/">https://www.robinwieruch.de/</a> Big thanks to Robin for his toturials about Readux, React, Saga. Always an big help. Supported us student with his books for free which was greatly appreciated. <br>

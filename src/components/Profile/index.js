@@ -216,12 +216,15 @@ class ProfilePage extends Component {
                     <h2>{this.props.authUser.username}</h2>
                     <div>
                       <s.ProfilePicture>
-                        <div class="image-upload">
+                        <div className="image-upload">
                           <label for="file-input">
                             {this.state.loading ? (
                               <Loading />
                             ) : (
-                              <img src={authUser.profilePic.url} />
+                              <img
+                                alt="user profile pic"
+                                src={authUser.profilePic.url}
+                              />
                             )}
                           </label>
 
@@ -277,7 +280,7 @@ class ProfilePage extends Component {
               preserveAspectRatio="none"
             >
               <polygon
-                class="svg--sm"
+                className="svg--sm"
                 fill="white"
                 points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
               />
@@ -372,12 +375,15 @@ class ProfilePage extends Component {
                     <h2>{this.props.authUser.username}</h2>
                     <div>
                       <s.ProfilePicture>
-                        <div class="image-upload">
+                        <div className="image-upload">
                           <label for="file-input">
                             {this.state.loading ? (
                               <Loading />
                             ) : (
-                              <img src={authUser.profilePic.url} />
+                              <img
+                                alt="user profile pic"
+                                src={authUser.profilePic.url}
+                              />
                             )}
                           </label>
 
@@ -432,7 +438,7 @@ class ProfilePage extends Component {
               preserveAspectRatio="none"
             >
               <polygon
-                class="svg--sm"
+                className="svg--sm"
                 fill="white"
                 points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
               />
@@ -523,12 +529,15 @@ class ProfilePage extends Component {
                     <h2>{this.props.authUser.username}</h2>
                     <div>
                       <s.ProfilePicture>
-                        <div class="image-upload">
-                          <label for="file-input">
+                        <div className="image-upload">
+                          <label htmlFor="file-input">
                             {this.state.loading ? (
                               <Loading />
                             ) : (
-                              <img src={authUser.profilePic.url} />
+                              <img
+                                alt="user profile pic"
+                                src={authUser.profilePic.url}
+                              />
                             )}
                           </label>
 

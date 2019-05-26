@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Truncate from 'react-truncate';
 
@@ -60,7 +60,6 @@ class SelectedUserWardrobe extends Component {
     const {
       users,
       userWardrobes,
-      parfumesState,
       location: { id },
     } = this.props;
 
@@ -80,7 +79,7 @@ class SelectedUserWardrobe extends Component {
               preserveAspectRatio="none"
             >
               <polygon
-                class="svg--sm"
+                className="svg--sm"
                 fill="white"
                 points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
               />
@@ -132,7 +131,7 @@ class SelectedUserWardrobe extends Component {
                     />
                   </s.StarsDiv>
                   <s.NotesDiv>
-                    <img src={noteslogo} />
+                    <img alt="notesLogo" src={noteslogo} />
                     {wardrobe[parfume].base},{' '}
                     {wardrobe[parfume].heart}, {wardrobe[parfume].top}
                   </s.NotesDiv>
@@ -216,7 +215,6 @@ function RatingWrapper({ textFirebase, username }) {
 const mapStateToProps = state => ({
   users: state.userState.users,
   userWardrobes: state.userWardrobesState,
-  parfumesState: state.sortedParfumesState,
 });
 
 const condition = authUser => !!authUser;

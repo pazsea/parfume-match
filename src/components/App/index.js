@@ -99,7 +99,11 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    this.props.firebase.users().off();
+    const { firebase } = this.props;
+
+    firebase.users().off();
+    firebase.wardrobes().off();
+    firebase.topNotes().off();
   }
 
   handleResize() {

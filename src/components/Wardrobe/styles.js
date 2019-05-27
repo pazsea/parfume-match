@@ -211,12 +211,16 @@ export const RatingForm = styled.form`
 `;
 
 export const RatingBox = styled.textarea`
-  flex: 5;
+  height: 100px;
+  /* overflow-y: scroll; */
   margin: 0 0.4em 0.4em 0.4em;
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.3em;
+  font-size: 1em;
   font-style: ${props => (props.editState ? 'none' : 'italic')};
-  border: ${props => (props.editState ? '1px solid grey' : 'none')};
+  border: ${props =>
+    props.editState
+      ? '1px solid rgba(81, 203, 238, 1)'
+      : '1px solid grey'};
 `;
 
 export const RatingButton = styled.button`
@@ -253,7 +257,7 @@ export const EditButton = styled.button`
   flex: 1;
   font-weight: ${props => (props.editState ? 'bold' : '300')};
   color: ${props => (props.editState ? 'darkgreen' : '#fff')};
-  background: ${props => (props.editState ? 'yellow' : '#000')};
+  background: ${props => (props.editState ? 'white' : '#000')};
   margin: 0 0.4em 0.4em 0.4em;
   border: 2px solid #000;
   text-transform: uppercase;

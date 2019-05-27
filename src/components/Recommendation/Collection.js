@@ -13,6 +13,7 @@ import {
   TextFlexContainer,
   Description,
   SubscribeButton,
+  ButtonWrapper,
 } from './styles';
 import { Section } from '../../styleConstants/section.js';
 import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
@@ -83,11 +84,23 @@ class Collection extends Component {
               <h1>{title}</h1>
               <h2>159 KR/MÅNAD</h2>
 
-              <SubscribeButton>
+              <ButtonWrapper>
+                <SubscribeButton>
+                  <Link
+                    onClick={e => this.setRecColToSelected(e)}
+                    id="link"
+                    to={ROUTES.WARDROBE}
+                  >
+                    Prenumerera
+                  </Link>
+                </SubscribeButton>
+              </ButtonWrapper>
+
+              {/* <SubscribeButton>
                 <button onClick={e => this.setRecColToSelected(e)}>
                   <Link to={ROUTES.WARDROBE}>Prenumerera</Link>
                 </button>
-              </SubscribeButton>
+              </SubscribeButton> */}
 
               <Description>
                 {firstDescription.split('/n').map((desc, index) => (

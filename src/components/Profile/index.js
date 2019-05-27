@@ -102,8 +102,6 @@ class ProfilePage extends Component {
     const { firebase, authUser } = this.props;
     const recommendedCol = Object.keys(authUser.recommendedCol);
 
-    console.log('SHIIIT ' + recommendedCol);
-
     firebase.user(authUser.uid).update({
       selectedCol: {
         [recommendedCol]: true,
@@ -169,7 +167,7 @@ class ProfilePage extends Component {
                   </TabPanel>
                   <TabPanel>
                     <s.Blog>
-                      <h2>Min beskrivning</h2>
+                      <h2>Min doftpersonlighet</h2>
                       <s.DescriptionBox
                         editState={this.state.editState}
                       >
@@ -194,12 +192,12 @@ class ProfilePage extends Component {
                           editState={this.state.editState}
                           onClick={this.changeEditState}
                         >
-                          EDIT
+                          ÄNDRA
                         </s.EditButton>
                         <s.RatingButton
                           onClick={e => this.sendOwnDescToDB(e)}
                         >
-                          SAVE
+                          SPARA
                         </s.RatingButton>
                       </s.DescButtonDiv>
                     </s.Blog>
@@ -293,7 +291,7 @@ class ProfilePage extends Component {
                 <Tabs>
                   <TabList>
                     <Tab>Sniph Blogg</Tab>
-                    <Tab>Min beskrivning</Tab>
+                    <Tab>Min doftpersonlighet</Tab>
                   </TabList>
                   <TabPanel>
                     <s.Blog>
@@ -317,7 +315,7 @@ class ProfilePage extends Component {
                   </TabPanel>
                   <TabPanel>
                     <s.Blog>
-                      <h2>Min beskrivning</h2>
+                      <h2>Min doftpersonlighet</h2>
                       <s.DescriptionBox
                         editState={this.state.editState}
                       >
@@ -342,12 +340,12 @@ class ProfilePage extends Component {
                           editState={this.state.editState}
                           onClick={this.changeEditState}
                         >
-                          EDIT
+                          ÄNDRA
                         </s.EditButton>
                         <s.RatingButton
                           onClick={e => this.sendOwnDescToDB(e)}
                         >
-                          SAVE
+                          SPARA
                         </s.RatingButton>
                       </s.DescButtonDiv>
                     </s.Blog>
@@ -436,7 +434,7 @@ class ProfilePage extends Component {
                 <Tabs>
                   <TabList>
                     <Tab>Sniph Blogg</Tab>
-                    <Tab>Min beskrivning</Tab>
+                    <Tab>Min doftpersonlighet</Tab>
                   </TabList>
                   <TabPanel>
                     <s.Blog>
@@ -460,7 +458,7 @@ class ProfilePage extends Component {
                   </TabPanel>
                   <TabPanel>
                     <s.Blog>
-                      <h2>Min beskrivning</h2>
+                      <h2>Min doftpersonlighet</h2>
                       <s.DescriptionBox
                         editState={this.state.editState}
                       >
@@ -472,7 +470,7 @@ class ProfilePage extends Component {
                           onChange={this.ownDescChange}
                           placeholder={
                             this.props.authUser.ownDesc ||
-                            'Vad har du för doft profil? Skriv gärna.'
+                            'Beskriv gärna vilka dofter du gillar.'
                           }
                           readOnly={
                             this.state.editState ? false : true
@@ -485,12 +483,12 @@ class ProfilePage extends Component {
                           editState={this.state.editState}
                           onClick={this.changeEditState}
                         >
-                          EDIT
+                          ÄNDRA
                         </s.EditButton>
                         <s.RatingButton
                           onClick={e => this.sendOwnDescToDB(e)}
                         >
-                          SAVE
+                          SPARA
                         </s.RatingButton>
                       </s.DescButtonDiv>
                     </s.Blog>

@@ -114,7 +114,7 @@ export const TitleCenter = styled.div`
 export const TitleOnHeaderCenter = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 3.5rem;
   color: white;
 `;
 
@@ -163,6 +163,7 @@ export const RatingButton = styled.button`
   text-transform: uppercase;
   margin-left: 0.4em;
   font-size: 1.1em;
+  padding: 1%;
 
   :hover {
     color: #000;
@@ -176,11 +177,14 @@ export const EditButton = styled.button`
   flex: 1;
   font-weight: ${props => (props.editState ? 'bold' : '300')};
   color: ${props => (props.editState ? 'darkgreen' : '#fff')};
-  background: ${props => (props.editState ? 'yellow' : '#000')};
+
+  background: ${props => (props.editState ? 'white' : '#000')};
+
   border: 1px solid #000;
   margin-right: 0.4em;
   text-transform: uppercase;
   font-size: 1.1em;
+  padding: 1%;
 
   :hover {
     color: #000;
@@ -199,7 +203,10 @@ export const DescriptionBox = styled.div`
     font-size: 1em;
     font-style: ${props => (props.editState ? 'none' : 'italic')};
     border: ${props =>
-      props.editState ? '1px solid gold' : '1px solid grey'};
+      props.editState
+        ? '1px solid rgba(81, 203, 238, 1)'
+        : '1px solid grey'};
+
     width: 100%;
     height: 16rem;
     flex-wrap: wrap;

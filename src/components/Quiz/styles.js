@@ -136,7 +136,7 @@ export const QuizInput = styled.div`
 
   textarea {
     margin-bottom: 30px;
-    height: 550px;
+    height: 450px;
     width: 500px;
     background-color: #f6f6f6;
   }

@@ -73,17 +73,6 @@ class SelectedUserWardrobe extends Component {
       return (
         <Section>
           <profileStyle.Header headerImage={sprayheader}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon
-                className="svg--sm"
-                fill="white"
-                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
-              />
-            </svg>
             <s.TitleCenter>
               <h1>
                 {users ? users[id].username + '' : 'User'}'s Wardrobe

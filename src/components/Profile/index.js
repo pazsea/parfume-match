@@ -274,17 +274,6 @@ class ProfilePage extends Component {
                 : null
             }
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon
-                className="svg--sm"
-                fill="white"
-                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
-              />
-            </svg>
             <s.TitleOnHeaderCenter>
               <h1>
                 Nuvarande kollektion <i>{colHeader}</i>
@@ -432,17 +421,6 @@ class ProfilePage extends Component {
                 : null
             }
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon
-                className="svg--sm"
-                fill="white"
-                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
-              />
-            </svg>
             <s.TitleOnHeaderCenter>
               <h1>
                 Rekommenderad kollektion <i>{colHeader}</i>

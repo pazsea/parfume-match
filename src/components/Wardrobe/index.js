@@ -8,6 +8,7 @@ import { Section } from '../../styleConstants/section.js';
 import { calculatePoints } from '../../constants/functions';
 
 import * as s from './styles';
+import * as a from '../../constants/actionTypes';
 
 import StarRatingComponent from 'react-star-rating-component';
 import parfume1 from '../../images/parfume1.jpg';
@@ -40,6 +41,14 @@ class WardrobePage extends Component {
     isTruncated: false,
     tabOpen: '',
   };
+
+  componentDidMount() {
+    const { onSetWardrobes, firebase } = this.props;
+    firebase.wardrobes().once('value', snapshot => {
+      const val = snapshot.val();
+      onSetWardrobes(val);
+    });
+  }
 
   componentWillUnmount() {
     const {
@@ -128,17 +137,6 @@ class WardrobePage extends Component {
       return (
         <Section>
           <s.Header>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon
-                className="svg--sm"
-                fill="white"
-                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
-              />
-            </svg>
             <s.TitleCenter>
               <h1>
                 {authUser.username + "'s" + ' '} <br />
@@ -343,7 +341,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSetUsers: users => dispatch({ type: 'USERS_SET', users }),
+  onSetUsers: users => dispatch({ type: a.USERS_SET, users }),
+
+  onSetWardrobes: wardrobes =>
+    dispatch({ type: a.WARDROBES_USERS_SET, wardrobes }),
 });
 
 const condition = authUser => !!authUser;

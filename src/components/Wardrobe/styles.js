@@ -56,8 +56,8 @@ export const ButtonDiv = styled.div`
   /* border-bottom: 1px solid #ccc; */
   background-color: white;
   align-items: center;
-  margin: 0 auto; /* Ny */
-  padding: 0.5em 0; /* Ny */
+  margin: 0 auto;
+  padding: 0.5em 0;
 
   button {
     cursor: pointer;

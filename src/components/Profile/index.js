@@ -29,10 +29,6 @@ class ProfilePage extends Component {
     this.setState({ editState: true });
   };
 
-  // componentDidMount() {
-  //   const { authUser } = this.props;
-  // }
-
   ownDescChange = e => {
     const text = e.target.value;
     this.setState({ ownDesc: text });
@@ -185,7 +181,7 @@ class ProfilePage extends Component {
                           onChange={this.ownDescChange}
                           placeholder={
                             this.props.authUser.ownDesc ||
-                            'Vad har du för doft profil? Skriv gärna.'
+                            'Vad har du för doftprofil? Skriv gärna.'
                           }
                           readOnly={
                             this.state.editState ? false : true
@@ -274,17 +270,6 @@ class ProfilePage extends Component {
                 : null
             }
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon
-                className="svg--sm"
-                fill="white"
-                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
-              />
-            </svg>
             <s.TitleOnHeaderCenter>
               <h1>
                 Nuvarande kollektion <i>{colHeader}</i>
@@ -344,7 +329,7 @@ class ProfilePage extends Component {
                           onChange={this.ownDescChange}
                           placeholder={
                             this.props.authUser.ownDesc ||
-                            'Vad har du för doft profil? Skriv gärna.'
+                            'Vad har du för doftprofil? Skriv gärna.'
                           }
                           readOnly={
                             this.state.editState ? false : true
@@ -432,17 +417,6 @@ class ProfilePage extends Component {
                 : null
             }
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon
-                className="svg--sm"
-                fill="white"
-                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
-              />
-            </svg>
             <s.TitleOnHeaderCenter>
               <h1>
                 Rekommenderad kollektion <i>{colHeader}</i>

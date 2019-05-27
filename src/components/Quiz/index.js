@@ -71,17 +71,6 @@ class QuizPage extends Component {
       <Section>
         <FlexContainerColumn>
           <profileStyle.Header headerImage={doftquiz}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-            >
-              <polygon
-                className="svg--sm"
-                fill="white"
-                points="0,0 40,100 65,21 90,100 100,50 100,100 0,100"
-              />
-            </svg>
             <s.TitleCenter>
               <h1>Doft-Quiz</h1>
             </s.TitleCenter>
@@ -96,11 +85,13 @@ class QuizPage extends Component {
               kan du byta kollektion när du vill.
             </p>
           </QuizIntroText>
-          <QuizIntroButton>
-            <button>
-              <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
-            </button>
-          </QuizIntroButton>
+
+          <s.ButtonWrapper>
+            <Link id="link" to={ROUTES.QUESTIONONE}>
+              Starta doft-quiz
+            </Link>
+          </s.ButtonWrapper>
+
           <SkipDiv>
             <button onClick={event => this.skipQuiz(event)}>
               HOPPA ÖVER
@@ -299,11 +290,12 @@ export class QuestionThree extends Component {
             >
           </ImageFlexSpacing>
         </FlexContainerRow>
-        <QuizIntroButton>
-          <button>
-            <Link to={ROUTES.QUESTIONFOUR}>Nästa</Link>
-          </button>
-        </QuizIntroButton>
+
+        <s.ButtonWrapper>
+          <Link id="link" to={ROUTES.QUESTIONFOUR}>
+            Nästa
+          </Link>
+        </s.ButtonWrapper>
       </Section>
     );
   }
@@ -389,11 +381,11 @@ export class QuestionFour extends Component {
           </ImageFlexSpacing>
         </FlexContainerRow>
 
-        <QuizIntroButton>
-          <button>
-            <Link to={ROUTES.QUESTIONFIVE}>Nästa</Link>
-          </button>
-        </QuizIntroButton>
+        <s.ButtonWrapper>
+          <Link id="link" to={ROUTES.QUESTIONFIVE}>
+            Nästa
+          </Link>
+        </s.ButtonWrapper>
       </Section>
     );
   }
@@ -459,11 +451,11 @@ export class QuestionFive extends Component {
           </ImageFlexSpacing>
         </FlexContainerRow>
 
-        <QuizIntroButton>
-          <button>
-            <Link to={ROUTES.QUESTIONSIX}>Nästa</Link>
-          </button>
-        </QuizIntroButton>
+        <s.ButtonWrapper>
+          <Link id="link" to={ROUTES.QUESTIONSIX}>
+            Nästa
+          </Link>
+        </s.ButtonWrapper>
       </Section>
     );
   }

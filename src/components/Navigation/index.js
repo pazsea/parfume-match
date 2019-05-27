@@ -20,7 +20,7 @@ import logo from '../../images/logoblack.png';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as a from '../../constants/actionTypes';
-import * as ROLES from '../../constants/roles';
+// import * as ROLES from '../../constants/roles';
 
 const Navigation = ({
   authUser,

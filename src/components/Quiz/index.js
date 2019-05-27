@@ -85,11 +85,13 @@ class QuizPage extends Component {
               kan du byta kollektion när du vill.
             </p>
           </QuizIntroText>
-          <QuizIntroButton>
-            <button>
-              <Link to={ROUTES.QUESTIONONE}>Starta doft-quiz</Link>
-            </button>
-          </QuizIntroButton>
+
+          <s.ButtonWrapper>
+            <Link id="link" to={ROUTES.QUESTIONONE}>
+              Starta doft-quiz
+            </Link>
+          </s.ButtonWrapper>
+
           <SkipDiv>
             <button onClick={event => this.skipQuiz(event)}>
               HOPPA ÖVER
@@ -288,11 +290,12 @@ export class QuestionThree extends Component {
             >
           </ImageFlexSpacing>
         </FlexContainerRow>
-        <QuizIntroButton>
-          <button>
-            <Link to={ROUTES.QUESTIONFOUR}>Nästa</Link>
-          </button>
-        </QuizIntroButton>
+
+        <s.ButtonWrapper>
+          <Link id="link" to={ROUTES.QUESTIONFOUR}>
+            Nästa
+          </Link>
+        </s.ButtonWrapper>
       </Section>
     );
   }
@@ -378,11 +381,11 @@ export class QuestionFour extends Component {
           </ImageFlexSpacing>
         </FlexContainerRow>
 
-        <QuizIntroButton>
-          <button>
-            <Link to={ROUTES.QUESTIONFIVE}>Nästa</Link>
-          </button>
-        </QuizIntroButton>
+        <s.ButtonWrapper>
+          <Link id="link" to={ROUTES.QUESTIONFIVE}>
+            Nästa
+          </Link>
+        </s.ButtonWrapper>
       </Section>
     );
   }
@@ -448,11 +451,11 @@ export class QuestionFive extends Component {
           </ImageFlexSpacing>
         </FlexContainerRow>
 
-        <QuizIntroButton>
-          <button>
-            <Link to={ROUTES.QUESTIONSIX}>Nästa</Link>
-          </button>
-        </QuizIntroButton>
+        <s.ButtonWrapper>
+          <Link id="link" to={ROUTES.QUESTIONSIX}>
+            Nästa
+          </Link>
+        </s.ButtonWrapper>
       </Section>
     );
   }

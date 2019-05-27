@@ -68,7 +68,6 @@ class SelectedUserWardrobe extends Component {
       const userWardrobeKeys = Object.keys(wardrobe);
       const selectedCol = Object.keys(users[id].selectedCol);
       console.log(selectedCol);
-      // console.log(subCollection.rating);
 
       return (
         <Section>
@@ -81,16 +80,22 @@ class SelectedUserWardrobe extends Component {
           </profileStyle.Header>
 
           {userWardrobeKeys.map((parfume, index) => (
-            <Fragment>
-              <s.Wrapper>
-                <s.ImageDiv>
+            <Fragment key={'fragment ' + parfume.name + index}>
+              <s.Wrapper key={'wrapper ' + parfume.name + index}>
+                <s.ImageDiv key={'imagediv ' + parfume.name + index}>
                   <img
                     alt="parfume bottle"
                     src={parfumePics[parfume] || parfume1}
                   />
                 </s.ImageDiv>
-                <s.ParfumeDiv>
-                  <s.ButtonDiv tabOpen={tabOpen} index={index}>
+                <s.ParfumeDiv
+                  key={'parfumeDiv' + parfume.name + index}
+                >
+                  <s.ButtonDiv
+                    key={'buttonDiv' + parfume.name + index}
+                    tabOpen={tabOpen}
+                    index={index}
+                  >
                     <button
                       value={'descriptionTab' + index}
                       onClick={e => this.toggleTab(e)}
@@ -101,14 +106,20 @@ class SelectedUserWardrobe extends Component {
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
+                      parfume
                     >
-                      Parfym Beskrivning
+                      Parfymbeskrivning
                     </button>
                   </s.ButtonDiv>
-                  <s.HeaderDiv>{parfume}</s.HeaderDiv>
-                  <s.StarsDiv>
+                  <s.HeaderDiv
+                    key={'headerDiv' + parfume.name + index}
+                  >
+                    {parfume}
+                  </s.HeaderDiv>
+                  <s.StarsDiv key={'starsDiv' + parfume.name + index}>
                     <StarRatingComponent
-                      key={parfume + index}
+                      key={'starRatin ' + parfume.name + index}
+                      // key={parfume + index}
                       name={parfume}
                       starCount={5}
                       editing={false}
@@ -119,7 +130,9 @@ class SelectedUserWardrobe extends Component {
                       }
                     />
                   </s.StarsDiv>
-                  <s.NotesDiv>
+                  <s.NotesDiv
+                    key={'notesDiv ' + parfume.name + index}
+                  >
                     <img alt="notesLogo" src={noteslogo} />
                     {wardrobe[parfume].base},{' '}
                     {wardrobe[parfume].heart}, {wardrobe[parfume].top}
@@ -127,12 +140,16 @@ class SelectedUserWardrobe extends Component {
 
                   {tabOpen === 'ratingTab' + index ? (
                     <DescriptionWrapper
+                      key={
+                        'description Warpper ' + parfume.name + index
+                      }
                       isTruncated={isTruncated}
                       toggleTruncate={this.toggleTruncate}
                       tabOpen={tabOpen}
                     />
                   ) : (
                     <RatingWrapper
+                      key={'ratingWrapper ' + parfume.name + index}
                       name={parfume}
                       username={users[id].username}
                       textFirebase={
@@ -187,6 +204,7 @@ function RatingWrapper({ textFirebase, username }) {
     <Fragment>
       <s.RatingForm>
         <s.RatingBox
+          readOnly
           type="text"
           className="ratingBox"
           value={

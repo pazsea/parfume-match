@@ -65,11 +65,21 @@ class QuestionSix extends Component {
             <Link
               id="link"
               to={ROUTES.RECOMMENDATION}
+              onclick={e => this.skipQuiz(e)}
+            >
+              Visa doftgarderob
+            </Link>
+          </ButtonWrapper>
+
+          {/* <ButtonWrapper>
+            <Link
+              id="link"
+              to={ROUTES.RECOMMENDATION}
               onClick={e => this.skipQuiz(e)}
             >
               Visa min Sniph-kollektion
             </Link>
-          </ButtonWrapper>
+          </ButtonWrapper> */}
         </FlexContainerColumn>
       </Section>
     );

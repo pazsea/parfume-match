@@ -177,7 +177,9 @@ export const EditButton = styled.button`
   flex: 1;
   font-weight: ${props => (props.editState ? 'bold' : '300')};
   color: ${props => (props.editState ? 'darkgreen' : '#fff')};
+
   background: ${props => (props.editState ? 'white' : '#000')};
+
   border: 1px solid #000;
   margin-right: 0.4em;
   text-transform: uppercase;
@@ -204,6 +206,7 @@ export const DescriptionBox = styled.div`
       props.editState
         ? '1px solid rgba(81, 203, 238, 1)'
         : '1px solid grey'};
+
     width: 100%;
     height: 16rem;
     flex-wrap: wrap;

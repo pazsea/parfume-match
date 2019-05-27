@@ -114,7 +114,7 @@ export const TitleCenter = styled.div`
 export const TitleOnHeaderCenter = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: 3.5rem;
   color: white;
 `;
 

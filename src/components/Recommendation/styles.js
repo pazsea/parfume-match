@@ -127,3 +127,32 @@ export const NoCollectionDiv = styled.div`
   width: 30%;
   padding-top: 1em;
 `;
+
+export const ButtonWrapper = styled.div`
+  width: 100%;
+  text-align: center;
+  #link {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
+      sans-serif;
+
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 16px;
+    a:visited {
+      text-decoration: none;
+      color: white;
+    }
+    a:link {
+      text-decoration: none;
+      color: white;
+    }
+  }
+`;

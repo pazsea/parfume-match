@@ -106,8 +106,6 @@ class ProfilePage extends Component {
     const { firebase, authUser } = this.props;
     const recommendedCol = Object.keys(authUser.recommendedCol);
 
-    console.log('SHIIIT ' + recommendedCol);
-
     firebase.user(authUser.uid).update({
       selectedCol: {
         [recommendedCol]: true,

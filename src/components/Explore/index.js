@@ -25,7 +25,8 @@ class Explore extends Component {
       <div>
         <profileStyle.Header headerImage={happypeople}>
           <s.TitleCenter>
-            <h1>Upptäck dina parfym vänner</h1>
+            <h1>Inspiration</h1>
+            <p>Inpireras av andra garderober.</p>
           </s.TitleCenter>
         </profileStyle.Header>
         {recommendedWardrobes && users && userWardrobes ? (

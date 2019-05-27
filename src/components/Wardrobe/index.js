@@ -229,6 +229,7 @@ class WardrobePage extends Component {
                       isTruncated={isTruncated}
                       toggleTruncate={this.toggleTruncate}
                       tabOpen={tabOpen}
+                      name={item.name}
                     />
                   )}
                 </s.ParfumeDiv>
@@ -241,7 +242,7 @@ class WardrobePage extends Component {
   }
 }
 
-function DescriptionWrapper({ toggleTruncate, isTruncated }) {
+function DescriptionWrapper({ toggleTruncate, isTruncated, name }) {
   return (
     <s.DescriptionDiv>
       <Truncate
@@ -252,17 +253,12 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
           </span>
         }
       >
-        2017's great launch from the perfume profile Pierre
-        Guillaume's fragrance collection "Huitième Art" is an
-        incomparable splash of fruity chords, woody notes and rich
-        spices. 2017's great launch from the perfume profile Pierre
-        Guillaume's fragrance collection "Huitième Art" is an
-        incomparable splash of fruity chords, woody notes and rich
-        spices.
-        <br />
-        The fact that you soon feel that you just have to shower in
-        Aqaysos is not unthinkable. Is this the scent that changes
-        your life?
+        {name}, grundat 1885, började som parisisk oas för skönhet och
+        välmående. Blev legendarisk nattklubb, restaurang, lyxhotell,
+        workspace - ett livsstilskoncept med en linje dofter. 1978 var
+        klubben Les Bains Douches nattklubben alla ville komma in på.
+        Förföriska noter av tobak, vanilj och kardemumma blir varmt
+        och berusande. Du kan helt enkelt inte få nog.
       </Truncate>
     </s.DescriptionDiv>
   );
@@ -319,7 +315,7 @@ function RatingWrapper({
           editState={editState}
           onClick={() => changeEditState()}
         >
-          EDIT
+          ÄNDRA
         </s.EditButton>
 
         <s.RatingButton
@@ -327,7 +323,7 @@ function RatingWrapper({
           value="SAVE"
           onClick={e => descriptionSubmit(e)}
         >
-          SAVE
+          SPARA
         </s.RatingButton>
       </s.DescButtonDiv>
     </Fragment>

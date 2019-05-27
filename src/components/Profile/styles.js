@@ -159,7 +159,7 @@ export const RatingButton = styled.button`
   flex: 1;
   color: #fff;
   background: #000;
-  border: 2px solid #000;
+  border: 1px solid #000;
   text-transform: uppercase;
   margin-left: 0.4em;
   font-size: 1.1em;
@@ -177,7 +177,7 @@ export const EditButton = styled.button`
   font-weight: ${props => (props.editState ? 'bold' : '300')};
   color: ${props => (props.editState ? 'darkgreen' : '#fff')};
   background: ${props => (props.editState ? 'yellow' : '#000')};
-  border: 2px solid #000;
+  border: 1px solid #000;
   margin-right: 0.4em;
   text-transform: uppercase;
   font-size: 1.1em;
@@ -185,7 +185,7 @@ export const EditButton = styled.button`
   :hover {
     color: #000;
     background: white;
-    border: 2px solid black;
+    border: 1px solid black;
     cursor: pointer;
   }
 `;
@@ -196,13 +196,14 @@ export const DescriptionBox = styled.div`
   textarea {
     flex: 5;
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.6em;
+    font-size: 1em;
     font-style: ${props => (props.editState ? 'none' : 'italic')};
     border: ${props =>
-      props.editState ? '3px solid gold' : '1px solid grey'};
+      props.editState ? '1px solid gold' : '1px solid grey'};
     width: 100%;
     height: 16rem;
     flex-wrap: wrap;
+    padding: 0.5em;
   }
 `;
 

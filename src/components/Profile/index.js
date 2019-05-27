@@ -185,7 +185,7 @@ class ProfilePage extends Component {
                           onChange={this.ownDescChange}
                           placeholder={
                             this.props.authUser.ownDesc ||
-                            'Vad har du för doft profil? Skriv gärna.'
+                            'Vad har du för doftprofil? Skriv gärna.'
                           }
                           readOnly={
                             this.state.editState ? false : true
@@ -344,7 +344,7 @@ class ProfilePage extends Component {
                           onChange={this.ownDescChange}
                           placeholder={
                             this.props.authUser.ownDesc ||
-                            'Vad har du för doft profil? Skriv gärna.'
+                            'Vad har du för doftprofil? Skriv gärna.'
                           }
                           readOnly={
                             this.state.editState ? false : true

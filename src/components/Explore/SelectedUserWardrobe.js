@@ -106,7 +106,6 @@ class SelectedUserWardrobe extends Component {
                     <button
                       value={'ratingTab' + index}
                       onClick={e => this.toggleTab(e)}
-                      parfume
                     >
                       Parfymbeskrivning
                     </button>

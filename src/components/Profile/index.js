@@ -29,10 +29,6 @@ class ProfilePage extends Component {
     this.setState({ editState: true });
   };
 
-  // componentDidMount() {
-  //   const { authUser } = this.props;
-  // }
-
   ownDescChange = e => {
     const text = e.target.value;
     this.setState({ ownDesc: text });

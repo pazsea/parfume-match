@@ -38,7 +38,7 @@ class QuestionSix extends Component {
     firebase.user(uid).update({
       completedQuiz: true,
       recommendedCol: {
-        [this.randomKey()]: true,
+        'Trending Now': true,
       },
     });
     this.props.history.push('/recommendation');

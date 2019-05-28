@@ -101,6 +101,7 @@ export const SubscribeButton = styled.div`
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
+    cursor: pointer;
 
     font-weight: bold;
     color: white;

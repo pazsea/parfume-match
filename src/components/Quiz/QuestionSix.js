@@ -30,7 +30,7 @@ class QuestionSix extends Component {
     return keys[this.getRandomInt(6)];
   };
 
-  skipQuiz() {
+  skipQuiz = e => {
     const {
       authUser: { uid },
       firebase,
@@ -42,7 +42,8 @@ class QuestionSix extends Component {
         [this.randomKey()]: true,
       },
     });
-  }
+    this.props.history.push('/recommendation');
+  };
 
   render() {
     return (
@@ -62,13 +63,7 @@ class QuestionSix extends Component {
             />
           </QuizInput>
           <ButtonWrapper>
-            <Link
-              id="link"
-              to={ROUTES.RECOMMENDATION}
-              onclick={e => this.skipQuiz(e)}
-            >
-              Visa doftgarderob
-            </Link>
+            <button onClick={this.skipQuiz}>Visa doftgarderob</button>
           </ButtonWrapper>
         </FlexContainerColumn>
       </Section>

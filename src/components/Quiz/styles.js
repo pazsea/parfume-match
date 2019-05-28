@@ -187,7 +187,7 @@ export const SkipDiv = styled.div`
     padding: 15px 32px;
     font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
       sans-serif;
-    min-width: 15%;
+    width: 20%;
 
     font-weight: bold;
     /* color: white; */
@@ -210,6 +210,31 @@ export const SkipDiv = styled.div`
 export const ButtonWrapper = styled.div`
   width: 100%;
   text-align: center;
+  button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    font-family: 'Montserrat', 'HelveticaNeue', 'Helvetica Neue',
+      sans-serif;
+
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    /* a:visited {
+      text-decoration: none;
+      color: white;
+    }
+    a:link {
+      text-decoration: none;
+      color: white;
+    } */
+  }
   #link {
     background-color: black;
     border: none;
@@ -225,6 +250,8 @@ export const ButtonWrapper = styled.div`
     text-transform: uppercase;
     display: inline-block;
     font-size: 16px;
+    cursor: pointer;
+    width: 20%;
     a:visited {
       text-decoration: none;
       color: white;

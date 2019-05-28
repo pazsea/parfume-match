@@ -40,7 +40,7 @@ class Collection extends Component {
   }
 
   setRecColToSelected(e) {
-    const { firebase, authUser } = this.props;
+    const { firebase, authUser, history } = this.props;
     // const { recommendedCol } = this.state;
     console.log(authUser.recommendedCol);
     firebase.user(authUser.uid).update({
@@ -48,6 +48,7 @@ class Collection extends Component {
         [Object.keys(authUser.recommendedCol)]: true,
       },
     });
+    this.props.history.push('/wardrobe');
   }
 
   render() {
@@ -86,13 +87,9 @@ class Collection extends Component {
 
               <ButtonWrapper>
                 <SubscribeButton>
-                  <Link
-                    onClick={e => this.setRecColToSelected(e)}
-                    id="link"
-                    to={ROUTES.WARDROBE}
-                  >
+                  <button onClick={e => this.setRecColToSelected(e)}>
                     Prenumerera
-                  </Link>
+                  </button>
                 </SubscribeButton>
               </ButtonWrapper>
 

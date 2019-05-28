@@ -63,7 +63,7 @@ class QuizPage extends Component {
           }),
       );
 
-    this.props.history.push(ROUTES.HOME);
+    this.props.history.push(ROUTES.PROFILE);
   };
 
   render() {

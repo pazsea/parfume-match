@@ -169,15 +169,15 @@ class App extends Component {
             path={ROUTES.RECOMMENDATION}
             component={RecommendationsPage}
           />
+          <Route path={ROUTES.WARDROBE} component={WardrobePage} />
           <Route
-            path={ROUTES.WARDROBE}
+            path={ROUTES.PROFILE}
             component={
               authUser && authUser.completedQuiz
-                ? WardrobePage
+                ? ProfilePage
                 : QuizPage
             }
           />
-          <Route path={ROUTES.PROFILE} component={ProfilePage} />
         </div>
       </Router>
     );

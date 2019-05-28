@@ -58,7 +58,10 @@ export const Nav = styled.nav`
   button:nth-child(1) {
     border: none;
     background: none;
-    color: rgb(255, 73, 73);
+    /* color: rgb(255, 73, 73); */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
 
     /* border: 1px solid red; */
   }

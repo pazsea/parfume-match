@@ -147,7 +147,7 @@ class ProfilePage extends Component {
                   </TabList>
                   <TabPanel>
                     <s.Blog>
-                      <h2>Senaste bloginlägg</h2>
+                      <h2>Senaste blogginlägg</h2>
                       <p>
                         <i>2019-05-19</i>
                         <br />
@@ -295,7 +295,7 @@ class ProfilePage extends Component {
                   </TabList>
                   <TabPanel>
                     <s.Blog>
-                      <h2>Senaste bloginlägg</h2>
+                      <h2>Senaste blogginlägg</h2>
                       <p>
                         <i>2019-05-19</i>
                         <br />
@@ -438,7 +438,7 @@ class ProfilePage extends Component {
                   </TabList>
                   <TabPanel>
                     <s.Blog>
-                      <h2>Senaste bloginlägg</h2>
+                      <h2>Senaste blogginlägg</h2>
                       <p>
                         <i>2019-05-19</i>
                         <br />

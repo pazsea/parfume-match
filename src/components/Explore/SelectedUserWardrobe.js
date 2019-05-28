@@ -77,7 +77,15 @@ class SelectedUserWardrobe extends Component {
               <h1>
                 {users ? users[id].username + '' : 'User'}'s Garderob
               </h1>
-              <p>Läs mer om {users[id].username} parfymer. </p>
+              <p>
+                {users ? users[id].username : 'Användarens'} aktiva
+                kollektion:{' '}
+                <i>
+                  {users
+                    ? Object.keys(users[id].selectedCol)
+                    : 'Okänt'}
+                </i>
+              </p>
             </s.TitleCenter>
           </profileStyle.Header>
 

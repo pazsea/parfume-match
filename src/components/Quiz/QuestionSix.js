@@ -25,7 +25,6 @@ class QuestionSix extends Component {
       'Clean',
       'Female Classics',
       'Trending Now',
-      'FÖR MÄN: Work/Play',
     ];
     return keys[this.getRandomInt(6)];
   };

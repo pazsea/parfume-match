@@ -24,6 +24,7 @@ import louanges from '../../images/louangesprofanes.jpg';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 import * as s from '../Wardrobe/styles';
+import * as b from './styles';
 
 const parfumePics = {
   'Oceanic Encre': oceanic,
@@ -74,8 +75,9 @@ class SelectedUserWardrobe extends Component {
           <profileStyle.Header headerImage={sprayheader}>
             <s.TitleCenter>
               <h1>
-                {users ? users[id].username + '' : 'User'}'s Wardrobe
+                {users ? users[id].username + '' : 'User'}'s Garderob
               </h1>
+              <p>Läs mer om {users[id].username} parfymer. </p>
             </s.TitleCenter>
           </profileStyle.Header>
 
@@ -202,7 +204,7 @@ function RatingWrapper({ textFirebase, username }) {
   return (
     <Fragment>
       <s.RatingForm>
-        <s.RatingBox
+        <b.RatingBox
           readOnly
           type="text"
           className="ratingBox"

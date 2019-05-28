@@ -87,6 +87,16 @@ export const TextBox = styled.div`
   }
 `;
 
+export const RatingBox = styled.textarea`
+  height: 100px;
+  /* overflow-y: scroll; */
+  margin: 0 0.4em 0.4em 0.4em;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-size: 1em;
+  border: none;
+`;
+
 export const ButtonWrapper = styled.div`
   flex: 1;
   height: fit-content;

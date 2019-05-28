@@ -110,19 +110,20 @@ export const NotesDiv = styled.div`
 export const TitleCenter = styled.div`
   font-family: 'Montserrat', sans-serif;
   text-align: center;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   display: flex;
   /* height: 20%; */
-  font-size: 1.1em;
+  font-size: 1.5em;
   flex-direction: column;
   color: black;
   border: 5px double black;
-  margin-top: 1%;
-  height: fit-content;
-  width: 20%;
+  margin-top: 0.8em;
+  height: 80%;
+  width: 30%;
   padding: 0 1.5%;
+  justify-content: center;
   h1 {
-    margin: 6% 0;
+    margin: 6% 0 2% 0;
   }
   p {
     i {
@@ -130,7 +131,6 @@ export const TitleCenter = styled.div`
       font-weight: bold;
     }
   }
-  /* font-weight: bold; */
   background-color: rgba(255, 255, 255, 0.6);
   font-family: 'Amatic SC', cursive;
 `;
@@ -159,7 +159,7 @@ export const HeaderDiv = styled.div`
   font-weight: 200;
   font-size: 1.4em;
   padding: 0.2em 0;
-  margin: 0 auto; /* Ny */
+  margin: 0 auto;
 `;
 
 export const Header = styled.div`
@@ -175,13 +175,6 @@ export const Header = styled.div`
   background-repeat: no-repeat;
   align-content: center;
   background-position-y: 100%;
-
-  svg {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-  }
 `;
 //DESCRIPTION TAB
 

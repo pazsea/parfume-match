@@ -23,7 +23,7 @@ export const FlexContainerRow = styled.div`
 export const TitleCenter = styled.div`
   font-family: 'Montserrat', sans-serif;
   text-align: center;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   display: flex;
   font-size: 1.5em;
   flex-direction: column;
@@ -33,8 +33,9 @@ export const TitleCenter = styled.div`
   height: fit-content;
   width: 20%;
   padding: 0 1.5%;
+  align-self: center;
   h1 {
-    margin: 6% 0;
+    margin: 4% 0;
   }
   p {
     i {

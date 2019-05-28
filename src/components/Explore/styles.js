@@ -11,19 +11,20 @@ export const Wrapper = styled.div`
 export const TitleCenter = styled.div`
   font-family: 'Montserrat', sans-serif;
   text-align: center;
-  vertical-align: middle;
+  /* vertical-align: middle; */
   display: flex;
-  font-size: 1.1em;
-  /* font-size: 1.5em; */
+  /* height: 20%; */
+  font-size: 1.5em;
   flex-direction: column;
   color: black;
   border: 5px double black;
-  margin-top: 1%;
-  height: fit-content;
-  width: 20%;
+  margin-top: 0.8em;
+  height: 80%;
+  width: 30%;
   padding: 0 1.5%;
+  justify-content: center;
   h1 {
-    margin: 6% 0;
+    margin: 6% 0 2% 0;
   }
   p {
     i {

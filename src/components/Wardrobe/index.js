@@ -9,7 +9,7 @@ import { calculatePoints } from '../../constants/functions';
 import * as s from './styles';
 import * as a from '../../constants/actionTypes';
 import StarRatingComponent from 'react-star-rating-component';
-import parfume1 from '../../images/advertisingArt.jpg';
+import parfume1 from '../../images/parfume1.jpg';
 import Loading from '../Loading';
 import NoCollection from '../Recommendation/No-collection';
 import noteslogo from '../../images/noteslogo.png';
@@ -161,7 +161,7 @@ class WardrobePage extends Component {
               <s.Wrapper key={'wrapper ' + item.name + index}>
                 <s.ImageDiv key={'imageDiv' + item.name + index}>
                   <img
-                    // Detta villkort väljer parfume1 för alla wardrobe-kort.
+                    // Detta villkor väljer parfume1 för alla wardrobe-kort.
                     alt="parfume bottle"
                     src={parfumePics[item.name] || parfume1}
                   />

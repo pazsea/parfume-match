@@ -7,12 +7,12 @@ import { withFirebase } from '../Firebase';
 import Collection from './Collection.js';
 
 //Bilder
-import collectionWithTextAesthetic from '../../images/collectionWithTextAesthetic.png';
-import collectionWithTextAvantgarde from '../../images/collectionWithTextAvantgarde.jpg';
-import collectionWithTextClean from '../../images/collectionWithTextClean.png';
-import collectionWithTextFemaleClassics from '../../images/collectionWithTextFemaleClassics.png';
-import collectionWithTextTrendingNow from '../../images/collectionWithTextTrendingNow.png';
-import collectionWithTextWorkPlay from '../../images/collectionWithTextWorkPlay.jpg';
+import collectionForMen from '../../images/collectionForMen.jpg';
+import collectionAvantgarde from '../../images/collectionAvantgarde.jpg';
+import collectionClean from '../../images/collectionClean.jpg';
+import collectionFemaleClassics from '../../images/collectionFemaleClassics.jpg';
+import collectionTrendingNow from '../../images/collectionTrendingNow.jpg';
+import collectionWorkPlay from '../../images/collectionWorkPlay.jpg';
 import headerForMen from '../../images/headerForMen.jpg';
 import headerAvantGarde from '../../images/headerAvantgard.jpg';
 import headerClean from '../../images/headerClean.jpg';
@@ -26,42 +26,42 @@ class RecommendationsPage extends Component {
   state = {
     //Mockup logik. Förberedelse för Firebase.
     'FÖR MÄN: Aesthetic': {
-      image: collectionWithTextAesthetic,
+      image: collectionForMen,
       headerImage: headerForMen,
       title: 'FÖR MÄN: AESTHETIC',
       firstDescription: DESC.firstTextAesthetic,
       secondDescription: DESC.secondTextAesthetic,
     },
     'Avant-Garde': {
-      image: collectionWithTextAvantgarde,
+      image: collectionAvantgarde,
       headerImage: headerAvantGarde,
       title: 'AVANT-GARDE',
       firstDescription: DESC.firstTextAvantGarde,
       secondDescription: DESC.secondTextAvantGarde,
     },
     Clean: {
-      image: collectionWithTextClean,
+      image: collectionClean,
       headerImage: headerClean,
       title: 'CLEAN',
       firstDescription: DESC.firstTextClean,
       secondDescription: DESC.secondTextClean,
     },
     'Female Classics': {
-      image: collectionWithTextFemaleClassics,
+      image: collectionFemaleClassics,
       headerImage: headerFemaleClassics,
       title: 'FEMALE CLASSICS',
       firstDescription: DESC.firstTextFemaleClassics,
       secondDescription: DESC.secondTextFemaleClassics,
     },
     'Trending Now': {
-      image: collectionWithTextTrendingNow,
+      image: collectionTrendingNow,
       headerImage: headerTrendingNow,
       title: 'TRENDING NOW',
       firstDescription: DESC.firstTextTrendingNow,
       secondDescription: DESC.secondTextTrendingNow,
     },
     'FÖR MÄN: Work/Play': {
-      image: collectionWithTextWorkPlay,
+      image: collectionWorkPlay,
       headerImage: headerWorkPlay,
       title: 'FÖR MÄN: WORK/PLAY',
       firstDescription: DESC.firstTextWorkPlay,

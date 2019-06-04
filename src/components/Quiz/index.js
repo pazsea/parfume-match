@@ -13,7 +13,6 @@ import {
   QuizTitle,
   QuizSubTitle,
   QuizIntroText,
-  QuizIntroButton,
   ImageFlexContainer,
   ImageFlexSpacing,
   RelativeContainer,

@@ -188,7 +188,14 @@ function DescriptionWrapper({ toggleTruncate, isTruncated }) {
         lines={isTruncated ? 0 : 9}
         ellipsis={
           <span>
-            ... <a onClick={toggleTruncate}> Read more</a>
+            ...{' '}
+            <a
+              href="http://localhost:3000/wardrobe"
+              onClick={toggleTruncate}
+            >
+              {' '}
+              Read more
+            </a>
           </span>
         }
       >

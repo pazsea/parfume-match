@@ -14,7 +14,7 @@ import {
   ButtonWrapper,
 } from './styles';
 import { Section } from '../../styleConstants/section.js';
-import genericParfumeBottle from '../../images/genericParfumeBottle.jpg';
+import genericParfumeBottle from '../../images/blurMarcJacobs.jpg';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
 

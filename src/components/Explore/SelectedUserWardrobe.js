@@ -10,16 +10,15 @@ import noteslogo from '../../images/noteslogo.png';
 import * as profileStyle from '../Profile/styles';
 import sprayheader from '../../images/sprayheader.jpg';
 
-import parfume1 from '../../images/parfume1.jpg';
-
-import oceanic from '../../images/oceanic.jpg';
-import tabaChoko from '../../images/tabachoko.jpg';
-import cementRose from '../../images/cementrose.jpg';
-import sideshow from '../../images/sideshow.png';
-import darkSaphir from '../../images/darksaphir.jpg';
-import coccobello from '../../images/Coccobello.jpg';
-import rayOfLight from '../../images/rayoflight.png';
-import louanges from '../../images/louangesprofanes.jpg';
+import parfume1 from '../../images/blurMarcJacobs.jpg';
+import aromaAromatic from '../../images/aromaAromatic.jpg';
+import aromatherapy from '../../images/aromatherapy.jpg';
+import blurBlurred from '../../images/blurBlurred.jpg';
+import blurMarcJacobs from '../../images/blurMarcJacobs.jpg';
+import chanel from '../../images/chanel.jpg';
+import dg from '../../images/dg.jpg';
+import advertisingArt from '../../images/advertisingArt.jpg';
+import aromaAromatherapy from '../../images/aromaAromatherapy.jpg';
 
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
@@ -27,15 +26,16 @@ import * as s from '../Wardrobe/styles';
 import * as b from './styles';
 
 const parfumePics = {
-  'Oceanic Encre': oceanic,
-  'Taba Choko': tabaChoko,
-  'Cement Rose': cementRose,
-  Sideshow: sideshow,
-  'Dark Saphir': darkSaphir,
-  Coccobello: coccobello,
-  'Ray of Light': rayOfLight,
-  'PG19 Louanges Profanes': louanges,
+  'Aroma Aromatic': aromaAromatic,
+  'Aroma Therapy': aromatherapy,
+  'Blur Blurred': blurBlurred,
+  'Blur Marc Jacobs': blurMarcJacobs,
+  Chanel: chanel,
+  'D&G': dg,
+  'Advertising Art': advertisingArt,
+  'Aroma Aromatherapy': aromaAromatherapy,
 };
+
 class SelectedUserWardrobe extends Component {
   state = {
     isTruncated: false,

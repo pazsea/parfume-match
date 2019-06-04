@@ -9,7 +9,7 @@ import { calculatePoints } from '../../constants/functions';
 import * as s from './styles';
 import * as a from '../../constants/actionTypes';
 import StarRatingComponent from 'react-star-rating-component';
-import parfume1 from '../../images/parfume1.jpg';
+import parfume1 from '../../images/blurMarcJacobs.jpg';
 import Loading from '../Loading';
 import NoCollection from '../Recommendation/No-collection';
 import noteslogo from '../../images/noteslogo.png';

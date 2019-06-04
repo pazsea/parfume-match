@@ -139,7 +139,7 @@ class WardrobePage extends Component {
           <s.Header>
             <s.TitleCenter>
               <h1>
-                {authUser.username + "'s" + ' '} <br />
+                {authUser.username + "'s "} <br />
                 doft garderob
               </h1>
               <p>
@@ -249,7 +249,14 @@ function DescriptionWrapper({ toggleTruncate, isTruncated, name }) {
         lines={isTruncated ? 0 : 9}
         ellipsis={
           <span>
-            ... <a onClick={toggleTruncate}> Read more</a>
+            ...{' '}
+            <a
+              href="http://localhost:3000/wardrobe"
+              onClick={toggleTruncate}
+            >
+              {' '}
+              Read more
+            </a>
           </span>
         }
       >

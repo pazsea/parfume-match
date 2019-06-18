@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import * as ROUTES from '../../constants/routes';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import * as a from '../../constants/actionTypes';
@@ -40,7 +38,7 @@ class Collection extends Component {
   }
 
   setRecColToSelected(e) {
-    const { firebase, authUser, history } = this.props;
+    const { firebase, authUser } = this.props;
     // const { recommendedCol } = this.state;
     console.log(authUser.recommendedCol);
     firebase.user(authUser.uid).update({

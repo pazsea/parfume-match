@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withAuthorization } from '../Session';
 import { withFirebase } from '../Firebase';
-import * as ROUTES from '../../constants/routes';
 import { connect } from 'react-redux';
 import {
   FlexContainerColumn,
